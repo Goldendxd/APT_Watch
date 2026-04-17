@@ -152,12 +152,12 @@
       margin-bottom: 2rem;
     "
   >
-    <div style="font-size: 2.5rem; margin-bottom: 0.75rem">Saved</div>
+    <div style="font-size: 2.5rem; margin-bottom: 0.75rem">&#9825;</div>
     <div style="font-size: 1rem; font-weight: 800; margin-bottom: 0.4rem">
-      No Items in Wishlist
+      Your Wishlist is Empty
     </div>
     <div style="font-size: 0.82rem; color: var(--muted)">
-      Click the Save button on any watch to add it to your wishlist.
+      Click the &#9825; heart on any watch to save it to your wishlist.
     </div>
   </div>
 
@@ -182,9 +182,10 @@
           <button
             class="prod-save"
             onclick="toggleWishlist(this)"
-            title="Add to Wishlist"
+            aria-label="Add to Wishlist"
           >
-            Save
+            <span class="wish-heart">&#9825;</span>
+            <span class="wish-tip">Wishlist</span>
           </button>
         </div>
         <div class="prod-body">
@@ -237,9 +238,10 @@
           <button
             class="prod-save"
             onclick="toggleWishlist(this)"
-            title="Add to Wishlist"
+            aria-label="Add to Wishlist"
           >
-            Save
+            <span class="wish-heart">&#9825;</span>
+            <span class="wish-tip">Wishlist</span>
           </button>
         </div>
         <div class="prod-body">
@@ -292,9 +294,10 @@
           <button
             class="prod-save"
             onclick="toggleWishlist(this)"
-            title="Add to Wishlist"
+            aria-label="Add to Wishlist"
           >
-            Save
+            <span class="wish-heart">&#9825;</span>
+            <span class="wish-tip">Wishlist</span>
           </button>
         </div>
         <div class="prod-body">
@@ -347,9 +350,10 @@
           <button
             class="prod-save"
             onclick="toggleWishlist(this)"
-            title="Add to Wishlist"
+            aria-label="Add to Wishlist"
           >
-            Save
+            <span class="wish-heart">&#9825;</span>
+            <span class="wish-tip">Wishlist</span>
           </button>
         </div>
         <div class="prod-body">
@@ -402,9 +406,10 @@
           <button
             class="prod-save"
             onclick="toggleWishlist(this)"
-            title="Add to Wishlist"
+            aria-label="Add to Wishlist"
           >
-            Save
+            <span class="wish-heart">&#9825;</span>
+            <span class="wish-tip">Wishlist</span>
           </button>
         </div>
         <div class="prod-body">
@@ -457,9 +462,10 @@
           <button
             class="prod-save"
             onclick="toggleWishlist(this)"
-            title="Add to Wishlist"
+            aria-label="Add to Wishlist"
           >
-            Save
+            <span class="wish-heart">&#9825;</span>
+            <span class="wish-tip">Wishlist</span>
           </button>
         </div>
         <div class="prod-body">
@@ -606,124 +612,193 @@
 </div>
 <!-- /pg-body -->
 
+<style>
+/* ---- Wishlist heart button ---- */
+.prod-save {
+  position:        absolute;
+  top:             0.75rem;
+  left:            0.75rem;
+  width:           40px;
+  height:          40px;
+  border-radius:   50%;
+  background:      rgba(255,255,255,0.95);
+  border:          none;
+  cursor:          pointer;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  box-shadow:      0 2px 10px rgba(0,0,0,0.12);
+  transition:      all 0.22s cubic-bezier(0.16,1,0.3,1);
+  z-index:         5;
+  overflow:        visible;
+  padding:         0;
+}
+.prod-save:hover {
+  transform:    scale(1.15);
+  box-shadow:   0 5px 18px rgba(0,0,0,0.18);
+  background:   #fff;
+}
+
+/* Heart icon */
+.wish-heart {
+  font-size:  1.22rem;
+  line-height: 1;
+  color:      #ccc;
+  transition: all 0.22s;
+  display:    block;
+}
+.prod-save.saved .wish-heart {
+  color:     #e53;
+  animation: heartPop 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+.prod-save:hover .wish-heart { color: #e53; }
+
+/* Tooltip label */
+.wish-tip {
+  position:     absolute;
+  left:         50%;
+  top:          calc(100% + 7px);
+  transform:    translateX(-50%);
+  background:   rgba(0,0,0,0.78);
+  color:        #fff;
+  font-size:    0.64rem;
+  font-weight:  700;
+  white-space:  nowrap;
+  padding:      0.28rem 0.65rem;
+  border-radius: 7px;
+  pointer-events: none;
+  opacity:      0;
+  transition:   opacity 0.18s;
+  letter-spacing: 0.04em;
+}
+.prod-save:hover .wish-tip   { opacity: 1; }
+.prod-save.saved  .wish-tip  { content: 'Saved!'; }
+
+/* Wishlist filter tab pill */
+#fav-tab { position: relative; }
+</style>
+
 <script>
-  var WISH_KEY = "alughadi_wishlist";
-  var CART_KEY = "alughadi_cart";
-  var _currentFilter = "all";
+  var WISH_KEY = 'alughadi_wishlist';
+  var CART_KEY = 'alughadi_cart';
+  var _currentFilter = 'all';
 
   function getWishlist() {
-    try {
-      return JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
-    } catch (e) {
-      return [];
-    }
+    try { return JSON.parse(localStorage.getItem(WISH_KEY) || '[]'); }
+    catch(e) { return []; }
   }
-  function saveWishlist(arr) {
-    localStorage.setItem(WISH_KEY, JSON.stringify(arr));
-  }
+  function saveWishlist(arr) { localStorage.setItem(WISH_KEY, JSON.stringify(arr)); }
 
   function getCart() {
-    try {
-      return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-    } catch (e) {
-      return [];
-    }
+    try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
+    catch(e) { return []; }
   }
-  function saveCart(arr) {
-    localStorage.setItem(CART_KEY, JSON.stringify(arr));
+  function saveCart(arr) { localStorage.setItem(CART_KEY, JSON.stringify(arr)); }
+
+  /* Sync heart buttons on load */
+  function syncHearts() {
+    var wish = getWishlist();
+    document.querySelectorAll('.product-card').forEach(function(card) {
+      var id   = card.getAttribute('data-id');
+      var btn  = card.querySelector('.prod-save');
+      var tip  = btn ? btn.querySelector('.wish-tip') : null;
+      if (!btn) return;
+      if (wish.indexOf(id) !== -1) {
+        btn.classList.add('saved');
+        btn.querySelector('.wish-heart').innerHTML = '&#9829;'; /* filled ♥ */
+        if (tip) tip.textContent = 'Saved!';
+      } else {
+        btn.classList.remove('saved');
+        btn.querySelector('.wish-heart').innerHTML = '&#9825;'; /* outline ♡ */
+        if (tip) tip.textContent = 'Wishlist';
+      }
+    });
   }
 
   function updateWishlistCount() {
     var wish = getWishlist();
-    var cnt = document.getElementById("fav-count");
-    var tab = document.getElementById("fav-tab");
-    if (!cnt) return;
+    var tab  = document.getElementById('fav-tab');
+    if (!tab) return;
     if (wish.length > 0) {
-      cnt.textContent = wish.length;
-      cnt.style.display = "inline";
-      tab.innerHTML =
-        'Saved Wishlist <span id="fav-count" style="background:var(--green);color:#fff;font-size:0.6rem;padding:0.1rem 0.4rem;border-radius:99px;margin-left:0.3rem;">' +
-        wish.length +
-        "</span>";
+      tab.innerHTML = '&#9829; Wishlist <span style="background:var(--green);color:#fff;font-size:0.6rem;padding:0.1rem 0.45rem;border-radius:99px;margin-left:0.3rem;font-weight:700;">' + wish.length + '</span>';
     } else {
-      tab.innerHTML = "Wishlist";
+      tab.innerHTML = '&#9825; Wishlist';
     }
   }
 
   function toggleWishlist(btn) {
-    var card = btn.closest(".product-card");
-    var id = card.getAttribute("data-id");
+    var card = btn.closest('.product-card');
+    var id   = card.getAttribute('data-id');
     var wish = getWishlist();
-    var idx = wish.indexOf(id);
+    var idx  = wish.indexOf(id);
+    var heart = btn.querySelector('.wish-heart');
+    var tip   = btn.querySelector('.wish-tip');
 
     if (idx === -1) {
       wish.push(id);
-      btn.textContent = "Saved";
+      btn.classList.add('saved');
+      heart.innerHTML  = '&#9829;';   /* ♥ filled */
+      if (tip) tip.textContent = 'Saved!';
+      if (typeof showToast === 'function') showToast('Added to Wishlist', 'Tap \u2665 again to remove.', '\u2665\uFE0F');
     } else {
       wish.splice(idx, 1);
-      btn.textContent = "Save";
+      btn.classList.remove('saved');
+      heart.innerHTML  = '&#9825;';   /* ♡ outline */
+      if (tip) tip.textContent = 'Wishlist';
+      if (typeof showToast === 'function') showToast('Removed from Wishlist', '', '\u2661');
     }
     saveWishlist(wish);
     updateWishlistCount();
   }
 
-  function filterProducts(cat, btn) {
+  function filterProducts(cat, tabBtn) {
     _currentFilter = cat;
-    document
-      .querySelectorAll(".tab")
-      .forEach((t) => t.classList.remove("active"));
-    btn.classList.add("active");
-
-    var cards = document.querySelectorAll(".product-card");
-    var empty = document.getElementById("fav-empty");
-    var visibleCount = 0;
-
-    if (cat === "wishlist") {
+    document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+    tabBtn.classList.add('active');
+    var cards = document.querySelectorAll('.product-card');
+    var empty = document.getElementById('fav-empty');
+    if (cat === 'wishlist') {
       var wish = getWishlist();
-      cards.forEach((card) => {
-        var id = card.getAttribute("data-id");
-        if (wish.includes(id)) {
-          card.style.display = "";
-          visibleCount++;
-        } else {
-          card.style.display = "none";
-        }
+      var shown = 0;
+      cards.forEach(function(card) {
+        var id = card.getAttribute('data-id');
+        if (wish.indexOf(id) !== -1) { card.style.display = ''; shown++; }
+        else { card.style.display = 'none'; }
       });
-      if (wish.length === 0) {
-        empty.style.display = "block";
-      } else {
-        empty.style.display = "none";
-      }
+      empty.style.display = shown === 0 ? 'block' : 'none';
     } else {
-      empty.style.display = "none";
-      cards.forEach((card) => {
-        var cardCat = card.getAttribute("data-cat");
-        if (cat === "all" || cardCat === cat) {
-          card.style.display = "";
-          visibleCount++;
-        } else {
-          card.style.display = "none";
-        }
+      empty.style.display = 'none';
+      cards.forEach(function(card) {
+        var cc = card.getAttribute('data-cat');
+        card.style.display = (cat === 'all' || cc === cat) ? '' : 'none';
       });
     }
   }
 
   function addToCart(name, price) {
     var cart = getCart();
-    var item = { name: name, price: price, qty: 1, id: Date.now() };
-    cart.push(item);
+    cart.push({ name: name, price: price, qty: 1, id: Date.now() });
     saveCart(cart);
-    alert("Added: " + name + " added to cart!");
     updateCartButton();
+    if (typeof showToast === 'function') showToast('Added to Cart', name, '\uD83D\uDED2');
   }
 
   function updateCartButton() {
-    var cart = getCart();
-    var btn = document.getElementById("cart-btn");
-    if (btn) btn.textContent = "Cart (" + cart.length + ")";
+    var cart  = getCart();
+    var total = cart.length;
+    var btn   = document.getElementById('cart-btn');
+    var nb    = document.getElementById('nav-cart-count');
+    if (btn) btn.innerHTML = '\uD83D\uDED2 Cart (' + total + ')';
+    if (nb)  nb.textContent = '(' + total + ')';
   }
 
-  // Initialize
+  /* Init */
+  syncHearts();
   updateWishlistCount();
   updateCartButton();
 </script>

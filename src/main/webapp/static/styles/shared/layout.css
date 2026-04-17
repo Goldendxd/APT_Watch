@@ -1,248 +1,395 @@
+/* ================================================================
+   layout.css — Page Hero, Page Body, Grid, Forms | AluGhadi Watches
+   ================================================================ */
+
+/* ================================================================
+   PAGE HERO  (inner pages — products, about, gifting…)
+   ================================================================ */
 .page-hero {
-  min-height: 44vh;
-  position: relative;
-  display: flex;
+  min-height:  46vh;
+  position:    relative;
+  display:     flex;
   align-items: flex-end;
-  overflow: hidden;
-  margin-top: 86px;
+  overflow:    hidden;
+  margin-top:  80px;
 }
 
 .ph-img {
   position: absolute;
-  inset: 0;
+  inset:    0;
 }
-
 .ph-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width:       100%;
+  height:      100%;
+  object-fit:  cover;
+  object-position: center;
 }
 
 .ph-ov {
-  position: absolute;
-  inset: 0;
+  position:   absolute;
+  inset:      0;
   background: linear-gradient(
     180deg,
-    rgba(8, 20, 12, 0.25) 0%,
-    rgba(8, 20, 12, 0.78) 100%
+    rgba(6, 18, 10, 0.22)  0%,
+    rgba(6, 18, 10, 0.82)  100%
+  );
+}
+
+/* Optional left-side fade for text contrast */
+.ph-ov-side {
+  position:   absolute;
+  inset:      0;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 18, 10, 0.60)  0%,
+    rgba(6, 18, 10, 0.10)  60%,
+    rgba(6, 18, 10, 0.00)  100%
   );
 }
 
 .ph-body {
-  position: relative;
-  z-index: 1;
-  padding: 3rem 8% 4rem;
-  width: 100%;
+  position:   relative;
+  z-index:    1;
+  padding:    3rem 8% 4.5rem;
+  width:      100%;
 }
 
 .ph-chip {
-  display: inline-flex;
+  display:     inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(255, 255, 255, 0.14);
+  gap:         0.4rem;
+  background:  rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-  padding: 0.28rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.68rem;
+  border:      1px solid rgba(255, 255, 255, 0.22);
+  color:       #fff;
+  padding:     0.3rem 0.85rem;
+  border-radius: 999px;
+  font-size:   0.68rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
 }
 
 .ph-h {
-  font-size: clamp(1.9rem, 5vw, 3.8rem);
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  margin-bottom: 0.5rem;
+  font-size:      clamp(2rem, 5.5vw, 4rem);
+  font-weight:    900;
+  color:          #fff;
+  line-height:    1.1;
+  letter-spacing: -0.03em;
+  margin-bottom:  0.55rem;
 }
+.ph-h span { color: var(--accent); }
 
 .ph-sub {
-  font-size: 0.87rem;
-  color: rgba(255, 255, 255, 0.68);
-  max-width: 460px;
-  line-height: 1.65;
+  font-size:   0.88rem;
+  color:       rgba(255, 255, 255, 0.65);
+  max-width:   500px;
+  line-height: 1.7;
 }
 
+/* ================================================================
+   PAGE BODY  (general content wrapper)
+   ================================================================ */
 .pg-body {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 4rem 2rem 7rem;
+  margin:    0 auto;
+  padding:   4.5rem 2rem 8rem;
+}
+.pg-body-sm {
+  max-width: 860px;
+  margin:    0 auto;
+  padding:   3.5rem 2rem 7rem;
 }
 
+/* 2-col / 3-col grids */
 .pg-two {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap:     2rem;
   align-items: start;
 }
-
 .pg-three {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap:     1.5rem;
 }
 
+/* ================================================================
+   GENERIC CARD  (.gc)
+   ================================================================ */
 .gc {
-  background: var(--white);
-  border: 1.5px solid var(--border);
+  background:    var(--white);
+  border:        1.5px solid var(--border);
   border-radius: var(--r);
-  padding: 1.75rem;
-  transition: all 0.25s;
+  padding:       2rem;
+  transition:    all 0.28s var(--ease);
 }
-
 .gc:hover {
-  box-shadow: var(--shadow);
+  box-shadow:   var(--shadow-md);
   border-color: var(--green-mid);
+  transform:    translateY(-2px);
 }
 
 .gc-tag {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-size:      0.64rem;
+  font-weight:    700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+  color:          var(--green);
+  margin-bottom:  0.9rem;
+  display:        flex;
+  align-items:    center;
+  gap:            0.45rem;
 }
-
 .gc-tag::before {
-  content: "";
-  width: 12px;
-  height: 2px;
-  background: var(--green);
-  border-radius: 1px;
+  content:       '';
+  width:         14px;
+  height:        2px;
+  background:    var(--green);
+  border-radius: 2px;
 }
 
 .gc-h {
-  font-size: 1.18rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.35rem;
+  font-size:      1.22rem;
+  font-weight:    800;
+  letter-spacing: -0.018em;
+  margin-bottom:  0.38rem;
 }
-
 .gc-sub {
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-bottom: 1.6rem;
-  line-height: 1.6;
+  font-size:   0.8rem;
+  color:       var(--muted);
+  margin-bottom: 1.75rem;
+  line-height: 1.65;
 }
 
+/* ================================================================
+   FORM FIELDS  (.fg)
+   ================================================================ */
 .fg {
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.2rem;
 }
-
 .fg label {
-  display: block;
-  font-size: 0.72rem;
+  display:     block;
+  font-size:   0.72rem;
   font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.45rem;
+  color:       var(--text);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
 }
 
 .fg input,
 .fg select,
 .fg textarea,
 .fg input[type="date"] {
-  width: 100%;
-  background: var(--bg);
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  padding: 0.76rem 0.95rem;
-  color: var(--text);
-  font-family: var(--ff);
-  font-size: 0.86rem;
-  outline: none;
-  transition: all 0.18s;
-  appearance: none;
+  width:         100%;
+  background:    var(--bg);
+  border:        1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  padding:       0.82rem 1rem;
+  color:         var(--text);
+  font-family:   var(--ff);
+  font-size:     0.88rem;
+  outline:       none;
+  transition:    all 0.2s var(--ease);
+  appearance:    none;
   -webkit-appearance: none;
 }
-
 .fg input:focus,
 .fg select:focus,
 .fg textarea:focus,
 .fg input[type="date"]:focus {
   border-color: var(--green);
-  background: var(--white);
-  box-shadow: 0 0 0 3px rgba(26, 107, 56, 0.07);
+  background:   var(--white);
+  box-shadow:
+    0 0 0 3px rgba(26, 107, 56, 0.08),
+    0 2px 8px rgba(26, 107, 56, 0.06);
 }
+.fg input::placeholder,
+.fg textarea::placeholder {
+  color:       var(--dim);
+  font-weight: 400;
+}
+
+.fg textarea { resize: vertical; min-height: 110px; }
 
 .fg-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.9rem;
+  gap:     0.9rem;
 }
-
 .fg-note {
-  font-size: 0.7rem;
-  color: var(--muted);
-  margin-top: 0.35rem;
+  font-size:  0.71rem;
+  color:      var(--muted);
+  margin-top: 0.38rem;
+  line-height: 1.5;
 }
 
+/* ---- Input with leading icon ---- */
+.input-wrap { position: relative; }
+.input-ico-l {
+  position:     absolute;
+  left:         0.95rem;
+  top:          50%;
+  transform:    translateY(-50%);
+  color:        var(--dim);
+  font-size:    0.9rem;
+  pointer-events: none;
+}
+.input-pl { padding-left: 2.5rem !important; }
+
+/* ---- File Upload ---- */
 .file-upload {
-  display: flex;
+  display:     flex;
   align-items: center;
-  gap: 0.75rem;
-  cursor: pointer;
-  background: var(--bg);
-  border: 1.5px dashed var(--border);
-  border-radius: 10px;
-  padding: 0.65rem 0.95rem;
-  transition: all 0.18s;
+  gap:         0.75rem;
+  cursor:      pointer;
+  background:  var(--bg);
+  border:      1.5px dashed var(--border2);
+  border-radius: var(--r-sm);
+  padding:     0.7rem 1rem;
+  transition:  all 0.18s;
 }
-
 .file-upload:hover {
   border-color: var(--green);
-  background: var(--green-light);
+  background:   var(--green-light);
 }
-
-.file-upload input[type="file"] {
-  display: none;
-}
-
+.file-upload input[type="file"] { display: none; }
 .fu-btn {
-  display: inline-flex;
+  display:     inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: var(--white);
-  border: 1.5px solid var(--border);
+  gap:         0.4rem;
+  background:  var(--white);
+  border:      1.5px solid var(--border);
   border-radius: 8px;
-  padding: 0.38rem 0.9rem;
-  font-size: 0.75rem;
+  padding:     0.38rem 0.9rem;
+  font-size:   0.75rem;
   font-weight: 700;
-  color: var(--text);
+  color:       var(--text);
   white-space: nowrap;
 }
-
 .fu-name {
-  font-size: 0.77rem;
-  color: var(--muted);
-  overflow: hidden;
+  font-size:     0.78rem;
+  color:         var(--muted);
+  overflow:      hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  flex: 1;
+  white-space:   nowrap;
+  flex:          1;
 }
 
-.route-wrap {
+/* ================================================================
+   SECTION WRAPPERS
+   ================================================================ */
+.sec {
   position: relative;
-  display: flex;
+  padding:  5.5rem 2rem;
+}
+.sec-alt { background: var(--surface2); }
+.sec-dark {
+  background: var(--text);
+  color:      #fff;
+}
+
+.sec-inner {
+  max-width: 1280px;
+  margin:    0 auto;
+}
+
+.sec-tag {
+  font-size:      0.66rem;
+  font-weight:    700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color:          var(--green);
+  margin-bottom:  0.9rem;
+  display:        flex;
+  align-items:    center;
+  gap:            0.5rem;
+}
+.sec-tag::before {
+  content:       '';
+  width:         14px;
+  height:        2px;
+  background:    var(--green);
+  border-radius: 2px;
+}
+.sec-dark .sec-tag { color: var(--accent); }
+.sec-dark .sec-tag::before { background: var(--accent); }
+
+.sec-h {
+  font-size:      clamp(1.85rem, 4vw, 3.2rem);
+  font-weight:    900;
+  line-height:    1.13;
+  letter-spacing: -0.025em;
+  margin-bottom:  0;
+}
+.sec-dark .sec-h { color: #fff; }
+
+.sec-sub {
+  font-size:   0.88rem;
+  color:       var(--muted);
+  max-width:   500px;
+  line-height: 1.75;
+  margin-top:  0.65rem;
+}
+.sec-dark .sec-sub { color: rgba(255,255,255,0.5); }
+
+/* ================================================================
+   SPLIT LAYOUT  (image + text)
+   ================================================================ */
+.split {
+  display:     grid;
+  grid-template-columns: 1fr 1fr;
+  gap:         3.5rem;
   align-items: center;
 }
+.split-img {
+  position:      relative;
+  border-radius: 20px;
+  overflow:      hidden;
+  height:        540px;
+}
+.split-img img {
+  width:      100%;
+  height:     100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+.split-img:hover img { transform: scale(1.04); }
 
-.route-icon {
-  position: absolute;
-  left: 0.85rem;
-  font-size: 0.95rem;
-  pointer-events: none;
-  z-index: 1;
+.split-badge {
+  position:      absolute;
+  bottom:        1.5rem;
+  left:          1.5rem;
+  background:    rgba(255, 255, 255, 0.95);
+  border:        1.5px solid var(--border);
+  border-radius: 16px;
+  padding:       1rem 1.35rem;
+  display:       flex;
+  align-items:   center;
+  gap:           0.9rem;
+  backdrop-filter: blur(14px);
+  box-shadow:    var(--shadow-md);
+}
+.sb-ico { font-size: 2rem; }
+.sb-v   { font-size: 1.35rem; font-weight: 900; display: block; }
+.sb-l   { font-size: 0.72rem; color: var(--muted); font-weight: 600; }
+
+/* ================================================================
+   RESPONSIVE  (shared layout breakpoints)
+   ================================================================ */
+@media (max-width: 1024px) {
+  .split   { grid-template-columns: 1fr; }
+  .split-img { height: 380px; }
 }
 
-.route-input {
-  padding-left: 2.4rem !important;
+@media (max-width: 768px) {
+  .pg-body  { padding: 2.5rem 1.25rem 6rem; }
+  .pg-two,
+  .pg-three,
+  .fg-row   { grid-template-columns: 1fr; }
+  .sec      { padding: 3.5rem 1.25rem; }
+  .split-img { height: 260px; }
+  .page-hero  { min-height: 38vh; }
+  .ph-body  { padding: 2rem 5% 3rem; }
 }

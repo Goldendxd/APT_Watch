@@ -1,193 +1,268 @@
+/* ================================================================
+   components.css — Buttons, Badges, Tabs, Cards | AluGhadi Watches
+   ================================================================ */
+
+/* ================================================================
+   BUTTONS
+   ================================================================ */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.75rem 1.6rem;
-  border-radius: 11px;
-  font-family: var(--ff);
-  font-weight: 700;
-  font-size: 0.8rem;
-  cursor: pointer;
-  border: none;
-  transition: all 0.22s;
+  display:        inline-flex;
+  align-items:    center;
+  gap:            0.45rem;
+  padding:        0.78rem 1.65rem;
+  border-radius:  var(--r-sm);
+  font-family:    var(--ff);
+  font-weight:    700;
+  font-size:      0.84rem;
+  cursor:         pointer;
+  border:         none;
+  transition:     all 0.22s var(--ease);
   text-decoration: none;
+  position:       relative;
+  letter-spacing: 0.01em;
+  white-space:    nowrap;
 }
 
+/* Primary — green gradient */
 .btn-g {
-  background: var(--green);
-  color: #fff;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green2) 100%);
+  color:      #fff;
+  box-shadow: 0 3px 14px rgba(26, 107, 56, 0.30);
 }
-
 .btn-g:hover {
-  background: var(--green2);
-  transform: translateY(-1px);
-  box-shadow: 0 5px 18px rgba(26, 107, 56, 0.28);
+  transform:  translateY(-2px);
+  box-shadow: 0 8px 26px rgba(26, 107, 56, 0.40);
+}
+.btn-g:active {
+  transform:  translateY(0);
+  box-shadow: 0 2px 8px rgba(26, 107, 56, 0.25);
 }
 
+/* Outline */
 .btn-o {
-  background: transparent;
-  color: var(--text);
-  border: 1.5px solid var(--border);
+  background:   transparent;
+  color:        var(--text);
+  border:       1.5px solid var(--border2);
 }
-
 .btn-o:hover {
   border-color: var(--green);
-  color: var(--green);
+  color:        var(--green);
+  background:   var(--green-light);
 }
 
+/* Danger */
 .btn-r {
-  background: #fff0f0;
-  color: var(--red);
-  border: 1.5px solid rgba(200, 60, 60, 0.18);
+  background: #fff1f1;
+  color:      var(--red);
+  border:     1.5px solid rgba(200, 60, 60, 0.18);
 }
-
 .btn-r:hover {
   background: var(--red);
-  color: #fff;
+  color:      #fff;
+  border-color: var(--red);
 }
 
-.btn-sm {
-  padding: 0.48rem 1rem;
-  font-size: 0.74rem;
-  border-radius: 9px;
+/* Ghost (text-only feel) */
+.btn-ghost {
+  background:   transparent;
+  color:        var(--muted);
+  padding:      0.5rem 0.8rem;
+}
+.btn-ghost:hover {
+  background: var(--surface);
+  color:      var(--text);
 }
 
+/* Gold accent */
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  color:      #fff;
+  box-shadow: 0 3px 14px rgba(201, 164, 82, 0.30);
+}
+.btn-gold:hover {
+  transform:  translateY(-2px);
+  box-shadow: 0 8px 26px rgba(201, 164, 82, 0.40);
+}
+
+/* Sizes */
+.btn-sm  { padding: 0.5rem 1.05rem; font-size: 0.76rem; border-radius: var(--r-xs); }
+.btn-lg  { padding: 1rem 2.2rem;    font-size: 0.95rem; gap: 0.55rem; }
+.btn-xl  { padding: 1.1rem 2.6rem;  font-size: 1rem;    gap: 0.6rem; }
+.btn-full { width: 100%; justify-content: center; }
+
+/* Icon-only */
+.btn-icon {
+  padding:         0.65rem;
+  border-radius:   10px;
+  aspect-ratio:    1;
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+}
+
+/* ================================================================
+   BADGES  (status pills)
+   ================================================================ */
 .badge {
-  display: inline-flex;
+  display:     inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.2rem 0.65rem;
-  border-radius: 20px;
-  font-size: 0.62rem;
+  gap:         0.32rem;
+  padding:     0.22rem 0.7rem;
+  border-radius: 999px;
+  font-size:   0.64rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
-
 .badge::before {
-  content: "";
-  width: 5px;
-  height: 5px;
+  content:       '';
+  width:         5px;
+  height:        5px;
   border-radius: 50%;
-  flex-shrink: 0;
+  flex-shrink:   0;
 }
 
-.b-g {
-  background: var(--green-light);
-  color: var(--green);
-}
+.b-g  { background: var(--green-light); color: var(--green); }
+.b-g::before  { background: var(--green); }
 
-.b-g::before {
-  background: var(--green);
-}
+.b-a  { background: #fff7e0; color: var(--amber); }
+.b-a::before  { background: var(--amber); }
 
-.b-a {
-  background: #fff7e0;
-  color: var(--amber);
-}
+.b-r  { background: #fff0f0; color: var(--red); }
+.b-r::before  { background: var(--red); }
 
-.b-a::before {
-  background: var(--amber);
-}
+.b-gold { background: var(--gold-light); color: var(--gold2); }
+.b-gold::before { background: var(--gold); }
 
-.b-r {
-  background: #fff0f0;
-  color: var(--red);
-}
+.b-grey { background: var(--surface); color: var(--muted); }
+.b-grey::before { background: var(--dim); }
 
-.b-r::before {
-  background: var(--red);
-}
-
-.b-grey {
-  background: var(--surface);
-  color: var(--muted);
-}
-
-.b-grey::before {
-  background: var(--dim);
-}
-
+/* ================================================================
+   INFO / WARN BANNERS
+   ================================================================ */
 .info-banner {
-  background: var(--green-light);
-  border: 1.5px solid var(--green-mid);
-  border-radius: 13px;
-  padding: 1.1rem 1.35rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.9rem;
-  margin-bottom: 2rem;
+  background:     var(--green-light);
+  border:         1.5px solid var(--green-mid);
+  border-radius:  13px;
+  padding:        1.1rem 1.35rem;
+  display:        flex;
+  align-items:    flex-start;
+  gap:            0.9rem;
+  margin-bottom:  1.5rem;
 }
+.ib-ico { font-size: 1.4rem; flex-shrink: 0; }
+.ib-h   { font-size: 0.85rem; font-weight: 700; color: var(--green); margin-bottom: 0.2rem; }
+.ib-p   { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
 
-.ib-ico {
-  font-size: 1.4rem;
-  flex-shrink: 0;
-}
+.warn-banner { background: #fffbec; border-color: #f0d880; }
+.warn-banner .ib-h { color: var(--amber); }
 
-.ib-h {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--green);
-  margin-bottom: 0.2rem;
-}
+.error-banner { background: #fff1f1; border-color: rgba(200,60,60,0.22); }
+.error-banner .ib-h { color: var(--red); }
 
-.ib-p {
-  font-size: 0.78rem;
-  color: var(--muted);
-  line-height: 1.55;
-}
-
-.warn-banner {
-  background: #fffbec;
-  border-color: #f0d880;
-}
-
-.warn-banner .ib-h {
-  color: var(--amber);
-}
-
+/* ================================================================
+   TABS
+   ================================================================ */
 .tabs-wrap {
-  display: flex;
-  background: var(--surface);
-  border-radius: 11px;
-  padding: 4px;
-  width: fit-content;
+  display:      flex;
+  background:   var(--surface);
+  border-radius: 13px;
+  padding:      4px;
+  width:        fit-content;
   margin-bottom: 2rem;
-  border: 1.5px solid var(--border);
+  border:       1.5px solid var(--border);
+  gap:          2px;
 }
-
 .tab {
-  padding: 0.5rem 1.3rem;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: var(--muted);
-  transition: all 0.18s;
-  font-family: var(--ff);
+  padding:      0.5rem 1.35rem;
+  border-radius: 9px;
+  font-size:    0.8rem;
+  font-weight:  700;
+  cursor:       pointer;
+  border:       none;
+  background:   none;
+  color:        var(--muted);
+  transition:   all 0.18s var(--ease);
+  font-family:  var(--ff);
+  white-space:  nowrap;
+}
+.tab:hover      { color: var(--text); background: rgba(255,255,255,0.6); }
+.tab.active     { background: var(--white); color: var(--green); box-shadow: var(--shadow); }
+.tab-panel      { display: none; }
+.tab-panel.active { display: block; }
+
+/* ================================================================
+   CHIP (small filter pill)
+   ================================================================ */
+.chip {
+  display:      inline-flex;
+  align-items:  center;
+  gap:          0.3rem;
+  padding:      0.32rem 0.85rem;
+  border-radius: 999px;
+  font-size:    0.72rem;
+  font-weight:  600;
+  background:   var(--surface);
+  border:       1.5px solid var(--border);
+  color:        var(--muted);
+  cursor:       pointer;
+  transition:   all 0.18s;
+}
+.chip.active,
+.chip:hover {
+  background:   var(--green-light);
+  border-color: var(--green-mid);
+  color:        var(--green);
 }
 
-.tab.active {
-  background: var(--white);
-  color: var(--green);
-  box-shadow: var(--shadow);
-}
-
-.tab-panel {
-  display: none;
-}
-
-.tab-panel.active {
-  display: block;
-}
-
+/* ================================================================
+   REVEAL / SCROLL ANIMATION
+   ================================================================ */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity:    0;
+  transform:  translateY(28px);
+  transition: all 0.7s var(--ease);
+}
+.reveal.vis {
+  opacity:   1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+
+/* ================================================================
+   DIVIDER
+   ================================================================ */
+.divider {
+  height:     1px;
+  background: var(--border);
+  margin:     1.5rem 0;
+}
+.divider-label {
+  display:     flex;
+  align-items: center;
+  gap:         1rem;
+  color:       var(--dim);
+  font-size:   0.72rem;
+  font-weight: 600;
+  margin:      1.5rem 0;
+}
+.divider-label::before,
+.divider-label::after {
+  content:    '';
+  flex:       1;
+  height:     1px;
+  background: var(--border);
 }
 
-.reveal.vis {
-  opacity: 1;
-  transform: none;
+/* ================================================================
+   RATING STARS helper
+   ================================================================ */
+.stars {
+  display:    inline-flex;
+  gap:        0.15rem;
+  color:      var(--gold);
+  font-size:  0.85rem;
 }

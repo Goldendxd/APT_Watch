@@ -10,111 +10,172 @@
   <footer>
     <div class="fi">
       <div class="ft">
+
+        <%-- Brand column --%>
         <div class="ft-brand">
-          <a class="logo" href="${pageContext.request.contextPath}/">
-            <div style="font-size:1.8rem;font-weight:900;">AG</div>
-            <span class="logo-brand" style="font-weight:900;">AluGhadi</span>
+          <a class="logo" href="${pageContext.request.contextPath}/" aria-label="AluGhadi home">
+            <img src="${pageContext.request.contextPath}/static/images/alughadiweblogo.png" alt="AluGhadi" class="footer-logo-img" />
           </a>
-          <p>Premium watches for every moment. Timeless style, exceptional quality.</p>
+          <p>Nepal's premium destination for fine watches. Timeless craftsmanship delivered with care to your doorstep.</p>
+          <div class="ft-socials">
+            <a class="ft-social-btn" href="#" aria-label="Facebook"  title="Facebook">&#128526;</a>
+            <a class="ft-social-btn" href="#" aria-label="Instagram" title="Instagram">&#128247;</a>
+            <a class="ft-social-btn" href="#" aria-label="Twitter"   title="Twitter">&#128038;</a>
+          </div>
         </div>
+
+        <%-- Shop links --%>
         <div class="ft-col">
           <h4>Shop</h4>
-          <a href="${pageContext.request.contextPath}/products">Products</a>
+          <a href="${pageContext.request.contextPath}/products">All Products</a>
           <a href="${pageContext.request.contextPath}/gifting">Gifting</a>
-          <a href="${pageContext.request.contextPath}/sale">Sale</a>
+          <a href="${pageContext.request.contextPath}/gifting">For Him</a>
+          <a href="${pageContext.request.contextPath}/gifting">For Her</a>
         </div>
+
+        <%-- Company links --%>
         <div class="ft-col">
           <h4>Company</h4>
           <a href="${pageContext.request.contextPath}/about">About Us</a>
           <a href="${pageContext.request.contextPath}/contact">Contact</a>
-          <a href="${pageContext.request.contextPath}/faq">FAQ</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
         </div>
+
+        <%-- Support links --%>
         <div class="ft-col">
           <h4>Support</h4>
-          <a>Email: support@alughadi.com</a>
-          <a>Phone: +977-1-XXXX-XXXX</a>
-          <a href="${pageContext.request.contextPath}/returns">Returns &amp; Shipping</a>
+          <a href="mailto:support@alughadi.com">support@alughadi.com</a>
+          <a href="tel:+977XXXXXXXX">+977-1-XXXX-XXXX</a>
+          <a href="#">Returns &amp; Shipping</a>
+          <a href="#">FAQ</a>
         </div>
       </div>
+
+      <%-- Bottom bar --%>
       <div class="fb">
-        <p>© 2026 AluGhadi Watches · All rights reserved</p>
-        <p>Crafted with precision and passion</p>
+        <p>&copy; 2026 AluGhadi Watches &middot; All rights reserved</p>
+        <div style="display:flex;gap:0.6rem;align-items:center;flex-wrap:wrap;">
+          <span class="fb-badge">&#127473;&#127477; Made in Nepal</span>
+          <span class="fb-badge">&#128274; Secure Payments</span>
+        </div>
+        <p>Crafted with precision &amp; passion</p>
       </div>
     </div>
   </footer>
 
   <%-- ======== FLOATING CART BUTTON ======== --%>
-  <button id="cart-btn" type="button" onclick="openCart()">Cart (0)</button>
+  <button id="cart-btn" type="button" onclick="openCart()" aria-label="Open cart">
+    &#128717; Cart (<span id="cart-count">0</span>)
+  </button>
 
   <%-- ======== CART MODAL ======== --%>
-  <div class="modal-ov" id="modal-cart">
+  <div class="modal-ov" id="modal-cart" role="dialog" aria-modal="true" aria-label="Shopping cart">
     <div class="modal" style="max-width:500px;">
-      <button class="modal-close" onclick="closeModal('cart')">✕</button>
-      <div class="modal-h">Shopping Cart</div>
-      <div class="modal-sub">Items in your cart</div>
-      <div id="cart-items" style="max-height:300px;overflow-y:auto;margin:1rem 0;">
-        <div style="text-align:center;padding:2rem;color:var(--muted);">
-          <div style="font-size:2rem;margin-bottom:0.5rem;">Cart</div>
-          <div style="font-size:0.9rem;">Your cart is empty</div>
+      <button class="modal-close" onclick="closeModal('cart')" aria-label="Close cart">&#10005;</button>
+      <div class="modal-h">&#128717; Shopping Cart</div>
+      <div class="modal-sub">Your selected items</div>
+      <div id="cart-items" style="max-height:320px;overflow-y:auto;margin:1rem 0;">
+        <div class="cart-empty">
+          <div class="cart-empty-ico">&#128717;</div>
+          <p>Your cart is empty.<br/>Start exploring our collection!</p>
         </div>
       </div>
-      <div style="border-top:1.5px solid var(--border);padding-top:1rem;margin-top:1rem;">
-        <div style="display:flex;justify-content:space-between;font-weight:700;margin-bottom:1rem;">
-          <span>Total:</span>
-          <span id="cart-total">$0.00</span>
+      <div style="border-top:1.5px solid var(--border);padding-top:1rem;margin-top:0.5rem;">
+        <div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:1rem;font-size:1.05rem;">
+          <span>Total</span>
+          <span id="cart-total" style="color:var(--green);">NPR 0</span>
         </div>
-        <button class="btn-fill" style="width:100%;">Proceed to Checkout</button>
+        <button class="btn btn-g btn-full" onclick="closeModal('cart')">
+          Proceed to Checkout &#8594;
+        </button>
       </div>
     </div>
   </div>
 
+  <%-- ======== TOAST CONTAINER ======== --%>
+  <div class="toast-c" id="toast-container" aria-live="polite"></div>
+
   <%-- ======== SHARED SCRIPTS ======== --%>
   <script src="${pageContext.request.contextPath}/static/app.js"></script>
   <script>
-    // Hide loading screen when page loads
-    window.addEventListener('load', function() {
+    /* ---------- Page Loader ---------- */
+    window.addEventListener('load', function () {
       var loader = document.getElementById('page-loader');
       if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(function() { loader.style.display = 'none'; }, 300);
+        setTimeout(function () { loader.classList.add('loader-done'); }, 200);
       }
     });
 
-    // Navigation and UI functions
+    /* ---------- Scrolled nav ---------- */
+    (function () {
+      var nav = document.getElementById('nav');
+      if (!nav) return;
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 30);
+      }, { passive: true });
+    })();
+
+    /* ---------- Sidebar ---------- */
     function toggleSidebar() {
-      var sidebar = document.getElementById('sidebar');
-      var overlay = document.getElementById('sidebar-overlay');
-      sidebar.classList.toggle('active');
-      overlay.classList.toggle('active');
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('sidebar-overlay').classList.toggle('active');
+      document.body.style.overflow = document.getElementById('sidebar').classList.contains('active') ? 'hidden' : '';
     }
-
     function closeSidebar() {
-      var sidebar = document.getElementById('sidebar');
-      var overlay = document.getElementById('sidebar-overlay');
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('sidebar-overlay').classList.remove('active');
+      document.body.style.overflow = '';
     }
 
-    function showModal(modalId) {
-      var modal = document.getElementById('modal-' + modalId);
-      if (modal) modal.classList.add('active');
+    /* ---------- Modals ---------- */
+    function showModal(id) {
+      var m = document.getElementById('modal-' + id);
+      if (m) { m.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    }
+    function closeModal(id) {
+      var m = document.getElementById('modal-' + id);
+      if (m) { m.classList.remove('active'); document.body.style.overflow = ''; }
+    }
+    function openCart() { showModal('cart'); }
+
+    /* Close modal on overlay click */
+    document.querySelectorAll('.modal-ov').forEach(function (ov) {
+      ov.addEventListener('click', function (e) {
+        if (e.target === ov) closeModal(ov.id.replace('modal-', ''));
+      });
+    });
+
+    /* ---------- Toast Helper ---------- */
+    function showToast(title, msg, icon) {
+      var c = document.getElementById('toast-container');
+      if (!c) return;
+      var t = document.createElement('div');
+      t.className = 'toast';
+      t.innerHTML = '<div class="t-ico">' + (icon || '&#10024;') + '</div>'
+        + '<div><div class="t-h">' + title + '</div>'
+        + (msg ? '<div class="t-p">' + msg + '</div>' : '') + '</div>';
+      c.appendChild(t);
+      setTimeout(function () { t.remove(); }, 4000);
     }
 
-    function closeModal(modalId) {
-      var modal = document.getElementById('modal-' + modalId);
-      if (modal) modal.classList.remove('active');
-    }
+    /* ---------- Reveal on scroll ---------- */
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
 
-    function openCart() {
-      showModal('cart');
-    }
-
-    // Smooth scroll behavior
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
+    /* ---------- Smooth anchor scroll ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
         var target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
   </script>

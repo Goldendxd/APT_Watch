@@ -88,6 +88,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>registerPage</servlet-name>
+        <jsp-file>/register.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registerPage</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>logoutPage</servlet-name>
         <jsp-file>/logout.jsp</jsp-file>
     </servlet>
