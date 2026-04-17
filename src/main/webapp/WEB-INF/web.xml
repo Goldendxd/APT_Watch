@@ -37,10 +37,6 @@
         <servlet-name>giftingPage</servlet-name>
         <url-pattern>/gifting</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>giftingPage</servlet-name>
-        <url-pattern>/collections</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>forHimPage</servlet-name>
