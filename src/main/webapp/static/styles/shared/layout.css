@@ -1,0 +1,248 @@
+.page-hero {
+  min-height: 44vh;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  margin-top: 86px;
+}
+
+.ph-img {
+  position: absolute;
+  inset: 0;
+}
+
+.ph-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ph-ov {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 20, 12, 0.25) 0%,
+    rgba(8, 20, 12, 0.78) 100%
+  );
+}
+
+.ph-body {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 8% 4rem;
+  width: 100%;
+}
+
+.ph-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  padding: 0.28rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.ph-h {
+  font-size: clamp(1.9rem, 5vw, 3.8rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+
+.ph-sub {
+  font-size: 0.87rem;
+  color: rgba(255, 255, 255, 0.68);
+  max-width: 460px;
+  line-height: 1.65;
+}
+
+.pg-body {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 4rem 2rem 7rem;
+}
+
+.pg-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.pg-three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.gc {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.75rem;
+  transition: all 0.25s;
+}
+
+.gc:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--green-mid);
+}
+
+.gc-tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.gc-tag::before {
+  content: "";
+  width: 12px;
+  height: 2px;
+  background: var(--green);
+  border-radius: 1px;
+}
+
+.gc-h {
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.35rem;
+}
+
+.gc-sub {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 1.6rem;
+  line-height: 1.6;
+}
+
+.fg {
+  margin-bottom: 1.1rem;
+}
+
+.fg label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.45rem;
+}
+
+.fg input,
+.fg select,
+.fg textarea,
+.fg input[type="date"] {
+  width: 100%;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 0.76rem 0.95rem;
+  color: var(--text);
+  font-family: var(--ff);
+  font-size: 0.86rem;
+  outline: none;
+  transition: all 0.18s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.fg input:focus,
+.fg select:focus,
+.fg textarea:focus,
+.fg input[type="date"]:focus {
+  border-color: var(--green);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(26, 107, 56, 0.07);
+}
+
+.fg-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+.fg-note {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  background: var(--bg);
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+  padding: 0.65rem 0.95rem;
+  transition: all 0.18s;
+}
+
+.file-upload:hover {
+  border-color: var(--green);
+  background: var(--green-light);
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.fu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 0.38rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.fu-name {
+  font-size: 0.77rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.route-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.route-icon {
+  position: absolute;
+  left: 0.85rem;
+  font-size: 0.95rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.route-input {
+  padding-left: 2.4rem !important;
+}
