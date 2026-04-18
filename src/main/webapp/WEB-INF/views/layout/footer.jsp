@@ -97,7 +97,7 @@
   <div class="toast-c" id="toast-container" aria-live="polite"></div>
 
   <%-- ======== SHARED SCRIPTS ======== --%>
-  <script src="${pageContext.request.contextPath}/static/app.js"></script>
+  <script src="${pageContext.request.contextPath}/static/js/app.js"></script>
   <script>
     /* ---------- Page Loader ---------- */
     window.addEventListener('load', function () {
