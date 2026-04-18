@@ -45,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
         } else if (!ValidationUtil.isValidEmail(email)) {
             errors.append("Invalid email format.");
         } else if (!ValidationUtil.isValidPassword(password)) {
-            errors.append("Password must be 8+ characters with uppercase, number, and symbol. ";
+            errors.append("Password must be 8+ characters with uppercase, number, and symbol. ");
         } else if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
             errors.append("Passwords do not match. ");
         } else {
@@ -57,48 +57,14 @@ public class RegisterServlet extends HttpServlet {
         String hashedPassword = PasswordUtil.getHashPassword(password);
         User user = new User(username, email, hashedPassword);
 
+        boolean success = userDao.insertUser(user);
 
-//        request.setAttribute("regError", regError);
+        if(!success) {
+            request.setAttribute("error", "Username or email already exists.");
+            request.getRequestDispatcher("/WEB-INF/views/register.jsp");
+            return;
+        }
+        response.sendRedirect(request.getContextPath() + "/login");
     }
-//
-//        String regError2 = (String) request.getAttribute("regError");
-//%>
-//        sabin
 
-//        if (ValidationUtil.isNullOrEmpty(username)
-//                || !ValidationUtil.isAlphanumericStartingWithLetter(username)
-//                || username.length() < 5) {
-//            errors.append("Username must be alphanumeric, start with a letter, and be at least 5 characters. ");
-//        }
-//        if (!ValidationUtil.isValidEmail(email)) {
-//            errors.append("Invalid email format. ");
-//        }
-//        if (!ValidationUtil.isValidPassword(password)) {
-//            errors.append("Password must be 8+ characters with uppercase, number, and symbol. ");
-//        }
-//        if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
-//            errors.append("Passwords do not match. ");
-//        }
-//
-//        if (!errors.isEmpty()) {
-//            request.setAttribute("error", errors.toString().trim());
-//            request.getRequestDispatcher("/WEB-INF/views/register.jsp")
-//                    .forward(request, response);
-//            return;
-//        }
-//
-//        String hashedPassword = PasswordUtil.getHashPassword(password);
-//        User user = new User(username, email, hashedPassword);
-//
-//        boolean success = userDao.insertUser(user);
-//
-//        if (!success) {
-//            request.setAttribute("error", "Username or email already exists.");
-//            request.getRequestDispatcher("/WEB-INF/views/register.jsp")
-//                    .forward(request, response);
-//            return;
-//        }
-//
-//        response.sendRedirect(request.getContextPath() + "/login");
-    }
 }
