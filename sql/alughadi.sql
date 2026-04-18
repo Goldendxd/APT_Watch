@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS wishlists (
 	CONSTRAINT uq_wishlists_user_product UNIQUE (user_id, product_id)
 );
 
-CREATE TABLE IF NOT EXISTS for_him (
+CREATE TABLE IF NOT EXISTS for_him_collection (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	product_id INT,
 	title VARCHAR(150) NOT NULL,
@@ -55,12 +55,12 @@ CREATE TABLE IF NOT EXISTS for_him (
 	price_range VARCHAR(60) NOT NULL,
 	description TEXT,
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT fk_for_him_product
+	CONSTRAINT fk_for_him_collection_product
 		FOREIGN KEY (product_id) REFERENCES products(id)
 		ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT EXISTS for_her (
+CREATE TABLE IF NOT EXISTS for_her_collection (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	product_id INT,
 	title VARCHAR(150) NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS for_her (
 	price_range VARCHAR(60) NOT NULL,
 	description TEXT,
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT fk_for_her_product
+	CONSTRAINT fk_for_her_collection_product
 		FOREIGN KEY (product_id) REFERENCES products(id)
 		ON DELETE SET NULL
 );
