@@ -28,6 +28,8 @@ dependency-reduced-pom.xml
 *.iws
 *.ipr
 out/
+.idea
+.smarttomcat
 
 # IDE - Eclipse
 .classpath
