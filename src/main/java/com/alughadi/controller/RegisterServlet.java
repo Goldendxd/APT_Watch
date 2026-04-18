@@ -1,3 +1,5 @@
+package com.alughadi.controller;
+
 import com.alughadi.dao.UserDao;
 import com.alughadi.dao.UserDaoImpl;
 import com.alughadi.entity.User;
