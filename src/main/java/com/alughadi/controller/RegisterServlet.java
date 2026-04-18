@@ -1,6 +1,10 @@
+package com.alughadi.controller;
+
 import com.alughadi.dao.UserDao;
 import com.alughadi.dao.UserDaoImpl;
 import com.alughadi.entity.User;
+import com.alughadi.utils.PasswordUtil;
+import com.alughadi.utils.ValidationUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,6 +38,33 @@ public class RegisterServlet extends HttpServlet {
 
         StringBuilder errors = new StringBuilder();
 
+        if (ValidationUtil.isNullOrEmpty(username) ||
+                !ValidationUtil.isAlphanumericStartingWithLetter(username) ||
+                username.length() < 6) {
+            errors.append("Username must be alphanumeric, start with a letter, and be at least 6 characters. ");
+        } else if (!ValidationUtil.isValidEmail(email)) {
+            errors.append("Invalid email format.");
+        } else if (!ValidationUtil.isValidPassword(password)) {
+            errors.append("Password must be 8+ characters with uppercase, number, and symbol. ";
+        } else if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
+            errors.append("Passwords do not match. ");
+        } else {
+            request.setAttribute("error", errors.toString().trim());
+            response.sendRedirect(request.getContextPath() + "/login?registered=1");
+            return;
+        }
+
+        String hashedPassword = PasswordUtil.getHashPassword(password);
+        User user = new User(username, email, hashedPassword);
+
+
+//        request.setAttribute("regError", regError);
+    }
+//
+//        String regError2 = (String) request.getAttribute("regError");
+//%>
+//        sabin
+
 //        if (ValidationUtil.isNullOrEmpty(username)
 //                || !ValidationUtil.isAlphanumericStartingWithLetter(username)
 //                || username.length() < 5) {
@@ -48,26 +79,26 @@ public class RegisterServlet extends HttpServlet {
 //        if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
 //            errors.append("Passwords do not match. ");
 //        }
-
-        if (!errors.isEmpty()) {
-            request.setAttribute("error", errors.toString().trim());
-            request.getRequestDispatcher("/WEB-INF/views/register.jsp")
-                    .forward(request, response);
-            return;
-        }
-
-        String hashedPassword = PasswordUtil.getHashPassword(password);
-        User user = new User(username, email, hashedPassword);
-
-        boolean success = userDao.insertUser(user);
-
-        if (!success) {
-            request.setAttribute("error", "Username or email already exists.");
-            request.getRequestDispatcher("/WEB-INF/views/register.jsp")
-                    .forward(request, response);
-            return;
-        }
-
-        response.sendRedirect(request.getContextPath() + "/login");
+//
+//        if (!errors.isEmpty()) {
+//            request.setAttribute("error", errors.toString().trim());
+//            request.getRequestDispatcher("/WEB-INF/views/register.jsp")
+//                    .forward(request, response);
+//            return;
+//        }
+//
+//        String hashedPassword = PasswordUtil.getHashPassword(password);
+//        User user = new User(username, email, hashedPassword);
+//
+//        boolean success = userDao.insertUser(user);
+//
+//        if (!success) {
+//            request.setAttribute("error", "Username or email already exists.");
+//            request.getRequestDispatcher("/WEB-INF/views/register.jsp")
+//                    .forward(request, response);
+//            return;
+//        }
+//
+//        response.sendRedirect(request.getContextPath() + "/login");
     }
 }

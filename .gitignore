@@ -55,3 +55,6 @@ logs/
 *~
 .tmp/
 node_modules/
+
+.smarttomcat
+
