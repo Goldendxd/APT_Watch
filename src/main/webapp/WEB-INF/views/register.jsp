@@ -1,33 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%
-  String method = request.getMethod();
-  String regError = null;
 
-  if ("POST".equalsIgnoreCase(method)) {
-    String username  = request.getParameter("username");
-    String email     = request.getParameter("email");
-    String password  = request.getParameter("password");
-    String cpassword = request.getParameter("cpassword");
-
-    if (username == null || username.trim().isEmpty()
-        || email == null || email.trim().isEmpty()
-        || password == null || password.isEmpty()) {
-      regError = "All fields are required.";
-    } else if (!password.equals(cpassword)) {
-      regError = "Passwords do not match. Please try again.";
-    } else if (password.length() < 6) {
-      regError = "Password must be at least 6 characters.";
-    } else {
-      /* ---- Placeholder: save to DB when backend is ready ---- */
-      response.sendRedirect(request.getContextPath() + "/login?registered=1");
-      return;
-    }
-    request.setAttribute("regError", regError);
-  }
-
-  String regError2 = (String) request.getAttribute("regError");
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,13 +89,14 @@
         Join AluGhadi Watches and step into a world of precision, elegance, and timeless style.
       </p>
 
-      <!-- Error Message -->
-      <% if (regError2 != null) { %>
-        <div class="auth-error">&#9888; <%= regError2 %></div>
-      <% } %>
 
       <!-- Register Form -->
       <form id="register-form" method="post" action="${pageContext.request.contextPath}/register" novalidate>
+
+        <!-- Error Message -->
+        <c:if test="${not empty error}">
+          <p class="error"><c:out value="${error}" /></p>
+        </c:if>
 
         <div class="auth-fg">
           <label for="reg-username">Username</label>
