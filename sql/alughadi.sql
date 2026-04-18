@@ -1,12 +1,37 @@
 -- AluGhadi core schema (derived from JSP views)
 
 CREATE TABLE IF NOT EXISTS users (
+--     Basic Info
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(50) NOT NULL UNIQUE,
 	email VARCHAR(150) NOT NULL UNIQUE,
-	password_hash VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,
 	role VARCHAR(20) NOT NULL DEFAULT 'user',
-	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+
+--     Personal Info
+    full_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) UNIQUE,
+    date_of_birth DATE,
+    gender ENUM('male', 'female', 'other'),
+    profile_image VARCHAR(255) DEFAULT 'default.png',
+
+--     Address Info
+    address VARCHAR(100),
+    country VARCHAR(100),
+    city VARCHAR(100),
+    Province VARCHAR(100),
+    District VARCHAR(100),
+    LocalUnits VARCHAR(100),
+    Ward VARCHAR(100),
+
+--     Account Status
+    is_active INT(1) DEFAULT 1,
+    is_verified INT(0) DEFAULT 0,
+
+--     Timestamps
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_login TIMESTAMP NULL
 );
 
 CREATE TABLE IF NOT EXISTS categories (
