@@ -36,20 +36,24 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("cpassword");
 
-        StringBuilder errors = new StringBuilder();
+        StringBuilder errorMessage = new StringBuilder();
 
         if (ValidationUtil.isNullOrEmpty(username) ||
                 !ValidationUtil.isAlphanumericStartingWithLetter(username) ||
                 username.length() < 6) {
-            errors.append("Username must be alphanumeric, start with a letter, and be at least 6 characters. ");
-        } else if (!ValidationUtil.isValidEmail(email)) {
-            errors.append("Invalid email format.");
-        } else if (!ValidationUtil.isValidPassword(password)) {
-            errors.append("Password must be 8+ characters with uppercase, number, and symbol. ");
-        } else if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
-            errors.append("Passwords do not match. ");
-        } else {
-            request.setAttribute("error", errors.toString().trim());
+            errorMessage.append("Username must be alphanumeric, start with a letter, and be at least 6 characters. ");
+        }
+        if (!ValidationUtil.isValidEmail(email)) {
+            errorMessage.append("Invalid email format.");
+        }
+        if (!ValidationUtil.isValidPassword(password)) {
+            errorMessage.append("Password must be 8+ characters with uppercase, number, and symbol. ");
+        }
+        if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
+            errorMessage.append("Passwords do not match. ");
+        }
+        else {
+            request.setAttribute("error", errorMessage.toString().trim());
             response.sendRedirect(request.getContextPath() + "/login?registered=1");
             return;
         }
@@ -61,7 +65,7 @@ public class RegisterServlet extends HttpServlet {
 
         if(!success) {
             request.setAttribute("error", "Username or email already exists.");
-            request.getRequestDispatcher("/WEB-INF/views/register.jsp");
+            request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
             return;
         }
         response.sendRedirect(request.getContextPath() + "/login");
