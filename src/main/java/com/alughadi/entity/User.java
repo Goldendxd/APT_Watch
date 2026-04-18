@@ -5,8 +5,11 @@ import java.util.Date;
 
 public class User {
     private int id;
+    private String username;
     private String full_name;
     private String phone;
+    private String email;
+    private String password;
     private Date date_of_birth;
     private String gender;
     private String profile_image;
@@ -23,13 +26,26 @@ public class User {
     private Timestamp updated_At;
     private Timestamp last_login;
 
-    public User(int id, String full_name, String phone, Date date_of_birth, String gender,
-                String profile_image, String address, String country, String city, String province,
-                String district, String localUnits, String ward, int is_active, int is_verified,
-                Timestamp created_At, Timestamp updated_At, Timestamp last_login) {
+    public User(int id, String username, String email, String password, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.created_At = createdAt;
+        this.updated_At = updatedAt;
+    }
+
+    public User(int id, String username, String full_name, String phone, String email,
+                String password, Date date_of_birth, String gender, String profile_image,
+                String address, String country, String city, String province, String district,
+                String localUnits, String ward, int is_active, int is_verified, Timestamp created_At,
+                Timestamp updated_At, Timestamp last_login) {
+        this.id = id;
+        this.username = username;
         this.full_name = full_name;
         this.phone = phone;
+        this.email = email;
+        this.password = password;
         this.date_of_birth = date_of_birth;
         this.gender = gender;
         this.profile_image = profile_image;
@@ -55,6 +71,14 @@ public class User {
         this.id = id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getFull_name() {
         return full_name;
     }
@@ -69,6 +93,22 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Date getDate_of_birth() {
@@ -195,8 +235,11 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", username='" + username + '\'' +
                 ", full_name='" + full_name + '\'' +
                 ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", date_of_birth=" + date_of_birth +
                 ", gender='" + gender + '\'' +
                 ", profile_image='" + profile_image + '\'' +

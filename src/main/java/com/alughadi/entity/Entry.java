@@ -5,10 +5,12 @@ import java.util.Date;
 
 public class Entry {
     private int id;
+    private String username;
     private String full_name;
     private String phone;
     private Date date_of_birth;
     private String gender;
+    private String email;
     private String profile_image;
     private String address;
     private String country;
@@ -23,11 +25,12 @@ public class Entry {
     private Timestamp updated_At;
     private Timestamp last_login;
 
-    public Entry(int id, String full_name, String phone, Date date_of_birth, String gender,
+    public Entry(int id, String full_name, String username, String phone, Date date_of_birth, String gender,
                  String profile_image, String address, String country, String city, String province,
-                 String district, String localUnits, String ward, int is_active, int is_verified, Timestamp created_At,
+                 String district, String localUnits, String email, String ward, int is_active, int is_verified, Timestamp created_At,
                  Timestamp updated_At, Timestamp last_login) {
         this.id = id;
+        this.username = username;
         this.full_name = full_name;
         this.phone = phone;
         this.date_of_birth = date_of_birth;
@@ -35,6 +38,7 @@ public class Entry {
         this.profile_image = profile_image;
         this.address = address;
         this.country = country;
+        this.email = email;
         this.city = city;
         this.province = province;
         this.district = district;
@@ -54,7 +58,12 @@ public class Entry {
     public void setId(int id) {
         this.id = id;
     }
-
+    public String getUsername(){
+        return username;
+    }
+    public void setUsername(String username){
+        this.username = username;
+    }
     public String getFull_name() {
         return full_name;
     }
@@ -85,6 +94,14 @@ public class Entry {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getEmail(){
+       return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getProfile_image() {
@@ -196,6 +213,7 @@ public class Entry {
         return "Entry{" +
                 "id=" + id +
                 ", full_name='" + full_name + '\'' +
+                ", username='" + username + '\'' +
                 ", phone='" + phone + '\'' +
                 ", date_of_birth=" + date_of_birth +
                 ", gender='" + gender + '\'' +
@@ -207,6 +225,7 @@ public class Entry {
                 ", district='" + district + '\'' +
                 ", localUnits='" + localUnits + '\'' +
                 ", ward='" + ward + '\'' +
+                ", email='" + email + '\'' +
                 ", is_active=" + is_active +
                 ", is_verified=" + is_verified +
                 ", created_At=" + created_At +
