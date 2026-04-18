@@ -39,12 +39,22 @@ public class RegisterServlet extends HttpServlet {
         StringBuilder errorMessage = new StringBuilder();
 
         if (ValidationUtil.isNullOrEmpty(username) ||
+                ValidationUtil.isNullOrEmpty(email) ||
+                ValidationUtil.isNullOrEmpty(password) ||
+                ValidationUtil.isNullOrEmpty(confirmPassword)) {
+
+            request.setAttribute("error", "Please fill in all fields.");
+            request.getRequestDispatcher("/WEB-INF/views/register.jsp")
+                    .forward(request, response);
+            return;
+        }
+        if (ValidationUtil.isNullOrEmpty(username) ||
                 !ValidationUtil.isAlphanumericStartingWithLetter(username) ||
                 username.length() < 6) {
             errorMessage.append("Username must be alphanumeric, start with a letter, and be at least 6 characters. ");
         }
         if (!ValidationUtil.isValidEmail(email)) {
-            errorMessage.append("Invalid email format.");
+            errorMessage.append("Invalid email format. ");
         }
         if (!ValidationUtil.isValidPassword(password)) {
             errorMessage.append("Password must be 8+ characters with uppercase, number, and symbol. ");
@@ -52,9 +62,9 @@ public class RegisterServlet extends HttpServlet {
         if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
             errorMessage.append("Passwords do not match. ");
         }
-        else {
+        if (errorMessage.length() > 0) {
             request.setAttribute("error", errorMessage.toString().trim());
-            response.sendRedirect(request.getContextPath() + "/login?registered=1");
+            request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
             return;
         }
 
