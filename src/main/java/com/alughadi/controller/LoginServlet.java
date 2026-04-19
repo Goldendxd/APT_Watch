@@ -59,8 +59,7 @@ public class LoginServlet extends HttpServlet {
                     .forward(request, response);
             return;
         }
-
-        response.sendRedirect(request.getContextPath() + "/topic");
         SessionUtil.setAttribute(request, "user", user);
+        response.sendRedirect(request.getContextPath() + "/home");
     }
 }
