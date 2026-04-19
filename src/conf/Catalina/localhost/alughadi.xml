@@ -6,5 +6,7 @@
     <PostResources base="C:/Users/ACER/.m2/repository/jakarta/el/jakarta.el-api/5.0.0/jakarta.el-api-5.0.0.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/jakarta.el-api-5.0.0.jar"/>
     <PostResources base="C:/Users/ACER/.m2/repository/org/glassfish/web/jakarta.servlet.jsp.jstl/3.0.1/jakarta.servlet.jsp.jstl-3.0.1.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/jakarta.servlet.jsp.jstl-3.0.1.jar"/>
     <PostResources base="C:/Users/ACER/.m2/repository/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/jbcrypt-0.4.jar"/>
+    <PostResources base="C:/Users/ACER/.m2/repository/com/mysql/mysql-connector-j/9.6.0/mysql-connector-j-9.6.0.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/mysql-connector-j-9.6.0.jar"/>
+    <PostResources base="C:/Users/ACER/.m2/repository/com/google/protobuf/protobuf-java/4.31.1/protobuf-java-4.31.1.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/protobuf-java-4.31.1.jar"/>
   </Resources>
 </Context>

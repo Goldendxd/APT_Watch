@@ -43,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
                 ValidationUtil.isNullOrEmpty(password) ||
                 ValidationUtil.isNullOrEmpty(confirmPassword)) {
 
-            request.setAttribute("error", "Please fill in all fields.");
+            request.setAttribute("registerError", "Please fill in all fields.");
             request.getRequestDispatcher("/WEB-INF/views/register.jsp")
                     .forward(request, response);
             return;
@@ -63,7 +63,7 @@ public class RegisterServlet extends HttpServlet {
             errorMessage.append("Passwords do not match. ");
         }
         if (errorMessage.length() > 0) {
-            request.setAttribute("error", errorMessage.toString().trim());
+            request.setAttribute("registerError", errorMessage.toString().trim());
             request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
             return;
         }
@@ -74,7 +74,7 @@ public class RegisterServlet extends HttpServlet {
         boolean success = userDao.insertUser(user);
 
         if(!success) {
-            request.setAttribute("error", "Username or email already exists.");
+            request.setAttribute("registerError", "Username or email already exists.");
             request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
             return;
         }

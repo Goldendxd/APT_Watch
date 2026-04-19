@@ -1,22 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%
-  String method = request.getMethod();
-  if ("POST".equalsIgnoreCase(method)) {
-    String username = request.getParameter("username");
-    String password = request.getParameter("password");
-    if (username != null && !username.trim().isEmpty()
-        && password != null && !password.trim().isEmpty()) {
-      session.setAttribute("authUser", username.trim());
-      session.setAttribute("authRole", "user");
-      response.sendRedirect(request.getContextPath() + "/");
-      return;
-    } else {
-      request.setAttribute("loginError", "Please enter both username and password.");
-    }
-  }
-  String loginError = (String) request.getAttribute("loginError");
-%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,9 +93,10 @@
       </p>
 
       <!-- Error Message -->
-      <% if (loginError != null) { %>
-        <div class="auth-error">&#9888; <%= loginError %></div>
-      <% } %>
+      <c:if test="${not empty loginError}">
+        <div class="auth-error"> &#9888; ${loginError}</div>
+      </c:if>
+
 
       <!-- Registered success flash -->
       <c:if test="${not empty param.registered}">
@@ -119,7 +104,7 @@
       </c:if>
 
       <!-- Login Form -->
-      <form id="login-form" method="post" action="${pageContext.request.contextPath}/login" novalidate>
+      <form id="login-form" method="post"  action="${pageContext.request.contextPath}/login" >
 
         <div class="auth-fg">
           <label for="username">Username</label>
