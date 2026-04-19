@@ -48,20 +48,20 @@ public class AuthenticationFilter implements Filter {
             return;
         }
 
-        boolean isLoggedIn = SessionUtil.getAttribute(req, "authUser") != null;
-        boolean isAuthPage = "/login".equals(path) || "/register".equals(path);
-
-        if (!isLoggedIn && !isAuthPage) {
-            // Not logged in + trying to access protected page -> go to login
-            res.sendRedirect(contextPath + "/login");
-            return;
-        }
-
-        if (isLoggedIn && isAuthPage) {
-            // Already logged in + trying to access login/register -> go to topics
-            res.sendRedirect(contextPath + "/home");
-            return;
-        }
+//        boolean isLoggedIn = SessionUtil.getAttribute(req, "authUser") != null;
+//        boolean isAuthPage = "/login".equals(path) || "/register".equals(path);
+//
+//        if (!isLoggedIn && !isAuthPage) {
+//            // Not logged in + trying to access protected page -> go to login
+//            res.sendRedirect(contextPath + "/login");
+//            return;
+//        }
+//
+//        if (isLoggedIn && isAuthPage) {
+//            // Already logged in + trying to access login/register -> go to topics
+//            res.sendRedirect(contextPath + "/home");
+//            return;
+//        }
 
         // All other cases: allow through
         chain.doFilter(request, response);
