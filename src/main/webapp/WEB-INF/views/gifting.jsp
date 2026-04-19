@@ -1,11 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-  request.setAttribute("pageTitle", "Gift Guide | AluGhadi Watches");
-  request.setAttribute("pageDesc", "Find the perfect watch gift for him or her. Curated top picks from AluGhadi.");
-  request.setAttribute("activeNav", "gifting");
-%>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%
+request.setAttribute("pageTitle", "Gift Guide | AluGhadi Watches");
+request.setAttribute("pageDesc", "Find the perfect watch gift for him or her.
+Curated top picks from AluGhadi."); request.setAttribute("activeNav",
+"gifting"); %>
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-
 <%-- ===== HERO — video background, minimal copy ===== --%>
 <section class="gift-hero">
   <video class="gift-hero-video" autoplay muted loop playsinline preload="auto">
