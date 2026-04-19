@@ -41,25 +41,35 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter("username").trim();
+        String password = request.getParameter("password").trim();
 
+        if (username == null || username.isEmpty() ||
+            password == null || password.isEmpty()){
+            request.setAttribute("loginError", "Please enter both username and password. ");
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp")
+                    .forward(request, response);
+            return;
+        }
         User user = userDao.findByUsername(username);
 
         if (user == null) {
-            request.setAttribute("error", "Invalid username or password.");
+            request.setAttribute("loginError", "Invalid username or password.");
             request.getRequestDispatcher("/WEB-INF/views/login.jsp")
                     .forward(request, response);
             return;
         }
 
-        if (!PasswordUtil.checkPassword(password, user.getPassword())) {
-            request.setAttribute("error", "Invalid username or password.");
+        if(!PasswordUtil.checkPassword(password, user.getPassword())){
+            request.setAttribute("loginError", "Invalid username or password. ");
             request.getRequestDispatcher("/WEB-INF/views/login.jsp")
                     .forward(request, response);
             return;
         }
-        SessionUtil.setAttribute(request, "user", user);
+
+        SessionUtil.setAttribute(request, "authUser", user.getUsername());
+        SessionUtil.setAttribute(request, "authRole", user);
         response.sendRedirect(request.getContextPath() + "/home");
     }
+
 }

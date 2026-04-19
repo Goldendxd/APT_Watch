@@ -91,11 +91,11 @@
 
 
       <!-- Register Form -->
-      <form id="register-form" method="post" action="${pageContext.request.contextPath}/register" novalidate>
+      <form id="register-form" method="post" action="${pageContext.request.contextPath}/register">
 
         <!-- Error Message -->
-        <c:if test="${not empty error}">
-          <p class="error"><c:out value="${error}" /></p>
+        <c:if test="${not empty registerError}">
+          <p style = "color: red; font-style: italic"><c:out value="${registerError}" /></p>
         </c:if>
 
         <div class="auth-fg">

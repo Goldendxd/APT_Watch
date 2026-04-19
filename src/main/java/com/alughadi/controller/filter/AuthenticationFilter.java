@@ -48,7 +48,7 @@ public class AuthenticationFilter implements Filter {
             return;
         }
 
-        boolean isLoggedIn = SessionUtil.getAttribute(req, "user") != null;
+        boolean isLoggedIn = SessionUtil.getAttribute(req, "authUser") != null;
         boolean isAuthPage = "/login".equals(path) || "/register".equals(path);
 
         if (!isLoggedIn && !isAuthPage) {
