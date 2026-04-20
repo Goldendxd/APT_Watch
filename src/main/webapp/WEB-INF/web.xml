@@ -19,25 +19,6 @@
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 
-    <!-- Friendly URL mappings (no .jsp required) -->
-    <servlet>
-        <servlet-name>productsPage</servlet-name>
-        <jsp-file>/WEB-INF/views/products.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>productsPage</servlet-name>
-        <url-pattern>/products</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>giftingPage</servlet-name>
-        <jsp-file>/WEB-INF/views/gifting.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>giftingPage</servlet-name>
-        <url-pattern>/gifting</url-pattern>
-    </servlet-mapping>
-
     <servlet>
         <servlet-name>forHimPage</servlet-name>
         <jsp-file>/WEB-INF/views/for-him.jsp</jsp-file>
