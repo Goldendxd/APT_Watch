@@ -11,8 +11,8 @@
 <div class="page-hero">
   <div class="ph-img">
     <img
-      src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
-      alt="Watch Collection"
+      src="${pageContext.request.contextPath}/static/images/hero_products.png"
+      alt="AluGhadi Watch Collection"
       style="object-position: center"
     />
   </div>
