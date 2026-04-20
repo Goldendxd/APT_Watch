@@ -9,9 +9,9 @@
 <%-- ======== PAGE HERO ======== --%>
 <section class="page-hero about-hero">
   <div class="ph-img">
-    <img src="${pageContext.request.contextPath}/static/images/alughadiweblogo.png"
+    <img src="${pageContext.request.contextPath}/static/images/hero_about.png"
          alt="AluGhadi Workshop"
-         style="object-position: center; filter: blur(1px) brightness(0.35);" />
+         style="object-position: center;" />
   </div>
   <div class="ph-ov"></div>
   <div class="ph-body">

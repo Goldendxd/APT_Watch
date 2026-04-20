@@ -9,9 +9,9 @@
 <%-- ======== PAGE HERO ======== --%>
 <section class="page-hero contact-hero">
   <div class="ph-img">
-    <img src="${pageContext.request.contextPath}/static/images/alughadiweblogo.png"
-         alt="Contact AluGhadi"
-         style="filter: blur(1px) brightness(0.3);" />
+    <img src="${pageContext.request.contextPath}/static/images/hero_contact.png"
+         alt="AluGhadi Watch Boutique"
+         style="object-position: center;" />
   </div>
   <div class="ph-ov"></div>
   <div class="ph-body">
