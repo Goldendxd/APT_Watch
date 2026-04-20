@@ -1,0 +1,273 @@
+/* ================================================================
+   about.css — About Page Styles | AluGhadi Watches
+   ================================================================ */
+
+/* ================================================================
+   ABOUT HERO
+   ================================================================ */
+.about-hero {
+  min-height: 52vh;
+}
+.about-hero .ph-img img {
+  object-position: center 30%;
+}
+
+/* ================================================================
+   STORY SPLIT  (mission text + stats grid)
+   ================================================================ */
+.about-values {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       0.6rem;
+  margin-top: 1.75rem;
+}
+.about-val-chip {
+  display:       inline-flex;
+  align-items:   center;
+  gap:           0.4rem;
+  background:    var(--green-light);
+  border:        1.5px solid var(--green-mid);
+  color:         var(--green);
+  padding:       0.42rem 1rem;
+  border-radius: 999px;
+  font-size:     0.76rem;
+  font-weight:   700;
+  letter-spacing: 0.02em;
+  transition:    all 0.2s var(--ease);
+}
+.about-val-chip:hover {
+  background: var(--green);
+  color:      #fff;
+  transform:  translateY(-2px);
+}
+
+/* stats 2×2 grid on right side */
+.split-stats-grid {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   1.15rem;
+}
+
+.about-stat-card {
+  background:     var(--white);
+  border:         1.5px solid var(--border);
+  border-radius:  20px;
+  padding:        2rem 1.5rem;
+  text-align:     center;
+  transition:     all 0.3s var(--ease);
+  position:       relative;
+  overflow:       hidden;
+}
+.about-stat-card::before {
+  content:       '';
+  position:      absolute;
+  inset:         0;
+  background:    linear-gradient(135deg, rgba(26,107,56,0.04) 0%, transparent 60%);
+  border-radius: inherit;
+}
+.about-stat-card:hover {
+  transform:    translateY(-6px);
+  box-shadow:   var(--shadow-lg);
+  border-color: var(--green-mid);
+}
+
+.asc-n {
+  font-size:      2.6rem;
+  font-weight:    900;
+  color:          var(--text);
+  letter-spacing: -0.04em;
+  line-height:    1;
+  margin-bottom:  0.35rem;
+  font-family:    var(--ffi);
+}
+.asc-n span {
+  font-size:  1.6rem;
+  color:      var(--green);
+  font-family: var(--ff);
+}
+.asc-l {
+  font-size:   0.74rem;
+  font-weight: 600;
+  color:       var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ================================================================
+   MARQUEE STRIP
+   ================================================================ */
+.about-marquee-strip {
+  background:  var(--text);
+  overflow:    hidden;
+  padding:     0.85rem 0;
+  white-space: nowrap;
+}
+.about-marquee-inner {
+  display:   inline-flex;
+  gap:       3rem;
+  animation: marquee 22s linear infinite;
+}
+.about-marquee-inner span {
+  font-size:      0.75rem;
+  font-weight:    700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color:          rgba(255,255,255,0.55);
+}
+.about-marquee-inner span:nth-child(odd) {
+  color: var(--accent);
+}
+
+/* ================================================================
+   TEAM GRID
+   ================================================================ */
+.team-grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:                   1.75rem;
+}
+
+.team-card {
+  background:     var(--white);
+  border:         1.5px solid var(--border);
+  border-radius:  24px;
+  overflow:       hidden;
+  padding:        2.25rem 1.75rem 2rem;
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  text-align:     center;
+  gap:            0;
+  transition:     all 0.35s var(--ease);
+  position:       relative;
+}
+.team-card:hover {
+  transform:    translateY(-8px);
+  box-shadow:   var(--shadow-xl);
+  border-color: var(--green-mid);
+}
+
+/* glow layer */
+.team-card-glow {
+  position:      absolute;
+  inset:         0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity:        0;
+  transition:     opacity 0.3s;
+}
+.team-card:hover .team-card-glow {
+  opacity: 1;
+}
+
+/* avatar */
+.team-avatar-wrap {
+  position:     relative;
+  width:        96px;
+  height:       96px;
+  margin-bottom: 1.35rem;
+  flex-shrink:  0;
+}
+.team-avatar {
+  width:           96px;
+  height:          96px;
+  border-radius:   50%;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  position:        relative;
+  z-index:         1;
+  box-shadow:      0 8px 32px rgba(0,0,0,0.18);
+}
+.team-avatar span {
+  font-size:   1.5rem;
+  font-weight: 900;
+  color:       #fff;
+  letter-spacing: -0.02em;
+  font-family: var(--ffi);
+}
+.team-avatar-ring {
+  position:      absolute;
+  inset:         -5px;
+  border-radius: 50%;
+  border:        2px dashed var(--green-mid);
+  animation:     teamRingRotate 12s linear infinite;
+}
+@keyframes teamRingRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* body */
+.team-body {
+  position: relative;
+  z-index:  1;
+  width:    100%;
+}
+
+.team-role-chip {
+  display:       inline-flex;
+  align-items:   center;
+  padding:       0.28rem 0.85rem;
+  border-radius: 999px;
+  font-size:     0.68rem;
+  font-weight:   700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background:    var(--green-light);
+  border:        1.5px solid rgba(26,107,56,0.18);
+  color:         var(--green);
+  margin-bottom: 0.7rem;
+}
+
+.team-name {
+  font-size:      1.22rem;
+  font-weight:    900;
+  letter-spacing: -0.02em;
+  margin-bottom:  0.55rem;
+  color:          var(--text);
+  font-family:    var(--ffi);
+}
+
+.team-bio {
+  font-size:   0.82rem;
+  color:       var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+}
+
+.team-skills {
+  display:        flex;
+  flex-wrap:      wrap;
+  gap:            0.45rem;
+  justify-content: center;
+}
+.team-skills span {
+  background:    var(--surface);
+  border:        1.5px solid var(--border);
+  border-radius: 999px;
+  padding:       0.22rem 0.72rem;
+  font-size:     0.7rem;
+  font-weight:   600;
+  color:         var(--text2);
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 1024px) {
+  .split { gap: 2.5rem; }
+  .split-stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .about-hero { min-height: 40vh; }
+  .split-stats-grid { grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+  .asc-n { font-size: 2rem; }
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card { max-width: 380px; margin: 0 auto; width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .split-stats-grid { grid-template-columns: 1fr 1fr; }
+}

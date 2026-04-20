@@ -1,0 +1,244 @@
+/* ================================================================
+   contact.css — Contact Page Styles | AluGhadi Watches
+   ================================================================ */
+
+/* ================================================================
+   CONTACT HERO
+   ================================================================ */
+.contact-hero {
+  min-height: 48vh;
+}
+.contact-hero .ph-img img {
+  object-position: center 40%;
+}
+
+/* ================================================================
+   CONTACT INFO STRIP
+   ================================================================ */
+.contact-info-strip {
+  background:    var(--white);
+  border-bottom: 1.5px solid var(--border);
+  padding:       1.6rem 2rem;
+}
+.cis-inner {
+  max-width:       1280px;
+  margin:          0 auto;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             0;
+  flex-wrap:       wrap;
+}
+.cis-item {
+  display:     flex;
+  align-items: center;
+  gap:         0.85rem;
+  padding:     0.5rem 2.5rem;
+  flex-shrink: 0;
+}
+.cis-divider {
+  width:         1px;
+  height:        2.5rem;
+  background:    var(--border);
+  flex-shrink:   0;
+}
+.cis-ico {
+  font-size:       1.35rem;
+  width:           44px;
+  height:          44px;
+  border-radius:   12px;
+  background:      var(--green-light);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  flex-shrink:     0;
+}
+.cis-label {
+  font-size:      0.65rem;
+  font-weight:    700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color:          var(--muted);
+  margin-bottom:  0.18rem;
+}
+.cis-val {
+  font-size:   0.9rem;
+  font-weight: 700;
+  color:       var(--text);
+}
+.cis-val a {
+  color:           inherit;
+  text-decoration: none;
+  transition:      color 0.18s;
+}
+.cis-val a:hover { color: var(--green); }
+
+/* ================================================================
+   CONTACT LAYOUT  (form + side)
+   ================================================================ */
+.contact-layout {
+  display:               grid;
+  grid-template-columns: 1fr 380px;
+  gap:                   2.25rem;
+  align-items:           start;
+}
+
+/* ================================================================
+   CONTACT FORM
+   ================================================================ */
+.contact-form-wrap .gc {
+  border-radius: 24px;
+  padding:       2.5rem;
+}
+
+.contact-form {
+  margin-top: 0.5rem;
+}
+
+.contact-form select {
+  width:           100%;
+  background:      var(--bg);
+  border:          1.5px solid var(--border);
+  border-radius:   var(--r-sm);
+  padding:         0.82rem 1rem;
+  color:           var(--text);
+  font-family:     var(--ff);
+  font-size:       0.88rem;
+  outline:         none;
+  cursor:          pointer;
+  transition:      all 0.2s var(--ease);
+  appearance:      none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234e6a59' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:   no-repeat;
+  background-position: right 1rem center;
+  padding-right:   2.5rem;
+}
+.contact-form select:focus {
+  border-color: var(--green);
+  background-color: var(--white);
+  box-shadow: 0 0 0 3px rgba(26, 107, 56, 0.08), 0 2px 8px rgba(26, 107, 56, 0.06);
+}
+
+.contact-form-foot {
+  display:     flex;
+  align-items: center;
+  gap:         1.25rem;
+  flex-wrap:   wrap;
+  margin-top:  0.5rem;
+}
+.contact-form-note {
+  font-size:  0.75rem;
+  color:      var(--muted);
+  font-weight: 500;
+}
+
+/* ================================================================
+   CONTACT SIDE CARDS
+   ================================================================ */
+.contact-side {
+  display:        flex;
+  flex-direction: column;
+  gap:            1.15rem;
+}
+
+.contact-side-card {
+  display:       flex;
+  align-items:   flex-start;
+  gap:           1rem;
+  background:    var(--white);
+  border:        1.5px solid var(--border);
+  border-radius: 18px;
+  padding:       1.4rem 1.35rem;
+  transition:    all 0.28s var(--ease);
+}
+.contact-side-card:hover {
+  transform:    translateY(-4px);
+  box-shadow:   var(--shadow-md);
+  border-color: var(--green-mid);
+}
+
+.csc-ico {
+  width:           46px;
+  height:          46px;
+  border-radius:   13px;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       1.3rem;
+  flex-shrink:     0;
+}
+.csc-h {
+  font-size:   0.9rem;
+  font-weight: 800;
+  color:       var(--text);
+  margin-bottom: 0.38rem;
+  letter-spacing: -0.01em;
+}
+.csc-p {
+  font-size:   0.79rem;
+  color:       var(--muted);
+  line-height: 1.7;
+  margin:      0;
+}
+
+/* ================================================================
+   CONTACT SOCIALS
+   ================================================================ */
+.contact-socials {
+  background:    var(--white);
+  border:        1.5px solid var(--border);
+  border-radius: 18px;
+  padding:       1.4rem 1.35rem;
+}
+.contact-social-links {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       0.6rem;
+}
+.contact-social-btn {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            0.4rem;
+  padding:        0.48rem 1rem;
+  border-radius:  999px;
+  background:     var(--surface);
+  border:         1.5px solid var(--border);
+  color:          var(--text);
+  font-size:      0.78rem;
+  font-weight:    700;
+  text-decoration: none;
+  transition:     all 0.2s var(--ease);
+}
+.contact-social-btn:hover {
+  background:   var(--green-light);
+  border-color: var(--green-mid);
+  color:        var(--green);
+  transform:    translateY(-2px);
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 1100px) {
+  .contact-layout { grid-template-columns: 1fr 320px; }
+}
+
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-side   { flex-direction: row; flex-wrap: wrap; }
+  .contact-side-card { flex: 1 1 260px; }
+  .contact-socials   { width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .contact-hero       { min-height: 38vh; }
+  .contact-info-strip { padding: 1rem; }
+  .cis-inner          { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  .cis-item           { padding: 0.3rem 0.5rem; }
+  .cis-divider        { width: 100%; height: 1px; }
+  .contact-form-wrap .gc { padding: 1.5rem; }
+  .contact-side       { flex-direction: column; }
+  .contact-form-foot  { flex-direction: column; align-items: stretch; }
+  .contact-form-foot .btn { justify-content: center; }
+}
