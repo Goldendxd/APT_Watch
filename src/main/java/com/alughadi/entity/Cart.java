@@ -17,6 +17,8 @@ public class Cart {
     private double price;
     private double totalPrice;
 
+    public Cart() {}
+
     public Cart(int id, int userId, int productId, int quantity, Timestamp createdAt, String productName,
                 String brand, String imageUrl, double price, double totalPrice) {
         this.id = id;
