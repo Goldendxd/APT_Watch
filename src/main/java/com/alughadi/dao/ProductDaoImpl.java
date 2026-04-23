@@ -8,19 +8,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class ProductDaoImpl {
+public class ProductDaoImpl implements ProductDAO {
 
-    public ArrayList<Product> getAllProducts() {
-        ArrayList<Product> products = new ArrayList<>();
+    public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<>();
         Connection conn = null;
 
         try {
             conn = DatabaseConnection.getConnection();
-            String sql = "SELECT product.*, category.name as category_name" +
-                    " from products product" +
-                    "JOIN categories category ON product.category_id = category.id" +
-                    "ORDER BY product.created_at DESC)";
+            String sql = "SELECT product.*, category.name as category_name " +
+                    " from products product " +
+                    "JOIN categories category ON product.category_id = category.id " +
+                    "ORDER BY product.created_at DESC";
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -35,15 +36,15 @@ public class ProductDaoImpl {
     }
 
 
-    public ArrayList<Product> getProductsByCategory(String categoryName) {
-        ArrayList<Product> products = new ArrayList<>();
+    public List<Product> getProductsByCategory(String categoryName) {
+        List<Product> products = new ArrayList<>();
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
             String sql = "SELECT p.*, c.name AS category_name " +
                     "FROM products p " +
                     "JOIN categories c ON p.category_id = c.id " +
-                    "WHERE c.name = ? " +
+                    "WHERE LOWER(c.name) = LOWER(?) " +
                     "ORDER BY p.created_at DESC";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, categoryName);
@@ -59,30 +60,46 @@ public class ProductDaoImpl {
         return products;
     }
 
-    public int getTotalInStockCount(){
+    public Product getProductById(int id) {
         Connection conn = null;
-
-        try{
+        try {
             conn = DatabaseConnection.getConnection();
-            String sql = "SELECT COUNT(*) FROM products WHERE in_stock = TRUE";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()){
-                return rs.getInt("id");
+            String sql = "SELECT p.*, c.name AS category_name " +
+                    "FROM products p " +
+                    "JOIN categories c ON p.category_id = c.id " +
+                    "WHERE p.id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return mapProductFromResultSet(rs);
             }
-        }  catch (SQLException e){
-            System.out.println("Error counting in-stock products: " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error fetching product by id: " + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
         }
-        return 0;
+        return null;
     }
 
-    public double getAverageRating(){
-        Connection conn = null;
-        try{
-            conn
+//    public int getTotalInStockCount(){
+//        Connection conn = null;
+//
+//        try{
+//            conn = DatabaseConnection.getConnection();
+//            String sql = "SELECT COUNT(*) FROM products WHERE in_stock = TRUE";
+//            PreparedStatement statement = conn.prepareStatement(sql);
+//            ResultSet rs = statement.executeQuery();
+//            if (rs.next()){
+//                return rs.getInt("id");
+//            }
+//        }  catch (SQLException e){
+//            System.out.println("Error counting in-stock products: " + e.getMessage());
+//        }
+//        return 0;
+//    }
 
-        }
-    }
+
 
     private Product mapProductFromResultSet(ResultSet rs) throws SQLException {
         Product product = new Product();

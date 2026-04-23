@@ -7,7 +7,5 @@ import java.util.List;
 public interface ProductDAO {
     List<Product> getAllProducts();
     List<Product> getProductsByCategory(String categoryName);
-    int getTotalInStockCount();
-    double getAverageRating();
-
+    Product getProductById(int id);
 }

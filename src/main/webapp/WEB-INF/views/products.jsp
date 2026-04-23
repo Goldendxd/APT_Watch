@@ -1,10 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%
-  request.setAttribute("pageTitle", "Shop - Premium Watches | AluGhadi");
-  request.setAttribute("pageDesc", "Browse our complete collection of premium watches. Find the perfect timepiece.");
-  request.setAttribute("activeNav", "products");
-%>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
 <!-- HERO -->
@@ -41,7 +38,7 @@
   <div class="season-inner">
     <div class="ss-item">
       <span class="ss-dot ss-closed" style="background: var(--green)"></span
-      >Total Products: <strong>156 in stock</strong>
+      >Total Products: <strong>${fn:length(productList)} in stock</strong>
     </div>
     <div class="ss-item">
       Popular Categories: <strong>Luxury, Sports, Classic</strong>
@@ -170,343 +167,347 @@
         gap: 1.5rem;
       "
     >
-      <!-- PRODUCT 1 - Using Snow Leopard as placeholder image -->
-      <div class="product-card" data-cat="luxury" data-id="premium-chronograph">
-        <div class="prod-img-container">
-          <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
-            alt="Premium Chronograph"
-            class="prod-img"
-          />
-          <div class="prod-chip">Featured</div>
-          <button
-            class="prod-save"
-            onclick="toggleWishlist(this)"
-            aria-label="Add to Wishlist"
-          >
-            <span class="wish-heart">&#9825;</span>
-            <span class="wish-tip">Wishlist</span>
-          </button>
-        </div>
-        <div class="prod-body">
-          <div class="prod-brand">Premium Luxury</div>
-          <div class="prod-h">Premium Chronograph Watch</div>
-          <div
-            class="prod-desc"
-            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"
-          >
-            Precision Swiss movement, leather strap, water resistant
-          </div>
-          <div class="prod-bot">
-            <div class="prod-price">
-              <div
-                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"
-              >
-                $499
-              </div>
-              <div
-                style="
-                  font-size: 0.75rem;
-                  color: var(--muted);
-                  text-decoration: line-through;
-                "
-              >
-                $699
-              </div>
-            </div>
-            <div class="prod-rating">Rating 4.9 (128)</div>
-          </div>
-          <button
-            class="btn-fill"
-            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"
-            onclick="addToCart('Premium Chronograph', 499)"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
+      <c:forEach var = "p" items="${products}">
+        <div class="product-card"></div>
+      </c:forEach>
 
-      <!-- PRODUCT 2 -->
-      <div class="product-card" data-cat="sports" data-id="sports-dive">
-        <div class="prod-img-container">
-          <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
-            alt="Sports Dive Watch"
-            class="prod-img"
-          />
-          <div class="prod-chip">Sports</div>
-          <button
-            class="prod-save"
-            onclick="toggleWishlist(this)"
-            aria-label="Add to Wishlist"
-          >
-            <span class="wish-heart">&#9825;</span>
-            <span class="wish-tip">Wishlist</span>
-          </button>
-        </div>
-        <div class="prod-body">
-          <div class="prod-brand">Sports Collection</div>
-          <div class="prod-h">Sports Dive Master</div>
-          <div
-            class="prod-desc"
-            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"
-          >
-            300m water resistance, titanium case, digital compass
-          </div>
-          <div class="prod-bot">
-            <div class="prod-price">
-              <div
-                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"
-              >
-                $349
-              </div>
-              <div
-                style="
-                  font-size: 0.75rem;
-                  color: var(--muted);
-                  text-decoration: line-through;
-                "
-              >
-                $449
-              </div>
-            </div>
-            <div class="prod-rating">Rating 4.7 (96)</div>
-          </div>
-          <button
-            class="btn-fill"
-            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"
-            onclick="addToCart('Sports Dive Master', 349)"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
+<%--      <!-- PRODUCT 1 - Using Snow Leopard as placeholder image -->--%>
+<%--      <div class="product-card" data-cat="luxury" data-id="premium-chronograph">--%>
+<%--        <div class="prod-img-container">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
+<%--            alt="Premium Chronograph"--%>
+<%--            class="prod-img"--%>
+<%--          />--%>
+<%--          <div class="prod-chip">Featured</div>--%>
+<%--          <button--%>
+<%--            class="prod-save"--%>
+<%--            onclick="toggleWishlist(this)"--%>
+<%--            aria-label="Add to Wishlist"--%>
+<%--          >--%>
+<%--            <span class="wish-heart">&#9825;</span>--%>
+<%--            <span class="wish-tip">Wishlist</span>--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--        <div class="prod-body">--%>
+<%--          <div class="prod-brand">Premium Luxury</div>--%>
+<%--          <div class="prod-h">Premium Chronograph Watch</div>--%>
+<%--          <div--%>
+<%--            class="prod-desc"--%>
+<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
+<%--          >--%>
+<%--            Precision Swiss movement, leather strap, water resistant--%>
+<%--          </div>--%>
+<%--          <div class="prod-bot">--%>
+<%--            <div class="prod-price">--%>
+<%--              <div--%>
+<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
+<%--              >--%>
+<%--                $499--%>
+<%--              </div>--%>
+<%--              <div--%>
+<%--                style="--%>
+<%--                  font-size: 0.75rem;--%>
+<%--                  color: var(--muted);--%>
+<%--                  text-decoration: line-through;--%>
+<%--                "--%>
+<%--              >--%>
+<%--                $699--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="prod-rating">Rating 4.9 (128)</div>--%>
+<%--          </div>--%>
+<%--          <button--%>
+<%--            class="btn-fill"--%>
+<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
+<%--            onclick="addToCart('Premium Chronograph', 499)"--%>
+<%--          >--%>
+<%--            Add to Cart--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--      </div>--%>
 
-      <!-- PRODUCT 3 -->
-      <div class="product-card" data-cat="classic" data-id="vintage-dress">
-        <div class="prod-img-container">
-          <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
-            alt="Vintage Dress Watch"
-            class="prod-img"
-          />
-          <div class="prod-chip">Classic</div>
-          <button
-            class="prod-save"
-            onclick="toggleWishlist(this)"
-            aria-label="Add to Wishlist"
-          >
-            <span class="wish-heart">&#9825;</span>
-            <span class="wish-tip">Wishlist</span>
-          </button>
-        </div>
-        <div class="prod-body">
-          <div class="prod-brand">Classic Collection</div>
-          <div class="prod-h">Vintage Dress Watch</div>
-          <div
-            class="prod-desc"
-            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"
-          >
-            Minimalist design, leather band, sapphire crystal
-          </div>
-          <div class="prod-bot">
-            <div class="prod-price">
-              <div
-                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"
-              >
-                $299
-              </div>
-              <div
-                style="
-                  font-size: 0.75rem;
-                  color: var(--muted);
-                  text-decoration: line-through;
-                "
-              >
-                $399
-              </div>
-            </div>
-            <div class="prod-rating">Rating 4.8 (153)</div>
-          </div>
-          <button
-            class="btn-fill"
-            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"
-            onclick="addToCart('Vintage Dress Watch', 299)"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
+<%--      <!-- PRODUCT 2 -->--%>
+<%--      <div class="product-card" data-cat="sports" data-id="sports-dive">--%>
+<%--        <div class="prod-img-container">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
+<%--            alt="Sports Dive Watch"--%>
+<%--            class="prod-img"--%>
+<%--          />--%>
+<%--          <div class="prod-chip">Sports</div>--%>
+<%--          <button--%>
+<%--            class="prod-save"--%>
+<%--            onclick="toggleWishlist(this)"--%>
+<%--            aria-label="Add to Wishlist"--%>
+<%--          >--%>
+<%--            <span class="wish-heart">&#9825;</span>--%>
+<%--            <span class="wish-tip">Wishlist</span>--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--        <div class="prod-body">--%>
+<%--          <div class="prod-brand">Sports Collection</div>--%>
+<%--          <div class="prod-h">Sports Dive Master</div>--%>
+<%--          <div--%>
+<%--            class="prod-desc"--%>
+<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
+<%--          >--%>
+<%--            300m water resistance, titanium case, digital compass--%>
+<%--          </div>--%>
+<%--          <div class="prod-bot">--%>
+<%--            <div class="prod-price">--%>
+<%--              <div--%>
+<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
+<%--              >--%>
+<%--                $349--%>
+<%--              </div>--%>
+<%--              <div--%>
+<%--                style="--%>
+<%--                  font-size: 0.75rem;--%>
+<%--                  color: var(--muted);--%>
+<%--                  text-decoration: line-through;--%>
+<%--                "--%>
+<%--              >--%>
+<%--                $449--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="prod-rating">Rating 4.7 (96)</div>--%>
+<%--          </div>--%>
+<%--          <button--%>
+<%--            class="btn-fill"--%>
+<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
+<%--            onclick="addToCart('Sports Dive Master', 349)"--%>
+<%--          >--%>
+<%--            Add to Cart--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--      </div>--%>
 
-      <!-- PRODUCT 4 -->
-      <div class="product-card" data-cat="smart" data-id="smart-connect">
-        <div class="prod-img-container">
-          <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
-            alt="Smart Connected"
-            class="prod-img"
-          />
-          <div class="prod-chip">Smart</div>
-          <button
-            class="prod-save"
-            onclick="toggleWishlist(this)"
-            aria-label="Add to Wishlist"
-          >
-            <span class="wish-heart">&#9825;</span>
-            <span class="wish-tip">Wishlist</span>
-          </button>
-        </div>
-        <div class="prod-body">
-          <div class="prod-brand">Smart Tech</div>
-          <div class="prod-h">Smart Connected Watch</div>
-          <div
-            class="prod-desc"
-            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"
-          >
-            Fitness tracking, notifications, 7-day battery
-          </div>
-          <div class="prod-bot">
-            <div class="prod-price">
-              <div
-                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"
-              >
-                $199
-              </div>
-              <div
-                style="
-                  font-size: 0.75rem;
-                  color: var(--muted);
-                  text-decoration: line-through;
-                "
-              >
-                $299
-              </div>
-            </div>
-            <div class="prod-rating">Rating 4.6 (87)</div>
-          </div>
-          <button
-            class="btn-fill"
-            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"
-            onclick="addToCart('Smart Connected Watch', 199)"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
+<%--      <!-- PRODUCT 3 -->--%>
+<%--      <div class="product-card" data-cat="classic" data-id="vintage-dress">--%>
+<%--        <div class="prod-img-container">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
+<%--            alt="Vintage Dress Watch"--%>
+<%--            class="prod-img"--%>
+<%--          />--%>
+<%--          <div class="prod-chip">Classic</div>--%>
+<%--          <button--%>
+<%--            class="prod-save"--%>
+<%--            onclick="toggleWishlist(this)"--%>
+<%--            aria-label="Add to Wishlist"--%>
+<%--          >--%>
+<%--            <span class="wish-heart">&#9825;</span>--%>
+<%--            <span class="wish-tip">Wishlist</span>--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--        <div class="prod-body">--%>
+<%--          <div class="prod-brand">Classic Collection</div>--%>
+<%--          <div class="prod-h">Vintage Dress Watch</div>--%>
+<%--          <div--%>
+<%--            class="prod-desc"--%>
+<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
+<%--          >--%>
+<%--            Minimalist design, leather band, sapphire crystal--%>
+<%--          </div>--%>
+<%--          <div class="prod-bot">--%>
+<%--            <div class="prod-price">--%>
+<%--              <div--%>
+<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
+<%--              >--%>
+<%--                $299--%>
+<%--              </div>--%>
+<%--              <div--%>
+<%--                style="--%>
+<%--                  font-size: 0.75rem;--%>
+<%--                  color: var(--muted);--%>
+<%--                  text-decoration: line-through;--%>
+<%--                "--%>
+<%--              >--%>
+<%--                $399--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="prod-rating">Rating 4.8 (153)</div>--%>
+<%--          </div>--%>
+<%--          <button--%>
+<%--            class="btn-fill"--%>
+<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
+<%--            onclick="addToCart('Vintage Dress Watch', 299)"--%>
+<%--          >--%>
+<%--            Add to Cart--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--      </div>--%>
 
-      <!-- PRODUCT 5 -->
-      <div class="product-card" data-cat="womens" data-id="womens-elegant">
-        <div class="prod-img-container">
-          <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
-            alt="Women's Elegant"
-            class="prod-img"
-          />
-          <div class="prod-chip">Elegant</div>
-          <button
-            class="prod-save"
-            onclick="toggleWishlist(this)"
-            aria-label="Add to Wishlist"
-          >
-            <span class="wish-heart">&#9825;</span>
-            <span class="wish-tip">Wishlist</span>
-          </button>
-        </div>
-        <div class="prod-body">
-          <div class="prod-brand">Women's Collection</div>
-          <div class="prod-h">Elegant Dress Watch</div>
-          <div
-            class="prod-desc"
-            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"
-          >
-            Diamond bezel, stainless steel, elegant strap
-          </div>
-          <div class="prod-bot">
-            <div class="prod-price">
-              <div
-                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"
-              >
-                $399
-              </div>
-              <div
-                style="
-                  font-size: 0.75rem;
-                  color: var(--muted);
-                  text-decoration: line-through;
-                "
-              >
-                $549
-              </div>
-            </div>
-            <div class="prod-rating">Rating 4.9 (142)</div>
-          </div>
-          <button
-            class="btn-fill"
-            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"
-            onclick="addToCart('Elegant Dress Watch', 399)"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
+<%--      <!-- PRODUCT 4 -->--%>
+<%--      <div class="product-card" data-cat="smart" data-id="smart-connect">--%>
+<%--        <div class="prod-img-container">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
+<%--            alt="Smart Connected"--%>
+<%--            class="prod-img"--%>
+<%--          />--%>
+<%--          <div class="prod-chip">Smart</div>--%>
+<%--          <button--%>
+<%--            class="prod-save"--%>
+<%--            onclick="toggleWishlist(this)"--%>
+<%--            aria-label="Add to Wishlist"--%>
+<%--          >--%>
+<%--            <span class="wish-heart">&#9825;</span>--%>
+<%--            <span class="wish-tip">Wishlist</span>--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--        <div class="prod-body">--%>
+<%--          <div class="prod-brand">Smart Tech</div>--%>
+<%--          <div class="prod-h">Smart Connected Watch</div>--%>
+<%--          <div--%>
+<%--            class="prod-desc"--%>
+<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
+<%--          >--%>
+<%--            Fitness tracking, notifications, 7-day battery--%>
+<%--          </div>--%>
+<%--          <div class="prod-bot">--%>
+<%--            <div class="prod-price">--%>
+<%--              <div--%>
+<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
+<%--              >--%>
+<%--                $199--%>
+<%--              </div>--%>
+<%--              <div--%>
+<%--                style="--%>
+<%--                  font-size: 0.75rem;--%>
+<%--                  color: var(--muted);--%>
+<%--                  text-decoration: line-through;--%>
+<%--                "--%>
+<%--              >--%>
+<%--                $299--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="prod-rating">Rating 4.6 (87)</div>--%>
+<%--          </div>--%>
+<%--          <button--%>
+<%--            class="btn-fill"--%>
+<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
+<%--            onclick="addToCart('Smart Connected Watch', 199)"--%>
+<%--          >--%>
+<%--            Add to Cart--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--      </div>--%>
 
-      <!-- PRODUCT 6 -->
-      <div class="product-card" data-cat="luxury" data-id="luxury-skeleton">
-        <div class="prod-img-container">
-          <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
-            alt="Skeleton Watch"
-            class="prod-img"
-          />
-          <div class="prod-chip">Premium</div>
-          <button
-            class="prod-save"
-            onclick="toggleWishlist(this)"
-            aria-label="Add to Wishlist"
-          >
-            <span class="wish-heart">&#9825;</span>
-            <span class="wish-tip">Wishlist</span>
-          </button>
-        </div>
-        <div class="prod-body">
-          <div class="prod-brand">Luxury Premium</div>
-          <div class="prod-h">Skeleton Movement Watch</div>
-          <div
-            class="prod-desc"
-            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"
-          >
-            Visible movement, sapphire glass, mechanical
-          </div>
-          <div class="prod-bot">
-            <div class="prod-price">
-              <div
-                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"
-              >
-                $599
-              </div>
-              <div
-                style="
-                  font-size: 0.75rem;
-                  color: var(--muted);
-                  text-decoration: line-through;
-                "
-              >
-                $799
-              </div>
-            </div>
-            <div class="prod-rating">Rating 4.9 (176)</div>
-          </div>
-          <button
-            class="btn-fill"
-            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"
-            onclick="addToCart('Skeleton Movement Watch', 599)"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+<%--      <!-- PRODUCT 5 -->--%>
+<%--      <div class="product-card" data-cat="womens" data-id="womens-elegant">--%>
+<%--        <div class="prod-img-container">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
+<%--            alt="Women's Elegant"--%>
+<%--            class="prod-img"--%>
+<%--          />--%>
+<%--          <div class="prod-chip">Elegant</div>--%>
+<%--          <button--%>
+<%--            class="prod-save"--%>
+<%--            onclick="toggleWishlist(this)"--%>
+<%--            aria-label="Add to Wishlist"--%>
+<%--          >--%>
+<%--            <span class="wish-heart">&#9825;</span>--%>
+<%--            <span class="wish-tip">Wishlist</span>--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--        <div class="prod-body">--%>
+<%--          <div class="prod-brand">Women's Collection</div>--%>
+<%--          <div class="prod-h">Elegant Dress Watch</div>--%>
+<%--          <div--%>
+<%--            class="prod-desc"--%>
+<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
+<%--          >--%>
+<%--            Diamond bezel, stainless steel, elegant strap--%>
+<%--          </div>--%>
+<%--          <div class="prod-bot">--%>
+<%--            <div class="prod-price">--%>
+<%--              <div--%>
+<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
+<%--              >--%>
+<%--                $399--%>
+<%--              </div>--%>
+<%--              <div--%>
+<%--                style="--%>
+<%--                  font-size: 0.75rem;--%>
+<%--                  color: var(--muted);--%>
+<%--                  text-decoration: line-through;--%>
+<%--                "--%>
+<%--              >--%>
+<%--                $549--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="prod-rating">Rating 4.9 (142)</div>--%>
+<%--          </div>--%>
+<%--          <button--%>
+<%--            class="btn-fill"--%>
+<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
+<%--            onclick="addToCart('Elegant Dress Watch', 399)"--%>
+<%--          >--%>
+<%--            Add to Cart--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+
+<%--      <!-- PRODUCT 6 -->--%>
+<%--      <div class="product-card" data-cat="luxury" data-id="luxury-skeleton">--%>
+<%--        <div class="prod-img-container">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
+<%--            alt="Skeleton Watch"--%>
+<%--            class="prod-img"--%>
+<%--          />--%>
+<%--          <div class="prod-chip">Premium</div>--%>
+<%--          <button--%>
+<%--            class="prod-save"--%>
+<%--            onclick="toggleWishlist(this)"--%>
+<%--            aria-label="Add to Wishlist"--%>
+<%--          >--%>
+<%--            <span class="wish-heart">&#9825;</span>--%>
+<%--            <span class="wish-tip">Wishlist</span>--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--        <div class="prod-body">--%>
+<%--          <div class="prod-brand">Luxury Premium</div>--%>
+<%--          <div class="prod-h">Skeleton Movement Watch</div>--%>
+<%--          <div--%>
+<%--            class="prod-desc"--%>
+<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
+<%--          >--%>
+<%--            Visible movement, sapphire glass, mechanical--%>
+<%--          </div>--%>
+<%--          <div class="prod-bot">--%>
+<%--            <div class="prod-price">--%>
+<%--              <div--%>
+<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
+<%--              >--%>
+<%--                $599--%>
+<%--              </div>--%>
+<%--              <div--%>
+<%--                style="--%>
+<%--                  font-size: 0.75rem;--%>
+<%--                  color: var(--muted);--%>
+<%--                  text-decoration: line-through;--%>
+<%--                "--%>
+<%--              >--%>
+<%--                $799--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="prod-rating">Rating 4.9 (176)</div>--%>
+<%--          </div>--%>
+<%--          <button--%>
+<%--            class="btn-fill"--%>
+<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
+<%--            onclick="addToCart('Skeleton Movement Watch', 599)"--%>
+<%--          >--%>
+<%--            Add to Cart--%>
+<%--          </button>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </div>--%>
+<%--  </div>--%>
 
   <!-- PRODUCT INFO SECTION -->
   <div style="margin: 4rem 0 0" class="reveal">
