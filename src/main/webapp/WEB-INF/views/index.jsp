@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
+<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
 prefix="c" uri="jakarta.tags.core" %> <% request.setAttribute("pageTitle",
 "AluGhadi Watches - Premium Watch Collection"); request.setAttribute("pageDesc",
 "Discover premium watches with timeless design and exceptional quality.");
@@ -9,8 +9,9 @@ request.setAttribute("activeNav", "home"); %>
 <section class="home-hero">
   <div class="hh-img">
     <img
-      src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
-      alt="Premium Watches"
+      src="${pageContext.request.contextPath}/static/images/hero_home.png"
+      alt="AluGhadi Premium Watches"
+      style="object-position: center top;"
     />
     <div class="hh-fade"></div>
   </div>
@@ -263,9 +264,9 @@ request.setAttribute("activeNav", "home"); %>
     <div class="split reveal">
       <div class="split-img">
         <img
-          src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+          src="${pageContext.request.contextPath}/static/images/hero_about.png"
           alt="Watch Craftsmanship"
-          style="object-position: center top"
+          style="object-position: center"
         />
         <div class="split-badge">
           <div class="sb-ico">&#8986;</div>
