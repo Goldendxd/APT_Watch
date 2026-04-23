@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
@@ -167,9 +168,17 @@
         gap: 1.5rem;
       "
     >
-      <c:forEach var = "p" items="${products}">
-        <div class="product-card"></div>
+      <c:forEach var="p" items="${productList}">
+        <div class="product-card"
+          data-id = "product-${p.id}">
+          <c:out value="${p.name}" />
+        </div>
       </c:forEach>
+
+
+<%--      <c:forEach var = "p" items="${productsList}">--%>
+<%--&lt;%&ndash;        <div class="product-card"></div>&ndash;%&gt;--%>
+<%--      </c:forEach>--%>
 
 <%--      <!-- PRODUCT 1 - Using Snow Leopard as placeholder image -->--%>
 <%--      <div class="product-card" data-cat="luxury" data-id="premium-chronograph">--%>
@@ -505,9 +514,9 @@
 <%--            Add to Cart--%>
 <%--          </button>--%>
 <%--        </div>--%>
-<%--      </div>--%>
-<%--    </div>--%>
-<%--  </div>--%>
+      </div>
+    </div>
+  </div>
 
   <!-- PRODUCT INFO SECTION -->
   <div style="margin: 4rem 0 0" class="reveal">
