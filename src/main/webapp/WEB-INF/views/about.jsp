@@ -180,6 +180,28 @@
         <div class="team-card-glow" style="background: rgba(124,58,237,0.06);"></div>
       </div>
 
+      <%-- Team Card: Rijan Pun --%>
+      <div class="team-card reveal reveal-delay-5">
+        <div class="team-avatar-wrap">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);">
+            <span>RP</span>
+          </div>
+          <div class="team-avatar-ring" style="border-color: #fde68a;"></div>
+        </div>
+        <div class="team-body">
+          <div class="team-role-chip" style="color:#b45309;background:#fffbeb;border-color:rgba(217,119,6,0.22);">QA &amp; Testing</div>
+          <h3 class="team-name">Rijan Pun</h3>
+          <p class="team-bio">
+            Quality guardian who ensures every feature is robust, bug-free, and
+            delivers a flawless experience. Driven by precision and user empathy.
+          </p>
+          <div class="team-skills">
+            <span>Testing</span><span>QA</span><span>Debugging</span>
+          </div>
+        </div>
+        <div class="team-card-glow" style="background: rgba(217,119,6,0.06);"></div>
+      </div>
+
     </div><%-- /team-grid --%>
   </div>
 </section>
