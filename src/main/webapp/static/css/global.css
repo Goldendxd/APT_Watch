@@ -356,11 +356,13 @@
   height:      250px;
   overflow:    hidden;
   background:  var(--surface);
+  flex-shrink: 0;
 }
 .prod-img {
   width:      100%;
   height:     100%;
   object-fit: cover;
+  display:    block;
   transition: transform 0.45s var(--ease);
 }
 .product-card:hover .prod-img { transform: scale(1.07); }
@@ -434,6 +436,7 @@
 .prod-save.saved { color: #e53; }
 
 .prod-body  { padding: 1.35rem; flex: 1; display: flex; flex-direction: column; }
+.prod-body .btn-fill { width: 100%; justify-content: center; margin-top: 0.75rem; padding: 0.6rem; }
 .prod-brand { font-size: 0.68rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.38rem; }
 .prod-h     { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.35rem; letter-spacing: -0.01em; line-height: 1.3; }
 .prod-desc  { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin: 0.4rem 0; flex: 1; }
@@ -447,11 +450,11 @@
   border-top:      1px solid var(--border);
 }
 .prod-price     { display: flex; flex-direction: column; gap: 0.15rem; }
-.prod-price-now { font-size: 1.05rem; font-weight: 900; color: var(--text); letter-spacing: -0.02em; }
+.prod-price-now { font-size: 1.05rem; font-weight: 900; color: var(--green); letter-spacing: -0.02em; }
 .prod-price-was { font-size: 0.75rem; color: var(--dim); text-decoration: line-through; }
 .prod-price-save { font-size: 0.68rem; font-weight: 700; color: var(--gold2); background: var(--gold-light); padding: 0.15rem 0.5rem; border-radius: 999px; }
 
-.prod-rating { font-size: 0.75rem; color: var(--muted); text-align: right; }
+.prod-rating { font-size: 0.75rem; color: var(--muted); text-align: right; align-self: flex-end; }
 .prod-stars  { color: var(--gold); font-size: 0.8rem; }
 
 /* ================================================================

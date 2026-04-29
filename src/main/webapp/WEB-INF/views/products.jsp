@@ -168,11 +168,46 @@
         gap: 1.5rem;
       "
     >
-      <c:forEach var="p" items="${productList}">
-        <div class="product-card"
-          data-id = "product-${p.id}">
-          <c:out value="${p.name}" />
+      <c:forEach var="product" items="${productList}">
+        <div class="product-card" data-category="${fn:toLowerCase(product.categoryName)}" data-id="${product.id}">
+          <div class="prod-img-container">
+            <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" class="prod-img">
+            <button class="prod-save" type="button" onclick="toggleWishlist(this)">
+              <span class="wish-heart">&#9825;</span>
+              <span class="wish-tip">Wishlist</span>
+            </button>
+            <div class="prod-chip">
+               ${product.categoryName}
+            </div>
+            </div>
+            <div class="prod-body">
+              <div class="prod-brand">${product.brand}</div>
+              <div class="prod-h">${product.name}</div>
+              <div class="prod-desc">${product.description}</div>
+
+              <div class="prod-bot">
+                <div class="prod-price">
+                  <div class="prod-price-now">${product.price}</div>
+                  <c:if test="${product.oldPrice != null}">
+                    <div style="text-decoration: line-through" class="prod-price-was">${product.oldPrice}</div>
+                  </c:if>
+                </div>
+                <div class="prod-rating">Rating ${product.rating}</div>
+              </div>
+              <button class="btn-fill" type="button">Add to Cart</button>
+            </div>
+<%--            <div class="prod-chip">${product.name}</div>--%>
+<%--          </div>--%>
+<%--          <div class="prod-body">--%>
+<%--            <div class="prod-brand">${product.brand}</div>--%>
+<%--          </div>--%>
         </div>
+<%--        <li class="product-card">--%>
+<%--          <a href="${pageContext.request.contentPath}/cart?productid= ${product.id}" class="prod-img-container"> <c:out value = "${product.image.url}" /></a>--%>
+<%--          <a href="${pageContext.request.contentPath}/cart?productid= ${product.id}" class="prod-h"> <c:out value = "${product.name}" /></a>--%>
+<%--        </li>--%>
+
+
       </c:forEach>
 
 
@@ -742,7 +777,7 @@
   }
 
   function toggleWishlist(btn) {
-    var card = btn.closest('.product-card');
+    var card = btn.closest('.prod-card');
     var id   = card.getAttribute('data-id');
     var wish = getWishlist();
     var idx  = wish.indexOf(id);
@@ -770,7 +805,7 @@
     _currentFilter = cat;
     document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
     tabBtn.classList.add('active');
-    var cards = document.querySelectorAll('.product-card');
+    var cards = document.querySelectorAll('.prod-card');
     var empty = document.getElementById('fav-empty');
     if (cat === 'wishlist') {
       var wish = getWishlist();
@@ -784,7 +819,7 @@
     } else {
       empty.style.display = 'none';
       cards.forEach(function(card) {
-        var cc = card.getAttribute('data-cat');
+        var cc = card.getAttribute('data-category');
         card.style.display = (cat === 'all' || cc === cat) ? '' : 'none';
       });
     }
