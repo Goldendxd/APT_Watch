@@ -64,4 +64,13 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>adminPage</servlet-name>
+        <jsp-file>/WEB-INF/views/admin.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminPage</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
 </web-app>
