@@ -19,7 +19,7 @@
     <p class="ph-sub">Elegant, expressive, and crafted to be treasured. Timepieces she'll reach for every day.</p>
     <div style="margin-top:1.5rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
       <a href="${pageContext.request.contextPath}/products" class="btn-fill" style="background:linear-gradient(135deg,#8b4a9e,#c9689a);">Shop Women's Watches</a>
-      <a href="${pageContext.request.contextPath}/for-him" class="forhim-switch-btn">Switch to For Him &#8594;</a>
+      <a href="${pageContext.request.contextPath}/for-him" class="forher-switch-btn">Switch to For Him &#8594;</a>
     </div>
   </div>
 </div>
@@ -27,7 +27,7 @@
 <div class="pg-body">
 
   <%-- Breadcrumb --%>
-  <div class="forhim-breadcrumb">
+  <div class="forher-breadcrumb">
     <a href="${pageContext.request.contextPath}/">Home</a>
     <span>&#8250;</span>
     <a href="${pageContext.request.contextPath}/gifting">Gift Guide</a>
@@ -36,8 +36,8 @@
   </div>
 
   <%-- Style filter tabs --%>
-  <div class="forhim-filter-row">
-    <div class="forhim-filter-label">Filter by style:</div>
+  <div class="forher-filter-row">
+    <div class="forher-filter-label">Filter by style:</div>
     <div class="tabs-wrap" style="margin-bottom:0;">
       <button class="tab active" onclick="filterCards('all', this)">All Styles</button>
       <button class="tab" onclick="filterCards('elegant', this)">Elegant</button>
@@ -48,7 +48,7 @@
   </div>
 
   <%-- Cards grid --%>
-  <div class="forhim-grid" id="forher-grid">
+  <div class="forher-grid" id="forher-grid">
 
     <article class="gift-pick-card reveal" data-category="elegant">
       <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Elegant Essential" />
@@ -56,9 +56,9 @@
         <div class="gift-pick-style-tag gift-pick-style-forher-elegant">Elegant</div>
         <div class="gift-pick-title">Elegant Essential</div>
         <p>Refined rose gold case with a delicate mesh band. Designed for every occasion, every day.</p>
-        <div class="forhim-card-footer">
+        <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 6,500 – 12,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn forher-card-btn">View &#8594;</a>
+          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
         </div>
       </div>
     </article>
@@ -69,9 +69,9 @@
         <div class="gift-pick-style-tag gift-pick-style-minimal">Minimal</div>
         <div class="gift-pick-title">Modern Minimal</div>
         <p>Clean white dial with a slim profile. Understated style that complements any outfit effortlessly.</p>
-        <div class="forhim-card-footer">
+        <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 5,000 – 10,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn forher-card-btn">View &#8594;</a>
+          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
         </div>
       </div>
     </article>
@@ -82,9 +82,9 @@
         <div class="gift-pick-style-tag gift-pick-style-forher-bold">Bold</div>
         <div class="gift-pick-title">Statement Bold</div>
         <p>Oversized dial with diamant&eacute;-cut accents. A bold statement for the woman who owns the room.</p>
-        <div class="forhim-card-footer">
+        <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 10,000 – 20,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn forher-card-btn">View &#8594;</a>
+          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
         </div>
       </div>
     </article>
@@ -95,9 +95,9 @@
         <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
         <div class="gift-pick-title">Jewelled Luxury</div>
         <p>Crystal-set bezel with mother-of-pearl dial. The pinnacle of feminine watchmaking.</p>
-        <div class="forhim-card-footer">
+        <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 35,000+</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn forher-card-btn">View &#8594;</a>
+          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
         </div>
       </div>
     </article>
@@ -108,9 +108,9 @@
         <div class="gift-pick-style-tag gift-pick-style-forher-elegant">Elegant</div>
         <div class="gift-pick-title">Everyday Chic</div>
         <p>Versatile silicone straps in pastel tones. Light, sporty, and effortlessly stylish.</p>
-        <div class="forhim-card-footer">
+        <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 4,500 – 8,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn forher-card-btn">View &#8594;</a>
+          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
         </div>
       </div>
     </article>
@@ -121,9 +121,9 @@
         <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
         <div class="gift-pick-title">Prestige Series</div>
         <p>Swiss movement, gold-plated case. For milestones, anniversaries, and once-in-a-lifetime moments.</p>
-        <div class="forhim-card-footer">
+        <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 50,000+</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn forher-card-btn">View &#8594;</a>
+          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
         </div>
       </div>
     </article>
@@ -131,11 +131,11 @@
   </div>
 
   <%-- Back nav --%>
-  <div class="forhim-back-row">
-    <a href="${pageContext.request.contextPath}/gifting" class="forhim-back-link">
+  <div class="forher-back-row">
+    <a href="${pageContext.request.contextPath}/gifting" class="forher-back-link">
       &#8592; Back to Gift Guide
     </a>
-    <a href="${pageContext.request.contextPath}/for-him" class="forhim-switch-link">
+    <a href="${pageContext.request.contextPath}/for-him" class="forher-switch-link">
       Switch to For Him &#8594;
     </a>
   </div>
@@ -144,7 +144,7 @@
 
 <style>
 .forher-hero { min-height: 60vh; }
-.forhim-switch-btn {
+.forher-switch-btn {
   display:     inline-flex;
   align-items: center;
   gap:         0.4rem;
@@ -159,7 +159,7 @@
   backdrop-filter: blur(8px);
   transition:  all 0.22s;
 }
-.forhim-switch-btn:hover { background: rgba(255,255,255,0.25); }
+.forher-switch-btn:hover { background: rgba(255,255,255,0.25); }
 
 /* For Her style-specific tags */
 .gift-pick-style-forher-elegant {
@@ -170,11 +170,10 @@
   background: #fff4e0;
   color:      #c87a20;
 }
-.forher-card-btn { color: #b8468a !important; }
-.forher-card-btn:hover { color: #8b2a6e !important; }
+.forher-card-btn { font-size: 0.78rem; font-weight: 700; color: #b8468a; text-decoration: none; }
+.forher-card-btn:hover { color: #8b2a6e; }
 
-/* Reuse styles from for-him */
-.forhim-breadcrumb {
+.forher-breadcrumb {
   display:     flex;
   align-items: center;
   gap:         0.5rem;
@@ -182,17 +181,17 @@
   color:       var(--muted);
   margin-bottom: 2rem;
 }
-.forhim-breadcrumb a { color: var(--green); text-decoration: none; font-weight: 600; }
-.forhim-breadcrumb span { color: var(--dim); }
-.forhim-filter-row {
+.forher-breadcrumb a { color: var(--green); text-decoration: none; font-weight: 600; }
+.forher-breadcrumb span { color: var(--dim); }
+.forher-filter-row {
   display:     flex;
   align-items: center;
   gap:         1.5rem;
   margin-bottom: 2rem;
   flex-wrap:   wrap;
 }
-.forhim-filter-label { font-size: 0.78rem; font-weight: 700; color: var(--muted); }
-.forhim-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+.forher-filter-label { font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+.forher-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
 .gift-pick-style-tag {
   display:    inline-flex;
   padding:    0.25rem 0.75rem;
@@ -207,21 +206,20 @@
 }
 .gift-pick-style-minimal { background: var(--surface); color: var(--muted); }
 .gift-pick-style-luxury  { background: var(--gold-light); color: var(--gold2); }
-.forhim-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
-.forhim-card-btn { font-size: 0.78rem; font-weight: 700; color: var(--green); text-decoration: none; }
-.forhim-back-row { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
-.forhim-back-link, .forhim-switch-link { font-size: 0.84rem; font-weight: 700; color: var(--green); text-decoration: none; }
-.forhim-grid .gift-pick-card.hidden { display: none; }
+.forher-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+.forher-back-row { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+.forher-back-link, .forher-switch-link { font-size: 0.84rem; font-weight: 700; color: var(--green); text-decoration: none; }
+.forher-grid .gift-pick-card.hidden { display: none; }
 
-@media (max-width: 900px)  { .forhim-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px)  { .forhim-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px)  { .forher-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .forher-grid { grid-template-columns: 1fr; } }
 </style>
 
 <script>
 function filterCards(cat, btn) {
   document.querySelectorAll('.tabs-wrap .tab').forEach(function(t){ t.classList.remove('active'); });
   btn.classList.add('active');
-  document.querySelectorAll('#forher-grid .gift-pick-card').forEach(function(card){
+  document.querySelectorAll('.forher-grid .gift-pick-card').forEach(function(card){
     if (cat === 'all' || (card.dataset.category && card.dataset.category.indexOf(cat) !== -1)) {
       card.classList.remove('hidden');
     } else {

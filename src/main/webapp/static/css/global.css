@@ -283,7 +283,7 @@
   border-color: var(--green-mid);
 }
 
-.feature-card-icon {
+.feat-card-icon {
   font-size:  2rem;
   margin-bottom: 1rem;
   display:    inline-flex;
@@ -301,9 +301,9 @@
 .icon-bg-blue  { background: #e5f4ec; }
 .icon-bg-gold  { background: var(--gold-light); }
 
-.feature-card-title       { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
-.feature-card-description { font-size: 0.84rem; color: var(--muted); line-height: 1.68; margin-bottom: 1rem; flex: 1; }
-.feature-card-link        { font-size: 0.82rem; font-weight: 700; color: var(--green); display: inline-flex; align-items: center; gap: 0.35rem; }
+.feat-card-title       { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+.feat-card-desc        { font-size: 0.84rem; color: var(--muted); line-height: 1.68; margin-bottom: 1rem; flex: 1; }
+.feat-card-link        { font-size: 0.82rem; font-weight: 700; color: var(--green); display: inline-flex; align-items: center; gap: 0.35rem; }
 
 /* ================================================================
    PRODUCT CARDS
