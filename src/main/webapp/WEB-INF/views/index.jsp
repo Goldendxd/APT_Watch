@@ -193,61 +193,61 @@ request.setAttribute("activeNav", "home"); %>
     </div>
     <div class="feat-grid">
       <a class="feat-card" href="${pageContext.request.contextPath}/products"
-        ><div class="feature-card-icon icon-bg-green">&#8986;</div>
-        <div class="feature-card-title">Premium Selection</div>
-        <p class="feature-card-description">
+        ><div class="feat-card-icon icon-bg-green">&#8986;</div>
+        <div class="feat-card-title">Premium Selection</div>
+        <p class="feat-card-desc">
           Handpicked watches from renowned international brands. Quality assured
           with authentic certifications.
         </p>
-        <div class="feature-card-link">Browse collection &rarr;</div></a
+        <div class="feat-card-link">Browse collection &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="feature-card-icon icon-bg-amber">&#10004;</div>
-        <div class="feature-card-title">100% Authentic</div>
-        <p class="feature-card-description">
+        ><div class="feat-card-icon icon-bg-amber">&#10004;</div>
+        <div class="feat-card-title">100% Authentic</div>
+        <p class="feat-card-desc">
           Every watch is verified authentic. We work directly with authorized
           distributors and manufacturers.
         </p>
-        <div class="feature-card-link">Learn more &rarr;</div></a
+        <div class="feat-card-link">Learn more &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="feature-card-icon icon-bg-red">&#128230;</div>
-        <div class="feature-card-title">Free Shipping</div>
-        <p class="feature-card-description">
+        ><div class="feat-card-icon icon-bg-red">&#128230;</div>
+        <div class="feat-card-title">Free Shipping</div>
+        <p class="feat-card-desc">
           Free shipping on orders above Rs 5,000. Safe, insured delivery to your
           doorstep with tracking.
         </p>
-        <div class="feature-card-link">View policy &rarr;</div></a
+        <div class="feat-card-link">View policy &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="feature-card-icon icon-bg-blue">&#128260;</div>
-        <div class="feature-card-title">Easy Returns</div>
-        <p class="feature-card-description">
+        ><div class="feat-card-icon icon-bg-blue">&#128260;</div>
+        <div class="feat-card-title">Easy Returns</div>
+        <p class="feat-card-desc">
           30-day return policy. Change your mind? Full refund, no questions
           asked. Hassle-free process.
         </p>
-        <div class="feature-card-link">Details &rarr;</div></a
+        <div class="feat-card-link">Details &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="feature-card-icon icon-bg-green">&#128142;</div>
-        <div class="feature-card-title">Expert Support</div>
-        <p class="feature-card-description">
+        ><div class="feat-card-icon icon-bg-green">&#128142;</div>
+        <div class="feat-card-title">Expert Support</div>
+        <p class="feat-card-desc">
           Our watch experts are here 24/7. Expert advice on sizing, features,
           and watch care.
         </p>
-        <div class="feature-card-link">Contact us &rarr;</div></a
+        <div class="feat-card-link">Contact us &rarr;</div></a
       >
       <a
         class="feat-card"
         href="${pageContext.request.contextPath}/"
         onclick="showModal('warranty'); return false;"
-        ><div class="feature-card-icon icon-bg-red">&#128737;</div>
-        <div class="feature-card-title">Warranty Coverage</div>
-        <p class="feature-card-description">
+        ><div class="feat-card-icon icon-bg-red">&#128737;</div>
+        <div class="feat-card-title">Warranty Coverage</div>
+        <p class="feat-card-desc">
           All watches backed by manufacturer warranty. Extended warranty options
           available for peace of mind.
         </p>
-        <div class="feature-card-link">View warranty &rarr;</div></a
+        <div class="feat-card-link">View warranty &rarr;</div></a
       >
     </div>
   </div>

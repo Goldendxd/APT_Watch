@@ -37,16 +37,16 @@
 <!-- INVENTORY STATUS STRIP -->
 <div class="season-strip">
   <div class="season-inner">
-    <div class="ss-item">
-      <span class="ss-dot ss-closed" style="background: var(--green)"></span
+    <div class="strip-item">
+      <span class="strip-dot ss-open"></span
       >Total Products: <strong>${fn:length(productList)} in stock</strong>
     </div>
-    <div class="ss-item">
+    <div class="strip-item">
       Popular Categories: <strong>Luxury, Sports, Classic</strong>
     </div>
-    <div class="ss-item">Average Rating: <strong>4.8/5 Star</strong></div>
-    <div class="ss-item">Free Shipping: <strong>Orders over Rs 5,000</strong></div>
-    <div class="ss-item">Last Updated: <strong>Today</strong></div>
+    <div class="strip-item">Average Rating: <strong>4.8/5 Star</strong></div>
+    <div class="strip-item">Free Shipping: <strong>Orders over Rs 5,000</strong></div>
+    <div class="strip-item">Last Updated: <strong>Today</strong></div>
   </div>
 </div>
 

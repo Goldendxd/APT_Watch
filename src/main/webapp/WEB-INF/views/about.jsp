@@ -28,7 +28,7 @@
 <section class="sec">
   <div class="sec-inner">
     <div class="split reveal">
-      <div class="split-txt">
+      <div class="split-body">
         <div class="sec-tag">Our Mission</div>
         <h2 class="sec-h">More than a <em style="font-style:normal;color:var(--gold);">watch</em> store.</h2>
         <p class="sec-sub" style="max-width:480px;">
@@ -215,19 +215,19 @@
     </div>
     <div class="feat-grid">
       <div class="feat-card reveal reveal-delay-1">
-        <div class="fc-ico ico-g">&#9200;</div>
-        <div class="fc-h">Precision First</div>
-        <p class="fc-p">Every watch we carry is vetted for accuracy, authenticity and craftsmanship. We never compromise on quality.</p>
+        <div class="feat-card-icon icon-bg-green">&#9200;</div>
+        <div class="feat-card-title">Precision First</div>
+        <p class="feat-card-desc">Every watch we carry is vetted for accuracy, authenticity and craftsmanship. We never compromise on quality.</p>
       </div>
       <div class="feat-card reveal reveal-delay-2">
-        <div class="fc-ico ico-gold">&#128081;</div>
-        <div class="fc-h">Timeless Heritage</div>
-        <p class="fc-p">We celebrate the art of watchmaking by connecting you with heritage brands that have stood the test of time.</p>
+        <div class="feat-card-icon icon-bg-gold">&#128081;</div>
+        <div class="feat-card-title">Timeless Heritage</div>
+        <p class="feat-card-desc">We celebrate the art of watchmaking by connecting you with heritage brands that have stood the test of time.</p>
       </div>
       <div class="feat-card reveal reveal-delay-3">
-        <div class="fc-ico ico-b">&#127468;&#127479;</div>
-        <div class="fc-h">Made for Nepal</div>
-        <p class="fc-p">Localised experience, local prices, local support. AluGhadi is proudly rooted in Nepal's growing collector community.</p>
+        <div class="feat-card-icon icon-bg-blue">&#127468;&#127479;</div>
+        <div class="feat-card-title">Made for Nepal</div>
+        <p class="feat-card-desc">Localised experience, local prices, local support. AluGhadi is proudly rooted in Nepal's growing collector community.</p>
       </div>
     </div>
   </div>
