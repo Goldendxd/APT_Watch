@@ -8,7 +8,7 @@ START TRANSACTION;
 -- ----------------------------
 -- Table: categories
 -- ----------------------------
-CREATE TABLE categories (
+CREATE TABLE  IF NOT EXISTS categories (
                             id INT(11) NOT NULL AUTO_INCREMENT,
                             name VARCHAR(60) NOT NULL,
                             slug VARCHAR(60) NOT NULL,
@@ -33,7 +33,7 @@ INSERT INTO categories (id, name, slug) VALUES
 -- ----------------------------
 -- Table: users
 -- ----------------------------
-CREATE TABLE users (
+CREATE TABLE  IF NOT EXISTS users (
                        id INT(11) NOT NULL AUTO_INCREMENT,
                        username VARCHAR(50) NOT NULL,
                        email VARCHAR(150) NOT NULL,
@@ -63,7 +63,7 @@ INSERT INTO users (id, username, email, password, is_active, is_verified) VALUES
 -- ----------------------------
 -- Table: products
 -- ----------------------------
-CREATE TABLE products (
+CREATE TABLE  IF NOT EXISTS products (
                           id INT(11) NOT NULL AUTO_INCREMENT,
                           category_id INT(11) NOT NULL,
                           name VARCHAR(150) NOT NULL,
@@ -96,7 +96,7 @@ INSERT INTO products VALUES
 -- ----------------------------
 -- Table: cart
 -- ----------------------------
-CREATE TABLE cart (
+CREATE TABLE  IF NOT EXISTS cart (
                       id INT(11) NOT NULL AUTO_INCREMENT,
                       user_id INT(11) NOT NULL,
                       product_id INT(11) NOT NULL,
