@@ -10,7 +10,10 @@ USE alughadi;
 -- Drop tables in FK-safe order (children first)
 -- -------------------------------------------------------
 SET FOREIGN_KEY_CHECKS = 0;
-
+-- DROP TABLE IF EXISTS cart;
+-- DROP TABLE IF EXISTS products;
+-- DROP TABLE IF EXISTS categories;
+-- DROP TABLE IF EXISTS users;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- -------------------------------------------------------
