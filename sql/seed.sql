@@ -10,16 +10,13 @@ USE alughadi;
 -- Drop tables in FK-safe order (children first)
 -- -------------------------------------------------------
 SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS cart;
-DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS users;
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- -------------------------------------------------------
 -- 1. users
 -- -------------------------------------------------------
-CREATE TABLE users (
+CREATE TABLE IF NOT Exists users (
     id          INT           AUTO_INCREMENT PRIMARY KEY,
     username    VARCHAR(50)   NOT NULL UNIQUE,
     email       VARCHAR(150)  NOT NULL UNIQUE,
@@ -34,7 +31,7 @@ CREATE TABLE users (
 -- -------------------------------------------------------
 -- 2. categories
 -- -------------------------------------------------------
-CREATE TABLE categories (
+CREATE TABLE IF NOT Exists categories (
     id         INT          AUTO_INCREMENT PRIMARY KEY,
     name       VARCHAR(60)  NOT NULL UNIQUE,
     slug       VARCHAR(60)  NOT NULL UNIQUE,
@@ -44,7 +41,7 @@ CREATE TABLE categories (
 -- -------------------------------------------------------
 -- 3. products
 -- -------------------------------------------------------
-CREATE TABLE products (
+CREATE TABLE IF NOT Exists products (
     id          INT            AUTO_INCREMENT PRIMARY KEY,
     category_id INT            NOT NULL,
     name        VARCHAR(150)   NOT NULL,
@@ -64,7 +61,7 @@ CREATE TABLE products (
 -- -------------------------------------------------------
 -- 4. cart
 -- -------------------------------------------------------
-CREATE TABLE cart (
+CREATE TABLE IF NOT Exists cart (
     id         INT       AUTO_INCREMENT PRIMARY KEY,
     user_id    INT       NOT NULL,
     product_id INT       NOT NULL,
