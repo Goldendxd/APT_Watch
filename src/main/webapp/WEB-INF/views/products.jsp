@@ -169,7 +169,7 @@
       "
     >
       <c:forEach var="product" items="${productList}">
-        <div class="product-card" data-category="${fn:toLowerCase(product.categoryName)}" data-id="${product.id}">
+        <div class="product-card" data-category="${fn:toLowerCase(product.categoryName)}" data-id="prod-${product.id}">
           <div class="prod-img-container">
             <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" class="prod-img">
             <button class="prod-save" type="button" onclick="toggleWishlist(this)">
@@ -187,12 +187,12 @@
 
               <div class="prod-bot">
                 <div class="prod-price">
-                  <div class="prod-price-now">${product.price}</div>
-                  <c:if test="${product.oldPrice != null}">
-                    <div style="text-decoration: line-through" class="prod-price-was">${product.oldPrice}</div>
+                  <div class="prod-price-now">Rs <fmt:formatNumber value="${product.price}" pattern="#,##0"/></div>
+                  <c:if test="${not empty product.oldPrice and product.oldPrice gt 0}">
+                    <div class="prod-price-was">Rs <fmt:formatNumber value="${product.oldPrice}" pattern="#,##0"/></div>
                   </c:if>
                 </div>
-                <div class="prod-rating">Rating ${product.rating}</div>
+                <div class="prod-rating"><span class="prod-stars">&#9733;</span> ${product.rating}</div>
               </div>
               <button class="btn-fill" type="button">Add to Cart</button>
             </div>
@@ -209,347 +209,6 @@
 
 
       </c:forEach>
-
-
-<%--      <c:forEach var = "p" items="${productsList}">--%>
-<%--&lt;%&ndash;        <div class="product-card"></div>&ndash;%&gt;--%>
-<%--      </c:forEach>--%>
-
-<%--      <!-- PRODUCT 1 - Using Snow Leopard as placeholder image -->--%>
-<%--      <div class="product-card" data-cat="luxury" data-id="premium-chronograph">--%>
-<%--        <div class="prod-img-container">--%>
-<%--          <img--%>
-<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
-<%--            alt="Premium Chronograph"--%>
-<%--            class="prod-img"--%>
-<%--          />--%>
-<%--          <div class="prod-chip">Featured</div>--%>
-<%--          <button--%>
-<%--            class="prod-save"--%>
-<%--            onclick="toggleWishlist(this)"--%>
-<%--            aria-label="Add to Wishlist"--%>
-<%--          >--%>
-<%--            <span class="wish-heart">&#9825;</span>--%>
-<%--            <span class="wish-tip">Wishlist</span>--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--        <div class="prod-body">--%>
-<%--          <div class="prod-brand">Premium Luxury</div>--%>
-<%--          <div class="prod-h">Premium Chronograph Watch</div>--%>
-<%--          <div--%>
-<%--            class="prod-desc"--%>
-<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
-<%--          >--%>
-<%--            Precision Swiss movement, leather strap, water resistant--%>
-<%--          </div>--%>
-<%--          <div class="prod-bot">--%>
-<%--            <div class="prod-price">--%>
-<%--              <div--%>
-<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
-<%--              >--%>
-<%--                $499--%>
-<%--              </div>--%>
-<%--              <div--%>
-<%--                style="--%>
-<%--                  font-size: 0.75rem;--%>
-<%--                  color: var(--muted);--%>
-<%--                  text-decoration: line-through;--%>
-<%--                "--%>
-<%--              >--%>
-<%--                $699--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--            <div class="prod-rating">Rating 4.9 (128)</div>--%>
-<%--          </div>--%>
-<%--          <button--%>
-<%--            class="btn-fill"--%>
-<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
-<%--            onclick="addToCart('Premium Chronograph', 499)"--%>
-<%--          >--%>
-<%--            Add to Cart--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--      </div>--%>
-
-<%--      <!-- PRODUCT 2 -->--%>
-<%--      <div class="product-card" data-cat="sports" data-id="sports-dive">--%>
-<%--        <div class="prod-img-container">--%>
-<%--          <img--%>
-<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
-<%--            alt="Sports Dive Watch"--%>
-<%--            class="prod-img"--%>
-<%--          />--%>
-<%--          <div class="prod-chip">Sports</div>--%>
-<%--          <button--%>
-<%--            class="prod-save"--%>
-<%--            onclick="toggleWishlist(this)"--%>
-<%--            aria-label="Add to Wishlist"--%>
-<%--          >--%>
-<%--            <span class="wish-heart">&#9825;</span>--%>
-<%--            <span class="wish-tip">Wishlist</span>--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--        <div class="prod-body">--%>
-<%--          <div class="prod-brand">Sports Collection</div>--%>
-<%--          <div class="prod-h">Sports Dive Master</div>--%>
-<%--          <div--%>
-<%--            class="prod-desc"--%>
-<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
-<%--          >--%>
-<%--            300m water resistance, titanium case, digital compass--%>
-<%--          </div>--%>
-<%--          <div class="prod-bot">--%>
-<%--            <div class="prod-price">--%>
-<%--              <div--%>
-<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
-<%--              >--%>
-<%--                $349--%>
-<%--              </div>--%>
-<%--              <div--%>
-<%--                style="--%>
-<%--                  font-size: 0.75rem;--%>
-<%--                  color: var(--muted);--%>
-<%--                  text-decoration: line-through;--%>
-<%--                "--%>
-<%--              >--%>
-<%--                $449--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--            <div class="prod-rating">Rating 4.7 (96)</div>--%>
-<%--          </div>--%>
-<%--          <button--%>
-<%--            class="btn-fill"--%>
-<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
-<%--            onclick="addToCart('Sports Dive Master', 349)"--%>
-<%--          >--%>
-<%--            Add to Cart--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--      </div>--%>
-
-<%--      <!-- PRODUCT 3 -->--%>
-<%--      <div class="product-card" data-cat="classic" data-id="vintage-dress">--%>
-<%--        <div class="prod-img-container">--%>
-<%--          <img--%>
-<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
-<%--            alt="Vintage Dress Watch"--%>
-<%--            class="prod-img"--%>
-<%--          />--%>
-<%--          <div class="prod-chip">Classic</div>--%>
-<%--          <button--%>
-<%--            class="prod-save"--%>
-<%--            onclick="toggleWishlist(this)"--%>
-<%--            aria-label="Add to Wishlist"--%>
-<%--          >--%>
-<%--            <span class="wish-heart">&#9825;</span>--%>
-<%--            <span class="wish-tip">Wishlist</span>--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--        <div class="prod-body">--%>
-<%--          <div class="prod-brand">Classic Collection</div>--%>
-<%--          <div class="prod-h">Vintage Dress Watch</div>--%>
-<%--          <div--%>
-<%--            class="prod-desc"--%>
-<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
-<%--          >--%>
-<%--            Minimalist design, leather band, sapphire crystal--%>
-<%--          </div>--%>
-<%--          <div class="prod-bot">--%>
-<%--            <div class="prod-price">--%>
-<%--              <div--%>
-<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
-<%--              >--%>
-<%--                $299--%>
-<%--              </div>--%>
-<%--              <div--%>
-<%--                style="--%>
-<%--                  font-size: 0.75rem;--%>
-<%--                  color: var(--muted);--%>
-<%--                  text-decoration: line-through;--%>
-<%--                "--%>
-<%--              >--%>
-<%--                $399--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--            <div class="prod-rating">Rating 4.8 (153)</div>--%>
-<%--          </div>--%>
-<%--          <button--%>
-<%--            class="btn-fill"--%>
-<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
-<%--            onclick="addToCart('Vintage Dress Watch', 299)"--%>
-<%--          >--%>
-<%--            Add to Cart--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--      </div>--%>
-
-<%--      <!-- PRODUCT 4 -->--%>
-<%--      <div class="product-card" data-cat="smart" data-id="smart-connect">--%>
-<%--        <div class="prod-img-container">--%>
-<%--          <img--%>
-<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
-<%--            alt="Smart Connected"--%>
-<%--            class="prod-img"--%>
-<%--          />--%>
-<%--          <div class="prod-chip">Smart</div>--%>
-<%--          <button--%>
-<%--            class="prod-save"--%>
-<%--            onclick="toggleWishlist(this)"--%>
-<%--            aria-label="Add to Wishlist"--%>
-<%--          >--%>
-<%--            <span class="wish-heart">&#9825;</span>--%>
-<%--            <span class="wish-tip">Wishlist</span>--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--        <div class="prod-body">--%>
-<%--          <div class="prod-brand">Smart Tech</div>--%>
-<%--          <div class="prod-h">Smart Connected Watch</div>--%>
-<%--          <div--%>
-<%--            class="prod-desc"--%>
-<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
-<%--          >--%>
-<%--            Fitness tracking, notifications, 7-day battery--%>
-<%--          </div>--%>
-<%--          <div class="prod-bot">--%>
-<%--            <div class="prod-price">--%>
-<%--              <div--%>
-<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
-<%--              >--%>
-<%--                $199--%>
-<%--              </div>--%>
-<%--              <div--%>
-<%--                style="--%>
-<%--                  font-size: 0.75rem;--%>
-<%--                  color: var(--muted);--%>
-<%--                  text-decoration: line-through;--%>
-<%--                "--%>
-<%--              >--%>
-<%--                $299--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--            <div class="prod-rating">Rating 4.6 (87)</div>--%>
-<%--          </div>--%>
-<%--          <button--%>
-<%--            class="btn-fill"--%>
-<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
-<%--            onclick="addToCart('Smart Connected Watch', 199)"--%>
-<%--          >--%>
-<%--            Add to Cart--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--      </div>--%>
-
-<%--      <!-- PRODUCT 5 -->--%>
-<%--      <div class="product-card" data-cat="womens" data-id="womens-elegant">--%>
-<%--        <div class="prod-img-container">--%>
-<%--          <img--%>
-<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
-<%--            alt="Women's Elegant"--%>
-<%--            class="prod-img"--%>
-<%--          />--%>
-<%--          <div class="prod-chip">Elegant</div>--%>
-<%--          <button--%>
-<%--            class="prod-save"--%>
-<%--            onclick="toggleWishlist(this)"--%>
-<%--            aria-label="Add to Wishlist"--%>
-<%--          >--%>
-<%--            <span class="wish-heart">&#9825;</span>--%>
-<%--            <span class="wish-tip">Wishlist</span>--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--        <div class="prod-body">--%>
-<%--          <div class="prod-brand">Women's Collection</div>--%>
-<%--          <div class="prod-h">Elegant Dress Watch</div>--%>
-<%--          <div--%>
-<%--            class="prod-desc"--%>
-<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
-<%--          >--%>
-<%--            Diamond bezel, stainless steel, elegant strap--%>
-<%--          </div>--%>
-<%--          <div class="prod-bot">--%>
-<%--            <div class="prod-price">--%>
-<%--              <div--%>
-<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
-<%--              >--%>
-<%--                $399--%>
-<%--              </div>--%>
-<%--              <div--%>
-<%--                style="--%>
-<%--                  font-size: 0.75rem;--%>
-<%--                  color: var(--muted);--%>
-<%--                  text-decoration: line-through;--%>
-<%--                "--%>
-<%--              >--%>
-<%--                $549--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--            <div class="prod-rating">Rating 4.9 (142)</div>--%>
-<%--          </div>--%>
-<%--          <button--%>
-<%--            class="btn-fill"--%>
-<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
-<%--            onclick="addToCart('Elegant Dress Watch', 399)"--%>
-<%--          >--%>
-<%--            Add to Cart--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--      </div>--%>
-
-<%--      <!-- PRODUCT 6 -->--%>
-<%--      <div class="product-card" data-cat="luxury" data-id="luxury-skeleton">--%>
-<%--        <div class="prod-img-container">--%>
-<%--          <img--%>
-<%--            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"--%>
-<%--            alt="Skeleton Watch"--%>
-<%--            class="prod-img"--%>
-<%--          />--%>
-<%--          <div class="prod-chip">Premium</div>--%>
-<%--          <button--%>
-<%--            class="prod-save"--%>
-<%--            onclick="toggleWishlist(this)"--%>
-<%--            aria-label="Add to Wishlist"--%>
-<%--          >--%>
-<%--            <span class="wish-heart">&#9825;</span>--%>
-<%--            <span class="wish-tip">Wishlist</span>--%>
-<%--          </button>--%>
-<%--        </div>--%>
-<%--        <div class="prod-body">--%>
-<%--          <div class="prod-brand">Luxury Premium</div>--%>
-<%--          <div class="prod-h">Skeleton Movement Watch</div>--%>
-<%--          <div--%>
-<%--            class="prod-desc"--%>
-<%--            style="font-size: 0.8rem; color: var(--muted); margin: 0.4rem 0"--%>
-<%--          >--%>
-<%--            Visible movement, sapphire glass, mechanical--%>
-<%--          </div>--%>
-<%--          <div class="prod-bot">--%>
-<%--            <div class="prod-price">--%>
-<%--              <div--%>
-<%--                style="font-weight: 900; font-size: 1.1rem; color: var(--green)"--%>
-<%--              >--%>
-<%--                $599--%>
-<%--              </div>--%>
-<%--              <div--%>
-<%--                style="--%>
-<%--                  font-size: 0.75rem;--%>
-<%--                  color: var(--muted);--%>
-<%--                  text-decoration: line-through;--%>
-<%--                "--%>
-<%--              >--%>
-<%--                $799--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--            <div class="prod-rating">Rating 4.9 (176)</div>--%>
-<%--          </div>--%>
-<%--          <button--%>
-<%--            class="btn-fill"--%>
-<%--            style="width: 100%; margin-top: 0.75rem; padding: 0.6rem"--%>
-<%--            onclick="addToCart('Skeleton Movement Watch', 599)"--%>
-<%--          >--%>
-<%--            Add to Cart--%>
-<%--          </button>--%>
-<%--        </div>--%>
-      </div>
     </div>
   </div>
 
@@ -777,7 +436,7 @@
   }
 
   function toggleWishlist(btn) {
-    var card = btn.closest('.prod-card');
+    var card = btn.closest('.product-card');
     var id   = card.getAttribute('data-id');
     var wish = getWishlist();
     var idx  = wish.indexOf(id);
@@ -805,7 +464,7 @@
     _currentFilter = cat;
     document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
     tabBtn.classList.add('active');
-    var cards = document.querySelectorAll('.prod-card');
+    var cards = document.querySelectorAll('.product-card');
     var empty = document.getElementById('fav-empty');
     if (cat === 'wishlist') {
       var wish = getWishlist();
@@ -820,7 +479,7 @@
       empty.style.display = 'none';
       cards.forEach(function(card) {
         var cc = card.getAttribute('data-category');
-        card.style.display = (cat === 'all' || cc === cat) ? '' : 'none';
+        card.style.display = (cat === 'all' || cc === cat || cc === cat + 's') ? '' : 'none';
       });
     }
   }
