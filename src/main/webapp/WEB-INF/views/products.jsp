@@ -194,7 +194,17 @@
                 </div>
                 <div class="prod-rating"><span class="prod-stars">&#9733;</span> ${product.rating}</div>
               </div>
-              <button class="btn-fill" type="button">Add to Cart</button>
+              <div class="prod-actions">
+                <button class="btn-fill prod-buy-btn" type="button"
+                        onclick="addToCart('${product.name}', ${product.price})">
+                  Buy Now
+                </button>
+                <button class="prod-cart-icon-btn" type="button"
+                        onclick="addToCart('${product.name}', ${product.price})"
+                        title="Add to cart">
+                  &#128717;
+                </button>
+              </div>
             </div>
 <%--            <div class="prod-chip">${product.name}</div>--%>
 <%--          </div>--%>
@@ -317,6 +327,43 @@
 <!-- /pg-body -->
 
 <style>
+/* ---- Buy + Cart icon row ---- */
+.prod-actions {
+  display:     flex;
+  gap:         0.5rem;
+  margin-top:  0.75rem;
+  align-items: stretch;
+}
+.prod-buy-btn {
+  flex:            1;
+  justify-content: center;
+  padding:         0.65rem 1rem;
+  font-size:       0.85rem;
+  line-height:     1;
+}
+.prod-cart-icon-btn {
+  flex-shrink:     0;
+  width:           42px;
+  border-radius:   11px;
+  border:          1.5px solid var(--green-mid);
+  background:      var(--green-light);
+  color:           var(--green);
+  font-size:       1rem;
+  cursor:          pointer;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  line-height:     1;
+  transition:      all 0.2s var(--ease);
+}
+.prod-cart-icon-btn:hover {
+  background:   var(--green);
+  border-color: var(--green);
+  color:        #fff;
+  transform:    translateY(-2px);
+  box-shadow:   0 4px 14px rgba(26,107,56,0.3);
+}
+
 /* ---- Wishlist heart button ---- */
 .prod-save {
   position:        absolute;

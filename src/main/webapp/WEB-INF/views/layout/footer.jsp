@@ -8,24 +8,24 @@
 
   <%-- ======== FOOTER ======== --%>
   <footer>
-    <div class="footer-inner">
-      <div class="footer-grid">
+    <div class="fi">
+      <div class="ft">
 
         <%-- Brand column --%>
-        <div class="footer-brand">
+        <div class="ft-brand">
           <a class="logo" href="${pageContext.request.contextPath}/" aria-label="AluGhadi home">
             <img src="${pageContext.request.contextPath}/static/images/alughadiweblogo.png" alt="AluGhadi" class="footer-logo-img" />
           </a>
           <p>Nepal's premium destination for fine watches. Timeless craftsmanship delivered with care to your doorstep.</p>
-          <div class="footer-socials">
-            <a class="footer-social-btn" href="#" aria-label="Facebook"  title="Facebook">&#128526;</a>
-            <a class="footer-social-btn" href="#" aria-label="Instagram" title="Instagram">&#128247;</a>
-            <a class="footer-social-btn" href="#" aria-label="Twitter"   title="Twitter">&#128038;</a>
+          <div class="ft-socials">
+            <a class="ft-social-btn" href="#" aria-label="Facebook"  title="Facebook">&#128526;</a>
+            <a class="ft-social-btn" href="#" aria-label="Instagram" title="Instagram">&#128247;</a>
+            <a class="ft-social-btn" href="#" aria-label="Twitter"   title="Twitter">&#128038;</a>
           </div>
         </div>
 
         <%-- Shop links --%>
-        <div class="footer-col">
+        <div class="ft-col">
           <h4>Shop</h4>
           <a href="${pageContext.request.contextPath}/products">All Products</a>
           <a href="${pageContext.request.contextPath}/gifting">Gifting</a>
@@ -34,7 +34,7 @@
         </div>
 
         <%-- Company links --%>
-        <div class="footer-col">
+        <div class="ft-col">
           <h4>Company</h4>
           <a href="${pageContext.request.contextPath}/about">About Us</a>
           <a href="${pageContext.request.contextPath}/contact">Contact</a>
@@ -43,7 +43,7 @@
         </div>
 
         <%-- Support links --%>
-        <div class="footer-col">
+        <div class="ft-col">
           <h4>Support</h4>
           <a href="mailto:support@alughadi.com">support@alughadi.com</a>
           <a href="tel:+977XXXXXXXX">+977-1-XXXX-XXXX</a>
@@ -53,28 +53,23 @@
       </div>
 
       <%-- Bottom bar --%>
-      <div class="footer-bottom">
+      <div class="fb">
         <p>&copy; 2026 AluGhadi Watches &middot; All rights reserved</p>
         <div style="display:flex;gap:0.6rem;align-items:center;flex-wrap:wrap;">
-          <span class="footer-badge">&#127473;&#127477; Made in Nepal</span>
-          <span class="footer-badge">&#128274; Secure Payments</span>
+          <span class="fb-badge">&#127473;&#127477; Made in Nepal</span>
+          <span class="fb-badge">&#128274; Secure Payments</span>
         </div>
         <p>Crafted with precision &amp; passion</p>
       </div>
     </div>
   </footer>
 
-  <%-- ======== FLOATING CART BUTTON ======== --%>
-  <button id="cart-btn" type="button" onclick="openCart()" aria-label="Open cart">
-    &#128717; Cart (<span id="cart-count">0</span>)
-  </button>
-
   <%-- ======== CART MODAL ======== --%>
   <div class="modal-ov" id="modal-cart" role="dialog" aria-modal="true" aria-label="Shopping cart">
     <div class="modal" style="max-width:500px;">
       <button class="modal-close" onclick="closeModal('cart')" aria-label="Close cart">&#10005;</button>
-      <div class="modal-title">&#128717; Shopping Cart</div>
-      <div class="modal-subtitle">Your selected items</div>
+      <div class="modal-h">&#128717; Shopping Cart</div>
+      <div class="modal-sub">Your selected items</div>
       <div id="cart-items" style="max-height:320px;overflow-y:auto;margin:1rem 0;">
         <div class="cart-empty">
           <div class="cart-empty-ico">&#128717;</div>
@@ -94,70 +89,23 @@
   </div>
 
   <%-- ======== TOAST CONTAINER ======== --%>
-  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <div class="toast-c" id="toast-container" aria-live="polite"></div>
 
   <%-- ======== SHARED SCRIPTS ======== --%>
   <script src="${pageContext.request.contextPath}/static/js/app.js"></script>
   <script>
-    /* ---------- Scrolled nav ---------- */
-    (function () {
-      var nav = document.getElementById('nav');
-      if (!nav) return;
-      window.addEventListener('scroll', function () {
-        nav.classList.toggle('scrolled', window.scrollY > 30);
-      }, { passive: true });
-    })();
-
-    /* ---------- Sidebar ---------- */
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('active');
-      document.getElementById('sidebar-overlay').classList.toggle('active');
-      document.body.style.overflow = document.getElementById('sidebar').classList.contains('active') ? 'hidden' : '';
-    }
-    function closeSidebar() {
-      document.getElementById('sidebar').classList.remove('active');
-      document.getElementById('sidebar-overlay').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    /* ---------- Modals ---------- */
-    function showModal(id) {
-      var m = document.getElementById('modal-' + id);
-      if (m) { m.classList.add('active'); document.body.style.overflow = 'hidden'; }
-    }
-    function closeModal(id) {
-      var m = document.getElementById('modal-' + id);
-      if (m) { m.classList.remove('active'); document.body.style.overflow = ''; }
-    }
-    function openCart() { showModal('cart'); }
-
-    /* Close modal on overlay click */
-    document.querySelectorAll('.modal-ov').forEach(function (ov) {
-      ov.addEventListener('click', function (e) {
-        if (e.target === ov) closeModal(ov.id.replace('modal-', ''));
-      });
-    });
-
     /* ---------- Toast Helper ---------- */
     function showToast(title, msg, icon) {
       var c = document.getElementById('toast-container');
       if (!c) return;
       var t = document.createElement('div');
       t.className = 'toast';
-      t.innerHTML = '<div class="toast-icon">' + (icon || '&#10024;') + '</div>'
-        + '<div><div class="toast-title">' + title + '</div>'
-        + (msg ? '<div class="toast-body">' + msg + '</div>' : '') + '</div>';
+      t.innerHTML = '<div class="t-ico">' + (icon || '&#10024;') + '</div>'
+        + '<div><div class="t-h">' + title + '</div>'
+        + (msg ? '<div class="t-p">' + msg + '</div>' : '') + '</div>';
       c.appendChild(t);
       setTimeout(function () { t.remove(); }, 4000);
     }
-
-    /* ---------- Smooth anchor scroll ---------- */
-    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        var target = document.querySelector(this.getAttribute('href'));
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      });
-    });
   </script>
 
 </body>

@@ -368,10 +368,4 @@ request.setAttribute("activeNav", "home"); %>
   </div>
 </section>
 
-<script>
-  function showModal(modalId) {
-    alert("This feature will be implemented with backend integration.");
-  }
-</script>
-
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

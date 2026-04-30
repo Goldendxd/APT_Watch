@@ -77,6 +77,7 @@ function showModal(modalId) {
   var modal = document.getElementById("modal-" + modalId);
   if (modal) {
     modal.classList.add("active");
+    document.body.style.overflow = "hidden";
   }
 }
 
@@ -84,6 +85,7 @@ function closeModal(modalId) {
   var modal = document.getElementById("modal-" + modalId);
   if (modal) {
     modal.classList.remove("active");
+    document.body.style.overflow = "";
   }
 }
 
@@ -91,6 +93,7 @@ function closeModal(modalId) {
 document.addEventListener("click", function (e) {
   if (e.target.classList.contains("modal-ov")) {
     e.target.classList.remove("active");
+    document.body.style.overflow = "";
   }
 });
 
@@ -103,9 +106,9 @@ function updateCartDisplay() {
   try {
     var cartData = localStorage.getItem("alughadi_cart");
     var cart = cartData ? JSON.parse(cartData) : [];
-    var cartBtn = document.getElementById("cart-btn");
-    if (cartBtn) {
-      cartBtn.textContent = "🛒 (" + cart.length + ")";
+    var countEl = document.getElementById("nav-cart-count");
+    if (countEl) {
+      countEl.textContent = "(" + cart.length + ")";
     }
   } catch (e) {
     console.error("Error updating cart:", e);
