@@ -7,15 +7,15 @@ request.setAttribute("activeNav", "home"); %>
 
 <!-- HERO -->
 <section class="home-hero">
-  <div class="hh-img">
+  <div class="hero-image">
     <img
       src="${pageContext.request.contextPath}/static/images/hero_home.png"
       alt="AluGhadi Premium Watches"
       style="object-position: center top;"
     />
-    <div class="hh-fade"></div>
+    <div class="hero-fade"></div>
   </div>
-  <div class="hh-left" style="animation: mIn 0.9s 0.1s both">
+  <div class="hero-content">
     <div class="hero-chip">&#8986; Timeless Elegance</div>
     <h1 class="hero-h">Discover Premium<br /><span>Watch Collections</span></h1>
     <p class="hero-p">
@@ -32,16 +32,16 @@ request.setAttribute("activeNav", "home"); %>
       >
     </div>
     <div class="hero-stats">
-      <div class="hs">
-        <span class="hs-n">500+</span><span class="hs-l">Watch Models</span>
+      <div class="hero-stat">
+        <span class="hero-stat-number">500+</span><span class="hero-stat-label">Watch Models</span>
       </div>
-      <div class="hs">
-        <span class="hs-n">50+</span
-        ><span class="hs-l">International Brands</span>
+      <div class="hero-stat">
+        <span class="hero-stat-number">50+</span
+        ><span class="hero-stat-label">International Brands</span>
       </div>
-      <div class="hs">
-        <span class="hs-n">99%</span
-        ><span class="hs-l">Customer Satisfaction</span>
+      <div class="hero-stat">
+        <span class="hero-stat-number">99%</span
+        ><span class="hero-stat-label">Customer Satisfaction</span>
       </div>
     </div>
   </div>
@@ -51,7 +51,6 @@ request.setAttribute("activeNav", "home"); %>
 <section class="sec" style="background: var(--white)">
   <div class="sec-inner">
     <div
-      class="reveal"
       style="
         display: flex;
         align-items: flex-end;
@@ -70,24 +69,24 @@ request.setAttribute("activeNav", "home"); %>
         represents the pinnacle of watchmaking.
       </p>
     </div>
-    <div class="dest-scroll reveal">
+    <div class="dest-scroll">
       <a
         class="dest-card"
         href="${pageContext.request.contextPath}/gifting"
         style="text-decoration: none"
       >
-        <div class="dc-img">
+        <div class="collection-card-image">
           <img
             src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
             alt="Luxury"
           />
         </div>
-        <div class="dc-ov"></div>
-        <div class="dc-chip">Premium</div>
-        <div class="dc-body">
-          <div class="dc-tag">High-End Collection</div>
-          <div class="dc-h">Luxury Watches</div>
-          <div class="dc-m">Timeless elegance and precision</div>
+        <div class="collection-card-overlay"></div>
+        <div class="collection-card-chip">Premium</div>
+        <div class="collection-card-body">
+          <div class="collection-card-tag">High-End Collection</div>
+          <div class="collection-card-title">Luxury Watches</div>
+          <div class="collection-card-meta">Timeless elegance and precision</div>
         </div>
       </a>
       <a
@@ -95,18 +94,18 @@ request.setAttribute("activeNav", "home"); %>
         href="${pageContext.request.contextPath}/gifting"
         style="text-decoration: none"
       >
-        <div class="dc-img">
+        <div class="collection-card-image">
           <img
             src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
             alt="Sports"
           />
         </div>
-        <div class="dc-ov"></div>
-        <div class="dc-chip">Active</div>
-        <div class="dc-body">
-          <div class="dc-tag">Sports & Adventure</div>
-          <div class="dc-h">Sports Watches</div>
-          <div class="dc-m">Built for performance and durability</div>
+        <div class="collection-card-overlay"></div>
+        <div class="collection-card-chip">Active</div>
+        <div class="collection-card-body">
+          <div class="collection-card-tag">Sports &amp; Adventure</div>
+          <div class="collection-card-title">Sports Watches</div>
+          <div class="collection-card-meta">Built for performance and durability</div>
         </div>
       </a>
       <a
@@ -114,18 +113,18 @@ request.setAttribute("activeNav", "home"); %>
         href="${pageContext.request.contextPath}/gifting"
         style="text-decoration: none"
       >
-        <div class="dc-img">
+        <div class="collection-card-image">
           <img
             src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
             alt="Classic"
           />
         </div>
-        <div class="dc-ov"></div>
-        <div class="dc-chip">Timeless</div>
-        <div class="dc-body">
-          <div class="dc-tag">Classic Designs</div>
-          <div class="dc-h">Classic Watches</div>
-          <div class="dc-m">Sophisticated style for every moment</div>
+        <div class="collection-card-overlay"></div>
+        <div class="collection-card-chip">Timeless</div>
+        <div class="collection-card-body">
+          <div class="collection-card-tag">Classic Designs</div>
+          <div class="collection-card-title">Classic Watches</div>
+          <div class="collection-card-meta">Sophisticated style for every moment</div>
         </div>
       </a>
       <a
@@ -133,18 +132,18 @@ request.setAttribute("activeNav", "home"); %>
         href="${pageContext.request.contextPath}/gifting"
         style="text-decoration: none"
       >
-        <div class="dc-img">
+        <div class="collection-card-image">
           <img
             src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
             alt="Smart"
           />
         </div>
-        <div class="dc-ov"></div>
-        <div class="dc-chip">Tech-Inspired</div>
-        <div class="dc-body">
-          <div class="dc-tag">Modern Technology</div>
-          <div class="dc-h">Smart Watches</div>
-          <div class="dc-m">Connected lifestyle features</div>
+        <div class="collection-card-overlay"></div>
+        <div class="collection-card-chip">Tech-Inspired</div>
+        <div class="collection-card-body">
+          <div class="collection-card-tag">Modern Technology</div>
+          <div class="collection-card-title">Smart Watches</div>
+          <div class="collection-card-meta">Connected lifestyle features</div>
         </div>
       </a>
       <a
@@ -152,18 +151,18 @@ request.setAttribute("activeNav", "home"); %>
         href="${pageContext.request.contextPath}/gifting"
         style="text-decoration: none"
       >
-        <div class="dc-img">
+        <div class="collection-card-image">
           <img
             src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
             alt="Womens"
           />
         </div>
-        <div class="dc-ov"></div>
-        <div class="dc-chip">Elegant</div>
-        <div class="dc-body">
-          <div class="dc-tag">For Her</div>
-          <div class="dc-h">Women's Collection</div>
-          <div class="dc-m">Elegant designs crafted for women</div>
+        <div class="collection-card-overlay"></div>
+        <div class="collection-card-chip">Elegant</div>
+        <div class="collection-card-body">
+          <div class="collection-card-tag">For Her</div>
+          <div class="collection-card-title">Women's Collection</div>
+          <div class="collection-card-meta">Elegant designs crafted for women</div>
         </div>
       </a>
     </div>
@@ -174,7 +173,6 @@ request.setAttribute("activeNav", "home"); %>
 <section class="sec">
   <div class="sec-inner">
     <div
-      class="reveal"
       style="
         display: flex;
         align-items: flex-end;
@@ -193,66 +191,63 @@ request.setAttribute("activeNav", "home"); %>
         value for money.
       </p>
     </div>
-    <div class="feat-grid reveal">
+    <div class="feat-grid">
       <a class="feat-card" href="${pageContext.request.contextPath}/products"
-        ><div class="fc-ico ico-g">&#8986;</div>
-        <div class="fc-h">Premium Selection</div>
-        <p class="fc-p">
+        ><div class="feature-card-icon icon-bg-green">&#8986;</div>
+        <div class="feature-card-title">Premium Selection</div>
+        <p class="feature-card-description">
           Handpicked watches from renowned international brands. Quality assured
           with authentic certifications.
         </p>
-        <div class="fc-arr">Browse collection &rarr;</div></a
+        <div class="feature-card-link">Browse collection &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="fc-ico ico-a">&#10004;</div>
-        <div class="fc-h">100% Authentic</div>
-        <p class="fc-p">
+        ><div class="feature-card-icon icon-bg-amber">&#10004;</div>
+        <div class="feature-card-title">100% Authentic</div>
+        <p class="feature-card-description">
           Every watch is verified authentic. We work directly with authorized
           distributors and manufacturers.
         </p>
-        <div class="fc-arr">Learn more &rarr;</div></a
+        <div class="feature-card-link">Learn more &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="fc-ico ico-r">&#128230;</div>
-        <div class="fc-h">Free Shipping</div>
-        <p class="fc-p">
-          Free shipping on orders above $100. Safe, insured delivery to your
+        ><div class="feature-card-icon icon-bg-red">&#128230;</div>
+        <div class="feature-card-title">Free Shipping</div>
+        <p class="feature-card-description">
+          Free shipping on orders above Rs 5,000. Safe, insured delivery to your
           doorstep with tracking.
         </p>
-        <div class="fc-arr">View policy &rarr;</div></a
+        <div class="feature-card-link">View policy &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="fc-ico ico-b">&#128260;</div>
-        <div class="fc-h">Easy Returns</div>
-        <p class="fc-p">
+        ><div class="feature-card-icon icon-bg-blue">&#128260;</div>
+        <div class="feature-card-title">Easy Returns</div>
+        <p class="feature-card-description">
           30-day return policy. Change your mind? Full refund, no questions
           asked. Hassle-free process.
         </p>
-        <div class="fc-arr">Details &rarr;</div></a
+        <div class="feature-card-link">Details &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="fc-ico ico-g">&#128142;</div>
-        <div class="fc-h">Expert Support</div>
-        <p class="fc-p">
+        ><div class="feature-card-icon icon-bg-green">&#128142;</div>
+        <div class="feature-card-title">Expert Support</div>
+        <p class="feature-card-description">
           Our watch experts are here 24/7. Expert advice on sizing, features,
           and watch care.
         </p>
-        <div class="fc-arr">Contact us &rarr;</div></a
+        <div class="feature-card-link">Contact us &rarr;</div></a
       >
       <a
         class="feat-card"
         href="${pageContext.request.contextPath}/"
-        onclick="
-          showModal('warranty');
-          return false;
-        "
-        ><div class="fc-ico ico-r">&#128737;</div>
-        <div class="fc-h">Warranty Coverage</div>
-        <p class="fc-p">
+        onclick="showModal('warranty'); return false;"
+        ><div class="feature-card-icon icon-bg-red">&#128737;</div>
+        <div class="feature-card-title">Warranty Coverage</div>
+        <p class="feature-card-description">
           All watches backed by manufacturer warranty. Extended warranty options
           available for peace of mind.
         </p>
-        <div class="fc-arr">View warranty &rarr;</div></a
+        <div class="feature-card-link">View warranty &rarr;</div></a
       >
     </div>
   </div>
@@ -261,7 +256,7 @@ request.setAttribute("activeNav", "home"); %>
 <!-- SPLIT SECTION -->
 <section class="sec" style="background: var(--white)">
   <div class="sec-inner">
-    <div class="split reveal">
+    <div class="split">
       <div class="split-img">
         <img
           src="${pageContext.request.contextPath}/static/images/hero_about.png"
@@ -322,10 +317,7 @@ request.setAttribute("activeNav", "home"); %>
   "
 >
   <div class="sec-inner">
-    <div
-      class="reveal"
-      style="max-width: 600px; margin: 0 auto; text-align: center"
-    >
+    <div style="max-width: 600px; margin: 0 auto; text-align: center">
       <div
         class="sec-tag"
         style="

@@ -21,12 +21,12 @@
   align-items: center;
 }
 
-.hh-img {
+.hero-image {
   position: absolute;
   inset:    0;
   right:    48%;
 }
-.hh-img img {
+.hero-image img {
   width:          100%;
   height:         100%;
   object-fit:     cover;
@@ -34,7 +34,7 @@
 }
 
 /* Gradient fade from image to right panel */
-.hh-fade {
+.hero-fade {
   position:   absolute;
   inset:      0;
   background: linear-gradient(
@@ -46,14 +46,14 @@
 }
 
 /* Right content column */
-.hh-left {
+.hero-content {
   position:    relative;
   z-index:     10;
   padding:     4rem 7% 4rem 5%;
   grid-column: 2;
 }
 
-/* Hero animated chip */
+/* Hero chip */
 .hero-chip {
   display:     inline-flex;
   align-items: center;
@@ -67,22 +67,12 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   margin-bottom: 1.15rem;
-  animation:   chipFade 0.6s var(--ease) both;
-}
-@keyframes chipFade {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: none; }
 }
 .hero-chip-dot {
   width:         6px;
   height:        6px;
   border-radius: 50%;
   background:    var(--green);
-  animation:     dotPulse 2s ease-in-out infinite;
-}
-@keyframes dotPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.8); }
 }
 
 /* Hero headline */
@@ -93,11 +83,6 @@
   line-height:    1.08;
   letter-spacing: -0.035em;
   margin-bottom:  0.9rem;
-  animation:      heroH 0.7s 0.1s var(--ease) both;
-}
-@keyframes heroH {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: none; }
 }
 .hero-h span    { color: var(--green); }
 .hero-h em      { font-style: normal; color: var(--gold); }
@@ -109,11 +94,6 @@
   max-width:   500px;
   line-height: 1.8;
   margin-bottom: 2.25rem;
-  animation:   heroP 0.7s 0.2s var(--ease) both;
-}
-@keyframes heroP {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: none; }
 }
 
 /* Hero CTA buttons */
@@ -122,7 +102,6 @@
   gap:           0.85rem;
   margin-bottom: 3rem;
   flex-wrap:     wrap;
-  animation:     heroP 0.7s 0.3s var(--ease) both;
 }
 
 .hbtn {
@@ -165,13 +144,12 @@
   display:  flex;
   gap:      2.5rem;
   flex-wrap: wrap;
-  animation: heroP 0.7s 0.4s var(--ease) both;
 }
-.hs           { display: flex; flex-direction: column; gap: 0.15rem; }
-.hs-n         { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: -0.02em; }
-.hs-n span    { color: var(--green); }
-.hs-l         { font-size: 0.72rem; color: var(--muted); font-weight: 600; }
-.hs-sep       { width: 1px; background: var(--border); align-self: stretch; }
+.hero-stat           { display: flex; flex-direction: column; gap: 0.15rem; }
+.hero-stat-number    { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: -0.02em; }
+.hero-stat-number span { color: var(--green); }
+.hero-stat-label     { font-size: 0.72rem; color: var(--muted); font-weight: 600; }
+.hero-stat-separator { width: 1px; background: var(--border); align-self: stretch; }
 
 /* ================================================================
    MARQUEE / INFO STRIP
@@ -186,11 +164,6 @@
 .info-strip-inner {
   display:    inline-flex;
   gap:        3rem;
-  animation:  marquee 28s linear infinite;
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
 }
 .info-strip-item {
   display:     inline-flex;
@@ -240,31 +213,31 @@
   border-color: var(--green-mid);
 }
 
-.dc-img {
+.collection-card-image {
   position:  relative;
   width:     100%;
   height:    220px;
   overflow:  hidden;
   background: var(--surface);
 }
-.dc-img img {
+.collection-card-image img {
   width:      100%;
   height:     100%;
   object-fit: cover;
   transition: transform 0.45s var(--ease);
 }
-.dest-card:hover .dc-img img { transform: scale(1.07); }
+.dest-card:hover .collection-card-image img { transform: scale(1.07); }
 
-.dc-ov {
+.collection-card-overlay {
   position:   absolute;
   inset:      0;
   background: linear-gradient(140deg, rgba(26,107,56,0.10) 0%, transparent 60%);
   opacity:    0;
   transition: opacity 0.3s;
 }
-.dest-card:hover .dc-ov { opacity: 1; }
+.dest-card:hover .collection-card-overlay { opacity: 1; }
 
-.dc-chip {
+.collection-card-chip {
   position:      absolute;
   top:           0.85rem;
   right:         0.85rem;
@@ -278,10 +251,10 @@
   box-shadow:    0 2px 8px rgba(0,0,0,0.08);
 }
 
-.dc-body    { padding: 1.25rem; }
-.dc-tag     { font-size: 0.65rem; color: var(--green); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
-.dc-h       { font-size: 1.08rem; font-weight: 800; margin-bottom: 0.3rem; letter-spacing: -0.01em; }
-.dc-m       { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+.collection-card-body    { padding: 1.25rem; }
+.collection-card-tag     { font-size: 0.65rem; color: var(--green); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.collection-card-title   { font-size: 1.08rem; font-weight: 800; margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+.collection-card-meta    { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
 
 /* ================================================================
    FEATURE / INFO CARDS
@@ -310,7 +283,7 @@
   border-color: var(--green-mid);
 }
 
-.fc-ico {
+.feature-card-icon {
   font-size:  2rem;
   margin-bottom: 1rem;
   display:    inline-flex;
@@ -322,15 +295,15 @@
   background: var(--surface);
   flex-shrink: 0;
 }
-.ico-g { background: var(--green-light); }
-.ico-a { background: #fff7e0; }
-.ico-r { background: #fff0f0; }
-.ico-b { background: #e5f4ec; }
-.ico-gold { background: var(--gold-light); }
+.icon-bg-green { background: var(--green-light); }
+.icon-bg-amber { background: #fff7e0; }
+.icon-bg-red   { background: #fff0f0; }
+.icon-bg-blue  { background: #e5f4ec; }
+.icon-bg-gold  { background: var(--gold-light); }
 
-.fc-h  { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
-.fc-p  { font-size: 0.84rem; color: var(--muted); line-height: 1.68; margin-bottom: 1rem; flex: 1; }
-.fc-arr { font-size: 0.82rem; font-weight: 700; color: var(--green); display: inline-flex; align-items: center; gap: 0.35rem; }
+.feature-card-title       { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+.feature-card-description { font-size: 0.84rem; color: var(--muted); line-height: 1.68; margin-bottom: 1rem; flex: 1; }
+.feature-card-link        { font-size: 0.82rem; font-weight: 700; color: var(--green); display: inline-flex; align-items: center; gap: 0.35rem; }
 
 /* ================================================================
    PRODUCT CARDS
@@ -474,7 +447,7 @@
   flex-wrap: wrap;
   align-items: center;
 }
-.ss-item {
+.strip-item {
   display:     flex;
   align-items: center;
   gap:         0.55rem;
@@ -483,19 +456,15 @@
   white-space: nowrap;
   font-weight: 500;
 }
-.ss-dot {
+.strip-dot {
   width:         9px;
   height:        9px;
   border-radius: 50%;
   flex-shrink:   0;
 }
-.ss-open   { background: var(--green); }
-.ss-closed { background: var(--red); animation: pulseDot 2s ease-in-out infinite; }
-.ss-limited { background: var(--gold); animation: pulseDot 1.5s ease-in-out infinite; }
-@keyframes pulseDot {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.5; }
-}
+.ss-open    { background: var(--green); }
+.ss-closed  { background: var(--red); }
+.ss-limited { background: var(--gold); }
 
 /* ================================================================
    GIFT GUIDE PAGES
@@ -600,23 +569,23 @@
 }
 
 @media (max-width: 1024px) {
-  .home-hero  { grid-template-columns: 1fr; min-height: 70vh; }
-  .hh-img     { right: 0; }
-  .hh-fade    { background: linear-gradient(180deg, rgba(242,246,242,0) 0%, rgba(242,246,242,0.85) 55%, rgba(242,246,242,1) 75%); }
-  .hh-left    { grid-column: 1; padding: 3rem 6%; }
+  .home-hero       { grid-template-columns: 1fr; min-height: 70vh; }
+  .hero-image      { right: 0; }
+  .hero-fade       { background: linear-gradient(180deg, rgba(242,246,242,0) 0%, rgba(242,246,242,0.85) 55%, rgba(242,246,242,1) 75%); }
+  .hero-content    { grid-column: 1; padding: 3rem 6%; }
 }
 
 @media (max-width: 768px) {
-  .home-hero  { min-height: 55vh; }
-  .hh-left    { padding: 2rem 5%; }
-  .hero-h     { font-size: 2rem; }
-  .hero-p     { font-size: 0.88rem; }
-  .hero-stats { gap: 1.5rem; }
-  .hero-btns  { flex-direction: column; }
-  .hbtn       { justify-content: center; }
-  .dest-card  { flex: 0 0 260px; }
-  .feat-grid  { grid-template-columns: 1fr; }
-  .season-inner { flex-direction: column; gap: 0.8rem; }
+  .home-hero       { min-height: 55vh; }
+  .hero-content    { padding: 2rem 5%; }
+  .hero-h          { font-size: 2rem; }
+  .hero-p          { font-size: 0.88rem; }
+  .hero-stats      { gap: 1.5rem; }
+  .hero-btns       { flex-direction: column; }
+  .hbtn            { justify-content: center; }
+  .dest-card       { flex: 0 0 260px; }
+  .feat-grid       { grid-template-columns: 1fr; }
+  .season-inner    { flex-direction: column; gap: 0.8rem; }
   .gift-hero-choice-grid { grid-template-columns: 1fr; }
   .gift-hero-choice { min-height: 200px; }
 }

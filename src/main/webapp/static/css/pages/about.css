@@ -103,9 +103,8 @@
   white-space: nowrap;
 }
 .about-marquee-inner {
-  display:   inline-flex;
-  gap:       3rem;
-  animation: marquee 22s linear infinite;
+  display: inline-flex;
+  gap:     3rem;
 }
 .about-marquee-inner span {
   font-size:      0.75rem;
@@ -197,11 +196,6 @@
   inset:         -5px;
   border-radius: 50%;
   border:        2px dashed var(--green-mid);
-  animation:     teamRingRotate 12s linear infinite;
-}
-@keyframes teamRingRotate {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
 }
 
 /* body */

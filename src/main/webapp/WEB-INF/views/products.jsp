@@ -45,7 +45,7 @@
       Popular Categories: <strong>Luxury, Sports, Classic</strong>
     </div>
     <div class="ss-item">Average Rating: <strong>4.8/5 Star</strong></div>
-    <div class="ss-item">Free Shipping: <strong>Orders over $100</strong></div>
+    <div class="ss-item">Free Shipping: <strong>Orders over Rs 5,000</strong></div>
     <div class="ss-item">Last Updated: <strong>Today</strong></div>
   </div>
 </div>
@@ -238,14 +238,14 @@
           Budget-Friendly
         </div>
         <p style="font-size: 0.78rem; color: var(--muted); line-height: 1.65">
-          Quality watches starting from $150. Perfect for everyday wear without
+          Quality watches starting from Rs 5,000. Perfect for everyday wear without
           breaking the bank. Great value for money.
         </p>
         <div
           class="badge b-g"
           style="margin-top: 0.75rem; display: inline-flex"
         >
-          $150-$300
+          Rs 5,000–15,000
         </div>
       </div>
       <div
@@ -266,7 +266,7 @@
           class="badge b-a"
           style="margin-top: 0.75rem; display: inline-flex"
         >
-          $300-$600
+          Rs 15,000–50,000
         </div>
       </div>
       <div
@@ -287,7 +287,7 @@
           class="badge b-g"
           style="margin-top: 0.75rem; display: inline-flex"
         >
-          $600+
+          Rs 50,000+
         </div>
       </div>
       <div

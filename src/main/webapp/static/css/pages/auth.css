@@ -91,23 +91,16 @@ body {
   width: 500px; height: 500px;
   top: -180px; right: -160px;
   border-color: rgba(255,255,255,0.04);
-  animation: ringBreath 9s ease-in-out infinite;
 }
 .auth-ring-2 {
   width: 380px; height: 380px;
   bottom: -120px; left: -100px;
   border-color: rgba(61,186,98,0.07);
-  animation: ringBreath 9s ease-in-out infinite 3s;
 }
 .auth-ring-3 {
   width: 220px; height: 220px;
   top: 42%; right: 8%;
   border-color: rgba(201, 164, 82, 0.10);
-  animation: ringBreath 7s ease-in-out infinite 1.5s;
-}
-@keyframes ringBreath {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50%       { transform: scale(1.06); opacity: 0.65; }
 }
 
 /* Subtle noise texture overlay */
@@ -193,7 +186,6 @@ body {
     0 0 0 16px rgba(61,186,98,0.08),
     0 0 0 32px rgba(61,186,98,0.04),
     0 8px 32px rgba(26,107,56,0.55);
-  animation: watchFloat 4s ease-in-out infinite;
 }
 .auth-watch-ring::before {
   content: '';
@@ -217,11 +209,6 @@ body {
   line-height: 1;
   font-family: var(--ff);
 }
-@keyframes watchFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50%       { transform: translateY(-7px) rotate(1deg); }
-}
-
 .auth-brand-title {
   font-family: var(--ff);
   font-size: clamp(1.9rem, 3vw, 2.8rem);
@@ -343,11 +330,6 @@ body {
   border-radius: 20px;
   padding: 2.4rem 2.2rem 2rem;
   box-shadow: 0 6px 32px rgba(10, 30, 15, 0.09), 0 2px 8px rgba(10, 30, 15, 0.05);
-  animation: fadeSlideUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-@keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: none; }
 }
 
 /* ---- Tab Switcher — match site .tabs-wrap ---- */

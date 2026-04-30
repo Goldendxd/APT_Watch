@@ -26,16 +26,6 @@
 </head>
 <body>
 
-  <%-- ======== LOADING SCREEN ======== --%>
-  <div id="page-loader">
-    <div class="loader-inner">
-      <div class="loader-logo-box">
-        <img src="${pageContext.request.contextPath}/static/images/alughadiweblogo.png" alt="AluGhadi" class="loader-logo-img" />
-      </div>
-      <div class="loader-bar"><div class="loader-fill"></div></div>
-    </div>
-  </div>
-
   <%-- ======== NAVIGATION ======== --%>
   <nav id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
