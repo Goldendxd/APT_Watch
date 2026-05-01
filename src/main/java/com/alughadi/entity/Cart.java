@@ -15,11 +15,12 @@ public class Cart {
     private String brand;
     private String imageUrl;
     private double price;
+    private double oldPrice;
     private double totalPrice;
 
     public Cart() {}
 
-    public Cart(int id, int userId, int productId, int quantity, Timestamp createdAt, String productName,
+    public Cart(int id, int userId,double oldPrice, int productId, int quantity, Timestamp createdAt, String productName,
                 String brand, String imageUrl, double price, double totalPrice) {
         this.id = id;
         this.userId = userId;
@@ -31,6 +32,14 @@ public class Cart {
         this.imageUrl = imageUrl;
         this.price = price;
         this.totalPrice = totalPrice;
+    }
+
+    public double getOldPrice() {
+        return oldPrice;
+    }
+
+    public void setOldPrice(double oldPrice) {
+        this.oldPrice = oldPrice;
     }
 
     public int getId() {
@@ -125,6 +134,7 @@ public class Cart {
                 ", brand='" + brand + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", price=" + price +
+                ", oldPrice=" + oldPrice +
                 ", totalPrice=" + totalPrice +
                 '}';
     }

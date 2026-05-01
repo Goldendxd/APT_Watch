@@ -27,10 +27,14 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("activeNav", "products");
         Object userIdObj = SessionUtil.getAttribute(request, "authUserId");
         if (userIdObj != null) {
+            int userId = (Integer) userIdObj;
             CartDao cartDao = new CartDaoImpl();
             List<Integer> cartProductIds = cartDao.getCartProductIds((Integer) userIdObj);
 
             request.setAttribute("cartProductIds", cartProductIds);
+            request.setAttribute("cartItems", cartDao.getCartItems(userId));
+            request.setAttribute("cartCount", cartDao.getCartCount(userId));
+            request.setAttribute("grandTotal", cartDao.getGrandTotal(userId));
         }
 
 //        HttpSession session = request.getSession(false);
