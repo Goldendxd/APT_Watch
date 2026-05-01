@@ -1,5 +1,7 @@
 package com.alughadi.controller.filter;
 
+import com.alughadi.dao.CartDao;
+import com.alughadi.dao.CartDaoImpl;
 import com.alughadi.utils.SessionUtil;
 
 import jakarta.servlet.Filter;
@@ -55,6 +57,18 @@ public class AuthenticationFilter implements Filter {
         if (!isLoggedIn && isCartPath){
             res.sendRedirect(contextPath + "/login");
             return;
+        }
+        if (isLoggedIn) {
+            Object userIdObj = SessionUtil.getAttribute(req, "authUserId");
+
+            if (userIdObj != null) {
+                int userId = (Integer) userIdObj;
+                CartDao cartDao = new CartDaoImpl();
+
+                req.setAttribute("cartItems", cartDao.getCartItems(userId));
+                req.setAttribute("cartCount", cartDao.getCartCount(userId));
+                req.setAttribute("grandTotal", cartDao.getGrandTotal(userId));
+            }
         }
         chain.doFilter(request, response);
 //        boolean isAuthPage = "/login".equals(path) || "/register".equals(path);

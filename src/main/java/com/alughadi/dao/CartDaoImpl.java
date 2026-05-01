@@ -55,11 +55,10 @@ public class CartDaoImpl implements CartDao {
         try {
             conn = DatabaseConnection.getConnection();
             String sql = "SELECT c.id, c.user_id, c.product_id, c.quantity, c.created_at, " +
-                    "p.name, p.brand, p.image_url, p.price, " +
+                    "p.name, p.brand, p.image_url, p.price, p.old_price, " +
                     "(p.price * c.quantity) AS total_price " +
-                    "FROM cart c, products p " +
-                    "WHERE c.product_id = p.id " +
-                    "AND c.user_id = ?";
+                    "FROM cart c join products p ON c.product_id = p.id " +
+                    "WHERE c.user_id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, userId);
             ResultSet rs = statement.executeQuery();
@@ -74,6 +73,7 @@ public class CartDaoImpl implements CartDao {
                 cart.setBrand(rs.getString("brand"));
                 cart.setImageUrl(rs.getString("image_url"));
                 cart.setPrice(rs.getDouble("price"));
+                cart.setOldPrice(rs.getDouble("old_price"));
                 cart.setTotalPrice(rs.getDouble("total_price"));
                 items.add(cart);
             }
