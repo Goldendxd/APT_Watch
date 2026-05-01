@@ -195,15 +195,24 @@
                 <div class="prod-rating"><span class="prod-stars">&#9733;</span> ${product.rating}</div>
               </div>
               <div class="prod-actions">
-                <button class="btn-fill prod-buy-btn" type="button"
-                        onclick="addToCart('${product.name}', ${product.price})">
-                  Buy Now
-                </button>
-                <button class="prod-cart-icon-btn" type="button"
-                        onclick="addToCart('${product.name}', ${product.price})"
-                        title="Add to cart">
-                  &#128717;
-                </button>
+                <form action="${pageContext.request.contextPath}/cart" method="post" style="display: flex; gap: 0.5rem; width: 100%;">
+                  <input type="hidden" name="action" value="add">
+                  <input type="hidden" name="productId" value="${product.id}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button class="btn-fill prod-buy-btn" type="submit" name="buyNow">Buy Now</button>
+                  <button class="prod-cart-icon-btn" type="submit" name="addToCart" title="Add to cart">
+                    <c:choose>
+                      <c:when test = "${cartProductIds.contains(product.id)}">
+                        ✓ Added
+                      </c:when>
+                      <c:otherwise>
+                        &#128717;
+                      </c:otherwise>
+                    </c:choose>
+                  </button>
+                </form>
+              </div>
+
               </div>
             </div>
 <%--            <div class="prod-chip">${product.name}</div>--%>
@@ -211,7 +220,7 @@
 <%--          <div class="prod-body">--%>
 <%--            <div class="prod-brand">${product.brand}</div>--%>
 <%--          </div>--%>
-        </div>
+
 <%--        <li class="product-card">--%>
 <%--          <a href="${pageContext.request.contentPath}/cart?productid= ${product.id}" class="prod-img-container"> <c:out value = "${product.image.url}" /></a>--%>
 <%--          <a href="${pageContext.request.contentPath}/cart?productid= ${product.id}" class="prod-h"> <c:out value = "${product.name}" /></a>--%>

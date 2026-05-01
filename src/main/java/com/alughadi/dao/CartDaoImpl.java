@@ -169,4 +169,26 @@ public class CartDaoImpl implements CartDao {
             DatabaseConnection.closeConnection(conn);
         }
     }
+
+    @Override
+    public List<Integer> getCartProductIds(int userId) {
+        List<Integer> productIds = new ArrayList<>();
+        Connection conn = null;
+        try {
+            conn = DatabaseConnection.getConnection();
+            String sql = "SELECT product_id FROM cart WHERE user_id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1,userId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                productIds.add(rs.getInt("product_id"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting cart product ids: " + e.getMessage());
+        }
+        finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return productIds;
+    }
 }

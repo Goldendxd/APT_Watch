@@ -12,4 +12,5 @@ public interface CartDao {
     void       removeFromCart(int cartId, int userId);
     void       updateQuantity(int cartId, int userId, int quantity);
     void       clearCart(int userId);
+    List<Integer> getCartProductIds(int userId);
 }

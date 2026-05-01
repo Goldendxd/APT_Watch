@@ -41,6 +41,7 @@ public class AuthenticationFilter implements Filter {
         String uri = req.getRequestURI();
         String contextPath = req.getContextPath();
         String path = uri.substring(contextPath.length());
+//        String method = req.getMethod();
 
         // Allow static resources (CSS, images, JS) through without login
         if (path.startsWith("/static/")) {
@@ -48,7 +49,14 @@ public class AuthenticationFilter implements Filter {
             return;
         }
 
-//        boolean isLoggedIn = SessionUtil.getAttribute(req, "authUser") != null;
+        boolean isLoggedIn = SessionUtil.getAttribute(req, "authUser") != null;
+        boolean isCartPath = "/cart".equals(path);
+//        boolean isCartToBUyAction = "POST".equalsIgnoreCase(method) && path.equals("/cart");
+        if (!isLoggedIn && isCartPath){
+            res.sendRedirect(contextPath + "/login");
+            return;
+        }
+        chain.doFilter(request, response);
 //        boolean isAuthPage = "/login".equals(path) || "/register".equals(path);
 //
 //        if (!isLoggedIn && !isAuthPage) {
@@ -64,6 +72,6 @@ public class AuthenticationFilter implements Filter {
 //        }
 
         // All other cases: allow through
-        chain.doFilter(request, response);
+
     }
 }

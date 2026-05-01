@@ -6,6 +6,7 @@ import com.alughadi.entity.User;
 import com.alughadi.utils.PasswordUtil;
 import com.alughadi.utils.SessionUtil;
 
+import com.alughadi.utils.ValidationUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -41,34 +42,27 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username = request.getParameter("username").trim();
-        String password = request.getParameter("password").trim();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
 
-        if (username == null || username.isEmpty() ||
-            password == null || password.isEmpty()){
+        if (ValidationUtil.isNullOrEmpty(username) || ValidationUtil.isNullOrEmpty(username)){
             request.setAttribute("loginError", "Please enter both username and password. ");
             request.getRequestDispatcher("/WEB-INF/views/login.jsp")
                     .forward(request, response);
             return;
         }
-        User user = userDao.findByUsername(username);
+        User user = userDao.findByUsername(username.trim());
 
-        if (user == null) {
+        if (user == null || !PasswordUtil.checkPassword(password.trim(), user.getPassword() )) {
             request.setAttribute("loginError", "Invalid username or password.");
             request.getRequestDispatcher("/WEB-INF/views/login.jsp")
                     .forward(request, response);
             return;
         }
 
-        if(!PasswordUtil.checkPassword(password, user.getPassword())){
-            request.setAttribute("loginError", "Invalid username or password. ");
-            request.getRequestDispatcher("/WEB-INF/views/login.jsp")
-                    .forward(request, response);
-            return;
-        }
-
         SessionUtil.setAttribute(request, "authUser", user.getUsername());
-        SessionUtil.setAttribute(request, "authRole", user);
+        SessionUtil.setAttribute(request, "authUserId", user.getId());
+        SessionUtil.setAttribute(request, "authRole", user.getId());
         response.sendRedirect(request.getContextPath() + "/home");
     }
 
