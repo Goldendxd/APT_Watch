@@ -1,39 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
-<section class="page-hero product-details-hero">
-  <div class="ph-img">
-    <img src="${pageContext.request.contextPath}/static/images/hero_products.png" alt="Royal Prestige Automatic" />
-  </div>
-  <div class="ph-ov"></div>
-  <div class="ph-ov-side"></div>
-  <div class="ph-body product-details-hero-body">
-    <span class="ph-chip">Luxury / Automatic / Swiss Made</span>
-    <h1 class="ph-h">Royal Prestige<br />Automatic</h1>
-    <p class="ph-sub">
-      A refined Swiss-made timepiece with an 18K gold bezel, sapphire crystal, and a
-      confident dress-sport profile built for daily wear and special occasions.
-    </p>
-  </div>
-</section>
+<!-- Hero removed per request; header shows back link to products -->
 
 <section class="product-details-main pg-body">
+  <div class="product-details-crumb gc reveal" aria-label="Breadcrumb">
+    <a href="${pageContext.request.contextPath}/">Home</a>
+    <span class="crumb-sep" aria-hidden="true">/</span>
+    <a href="${pageContext.request.contextPath}/products">Products</a>
+    <span class="crumb-sep" aria-hidden="true">/</span>
+    <span class="crumb-current" aria-current="page">Royal Prestige Automatic</span>
+  </div>
+
   <div class="product-details-layout">
     <div class="product-details-gallery gc reveal">
-      <div class="product-details-gallery-main">
+      <div class="product-details-gallery-main single-image">
         <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Royal Prestige Automatic watch" />
         <div class="product-details-gallery-badge">Editor's Pick</div>
-      </div>
-      <div class="product-details-thumb-grid">
-        <div class="product-details-thumb is-active">
-          <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Watch front view" />
-        </div>
-        <div class="product-details-thumb">
-          <img src="${pageContext.request.contextPath}/static/images/hero_products.png" alt="Lifestyle watch view" />
-        </div>
-        <div class="product-details-thumb">
-          <img src="${pageContext.request.contextPath}/static/images/hero_home.png" alt="Alternative watch angle" />
-        </div>
       </div>
     </div>
 
@@ -160,6 +143,64 @@
         stock, thumbnails, and feature content can all be replaced server-side without changing the
         structure of the page.
       </p>
+    </div>
+  </section>
+
+  <section class="product-details-reviews gc reveal">
+    <div class="sec-tag">Customer Reviews</div>
+    <h2 class="sec-h">What our customers say</h2>
+
+    <div class="reviews-grid">
+      <div class="review-item">
+        <div class="review-head">
+          <strong>Sabin Thapa</strong>
+          <span class="review-stars" aria-label="5 out of 5 stars">
+            <span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span>
+          </span>
+        </div>
+        <p class="review-body">Beautiful finish and excellent build quality. Happy with the purchase.</p>
+      </div>
+
+      <div class="review-item">
+        <div class="review-head">
+          <strong>Ashish Thapa</strong>
+          <span class="review-stars" aria-label="4 out of 5 stars">
+            <span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star">&#9733;</span>
+          </span>
+        </div>
+        <p class="review-body">Great watch; service was prompt and delivery was well packed.</p>
+      </div>
+
+      <div class="review-item">
+        <div class="review-head">
+          <strong>Dikshita GC</strong>
+          <span class="review-stars" aria-label="5 out of 5 stars">
+            <span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span>
+          </span>
+        </div>
+        <p class="review-body">Stylish and comfortable — looks even better in person.</p>
+      </div>
+
+      <div class="review-item">
+        <div class="review-head">
+          <strong>Rijan Pun</strong>
+          <span class="review-stars" aria-label="4 out of 5 stars">
+            <span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star">&#9733;</span>
+          </span>
+        </div>
+        <p class="review-body">Worth the price. The strap feels premium and sturdy.</p>
+      </div>
+
+      <div class="review-item">
+        <div class="review-head">
+          <strong>Shisir Lamsal</strong>
+          <span class="review-stars" aria-label="5 out of 5 stars">
+            <span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span><span class="star is-filled">&#9733;</span>
+          </span>
+        </div>
+        <p class="review-body">Amazing craftsmanship. Would recommend to friends and family.</p>
+      </div>
+
     </div>
   </section>
 
