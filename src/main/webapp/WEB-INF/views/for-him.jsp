@@ -9,7 +9,7 @@
 <%-- ===== HERO ===== --%>
 <div class="page-hero forhim-hero">
   <div class="ph-img">
-    <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="For Him — Men's Watch Collection" />
+    <img src="${pageContext.request.contextPath}/static/images/for-him/him-1.webp" alt="For Him — Men's Watch Collection" />
   </div>
   <div class="ph-ov"></div>
   <div class="ph-ov-side"></div>
@@ -51,7 +51,7 @@
   <div class="forhim-grid" id="forhim-grid">
 
     <article class="gift-pick-card reveal" data-category="classic">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Executive Classic" />
+      <img src="${pageContext.request.contextPath}/static/images/for-him/him-1.webp" alt="Executive Classic" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag">Classic</div>
         <div class="gift-pick-title">Executive Classic</div>
@@ -64,7 +64,7 @@
     </article>
 
     <article class="gift-pick-card reveal reveal-delay-1" data-category="sport">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Active Sport" />
+      <img src="${pageContext.request.contextPath}/static/images/for-him/him-2.webp" alt="Active Sport" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-sport">Sport</div>
         <div class="gift-pick-title">Active Sport</div>
@@ -77,7 +77,7 @@
     </article>
 
     <article class="gift-pick-card reveal reveal-delay-2" data-category="minimal">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Slim Minimal" />
+      <img src="${pageContext.request.contextPath}/static/images/for-him/him-3.webp" alt="Slim Minimal" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-minimal">Minimal</div>
         <div class="gift-pick-title">Slim Minimal</div>
@@ -90,7 +90,7 @@
     </article>
 
     <article class="gift-pick-card reveal reveal-delay-3" data-category="luxury">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Premium Signature" />
+      <img src="${pageContext.request.contextPath}/static/images/for-him/him-4.webp" alt="Premium Signature" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
         <div class="gift-pick-title">Premium Signature</div>
@@ -103,7 +103,7 @@
     </article>
 
     <article class="gift-pick-card reveal" data-category="classic sport">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Chronograph Pro" />
+      <img src="${pageContext.request.contextPath}/static/images/for-him/him-5.webp" alt="Chronograph Pro" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag">Classic</div>
         <div class="gift-pick-title">Chronograph Pro</div>
@@ -116,7 +116,7 @@
     </article>
 
     <article class="gift-pick-card reveal reveal-delay-1" data-category="luxury minimal">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Dress Watch" />
+      <img src="${pageContext.request.contextPath}/static/images/for-him/him-6.webp" alt="Dress Watch" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
         <div class="gift-pick-title">Dress Watch</div>

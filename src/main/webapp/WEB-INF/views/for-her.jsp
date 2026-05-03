@@ -9,7 +9,7 @@
 <%-- ===== HERO ===== --%>
 <div class="page-hero forher-hero">
   <div class="ph-img">
-    <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="For Her — Women's Watch Collection" />
+    <img src="${pageContext.request.contextPath}/static/images/for-her/her-1.webp" alt="For Her — Women's Watch Collection" />
   </div>
   <div class="ph-ov" style="background:linear-gradient(170deg,rgba(30,10,30,0.22) 0%,rgba(20,8,25,0.90) 100%);"></div>
   <div class="ph-ov-side"></div>
@@ -51,7 +51,7 @@
   <div class="forher-grid" id="forher-grid">
 
     <article class="gift-pick-card reveal" data-category="elegant">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Elegant Essential" />
+      <img src="${pageContext.request.contextPath}/static/images/for-her/her-1.webp" alt="Elegant Essential" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-forher-elegant">Elegant</div>
         <div class="gift-pick-title">Elegant Essential</div>
@@ -64,7 +64,7 @@
     </article>
 
     <article class="gift-pick-card reveal reveal-delay-1" data-category="minimal">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Modern Minimal" />
+      <img src="${pageContext.request.contextPath}/static/images/for-her/her-2.webp" alt="Modern Minimal" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-minimal">Minimal</div>
         <div class="gift-pick-title">Modern Minimal</div>
@@ -77,7 +77,7 @@
     </article>
 
     <article class="gift-pick-card reveal reveal-delay-2" data-category="bold">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Statement Bold" />
+      <img src="${pageContext.request.contextPath}/static/images/for-her/her-3.webp" alt="Statement Bold" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-forher-bold">Bold</div>
         <div class="gift-pick-title">Statement Bold</div>
@@ -90,7 +90,7 @@
     </article>
 
     <article class="gift-pick-card reveal reveal-delay-3" data-category="luxury elegant">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Luxury Jewelled" />
+      <img src="${pageContext.request.contextPath}/static/images/for-her/her-4.webp" alt="Luxury Jewelled" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
         <div class="gift-pick-title">Jewelled Luxury</div>
@@ -103,7 +103,7 @@
     </article>
 
     <article class="gift-pick-card reveal" data-category="elegant minimal">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Everyday Chic" />
+      <img src="${pageContext.request.contextPath}/static/images/for-her/her-5.webp" alt="Everyday Chic" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-forher-elegant">Elegant</div>
         <div class="gift-pick-title">Everyday Chic</div>
@@ -116,7 +116,7 @@
     </article>
 
     <article class="gift-pick-card reveal reveal-delay-1" data-category="luxury bold">
-      <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Prestige Series" />
+      <img src="${pageContext.request.contextPath}/static/images/for-her/her-6.webp" alt="Prestige Series" />
       <div class="gift-pick-body">
         <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
         <div class="gift-pick-title">Prestige Series</div>

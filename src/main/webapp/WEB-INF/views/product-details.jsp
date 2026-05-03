@@ -15,7 +15,7 @@
   <div class="product-details-layout">
     <div class="product-details-gallery gc reveal">
       <div class="product-details-gallery-main single-image">
-        <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Royal Prestige Automatic watch" />
+        <img src="${pageContext.request.contextPath}/static/images/products/watch_luxury/watch_luxury_1.webp" alt="Royal Prestige Automatic watch" />
         <div class="product-details-gallery-badge">Editor's Pick</div>
       </div>
     </div>
@@ -211,7 +211,7 @@
     <div class="product-details-related-grid">
       <div class="product-card">
         <div class="prod-img-container">
-          <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Submariner Heritage" class="prod-img" />
+          <img src="${pageContext.request.contextPath}/static/images/products/watch_luxury/watch_luxury_2.webp" alt="Submariner Heritage" class="prod-img" />
           <div class="prod-chip">Luxury</div>
         </div>
         <div class="prod-body">
@@ -229,7 +229,7 @@
 
       <div class="product-card">
         <div class="prod-img-container">
-          <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Pilot Chronograph Elite" class="prod-img" />
+          <img src="${pageContext.request.contextPath}/static/images/products/watch_luxury/watch_luxury_4.webp" alt="Pilot Chronograph Elite" class="prod-img" />
           <div class="prod-chip">Classic</div>
         </div>
         <div class="prod-body">
@@ -247,7 +247,7 @@
 
       <div class="product-card">
         <div class="prod-img-container">
-          <img src="${pageContext.request.contextPath}/static/images/snow_leopard.png" alt="Dress Slim Automatic" class="prod-img" />
+          <img src="${pageContext.request.contextPath}/static/images/products/watch_classic/watch_classic_1.webp" alt="Dress Slim Automatic" class="prod-img" />
           <div class="prod-chip">Classic</div>
         </div>
         <div class="prod-body">

@@ -9,7 +9,7 @@
 <%-- ======== PAGE HERO ======== --%>
 <section class="page-hero about-hero">
   <div class="ph-img">
-    <img src="${pageContext.request.contextPath}/static/images/hero_about.png"
+    <img src="${pageContext.request.contextPath}/static/images/about_images/hero_about.png"
          alt="AluGhadi Workshop"
          style="object-position: center;" />
   </div>

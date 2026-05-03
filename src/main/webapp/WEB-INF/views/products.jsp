@@ -9,7 +9,7 @@
 <div class="page-hero">
   <div class="ph-img">
     <img
-      src="${pageContext.request.contextPath}/static/images/hero_products.png"
+      src="${pageContext.request.contextPath}/static/images/products/hero_products.png"
       alt="AluGhadi Watch Collection"
       style="object-position: center"
     />

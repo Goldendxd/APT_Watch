@@ -1,20 +1,11 @@
 -- AluGhadi Watches — full database setup + seed data
--- Run once to (re)create the entire schema and load sample data.
--- Safe to re-run: drops and recreates all tables each time.
+-- Run once to (re)create the entire database schema and load sample data.
+-- Safe to re-run: drops and recreates the alughadi database each time.
 -- -------------------------------------------------------
 
-CREATE DATABASE IF NOT EXISTS alughadi;
+DROP DATABASE IF EXISTS alughadi;
+CREATE DATABASE alughadi;
 USE alughadi;
-
--- -------------------------------------------------------
--- Drop tables in FK-safe order (children first)
--- -------------------------------------------------------
-SET FOREIGN_KEY_CHECKS = 0;
--- DROP TABLE IF EXISTS cart;
--- DROP TABLE IF EXISTS products;
--- DROP TABLE IF EXISTS categories;
--- DROP TABLE IF EXISTS users;
-SET FOREIGN_KEY_CHECKS = 1;
 
 -- -------------------------------------------------------
 -- 1. users
@@ -104,38 +95,39 @@ INSERT INTO users (id, username, email, password, is_active, is_verified) VALUES
 -- Products
 --   image_url is relative to context root so the JSP renders:
 --   <img src="${pageContext.request.contextPath}${product.imageUrl}">
+--   Product images are organized under /static/images/products/watch_*/
 --   All prices in NPR (Nepali Rupees)
 INSERT INTO products (id, category_id, name, brand, description, price, old_price, rating, image_url, in_stock) VALUES
 
   -- Luxury
-  (1,  1, 'Royal Prestige Automatic',      'Rolex',          'Swiss-made automatic movement with sapphire crystal and 18K gold bezel. Water-resistant to 100m.',                       285000.00, 310000.00, 4.9, '/static/images/snow_leopard.png', 1),
-  (2,  1, 'Submariner Heritage',           'Omega',          'Iconic diver watch with ceramic bezel and Co-Axial Master Chronometer movement. 300m water resistance.',                 195000.00, NULL,      4.8, '/static/images/snow_leopard.png', 1),
-  (3,  1, 'Tourbillon Grand Complication', 'Patek Philippe', 'Ultra-thin tourbillon with perpetual calendar. Hand-finished movement with 72-hour power reserve.',                     520000.00, NULL,      5.0, '/static/images/snow_leopard.png', 1),
-  (4,  1, 'Pilot Chronograph Elite',       'IWC',            'Aviation-inspired chronograph with flyback function, titanium case, and COSC-certified movement.',                       165000.00, 182000.00, 4.7, '/static/images/snow_leopard.png', 1),
+  (1,  1, 'Royal Prestige Automatic',      'Rolex',          'Swiss-made automatic movement with sapphire crystal and 18K gold bezel. Water-resistant to 100m.',                       285000.00, 310000.00, 4.9, '/static/images/products/watch_luxury/watch_luxury_1.webp', 1),
+  (2,  1, 'Submariner Heritage',           'Omega',          'Iconic diver watch with ceramic bezel and Co-Axial Master Chronometer movement. 300m water resistance.',                 195000.00, NULL,      4.8, '/static/images/products/watch_luxury/watch_luxury_2.webp', 1),
+  (3,  1, 'Tourbillon Grand Complication', 'Patek Philippe', 'Ultra-thin tourbillon with perpetual calendar. Hand-finished movement with 72-hour power reserve.',                     520000.00, NULL,      5.0, '/static/images/products/watch_luxury/watch_luxury_3.webp', 1),
+  (4,  1, 'Pilot Chronograph Elite',       'IWC',            'Aviation-inspired chronograph with flyback function, titanium case, and COSC-certified movement.',                       165000.00, 182000.00, 4.7, '/static/images/products/watch_luxury/watch_luxury_4.webp', 1),
 
   -- Sports
-  (5,  2, 'ProDiver 300M',                 'Seiko',          'Professional diver with LumiBrite hands, screw-down crown, and ISO 6425 certified 300m water resistance.',               18500.00,  22000.00,  4.6, '/static/images/snow_leopard.png', 1),
-  (6,  2, 'AquaRacer Superprofessional',   'TAG Heuer',      'High-performance sport watch with unidirectional rotating bezel and 300m water resistance.',                             75000.00,  NULL,      4.5, '/static/images/snow_leopard.png', 1),
-  (7,  2, 'Speedmaster X-33 Matera',       'Omega',          'Multi-functional solar sports watch with GMT, countdown timer, and alarms.',                                              95000.00, 108000.00, 4.7, '/static/images/snow_leopard.png', 1),
-  (8,  2, 'Enduro Trail Runner',           'Garmin',         'GPS multisport watch with heart-rate monitor, trail running metrics, and 7-day battery life.',                           42000.00,  NULL,      4.4, '/static/images/snow_leopard.png', 1),
+  (5,  2, 'ProDiver 300M',                 'Seiko',          'Professional diver with LumiBrite hands, screw-down crown, and ISO 6425 certified 300m water resistance.',               18500.00,  22000.00,  4.6, '/static/images/products/watch_sport/watch_sport_1.webp', 1),
+  (6,  2, 'AquaRacer Superprofessional',   'TAG Heuer',      'High-performance sport watch with unidirectional rotating bezel and 300m water resistance.',                             75000.00,  NULL,      4.5, '/static/images/products/watch_sport/watch_sport_2.webp', 1),
+  (7,  2, 'Speedmaster X-33 Matera',       'Omega',          'Multi-functional solar sports watch with GMT, countdown timer, and alarms.',                                              95000.00, 108000.00, 4.7, '/static/images/products/watch_sport/watch_sport_3.webp', 1),
+  (8,  2, 'Enduro Trail Runner',           'Garmin',         'GPS multisport watch with heart-rate monitor, trail running metrics, and 7-day battery life.',                           42000.00,  NULL,      4.4, '/static/images/products/watch_sport/watch_sport_4.webp', 1),
 
   -- Classic
-  (9,  3, 'Dress Slim Automatic',          'Tissot',         'Elegantly thin automatic with sapphire crystal, exhibition caseback, and genuine leather strap.',                        12500.00,  15000.00,  4.5, '/static/images/snow_leopard.png', 1),
-  (10, 3, 'Heritage Presenter',            'Longines',       'Classic dress watch inspired by 1940s models. Self-winding movement with 64-hour power reserve.',                        35000.00,  NULL,      4.6, '/static/images/snow_leopard.png', 1),
-  (11, 3, 'Carrera Calibre Heritage',      'TAG Heuer',      'Timeless chronograph reissue with Valjoux movement, tachymeter, and black leather strap.',                               68000.00,  75000.00,  4.7, '/static/images/snow_leopard.png', 1),
-  (12, 3, 'Khaki Field Mechanical',        'Hamilton',       'Military-inspired field watch with hand-wound movement, domed crystal, and olive canvas strap.',                         14500.00,  NULL,      4.5, '/static/images/snow_leopard.png', 1),
+  (9,  3, 'Dress Slim Automatic',          'Tissot',         'Elegantly thin automatic with sapphire crystal, exhibition caseback, and genuine leather strap.',                        12500.00,  15000.00,  4.5, '/static/images/products/watch_classic/watch_classic_1.webp', 1),
+  (10, 3, 'Heritage Presenter',            'Longines',       'Classic dress watch inspired by 1940s models. Self-winding movement with 64-hour power reserve.',                        35000.00,  NULL,      4.6, '/static/images/products/watch_classic/watch_classic_2.webp', 1),
+  (11, 3, 'Carrera Calibre Heritage',      'TAG Heuer',      'Timeless chronograph reissue with Valjoux movement, tachymeter, and black leather strap.',                               68000.00,  75000.00,  4.7, '/static/images/products/watch_classic/watch_classic_3.webp', 1),
+  (12, 3, 'Khaki Field Mechanical',        'Hamilton',       'Military-inspired field watch with hand-wound movement, domed crystal, and olive canvas strap.',                         14500.00,  NULL,      4.5, '/static/images/products/watch_classic/watch_classic_4.webp', 1),
 
   -- Smart
-  (13, 4, 'Galaxy Watch Ultra',            'Samsung',        'Premium smartwatch with Wear OS, advanced health tracking, 60-hour battery, and titanium frame.',                        38000.00,  42000.00,  4.3, '/static/images/snow_leopard.png', 1),
-  (14, 4, 'Apple Watch Series 10',         'Apple',          'Most advanced Apple Watch with Always-On display, ECG, crash detection, and 18-hour battery life.',                      55000.00,  NULL,      4.6, '/static/images/snow_leopard.png', 1),
-  (15, 4, 'Fenix 8 Solar',                 'Garmin',         'Flagship outdoor smartwatch with solar charging, multi-band GPS, and 28-day battery in solar mode.',                     72000.00,  NULL,      4.7, '/static/images/snow_leopard.png', 1),
-  (16, 4, 'Amazfit GTR 4',                 'Amazfit',        'Affordable smartwatch with 150+ sport modes, AMOLED display, and 14-day battery life.',                                   8500.00,  10000.00,  4.2, '/static/images/snow_leopard.png', 1),
+  (13, 4, 'Galaxy Watch Ultra',            'Samsung',        'Premium smartwatch with Wear OS, advanced health tracking, 60-hour battery, and titanium frame.',                        38000.00,  42000.00,  4.3, '/static/images/products/watch_smart/watch_smart_1.webp', 1),
+  (14, 4, 'Apple Watch Series 10',         'Apple',          'Most advanced Apple Watch with Always-On display, ECG, crash detection, and 18-hour battery life.',                      55000.00,  NULL,      4.6, '/static/images/products/watch_smart/watch_smart_2.webp', 1),
+  (15, 4, 'Fenix 8 Solar',                 'Garmin',         'Flagship outdoor smartwatch with solar charging, multi-band GPS, and 28-day battery in solar mode.',                     72000.00,  NULL,      4.7, '/static/images/products/watch_smart/watch_smart_3.webp', 1),
+  (16, 4, 'Amazfit GTR 4',                 'Amazfit',        'Affordable smartwatch with 150+ sport modes, AMOLED display, and 14-day battery life.',                                   8500.00,  10000.00,  4.2, '/static/images/products/watch_smart/watch_smart_4.webp', 1),
 
   -- Womens
-  (17, 5, 'Rose Diamond Elegance',         'Chopard',        'Rose gold case set with 48 brilliant-cut diamonds. Swiss quartz movement with mother-of-pearl dial.',                   145000.00,  NULL,     4.9, '/static/images/snow_leopard.png', 1),
-  (18, 5, 'Ballon Bleu de Cartier',        'Cartier',        'Iconic curved sapphire crown, guilloché dial, and automatic movement in stainless steel.',                              235000.00,  NULL,     4.8, '/static/images/snow_leopard.png', 1),
-  (19, 5, 'Ladymatic Aqua Terra',          'Omega',          'Feminine Co-Axial watch with diamond-set bezel, alligator strap, and 150m water resistance.',                           125000.00, 138000.00, 4.7, '/static/images/snow_leopard.png', 1),
-  (20, 5, 'T-Wave Quartz',                 'Tissot',         'Elegant quartz watch with butterfly clasp, scratch-resistant sapphire, and sunray dial. Great for gifting.',               9500.00,  11500.00, 4.4, '/static/images/snow_leopard.png', 1);
+  (17, 5, 'Rose Diamond Elegance',         'Chopard',        'Rose gold case set with 48 brilliant-cut diamonds. Swiss quartz movement with mother-of-pearl dial.',                   145000.00,  NULL,     4.9, '/static/images/products/watch_womens/watch_womens_1.webp', 1),
+  (18, 5, 'Ballon Bleu de Cartier',        'Cartier',        'Iconic curved sapphire crown, guilloché dial, and automatic movement in stainless steel.',                              235000.00,  NULL,     4.8, '/static/images/products/watch_womens/watch_womens_2.webp', 1),
+  (19, 5, 'Ladymatic Aqua Terra',          'Omega',          'Feminine Co-Axial watch with diamond-set bezel, alligator strap, and 150m water resistance.',                           125000.00, 138000.00, 4.7, '/static/images/products/watch_womens/watch_womens_3.webp', 1),
+  (20, 5, 'T-Wave Quartz',                 'Tissot',         'Elegant quartz watch with butterfly clasp, scratch-resistant sapphire, and sunray dial. Great for gifting.',               9500.00,  11500.00, 4.4, '/static/images/products/watch_womens/watch_womens_4.webp', 1);
 
 -- Cart sample entries
 INSERT INTO cart (user_id, product_id, quantity) VALUES

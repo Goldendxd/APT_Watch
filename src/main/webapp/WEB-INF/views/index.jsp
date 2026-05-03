@@ -9,7 +9,7 @@ request.setAttribute("activeNav", "home"); %>
 <section class="home-hero">
   <div class="hero-image">
     <img
-      src="${pageContext.request.contextPath}/static/images/hero_home.png"
+      src="${pageContext.request.contextPath}/static/images/home/hero_home.png"
       alt="AluGhadi Premium Watches"
       style="object-position: center top;"
     />
@@ -77,7 +77,7 @@ request.setAttribute("activeNav", "home"); %>
       >
         <div class="collection-card-image">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/products/watch_luxury/watch_luxury_1.webp"
             alt="Luxury"
           />
         </div>
@@ -96,7 +96,7 @@ request.setAttribute("activeNav", "home"); %>
       >
         <div class="collection-card-image">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/products/watch_sport/watch_sport_1.webp"
             alt="Sports"
           />
         </div>
@@ -115,7 +115,7 @@ request.setAttribute("activeNav", "home"); %>
       >
         <div class="collection-card-image">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/products/watch_classic/watch_classic_1.webp"
             alt="Classic"
           />
         </div>
@@ -134,7 +134,7 @@ request.setAttribute("activeNav", "home"); %>
       >
         <div class="collection-card-image">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/products/watch_smart/watch_smart_1.webp"
             alt="Smart"
           />
         </div>
@@ -153,7 +153,7 @@ request.setAttribute("activeNav", "home"); %>
       >
         <div class="collection-card-image">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/products/watch_womens/watch_womens_1.webp"
             alt="Womens"
           />
         </div>
@@ -259,7 +259,7 @@ request.setAttribute("activeNav", "home"); %>
     <div class="split">
       <div class="split-img">
         <img
-          src="${pageContext.request.contextPath}/static/images/hero_about.png"
+          src="${pageContext.request.contextPath}/static/images/about_images/hero_about.png"
           alt="Watch Craftsmanship"
           style="object-position: center"
         />

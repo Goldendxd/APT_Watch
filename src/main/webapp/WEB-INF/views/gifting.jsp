@@ -4,7 +4,7 @@
 <%--Curated top picks from AluGhadi."); request.setAttribute("activeNav",--%>
 <%--"gifting"); %>--%>
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-<%-- ===== HERO — video background, minimal copy ===== --%>+
+<%-- ===== HERO — video background, minimal copy ===== --%>
 <section class="gift-hero">
   <video class="gift-hero-video" autoplay muted loop playsinline preload="auto">
     <source
@@ -51,7 +51,7 @@
       <article class="gift-pick">
         <div class="gift-pick-img">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/for-him/him-1.webp"
             alt="Executive Classic"
           />
           <span class="gift-pick-badge">For Him</span>
@@ -71,7 +71,7 @@
       <article class="gift-pick">
         <div class="gift-pick-img">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/for-her/her-1.webp"
             alt="Elegant Rose"
           />
           <span class="gift-pick-badge gift-pick-badge-her">For Her</span>
@@ -91,7 +91,7 @@
       <article class="gift-pick">
         <div class="gift-pick-img">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/for-him/him-2.webp"
             alt="Sport Pro"
           />
           <span class="gift-pick-badge">For Him</span>
@@ -111,7 +111,7 @@
       <article class="gift-pick">
         <div class="gift-pick-img">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/for-her/her-4.webp"
             alt="Prestige Jewelled"
           />
           <span class="gift-pick-badge gift-pick-badge-her">For Her</span>
@@ -131,7 +131,7 @@
       <article class="gift-pick">
         <div class="gift-pick-img">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/for-him/him-3.webp"
             alt="Minimal Slim"
           />
           <span class="gift-pick-badge">For Him</span>
@@ -151,7 +151,7 @@
       <article class="gift-pick">
         <div class="gift-pick-img">
           <img
-            src="${pageContext.request.contextPath}/static/images/snow_leopard.png"
+            src="${pageContext.request.contextPath}/static/images/for-her/her-5.webp"
             alt="Everyday Chic"
           />
           <span class="gift-pick-badge gift-pick-badge-her">For Her</span>
