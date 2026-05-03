@@ -145,13 +145,142 @@
 /* ================================================================
    CART MODAL inner
    ================================================================ */
-.cart-empty {
-  text-align:  center;
-  padding:     3rem 1rem;
-  color:       var(--muted);
+.cart-modal {
+  max-height: min(86vh, 760px);
+  display: flex;
+  flex-direction: column;
 }
-.cart-empty-ico { font-size: 3rem; margin-bottom: 0.75rem; opacity: 0.5; }
-.cart-empty p   { font-size: 0.88rem; }
+
+.cart-items-wrap,
+#modal-cart #cart-items {
+  max-height: 340px;
+  overflow-y: auto;
+  margin: 1rem 0;
+}
+
+/* Legacy cart markup currently rendered in deployed footer.jsp */
+#modal-cart #cart-items {
+  display: grid;
+  gap: 0.55rem;
+  padding-right: 0.25rem;
+}
+
+#modal-cart #cart-items > .cartBody,
+#modal-cart #cart-items > .cartName {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.58rem 0.65rem;
+}
+
+#modal-cart #cart-items > .cartBody {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+#modal-cart .cart-img {
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 10px;
+  object-fit: cover !important;
+  background: #fff;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+#modal-cart .cartName {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+#modal-cart .cart-brand {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+#modal-cart .newPrice {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--green);
+}
+
+#modal-cart .oldPrice {
+  font-size: 0.72rem;
+  color: var(--dim);
+  text-decoration: line-through;
+}
+
+#modal-cart .quantity {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  padding: 0.2rem 0.52rem;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* New normalized cart item markup support */
+.cart-item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface2);
+}
+
+.cart-item-main {
+  min-width: 0;
+}
+
+.cart-prices {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.48rem;
+}
+
+.cart-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+}
+
+.cart-empty-ico {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+}
+
+.cart-empty p {
+  font-size: 0.88rem;
+}
+
+@media (max-width: 520px) {
+  #modal-cart .cart-img {
+    width: 64px !important;
+    height: 64px !important;
+  }
+
+  .cart-item {
+    grid-template-columns: 64px 1fr;
+  }
+
+  .cart-item .quantity {
+    justify-self: start;
+    margin-left: 64px;
+  }
+}
 
 /* ================================================================
    TOAST NOTIFICATIONS

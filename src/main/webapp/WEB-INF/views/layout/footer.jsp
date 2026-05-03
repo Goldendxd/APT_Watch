@@ -66,54 +66,42 @@
 
   <%-- ======== CART MODAL ======== --%>
   <div class="modal-ov" id="modal-cart" role="dialog" aria-modal="true" aria-label="Shopping cart">
-    <div class="modal" style="max-width:500px;">
+    <div class="modal cart-modal" style="max-width:500px;">
       <button class="modal-close" onclick="closeModal('cart')" aria-label="Close cart">&#10005;</button>
       <div class="modal-h">&#128717; Shopping Cart</div>
       <div class="modal-sub">Your selected items</div>
-      <div id="cart-items" style="max-height:320px;overflow-y:auto;margin:1rem 0;">
-<c:choose>
-  <c:when test="${empty cartItems}">
-    <div id="cart-items" style="max-height:320px;overflow-y:auto;margin:1rem 0;">
-      <div class="cart-empty">
-            <div class="cart-empty-ico">&#128717;</div>
-      <p>Your cart is empty.<br/>Start exploring our collection!</p>
-    </div>
-    </div>
+      <div id="cart-items" class="cart-items-wrap">
+        <c:choose>
+          <c:when test="${empty cartItems}">
+            <div class="cart-empty">
+              <div class="cart-empty-ico">&#128717;</div>
+              <p>Your cart is empty.<br/>Start exploring our collection!</p>
+            </div>
+          </c:when>
 
-  </c:when>
+          <c:otherwise>
+            <c:forEach var="cart" items="${cartItems}">
+              <div class="cart-item">
+                <img src="${pageContext.request.contextPath}${cart.imageUrl}" alt="${cart.productName}" class="cart-img" />
 
-      <c:otherwise>
-      <c:forEach var="cart" items="${cartItems}">
+                <div class="cart-item-main">
+                  <div class="cartName">${cart.productName}</div>
+                  <div class="cart-brand">${cart.brand}</div>
+                  <div class="cart-prices">
+                    <span class="newPrice">Rs ${cart.price}</span>
+                    <c:if test="${cart.oldPrice > 0}">
+                      <span class="oldPrice">Rs ${cart.oldPrice}</span>
+                    </c:if>
+                  </div>
+                </div>
 
-          <div class="cartBody">
-            <img src="${pageContext.request.contextPath}${cart.imageUrl}" alt="${cart.productName}" class="cart-img">
-
-        </div>
-        <div class="cartName">
-          ${cart.productName}
-        </div>
-        <div class="cartBody">
-          <div class="cart-brand">${cart.brand}</div>
-          <div class="newPrice">${cart.price}</div>
-          <div class="oldPrice">${cart.oldPrice}</div>
-          <div class="quantity">${cart.quantity}</div>
-        </div>
-      </c:forEach>
-      </c:otherwise>
-</c:choose>
+                <div class="quantity">x${cart.quantity}</div>
+              </div>
+            </c:forEach>
+          </c:otherwise>
+        </c:choose>
       </div>
 
-<%--      <div id="cart-items" style="max-height:320px;overflow-y:auto;margin:1rem 0;">--%>
-<%--        <div class="cart-empty">--%>
-<%--          <div class="cart-empty-ico">&#128717;</div>--%>
-<%--          <p>Your cart is empty.<br/>Start exploring our collection!</p>--%>
-<%--        </div>--%>
-<%--      </div>--%>
-<%--      <div style="border-top:1.5px solid var(--border);padding-top:1rem;margin-top:0.5rem;">--%>
-<%--        <div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:1rem;font-size:1.05rem;">--%>
-<%--          <span>Total</span>--%>
-<%--          <span id="cart-total" style="color:var(--green);">NPR 0</span>--%>
-<%--        </div>--%>
         <button class="btn btn-g btn-full" onclick="closeModal('cart')">
           Proceed to Checkout &#8594;
         </button>
