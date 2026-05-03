@@ -9,11 +9,29 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<%-- Load cart count for nav badge if user is logged in and not already set --%>
+<%@ page import="com.alughadi.dao.CartDaoImpl" %>
+<%
+  if (request.getAttribute("cartCount") == null) {
+    Object uid = session.getAttribute("authUserId");
+    if (uid != null) {
+      CartDaoImpl _cartDao = new CartDaoImpl();
+      int _userId = (Integer) uid;
+      request.setAttribute("cartCount", _cartDao.getCartCount(_userId));
+      if (request.getAttribute("cartItems") == null) {
+        request.setAttribute("cartItems", _cartDao.getCartItems(_userId));
+        request.setAttribute("grandTotal", _cartDao.getGrandTotal(_userId));
+      }
+    }
+  }
+%>
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="ctx" content="${pageContext.request.contextPath}" />
   <title>${not empty pageTitle ? pageTitle : 'AluGhadi Watches'}</title>
   <meta name="description" content="${not empty pageDesc ? pageDesc : 'Premium watch collection and online shopping in Nepal.'}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -52,7 +70,7 @@
       <%-- Right actions --%>
       <div class="nav-end">
         <button class="btn-out-nav" id="nav-cart-btn" type="button" onclick="openCart()" aria-label="Open cart">
-          &#128717; Cart <span id="nav-cart-count">(0)</span>
+          &#128717; Cart <span id="nav-cart-count">(${not empty cartCount ? cartCount : 0})</span>
         </button>
         <c:choose>
           <c:when test="${not empty sessionScope.authUser}">

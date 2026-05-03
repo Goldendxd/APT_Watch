@@ -1,5 +1,11 @@
 package com.alughadi.controller;
 
+import com.alughadi.dao.CartDao;
+import com.alughadi.dao.CartDaoImpl;
+import com.alughadi.dao.ProductDAO;
+import com.alughadi.dao.ProductDaoImpl;
+import com.alughadi.entity.Product;
+import com.alughadi.utils.SessionUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,10 +18,45 @@ import java.io.IOException;
 public class ProductDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("pageTitle", "Royal Prestige Automatic | AluGhadi");
-        request.setAttribute("pageDesc", "Front-end product detail mockup for AluGhadi Watches. This page is ready for backend wiring later.");
+
+        String idParam = request.getParameter("id");
+        if (idParam == null || idParam.isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/products");
+            return;
+        }
+
+        int productId;
+        try {
+            productId = Integer.parseInt(idParam);
+        } catch (NumberFormatException e) {
+            response.sendRedirect(request.getContextPath() + "/products");
+            return;
+        }
+
+        ProductDAO productDAO = new ProductDaoImpl();
+        Product product = productDAO.getProductById(productId);
+
+        if (product == null) {
+            response.sendRedirect(request.getContextPath() + "/products");
+            return;
+        }
+
+        request.setAttribute("product", product);
+        request.setAttribute("pageTitle", product.getName() + " | AluGhadi Watches");
+        request.setAttribute("pageDesc", product.getDescription());
         request.setAttribute("activeNav", "products");
         request.setAttribute("pageStyle", "product-details");
+
+        // Load cart data for the cart modal
+        Object userIdObj = SessionUtil.getAttribute(request, "authUserId");
+        if (userIdObj != null) {
+            int userId = (Integer) userIdObj;
+            CartDao cartDao = new CartDaoImpl();
+            request.setAttribute("cartItems", cartDao.getCartItems(userId));
+            request.setAttribute("cartCount", cartDao.getCartCount(userId));
+            request.setAttribute("grandTotal", cartDao.getGrandTotal(userId));
+        }
+
         request.getRequestDispatcher("/WEB-INF/views/product-details.jsp").forward(request, response);
     }
 }

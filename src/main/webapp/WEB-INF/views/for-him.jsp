@@ -58,7 +58,15 @@
         <p>Clean dial and leather strap. Made for boardrooms, formal dinners, and daily elegance.</p>
         <div class="forhim-card-footer">
           <div class="gift-pick-meta">NPR 8,000 – 15,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="9">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=9" class="forhim-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -71,7 +79,15 @@
         <p>Built tough for every adventure. Water-resistant with a bold, energetic design.</p>
         <div class="forhim-card-footer">
           <div class="gift-pick-meta">NPR 5,000 – 12,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="5">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=5" class="forhim-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -84,7 +100,15 @@
         <p>Understated elegance. Thin profile and a clean face that lets the craft speak for itself.</p>
         <div class="forhim-card-footer">
           <div class="gift-pick-meta">NPR 6,500 – 14,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="12">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=12" class="forhim-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -97,7 +121,15 @@
         <p>A statement piece for milestone moments. Elevated materials and precision engineering.</p>
         <div class="forhim-card-footer">
           <div class="gift-pick-meta">NPR 40,000+</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="1">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=1" class="forhim-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -110,7 +142,15 @@
         <p>Multi-function dial with stopwatch. The perfect balance of sport function and classic design.</p>
         <div class="forhim-card-footer">
           <div class="gift-pick-meta">NPR 12,000 – 25,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="11">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=11" class="forhim-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -123,7 +163,15 @@
         <p>Ultra-thin with sapphire crystal. The ultimate dress watch for every formal occasion.</p>
         <div class="forhim-card-footer">
           <div class="gift-pick-meta">NPR 35,000 – 60,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forhim-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="4">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=4" class="forhim-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -228,6 +276,31 @@
   transition:  color 0.18s;
 }
 .forhim-card-btn:hover { color: var(--green2); }
+
+.gift-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.forhim-cart-btn, .forher-cart-btn {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.18s;
+  padding: 0;
+}
+.forhim-cart-btn:hover, .forher-cart-btn:hover {
+  background: var(--green-light);
+  border-color: var(--green-mid);
+  transform: scale(1.08);
+}
 
 .forhim-back-row {
   display:         flex;

@@ -161,60 +161,50 @@
 
   <!-- PRODUCT CARDS SECTION (Similar to quota bar structure) -->
   <div class="reveal" style="margin-bottom: 2rem">
-    <div
+     <div
       style="
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 1.5rem;
+        align-items: stretch;
       "
     >
       <c:forEach var="product" items="${productList}">
-        <div class="product-card" data-category="${fn:toLowerCase(product.categoryName)}" data-id="prod-${product.id}">
-          <div class="prod-img-container">
+        <div class="product-card" data-category="${fn:toLowerCase(product.categoryName)}" data-id="prod-${product.id}" style="display:flex;flex-direction:column;height:100%;">
+          <a href="${pageContext.request.contextPath}/product-details?id=${product.id}" class="prod-img-container">
             <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" class="prod-img">
-            <button class="prod-save" type="button" onclick="toggleWishlist(this)">
+            <button class="prod-save" type="button" onclick="event.preventDefault();event.stopPropagation();toggleWishlist(this)">
               <span class="wish-heart">&#9825;</span>
               <span class="wish-tip">Wishlist</span>
             </button>
-            <div class="prod-chip">
-               ${product.categoryName}
-            </div>
-            </div>
-            <div class="prod-body">
-              <div class="prod-brand">${product.brand}</div>
-              <div class="prod-h">${product.name}</div>
-              <div class="prod-desc">${product.description}</div>
+            <div class="prod-chip">${product.categoryName}</div>
+          </a>
+          <div class="prod-body" style="padding:1.2rem;flex:1;display:flex;flex-direction:column;">
+            <div class="prod-brand">${product.brand}</div>
+            <div class="prod-h">${product.name}</div>
 
-              <div class="prod-bot">
-                <div class="prod-price">
-                  <div class="prod-price-now">Rs <fmt:formatNumber value="${product.price}" pattern="#,##0"/></div>
-                  <c:if test="${not empty product.oldPrice and product.oldPrice gt 0}">
-                    <div class="prod-price-was">Rs <fmt:formatNumber value="${product.oldPrice}" pattern="#,##0"/></div>
-                  </c:if>
-                </div>
-                <div class="prod-rating"><span class="prod-stars">&#9733;</span> ${product.rating}</div>
+            <div class="prod-bot" style="margin-top:auto;padding-top:0.8rem;border-top:1px solid #d4e5da;display:flex;justify-content:space-between;align-items:flex-end;">
+              <div class="prod-price">
+                <div class="prod-price-now">Rs <fmt:formatNumber value="${product.price}" pattern="#,##0"/></div>
+                <c:if test="${not empty product.oldPrice and product.oldPrice gt 0}">
+                  <div class="prod-price-was">Rs <fmt:formatNumber value="${product.oldPrice}" pattern="#,##0"/></div>
+                </c:if>
               </div>
-              <div class="prod-actions">
-                <form action="${pageContext.request.contextPath}/cart" method="post" style="display: flex; gap: 0.5rem; width: 100%;">
-                  <input type="hidden" name="action" value="add">
-                  <input type="hidden" name="productId" value="${product.id}">
-                  <input type="hidden" name="quantity" value="1">
-                  <button class="btn-fill prod-buy-btn" type="submit" name="buyNow">Buy Now</button>
-                  <button class="prod-cart-icon-btn" type="submit" name="addToCart" title="Add to cart">
-                    <c:choose>
-                      <c:when test = "${cartProductIds.contains(product.id)}">
-                        ✓ Added
-                      </c:when>
-                      <c:otherwise>
-                        &#128717;
-                      </c:otherwise>
-                    </c:choose>
-                  </button>
-                </form>
-              </div>
-
-              </div>
+              <div class="prod-rating"><span class="prod-stars">&#9733;</span> ${product.rating}</div>
             </div>
+            <div style="display:flex;gap:0.45rem;margin-top:0.65rem;">
+              <button class="btn-fill prod-buy-btn" type="button" onclick="buyNow(${product.id})" style="flex:1;padding:0.55rem 0.4rem;font-size:0.78rem;font-weight:700;border-radius:10px;text-align:center;">Buy Now</button>
+              <c:choose>
+                <c:when test="${cartProductIds.contains(product.id)}">
+                  <button class="prod-cart-btn added" type="button" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#1a6b38;color:#fff;border:1.5px solid #1a6b38;cursor:default;font-family:inherit;text-align:center;">Added &#10003;</button>
+                </c:when>
+                <c:otherwise>
+                  <button class="prod-cart-btn" type="button" onclick="ajaxAddToCart(${product.id}, this)" title="Add to cart" style="flex:1;padding:0.55rem 0.4rem;border:1.5px solid #1a6b38;border-radius:10px;background:transparent;color:#1a6b38;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;text-align:center;">Add to Cart</button>
+                </c:otherwise>
+              </c:choose>
+            </div>
+          </div>
+        </div>
 <%--            <div class="prod-chip">${product.name}</div>--%>
 <%--          </div>--%>
 <%--          <div class="prod-body">--%>
@@ -445,20 +435,14 @@
 
 <script>
   var WISH_KEY = 'alughadi_wishlist';
-  var CART_KEY = 'alughadi_cart';
   var _currentFilter = 'all';
+  var CTX = '${pageContext.request.contextPath}';
 
   function getWishlist() {
     try { return JSON.parse(localStorage.getItem(WISH_KEY) || '[]'); }
     catch(e) { return []; }
   }
   function saveWishlist(arr) { localStorage.setItem(WISH_KEY, JSON.stringify(arr)); }
-
-  function getCart() {
-    try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
-    catch(e) { return []; }
-  }
-  function saveCart(arr) { localStorage.setItem(CART_KEY, JSON.stringify(arr)); }
 
   /* Sync heart buttons on load */
   function syncHearts() {
@@ -470,11 +454,11 @@
       if (!btn) return;
       if (wish.indexOf(id) !== -1) {
         btn.classList.add('saved');
-        btn.querySelector('.wish-heart').innerHTML = '&#9829;'; /* filled ♥ */
+        btn.querySelector('.wish-heart').innerHTML = '&#9829;';
         if (tip) tip.textContent = 'Saved!';
       } else {
         btn.classList.remove('saved');
-        btn.querySelector('.wish-heart').innerHTML = '&#9825;'; /* outline ♡ */
+        btn.querySelector('.wish-heart').innerHTML = '&#9825;';
         if (tip) tip.textContent = 'Wishlist';
       }
     });
@@ -502,13 +486,13 @@
     if (idx === -1) {
       wish.push(id);
       btn.classList.add('saved');
-      heart.innerHTML  = '&#9829;';   /* ♥ filled */
+      heart.innerHTML  = '&#9829;';
       if (tip) tip.textContent = 'Saved!';
       if (typeof showToast === 'function') showToast('Added to Wishlist', 'Tap \u2665 again to remove.', '\u2665\uFE0F');
     } else {
       wish.splice(idx, 1);
       btn.classList.remove('saved');
-      heart.innerHTML  = '&#9825;';   /* ♡ outline */
+      heart.innerHTML  = '&#9825;';
       if (tip) tip.textContent = 'Wishlist';
       if (typeof showToast === 'function') showToast('Removed from Wishlist', '', '\u2661');
     }
@@ -540,27 +524,25 @@
     }
   }
 
-  function addToCart(name, price) {
-    var cart = getCart();
-    cart.push({ name: name, price: price, qty: 1, id: Date.now() });
-    saveCart(cart);
-    updateCartButton();
-    if (typeof showToast === 'function') showToast('Added to Cart', name, '\uD83D\uDED2');
-  }
-
-  function updateCartButton() {
-    var cart  = getCart();
-    var total = cart.length;
-    var btn   = document.getElementById('cart-btn');
-    var nb    = document.getElementById('nav-cart-count');
-    if (btn) btn.innerHTML = '\uD83D\uDED2 Cart (' + total + ')';
-    if (nb)  nb.textContent = '(' + total + ')';
+  /* Buy Now: add to cart then redirect to checkout */
+  function buyNow(productId) {
+    var params = new URLSearchParams();
+    params.append('action', 'add');
+    params.append('productId', productId);
+    params.append('quantity', '1');
+    fetch(CTX + '/cart', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString(),
+      redirect: 'manual'
+    })
+    .then(function() { window.location.href = CTX + '/checkout'; })
+    .catch(function() { window.location.href = CTX + '/checkout'; });
   }
 
   /* Init */
   syncHearts();
   updateWishlistCount();
-  updateCartButton();
 </script>
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

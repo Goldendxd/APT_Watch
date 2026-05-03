@@ -1,4 +1,4 @@
-﻿<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%--%>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%--%>
 <%--request.setAttribute("pageTitle", "Gift Guide | AluGhadi Watches");--%>
 <%--request.setAttribute("pageDesc", "Find the perfect watch gift for him or her.--%>
 <%--Curated top picks from AluGhadi."); request.setAttribute("activeNav",--%>
@@ -61,9 +61,9 @@
           <div class="gift-pick-name">Executive Classic</div>
           <div class="gift-pick-price">From NPR 8,000</div>
           <a
-            href="${pageContext.request.contextPath}/products"
+            href="${pageContext.request.contextPath}/product-details?id=9"
             class="gift-pick-link"
-            >Shop Now &#8594;</a
+            >View Details &#8594;</a
           >
         </div>
       </article>
@@ -81,9 +81,9 @@
           <div class="gift-pick-name">Rose Gold Elegance</div>
           <div class="gift-pick-price">From NPR 6,500</div>
           <a
-            href="${pageContext.request.contextPath}/products"
+            href="${pageContext.request.contextPath}/product-details?id=17"
             class="gift-pick-link"
-            >Shop Now &#8594;</a
+            >View Details &#8594;</a
           >
         </div>
       </article>
@@ -101,9 +101,9 @@
           <div class="gift-pick-name">Active Sport Pro</div>
           <div class="gift-pick-price">From NPR 5,500</div>
           <a
-            href="${pageContext.request.contextPath}/products"
+            href="${pageContext.request.contextPath}/product-details?id=5"
             class="gift-pick-link"
-            >Shop Now &#8594;</a
+            >View Details &#8594;</a
           >
         </div>
       </article>
@@ -121,9 +121,9 @@
           <div class="gift-pick-name">Jewelled Prestige</div>
           <div class="gift-pick-price">From NPR 35,000</div>
           <a
-            href="${pageContext.request.contextPath}/products"
+            href="${pageContext.request.contextPath}/product-details?id=18"
             class="gift-pick-link"
-            >Shop Now &#8594;</a
+            >View Details &#8594;</a
           >
         </div>
       </article>
@@ -141,9 +141,9 @@
           <div class="gift-pick-name">Slim Minimal</div>
           <div class="gift-pick-price">From NPR 7,000</div>
           <a
-            href="${pageContext.request.contextPath}/products"
+            href="${pageContext.request.contextPath}/product-details?id=12"
             class="gift-pick-link"
-            >Shop Now &#8594;</a
+            >View Details &#8594;</a
           >
         </div>
       </article>
@@ -161,9 +161,9 @@
           <div class="gift-pick-name">Everyday Chic</div>
           <div class="gift-pick-price">From NPR 4,500</div>
           <a
-            href="${pageContext.request.contextPath}/products"
+            href="${pageContext.request.contextPath}/product-details?id=20"
             class="gift-pick-link"
-            >Shop Now &#8594;</a
+            >View Details &#8594;</a
           >
         </div>
       </article>

@@ -106,6 +106,7 @@
   margin-bottom: 2.25rem;
 }
 
+
 /* Hero CTA buttons */
 .hero-btns {
   display:       flex;
@@ -326,6 +327,7 @@
   transition:    all 0.3s var(--ease);
   display:       flex;
   flex-direction: column;
+  height:        100%;
 }
 .product-card:hover {
   transform:    translateY(-5px);
@@ -340,6 +342,9 @@
   overflow:    hidden;
   background:  var(--surface);
   flex-shrink: 0;
+  display:     block;
+  text-decoration: none;
+  color:       inherit;
 }
 .prod-img {
   width:      100%;
@@ -419,16 +424,15 @@
 .prod-save.saved { color: #e53; }
 
 .prod-body  { padding: 1.35rem; flex: 1; display: flex; flex-direction: column; }
-.prod-body .btn-fill { width: 100%; justify-content: center; margin-top: 0.75rem; padding: 0.6rem; }
 .prod-brand { font-size: 0.68rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.38rem; }
 .prod-h     { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.35rem; letter-spacing: -0.01em; line-height: 1.3; }
-.prod-desc  { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin: 0.4rem 0; flex: 1; }
+.prod-desc  { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin: 0.4rem 0; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
 
 .prod-bot {
   display:         flex;
   justify-content: space-between;
   align-items:     flex-end;
-  margin-top:      1rem;
+  margin-top:      auto;
   padding-top:     0.9rem;
   border-top:      1px solid var(--border);
 }
@@ -439,6 +443,49 @@
 
 .prod-rating { font-size: 0.75rem; color: var(--muted); text-align: right; align-self: flex-end; }
 .prod-stars  { color: var(--gold); font-size: 0.8rem; }
+
+/* Product card action buttons */
+.prod-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  align-items: stretch;
+}
+.prod-buy-btn {
+  flex: 1;
+  padding: 0.7rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 10px;
+  text-align: center;
+}
+.prod-cart-btn {
+  flex: 1;
+  padding: 0.7rem 0.5rem;
+  border: 1.5px solid var(--green);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--green);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: var(--ff);
+  text-align: center;
+  transition: all 0.22s var(--ease);
+}
+.prod-cart-btn:hover {
+  background: var(--green);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26,107,56,0.2);
+}
+.prod-cart-btn.added {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+  cursor: default;
+  pointer-events: none;
+}
 
 /* ================================================================
    SEASON / INFO STRIP  (from overlays retracted)

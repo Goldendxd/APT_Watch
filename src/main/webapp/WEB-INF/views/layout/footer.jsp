@@ -5,6 +5,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
   <%-- ======== FOOTER ======== --%>
   <footer>
@@ -66,7 +67,7 @@
 
   <%-- ======== CART MODAL ======== --%>
   <div class="modal-ov" id="modal-cart" role="dialog" aria-modal="true" aria-label="Shopping cart">
-    <div class="modal cart-modal" style="max-width:500px;">
+    <div class="modal cart-modal" style="max-width:520px;">
       <button class="modal-close" onclick="closeModal('cart')" aria-label="Close cart">&#10005;</button>
       <div class="modal-h">&#128717; Shopping Cart</div>
       <div class="modal-sub">Your selected items</div>
@@ -81,7 +82,7 @@
 
           <c:otherwise>
             <c:forEach var="cart" items="${cartItems}">
-              <div class="cart-item">
+              <div class="cart-item" id="cart-item-${cart.id}">
                 <img src="${pageContext.request.contextPath}${cart.imageUrl}" alt="${cart.productName}" class="cart-img" />
 
                 <div class="cart-item-main">
@@ -95,17 +96,49 @@
                   </div>
                 </div>
 
-                <div class="quantity">x${cart.quantity}</div>
+                <div class="cart-item-controls">
+                  <div class="cart-qty-row">
+                    <c:choose>
+                      <c:when test="${cart.quantity <= 1}">
+                        <button class="cart-qty-btn" type="button" onclick="ajaxRemoveFromCart(${cart.id})" title="Remove item">&#8722;</button>
+                      </c:when>
+                      <c:otherwise>
+                        <button class="cart-qty-btn" type="button" onclick="ajaxUpdateQty(${cart.id}, ${cart.quantity - 1})" title="Decrease quantity">&#8722;</button>
+                      </c:otherwise>
+                    </c:choose>
+
+                    <span class="cart-qty-val">${cart.quantity}</span>
+
+                    <button class="cart-qty-btn" type="button" onclick="ajaxUpdateQty(${cart.id}, ${cart.quantity + 1})" title="Increase quantity">&#43;</button>
+                  </div>
+
+                  <button class="cart-delete-btn" type="button" onclick="ajaxRemoveFromCart(${cart.id})" title="Remove from cart">&#128465;</button>
+                </div>
               </div>
             </c:forEach>
           </c:otherwise>
         </c:choose>
       </div>
 
-        <button class="btn btn-g btn-full" onclick="closeModal('cart')">
-          Proceed to Checkout &#8594;
-        </button>
-      </div>
+      <c:if test="${not empty cartItems}">
+        <div class="cart-total-row">
+          <span>Grand Total</span>
+          <strong>Rs <fmt:formatNumber value="${grandTotal}" pattern="#,##0"/></strong>
+        </div>
+      </c:if>
+
+      <c:choose>
+        <c:when test="${not empty cartItems}">
+          <a href="${pageContext.request.contextPath}/checkout" class="btn btn-g btn-full" style="text-decoration:none;">
+            Proceed to Checkout &#8594;
+          </a>
+        </c:when>
+        <c:otherwise>
+          <a href="${pageContext.request.contextPath}/products" class="btn btn-g btn-full" style="text-decoration:none;">
+            Browse Products &#8594;
+          </a>
+        </c:otherwise>
+      </c:choose>
     </div>
   </div>
 

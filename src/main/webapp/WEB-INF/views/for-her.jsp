@@ -58,7 +58,15 @@
         <p>Refined rose gold case with a delicate mesh band. Designed for every occasion, every day.</p>
         <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 6,500 – 12,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="17">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=17" class="forher-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -71,7 +79,15 @@
         <p>Clean white dial with a slim profile. Understated style that complements any outfit effortlessly.</p>
         <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 5,000 – 10,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="20">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=20" class="forher-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -84,7 +100,15 @@
         <p>Oversized dial with diamant&eacute;-cut accents. A bold statement for the woman who owns the room.</p>
         <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 10,000 – 20,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="19">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=19" class="forher-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -97,7 +121,15 @@
         <p>Crystal-set bezel with mother-of-pearl dial. The pinnacle of feminine watchmaking.</p>
         <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 35,000+</div>
-          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="18">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=18" class="forher-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -110,7 +142,15 @@
         <p>Versatile silicone straps in pastel tones. Light, sporty, and effortlessly stylish.</p>
         <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 4,500 – 8,000</div>
-          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="20">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=20" class="forher-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -123,7 +163,15 @@
         <p>Swiss movement, gold-plated case. For milestones, anniversaries, and once-in-a-lifetime moments.</p>
         <div class="forher-card-footer">
           <div class="gift-pick-meta">NPR 50,000+</div>
-          <a href="${pageContext.request.contextPath}/products" class="forher-card-btn">View &#8594;</a>
+          <div class="gift-card-actions">
+            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+              <input type="hidden" name="action" value="add">
+              <input type="hidden" name="productId" value="17">
+              <input type="hidden" name="quantity" value="1">
+              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+            </form>
+            <a href="${pageContext.request.contextPath}/product-details?id=17" class="forher-card-btn">View &#8594;</a>
+          </div>
         </div>
       </div>
     </article>
@@ -172,6 +220,31 @@
 }
 .forher-card-btn { font-size: 0.78rem; font-weight: 700; color: #b8468a; text-decoration: none; }
 .forher-card-btn:hover { color: #8b2a6e; }
+
+.gift-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.forher-cart-btn {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.18s;
+  padding: 0;
+}
+.forher-cart-btn:hover {
+  background: #fff0f8;
+  border-color: #e0a0c0;
+  transform: scale(1.08);
+}
 
 .forher-breadcrumb {
   display:     flex;
