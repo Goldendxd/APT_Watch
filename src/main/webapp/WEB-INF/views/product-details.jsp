@@ -60,8 +60,19 @@
       </div>
 
       <div class="product-details-action-row">
-        <button class="btn-fill product-details-primary-btn" type="button" onclick="ajaxAddToCart(${product.id}, this)">Add to Cart &#128717;</button>
-        <button class="btn-out-nav product-details-secondary-btn" type="button" onclick="detailBuyNow(${product.id})">Buy Now</button>
+        <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+          <input type="hidden" name="action" value="add">
+          <input type="hidden" name="productId" value="${product.id}">
+          <input type="hidden" name="quantity" value="1">
+          <button class="btn-fill product-details-primary-btn" type="submit">Add to Cart &#128717;</button>
+        </form>
+        <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+          <input type="hidden" name="action" value="add">
+          <input type="hidden" name="productId" value="${product.id}">
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="buyNow" value="true">
+          <button class="btn-out-nav product-details-secondary-btn" type="submit">Buy Now</button>
+        </form>
       </div>
     </aside>
   </div>
@@ -183,22 +194,6 @@
   </section>
 </section>
 
-<script>
-  var CTX = '${pageContext.request.contextPath}';
-  function detailBuyNow(productId) {
-    var params = new URLSearchParams();
-    params.append('action', 'add');
-    params.append('productId', productId);
-    params.append('quantity', '1');
-    fetch(CTX + '/cart', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString(),
-      redirect: 'manual'
-    })
-    .then(function() { window.location.href = CTX + '/checkout'; })
-    .catch(function() { window.location.href = CTX + '/checkout'; });
-  }
-</script>
+
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

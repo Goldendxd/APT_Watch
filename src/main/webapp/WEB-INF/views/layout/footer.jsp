@@ -82,7 +82,7 @@
 
           <c:otherwise>
             <c:forEach var="cart" items="${cartItems}">
-              <div class="cart-item" id="cart-item-${cart.id}">
+              <div class="cart-item">
                 <img src="${pageContext.request.contextPath}${cart.imageUrl}" alt="${cart.productName}" class="cart-img" />
 
                 <div class="cart-item-main">
@@ -100,19 +100,37 @@
                   <div class="cart-qty-row">
                     <c:choose>
                       <c:when test="${cart.quantity <= 1}">
-                        <button class="cart-qty-btn" type="button" onclick="ajaxRemoveFromCart(${cart.id})" title="Remove item">&#8722;</button>
+                        <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                          <input type="hidden" name="action" value="remove">
+                          <input type="hidden" name="cartId" value="${cart.id}">
+                          <button class="cart-qty-btn" type="submit" title="Remove item">&#8722;</button>
+                        </form>
                       </c:when>
                       <c:otherwise>
-                        <button class="cart-qty-btn" type="button" onclick="ajaxUpdateQty(${cart.id}, ${cart.quantity - 1})" title="Decrease quantity">&#8722;</button>
+                        <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                          <input type="hidden" name="action" value="update">
+                          <input type="hidden" name="cartId" value="${cart.id}">
+                          <input type="hidden" name="quantity" value="${cart.quantity - 1}">
+                          <button class="cart-qty-btn" type="submit" title="Decrease quantity">&#8722;</button>
+                        </form>
                       </c:otherwise>
                     </c:choose>
 
                     <span class="cart-qty-val">${cart.quantity}</span>
 
-                    <button class="cart-qty-btn" type="button" onclick="ajaxUpdateQty(${cart.id}, ${cart.quantity + 1})" title="Increase quantity">&#43;</button>
+                    <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                      <input type="hidden" name="action" value="update">
+                      <input type="hidden" name="cartId" value="${cart.id}">
+                      <input type="hidden" name="quantity" value="${cart.quantity + 1}">
+                      <button class="cart-qty-btn" type="submit" title="Increase quantity">&#43;</button>
+                    </form>
                   </div>
 
-                  <button class="cart-delete-btn" type="button" onclick="ajaxRemoveFromCart(${cart.id})" title="Remove from cart">&#128465;</button>
+                  <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                    <input type="hidden" name="action" value="remove">
+                    <input type="hidden" name="cartId" value="${cart.id}">
+                    <button class="cart-delete-btn" type="submit" title="Remove from cart">&#128465;</button>
+                  </form>
                 </div>
               </div>
             </c:forEach>

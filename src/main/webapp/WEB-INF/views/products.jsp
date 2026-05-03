@@ -193,15 +193,26 @@
               <div class="prod-rating"><span class="prod-stars">&#9733;</span> ${product.rating}</div>
             </div>
             <div style="display:flex;gap:0.45rem;margin-top:0.65rem;">
-              <button class="btn-fill prod-buy-btn" type="button" onclick="buyNow(${product.id})" style="flex:1;padding:0.55rem 0.4rem;font-size:0.78rem;font-weight:700;border-radius:10px;text-align:center;">Buy Now</button>
-              <c:choose>
-                <c:when test="${cartProductIds.contains(product.id)}">
-                  <button class="prod-cart-btn added" type="button" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#1a6b38;color:#fff;border:1.5px solid #1a6b38;cursor:default;font-family:inherit;text-align:center;">Added &#10003;</button>
-                </c:when>
-                <c:otherwise>
-                  <button class="prod-cart-btn" type="button" onclick="ajaxAddToCart(${product.id}, this)" title="Add to cart" style="flex:1;padding:0.55rem 0.4rem;border:1.5px solid #1a6b38;border-radius:10px;background:transparent;color:#1a6b38;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;text-align:center;">Add to Cart</button>
-                </c:otherwise>
-              </c:choose>
+              <form action="${pageContext.request.contextPath}/cart" method="post" style="flex:1;display:flex;">
+                <input type="hidden" name="action" value="add">
+                <input type="hidden" name="productId" value="${product.id}">
+                <input type="hidden" name="quantity" value="1">
+                <input type="hidden" name="buyNow" value="true">
+                <button class="btn-fill prod-buy-btn" type="submit" style="flex:1;padding:0.55rem 0.4rem;font-size:0.78rem;font-weight:700;border-radius:10px;text-align:center;">Buy Now</button>
+              </form>
+              <form action="${pageContext.request.contextPath}/cart" method="post" style="flex:1;display:flex;">
+                <input type="hidden" name="action" value="add">
+                <input type="hidden" name="productId" value="${product.id}">
+                <input type="hidden" name="quantity" value="1">
+                <c:choose>
+                  <c:when test="${cartProductIds.contains(product.id)}">
+                    <button type="submit" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#1a6b38;color:#fff;border:1.5px solid #1a6b38;cursor:default;font-family:inherit;text-align:center;">Added &#10003;</button>
+                  </c:when>
+                  <c:otherwise>
+                    <button type="submit" style="flex:1;padding:0.55rem 0.4rem;border:1.5px solid #1a6b38;border-radius:10px;background:transparent;color:#1a6b38;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;">Add to Cart</button>
+                  </c:otherwise>
+                </c:choose>
+              </form>
             </div>
           </div>
         </div>
@@ -524,21 +535,6 @@
     }
   }
 
-  /* Buy Now: add to cart then redirect to checkout */
-  function buyNow(productId) {
-    var params = new URLSearchParams();
-    params.append('action', 'add');
-    params.append('productId', productId);
-    params.append('quantity', '1');
-    fetch(CTX + '/cart', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString(),
-      redirect: 'manual'
-    })
-    .then(function() { window.location.href = CTX + '/checkout'; })
-    .catch(function() { window.location.href = CTX + '/checkout'; });
-  }
 
   /* Init */
   syncHearts();

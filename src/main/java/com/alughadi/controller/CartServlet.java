@@ -81,10 +81,10 @@ public class CartServlet extends HttpServlet {
         } else if (action.equals("clear")) {
             cartDao.clearCart(userId);
         }
-//        if (request.getParameter("buyNow") !=null){
-//            response.sendRedirect(request.getContextPath()+"/cart");
-//            return;
-//        }
+        if (request.getParameter("buyNow") != null) {
+            response.sendRedirect(request.getContextPath() + "/checkout");
+            return;
+        }
         response.sendRedirect(request.getContextPath() + "/products");
     }
     private int getLoggedInUserId(HttpServletRequest request, HttpServletResponse response) throws IOException {
