@@ -26,7 +26,7 @@
     request.setAttribute("pageTitle", statuscode + " - "+ errorTittle);
     request.setAttribute("pageStyle", "error");
 %>
-<jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<%--<jsp:include page="/WEB-INF/views/layout/header.jsp" />--%>
 <jsp:include page="/WEB-INF/views/layout/head.jsp" />
 <main class="error-shell">
     <section class="error-card">
@@ -46,5 +46,5 @@
         </div>
     </section>
 </main>
-<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+<%--<jsp:include page="/WEB-INF/views/layout/footer.jsp" />--%>
 
