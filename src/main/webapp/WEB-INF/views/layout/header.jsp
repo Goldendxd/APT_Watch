@@ -56,7 +56,8 @@
       <%-- Right actions --%>
       <div class="nav-end">
         <button class="btn-out-nav" id="nav-cart-btn" type="button" onclick="openCart()" aria-label="Open cart">
-          &#128717; Cart <span id="nav-cart-count">(${not empty cartCount ? cartCount : 0})</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          Cart <span id="nav-cart-count">(${not empty cartCount ? cartCount : 0})</span>
         </button>
         <c:choose>
           <c:when test="${not empty sessionScope.authUser}">
@@ -85,32 +86,31 @@
   <aside class="sidebar" id="sidebar" aria-label="Mobile navigation">
     <div class="sidebar-head">
       <a class="logo" href="${pageContext.request.contextPath}/" onclick="closeSidebar()">
-        <div class="logo-mark">AG</div>
-        <span class="logo-brand">Alu<span>Ghadi</span></span>
+        <img src="${pageContext.request.contextPath}/static/images/alughadiweblogo.png" alt="AluGhadi" class="nav-logo-img" style="height:32px;width:auto;" />
       </a>
       <button class="sidebar-close" onclick="closeSidebar()" aria-label="Close menu">&#10005;</button>
     </div>
     <nav class="sidebar-nav" aria-label="Sidebar navigation">
       <a href="${pageContext.request.contextPath}/"
          onclick="closeSidebar()"
-         ${activeNav == 'home' ? 'class="active"' : ''}>&#127968; Home</a>
+         ${activeNav == 'home' ? 'class="active"' : ''}>Home</a>
       <a href="${pageContext.request.contextPath}/products"
          onclick="closeSidebar()"
-         ${activeNav == 'products' ? 'class="active"' : ''}>&#8987; Products</a>
+         ${activeNav == 'products' ? 'class="active"' : ''}>Products</a>
       <a href="${pageContext.request.contextPath}/gifting"
          onclick="closeSidebar()"
-         ${activeNav == 'gifting' ? 'class="active"' : ''}>&#127873; Gifting</a>
+         ${activeNav == 'gifting' ? 'class="active"' : ''}>Gifting</a>
       <a href="${pageContext.request.contextPath}/about"
          onclick="closeSidebar()"
-         ${activeNav == 'about' ? 'class="active"' : ''}>&#8505; About</a>
+         ${activeNav == 'about' ? 'class="active"' : ''}>About</a>
       <a href="${pageContext.request.contextPath}/contact"
          onclick="closeSidebar()"
-         ${activeNav == 'contact' ? 'class="active"' : ''}>&#9993; Contact</a>
+         ${activeNav == 'contact' ? 'class="active"' : ''}>Contact</a>
     </nav>
     <div class="sidebar-foot">
       <button class="btn-out-nav" type="button"
               style="width:100%;justify-content:center;"
-              onclick="closeSidebar();openCart()">&#128717; Cart</button>
+              onclick="closeSidebar();openCart()">Cart</button>
       <c:choose>
         <c:when test="${not empty sessionScope.authUser}">
           <div class="sidebar-user">${sessionScope.authUser}</div>

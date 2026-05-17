@@ -16,7 +16,7 @@
   </div>
   <div class="ph-ov"></div>
   <div class="ph-body">
-    <span class="ph-chip">&#9993; Reach Us</span>
+    <span class="ph-chip">Reach Us</span>
     <h1 class="ph-h">We'd love to <span>hear</span><br>from you.</h1>
     <p class="ph-sub">
       Whether you have a question about a watch, an order, or a partnership —
@@ -29,7 +29,9 @@
 <div class="contact-info-strip">
   <div class="cis-inner">
     <div class="cis-item">
-      <div class="cis-ico">&#128205;</div>
+      <div class="cis-ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
       <div>
         <div class="cis-label">Our Location</div>
         <div class="cis-val">Kathmandu, Nepal</div>
@@ -37,7 +39,9 @@
     </div>
     <div class="cis-divider"></div>
     <div class="cis-item">
-      <div class="cis-ico">&#128222;</div>
+      <div class="cis-ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.11h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8 8.09a16 16 0 0 0 6 6l.77-.77a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
+      </div>
       <div>
         <div class="cis-label">Phone</div>
         <div class="cis-val"><a href="tel:+977XXXXXXXX">+977-1-XXXX-XXXX</a></div>
@@ -45,7 +49,9 @@
     </div>
     <div class="cis-divider"></div>
     <div class="cis-item">
-      <div class="cis-ico">&#128140;</div>
+      <div class="cis-ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
       <div>
         <div class="cis-label">Email</div>
         <div class="cis-val"><a href="mailto:support@alughadi.com">support@alughadi.com</a></div>
@@ -53,7 +59,9 @@
     </div>
     <div class="cis-divider"></div>
     <div class="cis-item">
-      <div class="cis-ico">&#128336;</div>
+      <div class="cis-ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
       <div>
         <div class="cis-label">Business Hours</div>
         <div class="cis-val">Sun – Fri &nbsp;9 AM – 6 PM</div>
@@ -80,7 +88,9 @@
               <div class="fg">
                 <label for="cf-name">Full Name *</label>
                 <div class="input-wrap">
-                  <span class="input-ico-l">&#128100;</span>
+                  <span class="input-ico-l">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </span>
                   <input type="text" id="cf-name" name="name" class="input-pl"
                          placeholder="Shisir Lamsal" required autocomplete="name" />
                 </div>
@@ -88,7 +98,9 @@
               <div class="fg">
                 <label for="cf-email">Email Address *</label>
                 <div class="input-wrap">
-                  <span class="input-ico-l">&#64;</span>
+                  <span class="input-ico-l">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  </span>
                   <input type="email" id="cf-email" name="email" class="input-pl"
                          placeholder="you@example.com" required autocomplete="email" />
                 </div>
@@ -99,7 +111,9 @@
               <div class="fg">
                 <label for="cf-phone">Phone (optional)</label>
                 <div class="input-wrap">
-                  <span class="input-ico-l">&#128222;</span>
+                  <span class="input-ico-l">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.11h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8 8.09a16 16 0 0 0 6 6l.77-.77a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
+                  </span>
                   <input type="tel" id="cf-phone" name="phone" class="input-pl"
                          placeholder="+977-98XX-XXXXXX" autocomplete="tel" />
                 </div>
@@ -107,7 +121,7 @@
               <div class="fg">
                 <label for="cf-subject">Subject *</label>
                 <select id="cf-subject" name="subject" required>
-                  <option value="" disabled selected>Select a topic…</option>
+                  <option value="" disabled selected>Select a topic...</option>
                   <option value="product-query">Product Enquiry</option>
                   <option value="order-support">Order Support</option>
                   <option value="returns">Returns &amp; Warranty</option>
@@ -121,28 +135,31 @@
               <label for="cf-message">Your Message *</label>
               <textarea id="cf-message" name="message" rows="6"
                         placeholder="Tell us what's on your mind — we read every message carefully." required></textarea>
-              <div class="fg-note">&#9432;&nbsp; We'll never share your details with third parties.</div>
+              <div class="fg-note">We'll never share your details with third parties.</div>
             </div>
 
             <div class="contact-form-foot">
               <button type="submit" class="btn btn-g btn-lg" id="cf-submit-btn">
-                <span id="cf-btn-text">&#9993; Send Message</span>
+                <span id="cf-btn-text">Send Message</span>
               </button>
-              <p class="contact-form-note">Typical reply time: &lt; 24 hours</p>
+              <p class="contact-form-note">Typical reply time: under 24 hours</p>
             </div>
 
           </form>
 
-          <%-- Success / Error feedback --%>
           <div id="cf-success" class="info-banner" style="display:none;margin-top:1.5rem;">
-            <div class="ib-ico">&#10003;</div>
+            <div class="ib-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
             <div>
               <div class="ib-h">Message Sent!</div>
               <div class="ib-p">Thank you for reaching out. We'll be in touch within one business day.</div>
             </div>
           </div>
           <div id="cf-error" class="info-banner error-banner" style="display:none;margin-top:1.5rem;">
-            <div class="ib-ico">&#9888;</div>
+            <div class="ib-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
             <div>
               <div class="ib-h">Something went wrong</div>
               <div class="ib-p">Please check your inputs and try again.</div>
@@ -156,7 +173,9 @@
       <div class="contact-side reveal reveal-delay-2">
 
         <div class="contact-side-card">
-          <div class="csc-ico" style="background:var(--green-light);color:var(--green);">&#128205;</div>
+          <div class="csc-ico" style="background:var(--green-light);color:var(--green);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
           <div>
             <div class="csc-h">Visit Our Store</div>
             <p class="csc-p">
@@ -168,7 +187,9 @@
         </div>
 
         <div class="contact-side-card">
-          <div class="csc-ico" style="background:var(--gold-light);color:var(--gold2);">&#128171;</div>
+          <div class="csc-ico" style="background:var(--gold-light);color:var(--gold2);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.11h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8 8.09a16 16 0 0 0 6 6l.77-.77a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
+          </div>
           <div>
             <div class="csc-h">Customer Support</div>
             <p class="csc-p">
@@ -180,7 +201,9 @@
         </div>
 
         <div class="contact-side-card">
-          <div class="csc-ico" style="background:#eff6ff;color:#1e40af;">&#128230;</div>
+          <div class="csc-ico" style="background:#eff6ff;color:#1e40af;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
           <div>
             <div class="csc-h">Returns &amp; Warranty</div>
             <p class="csc-p">
@@ -191,13 +214,12 @@
           </div>
         </div>
 
-        <%-- Social links --%>
         <div class="contact-socials">
           <div class="csc-h" style="margin-bottom:0.8rem;">Follow Us</div>
           <div class="contact-social-links">
-            <a href="#" class="contact-social-btn" aria-label="Facebook">&#128526; Facebook</a>
-            <a href="#" class="contact-social-btn" aria-label="Instagram">&#128247; Instagram</a>
-            <a href="#" class="contact-social-btn" aria-label="TikTok">&#127926; TikTok</a>
+            <a href="#" class="contact-social-btn" aria-label="Facebook">Facebook</a>
+            <a href="#" class="contact-social-btn" aria-label="Instagram">Instagram</a>
+            <a href="#" class="contact-social-btn" aria-label="TikTok">TikTok</a>
           </div>
         </div>
 
@@ -207,7 +229,6 @@
   </div>
 </section>
 
-<%-- ======== CONTACT FORM SCRIPT ======== --%>
 <script>
   function handleContactSubmit(e) {
     e.preventDefault();
@@ -215,7 +236,6 @@
     var txt  = document.getElementById('cf-btn-text');
     var form = document.getElementById('contact-form');
 
-    /* basic validation */
     var name    = document.getElementById('cf-name').value.trim();
     var email   = document.getElementById('cf-email').value.trim();
     var subject = document.getElementById('cf-subject').value;
@@ -228,14 +248,12 @@
       return;
     }
 
-    /* loading state */
     btn.disabled = true;
-    txt.textContent = '&#8987; Sending…';
+    txt.textContent = 'Sending...';
 
-    /* simulate async send — replace with real fetch() later */
     setTimeout(function () {
       btn.disabled = false;
-      txt.textContent = '&#9993; Send Message';
+      txt.textContent = 'Send Message';
       form.reset();
       var ok = document.getElementById('cf-success');
       ok.style.display = 'flex';

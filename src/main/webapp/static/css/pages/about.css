@@ -96,6 +96,11 @@
 /* ================================================================
    MARQUEE STRIP
    ================================================================ */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .about-marquee-strip {
   background:  var(--text);
   overflow:    hidden;
@@ -103,8 +108,13 @@
   white-space: nowrap;
 }
 .about-marquee-inner {
-  display: inline-flex;
-  gap:     3rem;
+  display:   inline-flex;
+  gap:       3rem;
+  animation: marquee-scroll 22s linear infinite;
+  will-change: transform;
+}
+.about-marquee-strip:hover .about-marquee-inner {
+  animation-play-state: paused;
 }
 .about-marquee-inner span {
   font-size:      0.75rem;
@@ -112,6 +122,7 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color:          rgba(255,255,255,0.55);
+  flex-shrink:    0;
 }
 .about-marquee-inner span:nth-child(odd) {
   color: var(--accent);

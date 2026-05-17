@@ -272,12 +272,22 @@
 
   <!-- PRODUCT CARDS SECTION (Similar to quota bar structure) -->
   <div class="reveal" style="margin-bottom: 2rem">
-    <c:choose>
-      <c:when test="${empty productList}">
-        <jsp:include page="/error.jsp" />
-      </c:when>
-    </c:choose>
-     <div
+    <c:if test="${empty productList}">
+      <div style="text-align:center;padding:5rem 2rem;background:var(--white);border:1.5px dashed var(--border);border-radius:20px;margin-bottom:2rem;">
+        <div style="margin:0 auto 1.25rem;width:64px;height:64px;background:var(--surface);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/></svg>
+        </div>
+        <div style="font-size:1.25rem;font-weight:800;color:var(--text);margin-bottom:.5rem;">Sorry, we are out of products</div>
+        <p style="font-size:.88rem;color:var(--muted);max-width:380px;margin:0 auto 1.5rem;line-height:1.7;">
+          We are currently restocking our collection. Please check back soon — new watches arrive regularly.
+        </p>
+        <a href="${pageContext.request.contextPath}/products" style="display:inline-flex;align-items:center;gap:.4rem;padding:.65rem 1.4rem;background:var(--green);color:#fff;border-radius:10px;font-weight:700;font-size:.84rem;text-decoration:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.76"/></svg>
+          View All Collections
+        </a>
+      </div>
+    </c:if>
+    <div
       style="
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
