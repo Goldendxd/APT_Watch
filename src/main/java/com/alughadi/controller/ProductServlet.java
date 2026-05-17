@@ -1,7 +1,6 @@
 package com.alughadi.controller;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import com.alughadi.dao.CartDao;
@@ -41,12 +40,11 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("pageTitle", "Shop - Premium Watches | AluGhadi");
         request.setAttribute("pageDesc", "Browse our complete collection of premium watches. Find the perfect timepiece.");
         request.setAttribute("activeNav", "products");
-        request.setAttribute("cartProductIds", Collections.emptyList());
         Object userIdObj = SessionUtil.getAttribute(request, "authUserId");
         if (userIdObj != null) {
             int userId = (Integer) userIdObj;
             CartDao cartDao = new CartDaoImpl();
-            List<Integer> cartProductIds = cartDao.getCartProductIds(userId);
+            List<Integer> cartProductIds = cartDao.getCartProductIds((Integer) userIdObj);
 
             request.setAttribute("cartProductIds", cartProductIds);
             request.setAttribute("cartItems", cartDao.getCartItems(userId));

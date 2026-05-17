@@ -4,7 +4,6 @@
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-<jsp:include page="/WEB-INF/views/layout/head.jsp" />
 
 <section class="product-details-main pg-body">
   <div class="product-details-crumb gc reveal" aria-label="Breadcrumb">
@@ -13,7 +12,7 @@
     <a href="${pageContext.request.contextPath}/products">Products</a>
     <span class="crumb-sep" aria-hidden="true">/</span>
     <span class="crumb-current" aria-current="page">${product.name}</span>
-  </div>
+  </div>v
 
   <div class="product-details-layout">
     <div class="product-details-gallery gc reveal">
@@ -55,7 +54,7 @@
       <div class="product-details-chip-row">
         <span class="product-details-chip">${product.categoryName}</span>
         <span class="product-details-chip">${product.brand}</span>
-        <c:if test="${product.stockQuantity > 0}">
+        <c:when test="${product.stockQuantity > 0}">
           <span class="product-details-chip">Ready to Ship</span>
         </c:if>
       </div>
@@ -66,7 +65,7 @@
           <input type="hidden" name="productId" value="${product.id}">
           <input type="hidden" name="quantity" value="1">
           <c:choose>
-            <c:when test="${product.stockQuantity > 0}">
+            <c:when test="${product.inStock > 0}">
               <button class="btn-fill product-details-primary-btn" type="submit">Add to Cart &#128717;</button>
             </c:when>
             <c:otherwise>

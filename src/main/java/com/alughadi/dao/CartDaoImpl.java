@@ -14,9 +14,6 @@ public class CartDaoImpl implements CartDao {
 
     @Override
     public void addToCart(int userId, int productId, int quantity) {
-        if (quantity <= 0) {
-            return;
-        }
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
@@ -30,10 +27,7 @@ public class CartDaoImpl implements CartDao {
 
             if (rs.next()) {
                 // Already in cart — increase quantity
-                String updateSql = "UPDATE cart c " +
-                        "JOIN products p ON c.product_id = p.id " +
-                        "SET c.quantity = LEAST(c.quantity + ?, p.stock_quantity) " +
-                        "WHERE c.user_id = ? AND c.product_id = ? AND p.stock_quantity > 0";
+                String updateSql = "UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?";
                 PreparedStatement statement = conn.prepareStatement(updateSql);
                 statement.setInt(1, quantity);
                 statement.setInt(2, userId);
@@ -41,13 +35,11 @@ public class CartDaoImpl implements CartDao {
                 statement.executeUpdate();
             } else {
                 // New item — insert
-                String insertSql = "INSERT INTO cart (user_id, product_id, quantity) " +
-                        "SELECT ?, p.id, LEAST(?, p.stock_quantity) " +
-                        "FROM products p WHERE p.id = ? AND p.stock_quantity > 0";
+                String insertSql = "INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)";
                 PreparedStatement statement = conn.prepareStatement(insertSql);
                 statement.setInt(1, userId);
-                statement.setInt(2, quantity);
-                statement.setInt(3, productId);
+                statement.setInt(2, productId);
+                statement.setInt(3, quantity);
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -147,17 +139,10 @@ public class CartDaoImpl implements CartDao {
     }
     @Override
     public void updateQuantity(int cartId, int userId, int quantity) {
-        if (quantity <= 0) {
-            removeFromCart(cartId, userId);
-            return;
-        }
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
-            String sql = "UPDATE cart c " +
-                    "JOIN products p ON c.product_id = p.id " +
-                    "SET c.quantity = LEAST(?, p.stock_quantity) " +
-                    "WHERE c.id = ? AND c.user_id = ? AND p.stock_quantity > 0";
+            String sql = "UPDATE cart SET quantity = ? WHERE id = ? AND user_id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, quantity);
             statement.setInt(2, cartId);

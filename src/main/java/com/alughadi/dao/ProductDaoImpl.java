@@ -143,8 +143,6 @@ public class ProductDaoImpl implements ProductDAO {
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            DatabaseConnection.closeConnection(conn);
         }
     }
 

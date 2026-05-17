@@ -12,11 +12,7 @@ public class ImageUtil {
         if (fileName == null || fileName.isEmpty()){
             return null;
         }
-        int extensionStart = fileName.lastIndexOf(".");
-        if (extensionStart < 0 || extensionStart == fileName.length() - 1) {
-            return null;
-        }
-        String extension = fileName.substring(extensionStart).toLowerCase();
+        String extension = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
         if (!extension.equals(".jpg") && !extension.equals(".jpeg") && !extension.equals(".png") && !extension.equals(".webp")){
             return null;
         }
