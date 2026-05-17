@@ -5,6 +5,7 @@
   request.setAttribute("activeNav", "gifting");
 %>
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/head.jsp" />
 
 <%-- ===== HERO ===== --%>
 <div class="page-hero forhim-hero">

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/head.jsp" />
 
 <style>
 /* ---- Buy + Cart icon row ---- */
@@ -268,8 +269,14 @@
     </div>
   </div>
 
+
   <!-- PRODUCT CARDS SECTION (Similar to quota bar structure) -->
   <div class="reveal" style="margin-bottom: 2rem">
+    <c:choose>
+      <c:when test="${empty productList}">
+        <jsp:include page="/error.jsp" />
+      </c:when>
+    </c:choose>
      <div
       style="
         display: grid;

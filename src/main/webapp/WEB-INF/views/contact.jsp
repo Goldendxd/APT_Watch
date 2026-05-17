@@ -5,6 +5,7 @@
   request.setAttribute("pageStyle", "contact");
 %>
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/head.jsp" />
 
 <%-- ======== PAGE HERO ======== --%>
 <section class="page-hero contact-hero">

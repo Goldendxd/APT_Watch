@@ -27,6 +27,7 @@
 %>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/head.jsp" />
 
 <!-- HERO -->
 <div class="page-hero" style="min-height:28vh;">

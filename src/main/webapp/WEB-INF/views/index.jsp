@@ -4,6 +4,7 @@ prefix="c" uri="jakarta.tags.core" %> <% request.setAttribute("pageTitle",
 "Discover premium watches with timeless design and exceptional quality.");
 request.setAttribute("activeNav", "home"); %>
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/head.jsp" />
 
 <!-- HERO -->
 <section class="home-hero">
