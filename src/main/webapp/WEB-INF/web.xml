@@ -38,15 +38,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>aboutPage</servlet-name>
-        <jsp-file>/WEB-INF/views/about.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>aboutPage</servlet-name>
-        <url-pattern>/about</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>contactPage</servlet-name>
         <jsp-file>/WEB-INF/views/contact.jsp</jsp-file>
     </servlet>
@@ -56,30 +47,21 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>logoutPage</servlet-name>
-        <jsp-file>/WEB-INF/views/logout.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>logoutPage</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>adminPage</servlet-name>
-        <jsp-file>/WEB-INF/views/admin.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>adminPage</servlet-name>
-        <url-pattern>/admin</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>checkoutPage</servlet-name>
         <jsp-file>/WEB-INF/views/checkout.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>checkoutPage</servlet-name>
         <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AboutUs</servlet-name>
+        <jsp-file>/WEB-INF/views/about.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AboutUs</servlet-name>
+        <url-pattern>/about</url-pattern>
     </servlet-mapping>
 
 </web-app>

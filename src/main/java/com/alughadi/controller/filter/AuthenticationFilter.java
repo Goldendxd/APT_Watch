@@ -70,6 +70,21 @@ public class AuthenticationFilter implements Filter {
                 req.setAttribute("grandTotal", cartDao.getGrandTotal(userId));
             }
         }
+
+        boolean isAdminPath = "/admin".equals(path);
+        if (isAdminPath){
+            if (!isLoggedIn){
+                res.sendRedirect(contextPath+"/login");
+                return;
+            }
+            Object role = SessionUtil.getAttribute(req, "authRole");
+
+            if (!"admin".equals(role)){
+                res.sendRedirect(contextPath+"/home");
+                return;
+            }
+        }
+
         chain.doFilter(request, response);
 //        boolean isAuthPage = "/login".equals(path) || "/register".equals(path);
 //

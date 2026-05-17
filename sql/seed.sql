@@ -15,6 +15,7 @@ CREATE TABLE IF NOT Exists users (
     username    VARCHAR(50)   NOT NULL UNIQUE,
     email       VARCHAR(150)  NOT NULL UNIQUE,
     password    VARCHAR(255)  NOT NULL,
+    role        varchar(20)   NOT NULL DEFAULT 'customer',
     is_active   TINYINT(1)    NOT NULL DEFAULT 1,
     is_verified TINYINT(1)    NOT NULL DEFAULT 0,
     created_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -80,17 +81,17 @@ INSERT INTO categories (id, name, slug) VALUES
   (5, 'Womens',  'womens');
 
 -- Users  (BCrypt placeholder hashes — replace before production)
-INSERT INTO users (id, username, email, password, is_active, is_verified) VALUES
-  (1,  'sabin',  'sabin@example.com',  '$2a$10$dummyhashplaceholder0001', 1, 1),
-  (2,  'ram',    'ram@example.com',    '$2a$10$dummyhashplaceholder0002', 1, 1),
-  (3,  'hari',   'hari@example.com',   '$2a$10$dummyhashplaceholder0003', 1, 0),
-  (4,  'sita',   'sita@example.com',   '$2a$10$dummyhashplaceholder0004', 1, 1),
-  (5,  'gita',   'gita@example.com',   '$2a$10$dummyhashplaceholder0005', 1, 0),
-  (6,  'mina',   'mina@example.com',   '$2a$10$dummyhashplaceholder0006', 1, 1),
-  (7,  'dipesh', 'dipesh@example.com', '$2a$10$dummyhashplaceholder0007', 1, 1),
-  (8,  'sunita', 'sunita@example.com', '$2a$10$dummyhashplaceholder0008', 1, 1),
-  (9,  'rohan',  'rohan@example.com',  '$2a$10$dummyhashplaceholder0009', 1, 0),
-  (10, 'priya',  'priya@example.com',  '$2a$10$dummyhashplaceholder0010', 1, 1);
+INSERT INTO users (id, username, email, password, role, is_active, is_verified) VALUES
+  (1,  'sabin',  'sabin@example.com',  '$2a$10$dummyhashplaceholder0001', 'admin', 1, 1),
+  (2,  'ram',    'ram@example.com',    '$2a$10$dummyhashplaceholder0002', 'customer', 1, 1),
+  (3,  'hari',   'hari@example.com',   '$2a$10$dummyhashplaceholder0003', 'customer',1, 0),
+  (4,  'sita',   'sita@example.com',   '$2a$10$dummyhashplaceholder0004', 'customer',1, 1),
+  (5,  'gita',   'gita@example.com',   '$2a$10$dummyhashplaceholder0005', 'customer',1, 0),
+  (6,  'mina',   'mina@example.com',   '$2a$10$dummyhashplaceholder0006', 'customer',1, 1),
+  (7,  'dipesh', 'dipesh@example.com', '$2a$10$dummyhashplaceholder0007', 'customer',1, 1),
+  (8,  'sunita', 'sunita@example.com', '$2a$10$dummyhashplaceholder0008', 'customer',1, 1),
+  (9,  'rohan',  'rohan@example.com',  '$2a$10$dummyhashplaceholder0009', 'customer',1, 0),
+  (10, 'priya',  'priya@example.com',  '$2a$10$dummyhashplaceholder0010', 'customer',1, 1);
 
 -- Products
 --   image_url is relative to context root so the JSP renders:

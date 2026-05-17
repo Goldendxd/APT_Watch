@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (ValidationUtil.isNullOrEmpty(username) || ValidationUtil.isNullOrEmpty(username)){
+        if (ValidationUtil.isNullOrEmpty(username) || ValidationUtil.isNullOrEmpty(password)){
             request.setAttribute("loginError", "Please enter both username and password. ");
             request.getRequestDispatcher("/WEB-INF/views/login.jsp")
                     .forward(request, response);
@@ -62,8 +62,13 @@ public class LoginServlet extends HttpServlet {
 
         SessionUtil.setAttribute(request, "authUser", user.getUsername());
         SessionUtil.setAttribute(request, "authUserId", user.getId());
-        SessionUtil.setAttribute(request, "authRole", user.getId());
-        response.sendRedirect(request.getContextPath() + "/home");
+        SessionUtil.setAttribute(request, "authRole", user.getRole());
+        if("admin".equalsIgnoreCase(user.getRole())) {
+            response.sendRedirect(request.getContextPath()+"/admin");
+        } else {
+            response.sendRedirect(request.getContextPath()+"/home");
+        }
+
     }
 
 }

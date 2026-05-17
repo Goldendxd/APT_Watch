@@ -82,6 +82,89 @@ public class ProductDaoImpl implements ProductDAO {
         return null;
     }
 
+    @Override
+    public boolean addProduct(Product product){
+        Connection conn = null;
+        try{
+            conn = DatabaseConnection.getConnection();
+
+            String sql = "INSERT INTO products " +
+                    "(category_id, name, brand, description, price, old_price, rating, image_url, in_stock) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, product.getCategoryId());
+            stmt.setString(2, product.getName());
+            stmt.setString(3, product.getBrand());
+            stmt.setString(4, product.getDescription());
+            stmt.setBigDecimal(5, product.getPrice());
+            stmt.setBigDecimal(6, product.getOldPrice());
+            stmt.setDouble(7, product.getRating());
+            stmt.setString(8, product.getImageUrl());
+            stmt.setBoolean(9, product.isInStock());
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error adding product: " + e.getMessage());
+            return false;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+
+    }
+
+    @Override
+    public boolean updateProduct(Product product){
+        Connection conn = null;
+
+        try{
+            conn = DatabaseConnection.getConnection();
+
+            String sql = "UPDATE products SET " +
+                    "category_id = ?, name = ?, brand = ?, description = ?, price = ?, " +
+                    "old_price = ?, rating = ?, image_url = ?, in_stock = ? " +
+                    "WHERE id = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, product.getCategoryId());
+            stmt.setString(2, product.getName());
+            stmt.setString(3, product.getBrand());
+            stmt.setString(4, product.getDescription());
+            stmt.setBigDecimal(5, product.getPrice());
+            stmt.setBigDecimal(6, product.getOldPrice());
+            stmt.setDouble(7, product.getRating());
+            stmt.setString(8, product.getImageUrl());
+            stmt.setBoolean(9, product.isInStock());
+            stmt.setInt(10, product.getId());
+
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteProduct(int id){
+        Connection conn = null;
+
+        try {
+            conn = DatabaseConnection.getConnection();
+
+            String sql = "DELETE FROM products WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error deleting product: " + e.getMessage());
+            return false;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+
 //    public int getTotalInStockCount(){
 //        Connection conn = null;
 //

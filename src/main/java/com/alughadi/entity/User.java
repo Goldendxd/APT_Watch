@@ -10,6 +10,7 @@ public class User {
     private String phone;
     private String email;
     private String password;
+    private String role;
     private Date date_of_birth;
     private String gender;
     private String profile_image;
@@ -115,6 +116,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Date getDate_of_birth() {

@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                return new User(
+                 User user = new User(
                         rs.getInt("id"),
                         rs.getString("username"),
                         rs.getString("email"),
@@ -68,6 +68,8 @@ public class UserDaoImpl implements UserDao {
                         rs.getTimestamp("created_at"),
                         rs.getTimestamp("updated_at")
                 );
+                user.setRole(rs.getString("role"));
+                return user;
             }
         } catch (SQLException e) {
             System.out.println("Error finding user by username: " + e.getMessage());
@@ -87,7 +89,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                return new User(
+                User user = new User(
                         rs.getInt("id"),
                         rs.getString("username"),
                         rs.getString("email"),
@@ -95,6 +97,8 @@ public class UserDaoImpl implements UserDao {
                         rs.getTimestamp("created_at"),
                         rs.getTimestamp("updated_at")
                 );
+                user.setRole(rs.getString("role"));
+                return user;
             }
         } catch (SQLException e) {
             System.out.println("Error finding user by email: " + e.getMessage());
