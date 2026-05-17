@@ -307,13 +307,23 @@
                 <input type="hidden" name="productId" value="${product.id}">
                 <input type="hidden" name="quantity" value="1">
                 <input type="hidden" name="buyNow" value="true">
-                <button class="btn-fill prod-buy-btn" type="submit" style="flex:1;padding:0.55rem 0.4rem;font-size:0.78rem;font-weight:700;border-radius:10px;text-align:center;">Buy Now</button>
+                <c:choose>
+                  <c:when test="${product.stockQuantity > 0}">
+                    <button class="btn-fill prod-buy-btn" type="submit" style="flex:1;padding:0.55rem 0.4rem;font-size:0.78rem;font-weight:700;border-radius:10px;text-align:center;">Buy Now</button>
+                  </c:when>
+                  <c:otherwise>
+                    <button class="btn-fill prod-buy-btn" type="button" disabled style="flex:1;padding:0.55rem 0.4rem;font-size:0.78rem;font-weight:700;border-radius:10px;text-align:center;background:#999;cursor:not-allowed;">Out of Stock</button>
+                  </c:otherwise>
+                </c:choose>
               </form>
               <form action="${pageContext.request.contextPath}/cart" method="post" style="flex:1;display:flex;">
                 <input type="hidden" name="action" value="add">
                 <input type="hidden" name="productId" value="${product.id}">
                 <input type="hidden" name="quantity" value="1">
                 <c:choose>
+                  <c:when test="${product.stockQuantity <= 0}">
+                    <button type="button" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#ddd;color:#777;border:1.5px solid #ccc;cursor:not-allowed;font-family:inherit;text-align:center;">Out of Stock</button>
+                  </c:when>
                   <c:when test="${cartProductIds.contains(product.id)}">
                     <button type="submit" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#1a6b38;color:#fff;border:1.5px solid #1a6b38;cursor:default;font-family:inherit;text-align:center;">Added &#10003;</button>
                   </c:when>

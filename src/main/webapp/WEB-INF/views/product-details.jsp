@@ -12,7 +12,7 @@
     <a href="${pageContext.request.contextPath}/products">Products</a>
     <span class="crumb-sep" aria-hidden="true">/</span>
     <span class="crumb-current" aria-current="page">${product.name}</span>
-  </div>v
+  </div>
 
   <div class="product-details-layout">
     <div class="product-details-gallery gc reveal">
@@ -26,7 +26,7 @@
       <div class="product-details-brand-row">
         <span class="product-details-brand">${product.brand}</span>
         <c:choose>
-          <c:when test="${product.inStock}">
+          <c:when test="${product.stockQuantity > 0}">
             <span class="product-details-stock">In Stock</span>
           </c:when>
           <c:otherwise>
@@ -54,7 +54,7 @@
       <div class="product-details-chip-row">
         <span class="product-details-chip">${product.categoryName}</span>
         <span class="product-details-chip">${product.brand}</span>
-        <c:if test="${product.inStock}">
+        <c:if test="${product.stockQuantity > 0}">
           <span class="product-details-chip">Ready to Ship</span>
         </c:if>
       </div>
@@ -64,14 +64,28 @@
           <input type="hidden" name="action" value="add">
           <input type="hidden" name="productId" value="${product.id}">
           <input type="hidden" name="quantity" value="1">
-          <button class="btn-fill product-details-primary-btn" type="submit">Add to Cart &#128717;</button>
+          <c:choose>
+            <c:when test="${product.stockQuantity > 0}">
+              <button class="btn-fill product-details-primary-btn" type="submit">Add to Cart &#128717;</button>
+            </c:when>
+            <c:otherwise>
+              <button class="btn-fill product-details-primary-btn" type="button" disabled style="background:#999;cursor:not-allowed;">Out of Stock</button>
+            </c:otherwise>
+          </c:choose>
         </form>
         <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
           <input type="hidden" name="action" value="add">
           <input type="hidden" name="productId" value="${product.id}">
           <input type="hidden" name="quantity" value="1">
           <input type="hidden" name="buyNow" value="true">
-          <button class="btn-out-nav product-details-secondary-btn" type="submit">Buy Now</button>
+          <c:choose>
+            <c:when test="${product.stockQuantity > 0}">
+              <button class="btn-out-nav product-details-secondary-btn" type="submit">Buy Now</button>
+            </c:when>
+            <c:otherwise>
+              <button class="btn-out-nav product-details-secondary-btn" type="button" disabled style="cursor:not-allowed;opacity:.6;">Unavailable</button>
+            </c:otherwise>
+          </c:choose>
         </form>
       </div>
     </aside>
@@ -98,7 +112,7 @@
         </div>
         <div class="product-details-feature-item">
           <strong>Availability</strong>
-          <span>${product.inStock ? 'In Stock — Ready to ship' : 'Currently unavailable'}</span>
+          <span>${product.stockQuantity > 0 ? 'In Stock - Ready to ship' : 'Currently unavailable'}</span>
         </div>
       </div>
     </div>

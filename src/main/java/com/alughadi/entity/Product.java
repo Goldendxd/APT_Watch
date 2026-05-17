@@ -14,6 +14,7 @@ public class Product {
     private double rating;
     private String imageUrl;
     private boolean inStock;
+    private int stockQuantity;
     private Timestamp createdAt;
     private String categoryName;
 
@@ -117,6 +118,14 @@ public class Product {
 
     public void setInStock(boolean inStock) {
         this.inStock = inStock;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public Timestamp getCreatedAt() {
