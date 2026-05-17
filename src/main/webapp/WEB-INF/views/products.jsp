@@ -5,6 +5,114 @@
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
+<style>
+/* ---- Buy + Cart icon row ---- */
+.prod-actions {
+  display:     flex;
+  gap:         0.5rem;
+  margin-top:  0.75rem;
+  align-items: stretch;
+}
+.prod-buy-btn {
+  flex:            1;
+  justify-content: center;
+  padding:         0.65rem 1rem;
+  font-size:       0.85rem;
+  line-height:     1;
+}
+.prod-cart-icon-btn {
+  flex-shrink:     0;
+  width:           42px;
+  border-radius:   11px;
+  border:          1.5px solid var(--green-mid);
+  background:      var(--green-light);
+  color:           var(--green);
+  font-size:       1rem;
+  cursor:          pointer;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  line-height:     1;
+  transition:      all 0.2s var(--ease);
+}
+.prod-cart-icon-btn:hover {
+  background:   var(--green);
+  border-color: var(--green);
+  color:        #fff;
+  transform:    translateY(-2px);
+  box-shadow:   0 4px 14px rgba(26,107,56,0.3);
+}
+
+/* ---- Wishlist heart button ---- */
+.prod-save {
+  position:        absolute;
+  top:             0.75rem;
+  left:            0.75rem;
+  width:           40px;
+  height:          40px;
+  border-radius:   50%;
+  background:      rgba(255,255,255,0.95);
+  border:          none;
+  cursor:          pointer;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  box-shadow:      0 2px 10px rgba(0,0,0,0.12);
+  transition:      all 0.22s cubic-bezier(0.16,1,0.3,1);
+  z-index:         5;
+  overflow:        visible;
+  padding:         0;
+}
+.prod-save:hover {
+  transform:    scale(1.15);
+  box-shadow:   0 5px 18px rgba(0,0,0,0.18);
+  background:   #fff;
+}
+
+/* Heart icon */
+.wish-heart {
+  font-size:  1.22rem;
+  line-height: 1;
+  color:      #ccc;
+  transition: all 0.22s;
+  display:    block;
+}
+.prod-save.saved .wish-heart {
+  color:     #e53;
+  animation: heartPop 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+.prod-save:hover .wish-heart { color: #e53; }
+
+/* Tooltip label */
+.wish-tip {
+  position:     absolute;
+  left:         50%;
+  top:          calc(100% + 7px);
+  transform:    translateX(-50%);
+  background:   rgba(0,0,0,0.78);
+  color:        #fff;
+  font-size:    0.64rem;
+  font-weight:  700;
+  white-space:  nowrap;
+  padding:      0.28rem 0.65rem;
+  border-radius: 7px;
+  pointer-events: none;
+  opacity:      0;
+  transition:   opacity 0.18s;
+  letter-spacing: 0.04em;
+}
+.prod-save:hover .wish-tip   { opacity: 1; }
+.prod-save.saved  .wish-tip  { content: 'Saved!'; }
+
+/* Wishlist filter tab pill */
+#fav-tab { position: relative; }
+</style>
+
 <!-- HERO -->
 <div class="page-hero">
   <div class="ph-img">
@@ -65,52 +173,53 @@
     <span style="font-size: 0.78rem; font-weight: 700; color: var(--muted)"
       >Filter:</span
     >
-    <button
-      class="tab active"
+    <a
+      class="tab ${activeCategory == 'all' ? 'active' : ''}"
       style="padding: 0.4rem 1rem"
-      onclick="filterProducts('all', this)"
+      href="${pageContext.request.contextPath}/products"
     >
       All
-    </button>
-    <button
-      class="tab"
+    </a>
+    <a
+      class="tab ${activeCategory == 'luxury' ? 'active' : ''}"
       style="padding: 0.4rem 1rem"
-      onclick="filterProducts('luxury', this)"
+      href="${pageContext.request.contextPath}/products?category=luxury"
     >
       Luxury
-    </button>
-    <button
-      class="tab"
+    </a>
+    <a
+      class="tab ${activeCategory == 'sports' ? 'active' : ''}"
       style="padding: 0.4rem 1rem"
-      onclick="filterProducts('sports', this)"
+      href="${pageContext.request.contextPath}/products?category=sports"
     >
       Sports
-    </button>
-    <button
-      class="tab"
+    </a>
+    <a
+      class="tab ${activeCategory == 'classic' ? 'active' : ''}"
       style="padding: 0.4rem 1rem"
-      onclick="filterProducts('classic', this)"
+      href="${pageContext.request.contextPath}/products?category=classic"
     >
       Classic
-    </button>
-    <button
-      class="tab"
+    </a>
+    <a
+      class="tab ${activeCategory == 'smart' ? 'active' : ''}"
       style="padding: 0.4rem 1rem"
-      onclick="filterProducts('smart', this)"
+      href="${pageContext.request.contextPath}/products?category=smart"
     >
       Smart
-    </button>
-    <button
-      class="tab"
+    </a>
+    <a
+      class="tab ${activeCategory == 'womens' ? 'active' : ''}"
       style="padding: 0.4rem 1rem"
-      onclick="filterProducts('womens', this)"
+      href="${pageContext.request.contextPath}/products?category=womens"
     >
       Women's
-    </button>
+    </a>
     <button
       class="tab"
       id="fav-tab"
       style="padding: 0.4rem 1rem"
+      type="button"
       onclick="filterProducts('wishlist', this)"
     >
       Wishlist
@@ -336,118 +445,8 @@
 </div>
 <!-- /pg-body -->
 
-<style>
-/* ---- Buy + Cart icon row ---- */
-.prod-actions {
-  display:     flex;
-  gap:         0.5rem;
-  margin-top:  0.75rem;
-  align-items: stretch;
-}
-.prod-buy-btn {
-  flex:            1;
-  justify-content: center;
-  padding:         0.65rem 1rem;
-  font-size:       0.85rem;
-  line-height:     1;
-}
-.prod-cart-icon-btn {
-  flex-shrink:     0;
-  width:           42px;
-  border-radius:   11px;
-  border:          1.5px solid var(--green-mid);
-  background:      var(--green-light);
-  color:           var(--green);
-  font-size:       1rem;
-  cursor:          pointer;
-  display:         flex;
-  align-items:     center;
-  justify-content: center;
-  line-height:     1;
-  transition:      all 0.2s var(--ease);
-}
-.prod-cart-icon-btn:hover {
-  background:   var(--green);
-  border-color: var(--green);
-  color:        #fff;
-  transform:    translateY(-2px);
-  box-shadow:   0 4px 14px rgba(26,107,56,0.3);
-}
-
-/* ---- Wishlist heart button ---- */
-.prod-save {
-  position:        absolute;
-  top:             0.75rem;
-  left:            0.75rem;
-  width:           40px;
-  height:          40px;
-  border-radius:   50%;
-  background:      rgba(255,255,255,0.95);
-  border:          none;
-  cursor:          pointer;
-  display:         flex;
-  align-items:     center;
-  justify-content: center;
-  box-shadow:      0 2px 10px rgba(0,0,0,0.12);
-  transition:      all 0.22s cubic-bezier(0.16,1,0.3,1);
-  z-index:         5;
-  overflow:        visible;
-  padding:         0;
-}
-.prod-save:hover {
-  transform:    scale(1.15);
-  box-shadow:   0 5px 18px rgba(0,0,0,0.18);
-  background:   #fff;
-}
-
-/* Heart icon */
-.wish-heart {
-  font-size:  1.22rem;
-  line-height: 1;
-  color:      #ccc;
-  transition: all 0.22s;
-  display:    block;
-}
-.prod-save.saved .wish-heart {
-  color:     #e53;
-  animation: heartPop 0.35s cubic-bezier(0.16,1,0.3,1);
-}
-@keyframes heartPop {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(1.45); }
-  100% { transform: scale(1); }
-}
-.prod-save:hover .wish-heart { color: #e53; }
-
-/* Tooltip label */
-.wish-tip {
-  position:     absolute;
-  left:         50%;
-  top:          calc(100% + 7px);
-  transform:    translateX(-50%);
-  background:   rgba(0,0,0,0.78);
-  color:        #fff;
-  font-size:    0.64rem;
-  font-weight:  700;
-  white-space:  nowrap;
-  padding:      0.28rem 0.65rem;
-  border-radius: 7px;
-  pointer-events: none;
-  opacity:      0;
-  transition:   opacity 0.18s;
-  letter-spacing: 0.04em;
-}
-.prod-save:hover .wish-tip   { opacity: 1; }
-.prod-save.saved  .wish-tip  { content: 'Saved!'; }
-
-/* Wishlist filter tab pill */
-#fav-tab { position: relative; }
-</style>
-
 <script>
   var WISH_KEY = 'alughadi_wishlist';
-  var _currentFilter = 'all';
-  var CTX = '${pageContext.request.contextPath}';
 
   function getWishlist() {
     try { return JSON.parse(localStorage.getItem(WISH_KEY) || '[]'); }
@@ -455,7 +454,6 @@
   }
   function saveWishlist(arr) { localStorage.setItem(WISH_KEY, JSON.stringify(arr)); }
 
-  /* Sync heart buttons on load */
   function syncHearts() {
     var wish = getWishlist();
     document.querySelectorAll('.product-card').forEach(function(card) {
@@ -478,11 +476,20 @@
   function updateWishlistCount() {
     var wish = getWishlist();
     var tab  = document.getElementById('fav-tab');
+    var count = document.getElementById('fav-count');
+    var empty = document.getElementById('fav-empty');
     if (!tab) return;
-    if (wish.length > 0) {
-      tab.innerHTML = '&#9829; Wishlist <span style="background:var(--green);color:#fff;font-size:0.6rem;padding:0.1rem 0.45rem;border-radius:99px;margin-left:0.3rem;font-weight:700;">' + wish.length + '</span>';
-    } else {
-      tab.innerHTML = '&#9825; Wishlist';
+    if (count) {
+      if (wish.length > 0) {
+        count.style.display = 'inline-flex';
+        count.textContent = wish.length;
+      } else {
+        count.style.display = 'none';
+        count.textContent = '';
+      }
+    }
+    if (empty) {
+      empty.style.display = wish.length === 0 ? 'block' : 'none';
     }
   }
 
@@ -512,29 +519,21 @@
   }
 
   function filterProducts(cat, tabBtn) {
-    _currentFilter = cat;
     document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
     tabBtn.classList.add('active');
     var cards = document.querySelectorAll('.product-card');
     var empty = document.getElementById('fav-empty');
-    if (cat === 'wishlist') {
-      var wish = getWishlist();
-      var shown = 0;
-      cards.forEach(function(card) {
-        var id = card.getAttribute('data-id');
-        if (wish.indexOf(id) !== -1) { card.style.display = ''; shown++; }
-        else { card.style.display = 'none'; }
-      });
+    var wish = getWishlist();
+    var shown = 0;
+    cards.forEach(function(card) {
+      var id = card.getAttribute('data-id');
+      if (wish.indexOf(id) !== -1) { card.style.display = ''; shown++; }
+      else { card.style.display = 'none'; }
+    });
+    if (empty) {
       empty.style.display = shown === 0 ? 'block' : 'none';
-    } else {
-      empty.style.display = 'none';
-      cards.forEach(function(card) {
-        var cc = card.getAttribute('data-category');
-        card.style.display = (cat === 'all' || cc === cat || cc === cat + 's') ? '' : 'none';
-      });
     }
   }
-
 
   /* Init */
   syncHearts();

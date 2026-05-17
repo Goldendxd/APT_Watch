@@ -1,27 +1,42 @@
 package com.alughadi.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import com.alughadi.dao.CartDao;
 import com.alughadi.dao.CartDaoImpl;
 import com.alughadi.dao.ProductDAO;
 import com.alughadi.dao.ProductDaoImpl;
 import com.alughadi.entity.Product;
 import com.alughadi.utils.SessionUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
-import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/products")
 public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductDAO productDAO = new ProductDaoImpl();
-        List<Product> productList = productDAO.getAllProducts();
+        String categoryParam = request.getParameter("category");
+        String activeCategory = "all";
+        List<Product> productList;
+
+        if (categoryParam != null) {
+            categoryParam = categoryParam.trim();
+        }
+
+        if (categoryParam != null && !categoryParam.isEmpty() && !"all".equalsIgnoreCase(categoryParam)) {
+            productList = productDAO.getProductsByCategory(categoryParam);
+            activeCategory = categoryParam.toLowerCase();
+        } else {
+            productList = productDAO.getAllProducts();
+        }
+
         request.setAttribute("productList", productList);
+        request.setAttribute("activeCategory", activeCategory);
         request.setAttribute("pageTitle", "Shop - Premium Watches | AluGhadi");
         request.setAttribute("pageDesc", "Browse our complete collection of premium watches. Find the perfect timepiece.");
         request.setAttribute("activeNav", "products");

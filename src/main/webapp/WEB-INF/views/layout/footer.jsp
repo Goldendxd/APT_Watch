@@ -71,6 +71,10 @@
       <button class="modal-close" onclick="closeModal('cart')" aria-label="Close cart">&#10005;</button>
       <div class="modal-h">&#128717; Shopping Cart</div>
       <div class="modal-sub">Your selected items</div>
+      <c:set var="currentPage" value="${pageContext.request.requestURI}" />
+      <c:if test="${not empty pageContext.request.queryString}">
+        <c:set var="currentPage" value="${currentPage}?${pageContext.request.queryString}" />
+      </c:if>
       <div id="cart-items" class="cart-items-wrap">
         <c:choose>
           <c:when test="${empty cartItems}">
@@ -103,6 +107,7 @@
                         <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
                           <input type="hidden" name="action" value="remove">
                           <input type="hidden" name="cartId" value="${cart.id}">
+                          <input type="hidden" name="redirectTo" value="${currentPage}">
                           <button class="cart-qty-btn" type="submit" title="Remove item">&#8722;</button>
                         </form>
                       </c:when>
@@ -111,6 +116,7 @@
                           <input type="hidden" name="action" value="update">
                           <input type="hidden" name="cartId" value="${cart.id}">
                           <input type="hidden" name="quantity" value="${cart.quantity - 1}">
+                          <input type="hidden" name="redirectTo" value="${currentPage}">
                           <button class="cart-qty-btn" type="submit" title="Decrease quantity">&#8722;</button>
                         </form>
                       </c:otherwise>
@@ -122,6 +128,7 @@
                       <input type="hidden" name="action" value="update">
                       <input type="hidden" name="cartId" value="${cart.id}">
                       <input type="hidden" name="quantity" value="${cart.quantity + 1}">
+                      <input type="hidden" name="redirectTo" value="${currentPage}">
                       <button class="cart-qty-btn" type="submit" title="Increase quantity">&#43;</button>
                     </form>
                   </div>
@@ -129,6 +136,7 @@
                   <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
                     <input type="hidden" name="action" value="remove">
                     <input type="hidden" name="cartId" value="${cart.id}">
+                    <input type="hidden" name="redirectTo" value="${currentPage}">
                     <button class="cart-delete-btn" type="submit" title="Remove from cart">&#128465;</button>
                   </form>
                 </div>

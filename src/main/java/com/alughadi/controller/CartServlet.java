@@ -1,5 +1,8 @@
 package com.alughadi.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import com.alughadi.dao.CartDao;
 import com.alughadi.dao.CartDaoImpl;
 import com.alughadi.entity.Cart;
@@ -10,9 +13,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.util.List;
 
 /**
  * CartServlet — handles cart operations.
@@ -67,7 +67,6 @@ public class CartServlet extends HttpServlet {
             int productId = Integer.parseInt(request.getParameter("productId"));
             int quantity  = Integer.parseInt(request.getParameter("quantity"));
             cartDao.addToCart(userId, productId, quantity);
-//            request.getSession().setAttribute("justAddedProductId", productId);
 
         } else if (action.equals("remove")) {
             int cartId = Integer.parseInt(request.getParameter("cartId"));
@@ -83,6 +82,16 @@ public class CartServlet extends HttpServlet {
         }
         if (request.getParameter("buyNow") != null) {
             response.sendRedirect(request.getContextPath() + "/checkout");
+            return;
+        }
+        String redirectTo = request.getParameter("redirectTo");
+        if (redirectTo != null && !redirectTo.isBlank()) {
+            response.sendRedirect(redirectTo);
+            return;
+        }
+        String referer = request.getHeader("Referer");
+        if (referer != null && !referer.isBlank()) {
+            response.sendRedirect(referer);
             return;
         }
         response.sendRedirect(request.getContextPath() + "/products");

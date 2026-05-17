@@ -12,7 +12,7 @@
     <a href="${pageContext.request.contextPath}/products">Products</a>
     <span class="crumb-sep" aria-hidden="true">/</span>
     <span class="crumb-current" aria-current="page">${product.name}</span>
-  </div>
+  </div>v
 
   <div class="product-details-layout">
     <div class="product-details-gallery gc reveal">
