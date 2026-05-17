@@ -3,8 +3,11 @@
 <%--request.setAttribute("pageDesc", "Find the perfect watch gift for him or her.--%>
 <%--Curated top picks from AluGhadi."); request.setAttribute("activeNav",--%>
 <%--"gifting"); %>--%>
-<jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <jsp:include page="/WEB-INF/views/layout/head.jsp" />
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 <%-- ===== HERO — video background, minimal copy ===== --%>
 <section class="gift-hero">
   <video class="gift-hero-video" autoplay muted loop playsinline preload="auto">
@@ -49,126 +52,142 @@
     </div>
 
     <div class="gift-picks-grid">
-      <article class="gift-pick">
-        <div class="gift-pick-img">
-          <img
-            src="${pageContext.request.contextPath}/static/images/for-him/him-1.webp"
-            alt="Executive Classic"
-          />
-          <span class="gift-pick-badge">For Him</span>
-        </div>
-        <div class="gift-pick-info">
-          <div class="gift-pick-brand">Classic Collection</div>
-          <div class="gift-pick-name">Executive Classic</div>
-          <div class="gift-pick-price">From NPR 8,000</div>
-          <a
-            href="${pageContext.request.contextPath}/product-details?id=9"
-            class="gift-pick-link"
-            >View Details &#8594;</a
-          >
-        </div>
-      </article>
+      <c:forEach var="product" items="${productList}" begin="0" end="5">
+        <article class="gift-pick">
+          <div class="gift-pick-img">
+            <img
+                    src="${pageContext.request.contextPath}${product.imageUrl}"
+                    alt="${product.name}"
+            />
 
-      <article class="gift-pick">
-        <div class="gift-pick-img">
-          <img
-            src="${pageContext.request.contextPath}/static/images/for-her/her-1.webp"
-            alt="Elegant Rose"
-          />
-          <span class="gift-pick-badge gift-pick-badge-her">For Her</span>
-        </div>
-        <div class="gift-pick-info">
-          <div class="gift-pick-brand">Elegant Series</div>
-          <div class="gift-pick-name">Rose Gold Elegance</div>
-          <div class="gift-pick-price">From NPR 6,500</div>
-          <a
-            href="${pageContext.request.contextPath}/product-details?id=17"
-            class="gift-pick-link"
-            >View Details &#8594;</a
-          >
-        </div>
-      </article>
+            <c:choose>
+              <c:when test="${product.categoryName == 'Womens'}">
+                <span class="gift-pick-badge gift-pick-badge-her">For Her</span>
+              </c:when>
+              <c:otherwise>
+                <span class="gift-pick-badge">For Him</span>
+              </c:otherwise>
+            </c:choose>
+          </div>
 
-      <article class="gift-pick">
-        <div class="gift-pick-img">
-          <img
-            src="${pageContext.request.contextPath}/static/images/for-him/him-2.webp"
-            alt="Sport Pro"
-          />
-          <span class="gift-pick-badge">For Him</span>
-        </div>
-        <div class="gift-pick-info">
-          <div class="gift-pick-brand">Sport Collection</div>
-          <div class="gift-pick-name">Active Sport Pro</div>
-          <div class="gift-pick-price">From NPR 5,500</div>
-          <a
-            href="${pageContext.request.contextPath}/product-details?id=5"
-            class="gift-pick-link"
-            >View Details &#8594;</a
-          >
-        </div>
-      </article>
+          <div class="gift-pick-info">
+            <div class="gift-pick-brand">${product.brand}</div>
+            <div class="gift-pick-name">${product.name}</div>
+            <div class="gift-pick-price">
+              From NPR <fmt:formatNumber value="${product.price}" pattern="#,##0"/>
+            </div>
 
-      <article class="gift-pick">
-        <div class="gift-pick-img">
-          <img
-            src="${pageContext.request.contextPath}/static/images/for-her/her-4.webp"
-            alt="Prestige Jewelled"
-          />
-          <span class="gift-pick-badge gift-pick-badge-her">For Her</span>
-        </div>
-        <div class="gift-pick-info">
-          <div class="gift-pick-brand">Prestige Series</div>
-          <div class="gift-pick-name">Jewelled Prestige</div>
-          <div class="gift-pick-price">From NPR 35,000</div>
-          <a
-            href="${pageContext.request.contextPath}/product-details?id=18"
-            class="gift-pick-link"
-            >View Details &#8594;</a
-          >
-        </div>
-      </article>
-
-      <article class="gift-pick">
-        <div class="gift-pick-img">
-          <img
-            src="${pageContext.request.contextPath}/static/images/for-him/him-3.webp"
-            alt="Minimal Slim"
-          />
-          <span class="gift-pick-badge">For Him</span>
-        </div>
-        <div class="gift-pick-info">
-          <div class="gift-pick-brand">Minimal Collection</div>
-          <div class="gift-pick-name">Slim Minimal</div>
-          <div class="gift-pick-price">From NPR 7,000</div>
-          <a
-            href="${pageContext.request.contextPath}/product-details?id=12"
-            class="gift-pick-link"
-            >View Details &#8594;</a
-          >
-        </div>
-      </article>
-
-      <article class="gift-pick">
-        <div class="gift-pick-img">
-          <img
-            src="${pageContext.request.contextPath}/static/images/for-her/her-5.webp"
-            alt="Everyday Chic"
-          />
-          <span class="gift-pick-badge gift-pick-badge-her">For Her</span>
-        </div>
-        <div class="gift-pick-info">
-          <div class="gift-pick-brand">Chic Series</div>
-          <div class="gift-pick-name">Everyday Chic</div>
-          <div class="gift-pick-price">From NPR 4,500</div>
-          <a
-            href="${pageContext.request.contextPath}/product-details?id=20"
-            class="gift-pick-link"
-            >View Details &#8594;</a
-          >
-        </div>
-      </article>
+            <a
+                    href="${pageContext.request.contextPath}/product-details?id=${product.id}"
+                    class="gift-pick-link"
+            >
+              View Details &#8594;
+            </a>
+          </div>
+        </article>
+      </c:forEach>
     </div>
+
+<%--      <article class="gift-pick">--%>
+<%--        <div class="gift-pick-img">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/for-her/her-1.webp"--%>
+<%--            alt="Elegant Rose"--%>
+<%--          />--%>
+<%--          <span class="gift-pick-badge gift-pick-badge-her">For Her</span>--%>
+<%--        </div>--%>
+<%--        <div class="gift-pick-info">--%>
+<%--          <div class="gift-pick-brand">Elegant Series</div>--%>
+<%--          <div class="gift-pick-name">Rose Gold Elegance</div>--%>
+<%--          <div class="gift-pick-price">From NPR 6,500</div>--%>
+<%--          <a--%>
+<%--            href="${pageContext.request.contextPath}/product-details?id=17"--%>
+<%--            class="gift-pick-link"--%>
+<%--            >View Details &#8594;</a--%>
+<%--          >--%>
+<%--        </div>--%>
+<%--      </article>--%>
+
+<%--      <article class="gift-pick">--%>
+<%--        <div class="gift-pick-img">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/for-him/him-2.webp"--%>
+<%--            alt="Sport Pro"--%>
+<%--          />--%>
+<%--          <span class="gift-pick-badge">For Him</span>--%>
+<%--        </div>--%>
+<%--        <div class="gift-pick-info">--%>
+<%--          <div class="gift-pick-brand">Sport Collection</div>--%>
+<%--          <div class="gift-pick-name">Active Sport Pro</div>--%>
+<%--          <div class="gift-pick-price">From NPR 5,500</div>--%>
+<%--          <a--%>
+<%--            href="${pageContext.request.contextPath}/product-details?id=5"--%>
+<%--            class="gift-pick-link"--%>
+<%--            >View Details &#8594;</a--%>
+<%--          >--%>
+<%--        </div>--%>
+<%--      </article>--%>
+
+<%--      <article class="gift-pick">--%>
+<%--        <div class="gift-pick-img">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/for-her/her-4.webp"--%>
+<%--            alt="Prestige Jewelled"--%>
+<%--          />--%>
+<%--          <span class="gift-pick-badge gift-pick-badge-her">For Her</span>--%>
+<%--        </div>--%>
+<%--        <div class="gift-pick-info">--%>
+<%--          <div class="gift-pick-brand">Prestige Series</div>--%>
+<%--          <div class="gift-pick-name">Jewelled Prestige</div>--%>
+<%--          <div class="gift-pick-price">From NPR 35,000</div>--%>
+<%--          <a--%>
+<%--            href="${pageContext.request.contextPath}/product-details?id=18"--%>
+<%--            class="gift-pick-link"--%>
+<%--            >View Details &#8594;</a--%>
+<%--          >--%>
+<%--        </div>--%>
+<%--      </article>--%>
+
+<%--      <article class="gift-pick">--%>
+<%--        <div class="gift-pick-img">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/for-him/him-3.webp"--%>
+<%--            alt="Minimal Slim"--%>
+<%--          />--%>
+<%--          <span class="gift-pick-badge">For Him</span>--%>
+<%--        </div>--%>
+<%--        <div class="gift-pick-info">--%>
+<%--          <div class="gift-pick-brand">Minimal Collection</div>--%>
+<%--          <div class="gift-pick-name">Slim Minimal</div>--%>
+<%--          <div class="gift-pick-price">From NPR 7,000</div>--%>
+<%--          <a--%>
+<%--            href="${pageContext.request.contextPath}/product-details?id=12"--%>
+<%--            class="gift-pick-link"--%>
+<%--            >View Details &#8594;</a--%>
+<%--          >--%>
+<%--        </div>--%>
+<%--      </article>--%>
+
+<%--      <article class="gift-pick">--%>
+<%--        <div class="gift-pick-img">--%>
+<%--          <img--%>
+<%--            src="${pageContext.request.contextPath}/static/images/for-her/her-5.webp"--%>
+<%--            alt="Everyday Chic"--%>
+<%--          />--%>
+<%--          <span class="gift-pick-badge gift-pick-badge-her">For Her</span>--%>
+<%--        </div>--%>
+<%--        <div class="gift-pick-info">--%>
+<%--          <div class="gift-pick-brand">Chic Series</div>--%>
+<%--          <div class="gift-pick-name">Everyday Chic</div>--%>
+<%--          <div class="gift-pick-price">From NPR 4,500</div>--%>
+<%--          <a--%>
+<%--            href="${pageContext.request.contextPath}/product-details?id=20"--%>
+<%--            class="gift-pick-link"--%>
+<%--            >View Details &#8594;</a--%>
+<%--          >--%>
+<%--        </div>--%>
+<%--      </article>--%>
+<%--    </div>--%>
 
     <div class="gift-picks-footer">
       <a href="${pageContext.request.contextPath}/products" class="btn-fill"
