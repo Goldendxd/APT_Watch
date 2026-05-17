@@ -1,18 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<% request.setAttribute("pageStyle", "auth"); %>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login — AluGhadi Watches</title>
-  <meta name="description" content="Sign in to your AluGhadi account to explore premium watch collections in Nepal." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/pages/auth.css" />
-</head>
+<jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/head.jsp" />
+
 <body>
 
 <div class="auth-page">
@@ -26,12 +20,6 @@
     <div class="auth-ring auth-ring-3"></div>
 
     <div class="auth-left-content">
-
-      <!-- Logo -->
-      <a href="${pageContext.request.contextPath}/" class="auth-logo">
-        <img src="${pageContext.request.contextPath}/static/images/alughadiweblogo.png" alt="AluGhadi" class="auth-logo-img" />
-      </a>
-
       <!-- Central Brand Block -->
       <div class="auth-brand-center">
         <div class="auth-brand-eyebrow">&#9651; Nepal's Premier Watch Destination</div>

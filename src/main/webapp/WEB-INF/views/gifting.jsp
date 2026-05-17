@@ -4,6 +4,7 @@
 <%--Curated top picks from AluGhadi."); request.setAttribute("activeNav",--%>
 <%--"gifting"); %>--%>
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/head.jsp" />
 <%-- ===== HERO — video background, minimal copy ===== --%>
 <section class="gift-hero">
   <video class="gift-hero-video" autoplay muted loop playsinline preload="auto">

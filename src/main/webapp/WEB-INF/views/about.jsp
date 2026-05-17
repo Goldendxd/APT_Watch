@@ -5,6 +5,8 @@
   request.setAttribute("pageStyle", "about");
 %>
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="/WEB-INF/views/layout/head.jsp" />
+
 
 <%-- ======== PAGE HERO ======== --%>
 <section class="page-hero about-hero">
