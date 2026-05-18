@@ -77,9 +77,11 @@
       <button class="modal-close" onclick="closeModal('cart')" aria-label="Close cart">&#10005;</button>
       <div class="modal-h">Shopping Cart</div>
       <div class="modal-sub">Your selected items</div>
-      <c:set var="currentPage" value="${pageContext.request.requestURI}" />
-      <c:if test="${not empty pageContext.request.queryString}">
-        <c:set var="currentPage" value="${currentPage}?${pageContext.request.queryString}" />
+      <%-- Use the original forwarded URI so redirectTo works after a servlet forward --%>
+      <c:set var="currentPage" value="${not empty requestScope['jakarta.servlet.forward.request_uri'] ? requestScope['jakarta.servlet.forward.request_uri'] : pageContext.request.requestURI}" />
+      <c:set var="currentQS"   value="${not empty requestScope['jakarta.servlet.forward.query_string'] ? requestScope['jakarta.servlet.forward.query_string'] : pageContext.request.queryString}" />
+      <c:if test="${not empty currentQS}">
+        <c:set var="currentPage" value="${currentPage}?${currentQS}" />
       </c:if>
       <div id="cart-items" class="cart-items-wrap">
         <c:choose>
