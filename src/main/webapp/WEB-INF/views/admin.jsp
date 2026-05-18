@@ -598,7 +598,7 @@
         </div>
         <div class="fg-row">
           <div class="fg"><label for="pPrice">Price (Rs) *</label><input type="number" id="pPrice" name="price" placeholder="12500" min="0" /></div>
-          <div class="fg"><label for="pOldPrice">Original Price (Rs)</label><input type="number" id="pOldPrice" name="oldPrice" placeholder="Optional" min="0" /></div>
+          <div class="fg"><label for="pOldPrice">Old Price (Rs)</label><input type="number" id="pOldPrice" name="oldPrice" placeholder="Optional" min="0" /></div>
         </div>
         <div class="fg-row">
           <div class="fg">
