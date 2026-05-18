@@ -19,15 +19,12 @@ public class ForHimServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Product> classics = productDAO.getProductsByCategory("classic");
-        List<Product> sports   = productDAO.getProductsByCategory("sports");
-        List<Product> luxury   = productDAO.getProductsByCategory("luxury");
-        List<Product> smart    = productDAO.getProductsByCategory("smart");
+        List<Product> productList = productDAO.getAllProducts();
 
-        request.setAttribute("classicProducts", classics);
-        request.setAttribute("sportsProducts",  sports);
-        request.setAttribute("luxuryProducts",  luxury);
-        request.setAttribute("smartProducts",   smart);
+        request.setAttribute("productList", productList);
+        request.setAttribute("pageTitle", "Gifts For Him | AluGhadi Watches");
+        request.setAttribute("pageDesc", "Curated watch gifts for him.");
+        request.setAttribute("activeNav", "gifting");
 
         request.getRequestDispatcher("/WEB-INF/views/for-him.jsp").forward(request, response);
     }

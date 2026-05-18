@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%
   request.setAttribute("pageTitle", "Gifts For Her | AluGhadi Watches");
   request.setAttribute("pageDesc", "Curated watch gifts for her — elegant, expressive, and made to be treasured. Browse our women's gift collection.");
@@ -50,136 +52,139 @@
 
   <%-- Cards grid --%>
   <div class="forher-grid" id="forher-grid">
-
-    <article class="gift-pick-card reveal" data-category="elegant">
-      <img src="${pageContext.request.contextPath}/static/images/for-her/her-1.webp" alt="Elegant Essential" />
+    <c:forEach var="product" items="${productList}">
+      <article class="gift-pick-card reveal" data-category="elegant">
+        <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" />
       <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-forher-elegant">Elegant</div>
-        <div class="gift-pick-title">Elegant Essential</div>
-        <p>Refined rose gold case with a delicate mesh band. Designed for every occasion, every day.</p>
+        <div class="gift-pick-style-tag gift-pick-style-forher-elegant">${product.categoryName}</div>
+        <div class="gift-pick-title">${product.name}</div>
+        <p>${product.description}</p>
         <div class="forher-card-footer">
-          <div class="gift-pick-meta">NPR 6,500 – 12,000</div>
+          <div class="gift-pick-meta">
+            NPR <fmt:formatNumber value="${product.price}" pattern="#,##0"/>
+          </div>
           <div class="gift-card-actions">
             <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
               <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="17">
+              <input type="hidden" name="productId" value="${product.id}">
               <input type="hidden" name="quantity" value="1">
               <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
             </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=17" class="forher-card-btn">View &#8594;</a>
+            <a href="${pageContext.request.contextPath}/product-details?id=${product.id}" class="forher-card-btn">View &#8594;</a>
+            </div>
           </div>
-        </div>
       </div>
-    </article>
-
-    <article class="gift-pick-card reveal reveal-delay-1" data-category="minimal">
-      <img src="${pageContext.request.contextPath}/static/images/for-her/her-2.webp" alt="Modern Minimal" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-minimal">Minimal</div>
-        <div class="gift-pick-title">Modern Minimal</div>
-        <p>Clean white dial with a slim profile. Understated style that complements any outfit effortlessly.</p>
-        <div class="forher-card-footer">
-          <div class="gift-pick-meta">NPR 5,000 – 10,000</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="20">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=20" class="forher-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gift-pick-card reveal reveal-delay-2" data-category="bold">
-      <img src="${pageContext.request.contextPath}/static/images/for-her/her-3.webp" alt="Statement Bold" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-forher-bold">Bold</div>
-        <div class="gift-pick-title">Statement Bold</div>
-        <p>Oversized dial with diamant&eacute;-cut accents. A bold statement for the woman who owns the room.</p>
-        <div class="forher-card-footer">
-          <div class="gift-pick-meta">NPR 10,000 – 20,000</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="19">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=19" class="forher-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gift-pick-card reveal reveal-delay-3" data-category="luxury elegant">
-      <img src="${pageContext.request.contextPath}/static/images/for-her/her-4.webp" alt="Luxury Jewelled" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
-        <div class="gift-pick-title">Jewelled Luxury</div>
-        <p>Crystal-set bezel with mother-of-pearl dial. The pinnacle of feminine watchmaking.</p>
-        <div class="forher-card-footer">
-          <div class="gift-pick-meta">NPR 35,000+</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="18">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=18" class="forher-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gift-pick-card reveal" data-category="elegant minimal">
-      <img src="${pageContext.request.contextPath}/static/images/for-her/her-5.webp" alt="Everyday Chic" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-forher-elegant">Elegant</div>
-        <div class="gift-pick-title">Everyday Chic</div>
-        <p>Versatile silicone straps in pastel tones. Light, sporty, and effortlessly stylish.</p>
-        <div class="forher-card-footer">
-          <div class="gift-pick-meta">NPR 4,500 – 8,000</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="20">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=20" class="forher-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gift-pick-card reveal reveal-delay-1" data-category="luxury bold">
-      <img src="${pageContext.request.contextPath}/static/images/for-her/her-6.webp" alt="Prestige Series" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
-        <div class="gift-pick-title">Prestige Series</div>
-        <p>Swiss movement, gold-plated case. For milestones, anniversaries, and once-in-a-lifetime moments.</p>
-        <div class="forher-card-footer">
-          <div class="gift-pick-meta">NPR 50,000+</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="17">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=17" class="forher-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
+       </article>
+    </c:forEach>
   </div>
+<%--    <article class="gift-pick-card reveal reveal-delay-1" data-category="minimal">--%>
+<%--      <img src="${pageContext.request.contextPath}/static/images/for-her/her-2.webp" alt="Modern Minimal" />--%>
+<%--      <div class="gift-pick-body">--%>
+<%--        <div class="gift-pick-style-tag gift-pick-style-minimal">Minimal</div>--%>
+<%--        <div class="gift-pick-title">Modern Minimal</div>--%>
+<%--        <p>Clean white dial with a slim profile. Understated style that complements any outfit effortlessly.</p>--%>
+<%--        <div class="forher-card-footer">--%>
+<%--          <div class="gift-pick-meta">NPR 5,000 – 10,000</div>--%>
+<%--          <div class="gift-card-actions">--%>
+<%--            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">--%>
+<%--              <input type="hidden" name="action" value="add">--%>
+<%--              <input type="hidden" name="productId" value="20">--%>
+<%--              <input type="hidden" name="quantity" value="1">--%>
+<%--              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>--%>
+<%--            </form>--%>
+<%--            <a href="${pageContext.request.contextPath}/product-details?id=20" class="forher-card-btn">View &#8594;</a>--%>
+<%--          </div>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </article>--%>
 
-  <%-- Back nav --%>
+<%--    <article class="gift-pick-card reveal reveal-delay-2" data-category="bold">--%>
+<%--      <img src="${pageContext.request.contextPath}/static/images/for-her/her-3.webp" alt="Statement Bold" />--%>
+<%--      <div class="gift-pick-body">--%>
+<%--        <div class="gift-pick-style-tag gift-pick-style-forher-bold">Bold</div>--%>
+<%--        <div class="gift-pick-title">Statement Bold</div>--%>
+<%--        <p>Oversized dial with diamant&eacute;-cut accents. A bold statement for the woman who owns the room.</p>--%>
+<%--        <div class="forher-card-footer">--%>
+<%--          <div class="gift-pick-meta">NPR 10,000 – 20,000</div>--%>
+<%--          <div class="gift-card-actions">--%>
+<%--            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">--%>
+<%--              <input type="hidden" name="action" value="add">--%>
+<%--              <input type="hidden" name="productId" value="19">--%>
+<%--              <input type="hidden" name="quantity" value="1">--%>
+<%--              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>--%>
+<%--            </form>--%>
+<%--            <a href="${pageContext.request.contextPath}/product-details?id=19" class="forher-card-btn">View &#8594;</a>--%>
+<%--          </div>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </article>--%>
+
+<%--    <article class="gift-pick-card reveal reveal-delay-3" data-category="luxury elegant">--%>
+<%--      <img src="${pageContext.request.contextPath}/static/images/for-her/her-4.webp" alt="Luxury Jewelled" />--%>
+<%--      <div class="gift-pick-body">--%>
+<%--        <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>--%>
+<%--        <div class="gift-pick-title">Jewelled Luxury</div>--%>
+<%--        <p>Crystal-set bezel with mother-of-pearl dial. The pinnacle of feminine watchmaking.</p>--%>
+<%--        <div class="forher-card-footer">--%>
+<%--          <div class="gift-pick-meta">NPR 35,000+</div>--%>
+<%--          <div class="gift-card-actions">--%>
+<%--            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">--%>
+<%--              <input type="hidden" name="action" value="add">--%>
+<%--              <input type="hidden" name="productId" value="18">--%>
+<%--              <input type="hidden" name="quantity" value="1">--%>
+<%--              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>--%>
+<%--            </form>--%>
+<%--            <a href="${pageContext.request.contextPath}/product-details?id=18" class="forher-card-btn">View &#8594;</a>--%>
+<%--          </div>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </article>--%>
+
+<%--    <article class="gift-pick-card reveal" data-category="elegant minimal">--%>
+<%--      <img src="${pageContext.request.contextPath}/static/images/for-her/her-5.webp" alt="Everyday Chic" />--%>
+<%--      <div class="gift-pick-body">--%>
+<%--        <div class="gift-pick-style-tag gift-pick-style-forher-elegant">Elegant</div>--%>
+<%--        <div class="gift-pick-title">Everyday Chic</div>--%>
+<%--        <p>Versatile silicone straps in pastel tones. Light, sporty, and effortlessly stylish.</p>--%>
+<%--        <div class="forher-card-footer">--%>
+<%--          <div class="gift-pick-meta">NPR 4,500 – 8,000</div>--%>
+<%--          <div class="gift-card-actions">--%>
+<%--            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">--%>
+<%--              <input type="hidden" name="action" value="add">--%>
+<%--              <input type="hidden" name="productId" value="20">--%>
+<%--              <input type="hidden" name="quantity" value="1">--%>
+<%--              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>--%>
+<%--            </form>--%>
+<%--            <a href="${pageContext.request.contextPath}/product-details?id=20" class="forher-card-btn">View &#8594;</a>--%>
+<%--          </div>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </article>--%>
+
+<%--    <article class="gift-pick-card reveal reveal-delay-1" data-category="luxury bold">--%>
+<%--      <img src="${pageContext.request.contextPath}/static/images/for-her/her-6.webp" alt="Prestige Series" />--%>
+<%--      <div class="gift-pick-body">--%>
+<%--        <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>--%>
+<%--        <div class="gift-pick-title">Prestige Series</div>--%>
+<%--        <p>Swiss movement, gold-plated case. For milestones, anniversaries, and once-in-a-lifetime moments.</p>--%>
+<%--        <div class="forher-card-footer">--%>
+<%--          <div class="gift-pick-meta">NPR 50,000+</div>--%>
+<%--          <div class="gift-card-actions">--%>
+<%--            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">--%>
+<%--              <input type="hidden" name="action" value="add">--%>
+<%--              <input type="hidden" name="productId" value="17">--%>
+<%--              <input type="hidden" name="quantity" value="1">--%>
+<%--              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>--%>
+<%--            </form>--%>
+<%--            <a href="${pageContext.request.contextPath}/product-details?id=17" class="forher-card-btn">View &#8594;</a>--%>
+<%--          </div>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </article>--%>
+
+<%--  </div>--%>
+
+   Back nav
   <div class="forher-back-row">
     <a href="${pageContext.request.contextPath}/gifting" class="forher-back-link">
       &#8592; Back to Gift Guide

@@ -358,16 +358,6 @@
             </div>
           </div>
         </div>
-<%--            <div class="prod-chip">${product.name}</div>--%>
-<%--          </div>--%>
-<%--          <div class="prod-body">--%>
-<%--            <div class="prod-brand">${product.brand}</div>--%>
-<%--          </div>--%>
-
-<%--        <li class="product-card">--%>
-<%--          <a href="${pageContext.request.contentPath}/cart?productid= ${product.id}" class="prod-img-container"> <c:out value = "${product.image.url}" /></a>--%>
-<%--          <a href="${pageContext.request.contentPath}/cart?productid= ${product.id}" class="prod-h"> <c:out value = "${product.name}" /></a>--%>
-<%--        </li>--%>
 
 
       </c:forEach>

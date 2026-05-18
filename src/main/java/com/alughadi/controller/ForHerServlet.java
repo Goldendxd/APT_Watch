@@ -20,12 +20,11 @@ public class ForHerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Product> womens  = productDAO.getProductsByCategory("womens");
-        List<Product> luxury  = productDAO.getProductsByCategory("luxury");
-        List<Product> classic = productDAO.getProductsByCategory("classic");
 
-        request.setAttribute("womensProducts",  womens);
-        request.setAttribute("luxuryProducts",  luxury);
-        request.setAttribute("classicProducts", classic);
+        request.setAttribute("productList", womens);
+        request.setAttribute("pageTitle", "Gifts For Her | AluGhadi Watches");
+        request.setAttribute("pageDesc", "Curated watch gifts for her.");
+        request.setAttribute("activeNav", "gifting");
 
         request.getRequestDispatcher("/WEB-INF/views/for-her.jsp").forward(request, response);
     }
