@@ -66,10 +66,18 @@ public class CartServlet extends HttpServlet {
         }
         int userId = (Integer) userIdObj;
         String action = request.getParameter("action");
+        if (action == null || action.isBlank()) {
+            response.sendRedirect(request.getContextPath() + "/products");
+            return;
+        }
+        if ("add".equals(action)) {
+            Integer productId = parsePositiveInt(request.getParameter("productId"));
+            Integer quantity = parsePositiveInt(request.getParameter("quantity"));
 
-        if (action.equals("add")) {
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            int quantity  = Integer.parseInt(request.getParameter("quantity"));
+            if (productId == null || quantity == null) {
+                response.sendRedirect(request.getContextPath() + "/products");
+                return;
+            }
 
             Product product = productDAO.getProductById(productId);
             if (product == null || product.getStockQuantity() <= 0) {
@@ -84,41 +92,71 @@ public class CartServlet extends HttpServlet {
 
             cartDao.addToCart(userId, productId, quantity);
 
-        } else if (action.equals("remove")) {
-            int cartId = Integer.parseInt(request.getParameter("cartId"));
+        } else if ("remove".equals(action)) {
+            Integer cartId = parsePositiveInt(request.getParameter("cartId"));
+            if (cartId == null) {
+                response.sendRedirect(request.getContextPath() + "/products?cart=open");
+                return;
+            }
             cartDao.removeFromCart(cartId, userId);
 
-        } else if (action.equals("update")) {
-            int cartId   = Integer.parseInt(request.getParameter("cartId"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
+        } else if ("update".equals(action)) {
+            Integer cartId = parsePositiveInt(request.getParameter("cartId"));
+            Integer quantity = parsePositiveInt(request.getParameter("quantity"));
+
+            if (cartId == null || quantity == null) {
+                response.sendRedirect(request.getContextPath() + "/products?cart=open");
+                return;
+            }
             cartDao.updateQuantity(cartId, userId, quantity);
 
-        } else if (action.equals("clear")) {
+        } else if ("clear".equals(action)) {
             cartDao.clearCart(userId);
         }
+
         if (request.getParameter("buyNow") != null) {
             response.sendRedirect(request.getContextPath() + "/checkout");
             return;
         }
         String redirectTo = request.getParameter("redirectTo");
+
         if (redirectTo != null && !redirectTo.isBlank()) {
-            response.sendRedirect(redirectTo);
+            response.sendRedirect(addCartOpen(redirectTo));
             return;
-        }
-        String referer = request.getHeader("Referer");
-        if (referer != null && !referer.isBlank()) {
-            response.sendRedirect(referer);
-            return;
-        }
-        response.sendRedirect(request.getContextPath() + "/products");
-    }
-    private int getLoggedInUserId(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Object userIdObj = SessionUtil.getAttribute(request, "authUserId");
-        if (userIdObj == null){
-            response.sendRedirect(request.getContextPath());
-            return -1;
         }
 
-        return (Integer) userIdObj;
+        String referer = request.getHeader("Referer");
+
+        if (referer != null && !referer.isBlank()) {
+            response.sendRedirect(addCartOpen(referer));
+            return;
+        }
+
+        response.sendRedirect(request.getContextPath() + "/products?cart=open");
+    }
+//    private int getLoggedInUserId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        Object userIdObj = SessionUtil.getAttribute(request, "authUserId");
+//        if (userIdObj == null){
+//            response.sendRedirect(request.getContextPath());
+//            return -1;
+//        }
+//
+//        return (Integer) userIdObj;
+//    }
+    private Integer parsePositiveInt(String value) {
+        try {
+            int parsed = Integer.parseInt(value);
+            return parsed > 0 ? parsed : null;
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+    private String addCartOpen(String url) {
+        if (url.contains("cart=open")) {
+            return url;
+        }
+
+        String separator = url.contains("?") ? "&" : "?";
+        return url + separator + "cart=open";
     }
 }
