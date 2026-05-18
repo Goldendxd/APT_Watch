@@ -11,4 +11,5 @@ public interface UserDao {
     boolean insertUser(User user);
     User findByUsername(String username);
     User findByEmail(String email);
+    int countCustomers();
 }

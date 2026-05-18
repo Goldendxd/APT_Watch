@@ -17,7 +17,7 @@
   </div>
   <div class="ph-ov"></div>
   <div class="ph-body">
-    <span class="ph-chip">&#9654; Our Story</span>
+    <span class="ph-chip">Our Story</span>
     <h1 class="ph-h">Crafted with <span>passion</span>,<br>built for <span>precision</span>.</h1>
     <p class="ph-sub">
       AluGhadi was born from a shared love of horology and a dream to bring world-class
@@ -40,10 +40,10 @@
           celebrated horological craftsmanship, delivered with care to your doorstep.
         </p>
         <div class="about-values">
-          <div class="about-val-chip">&#9657; Authentic Brands</div>
-          <div class="about-val-chip">&#9657; Secured Delivery</div>
-          <div class="about-val-chip">&#9657; Expert Curation</div>
-          <div class="about-val-chip">&#9657; After-Sales Care</div>
+          <div class="about-val-chip">Authentic Brands</div>
+          <div class="about-val-chip">Secured Delivery</div>
+          <div class="about-val-chip">Expert Curation</div>
+          <div class="about-val-chip">After-Sales Care</div>
         </div>
       </div>
       <div class="split-stats-grid">
@@ -68,15 +68,22 @@
   </div>
 </section>
 
-<%-- ======== DIVIDER STRIP ======== --%>
+<%-- ======== DIVIDER STRIP (marquee) ======== --%>
 <div class="about-marquee-strip">
   <div class="about-marquee-inner">
-    <span>&#10022; Precision</span><span>&#10022; Heritage</span>
-    <span>&#10022; Craftsmanship</span><span>&#10022; Innovation</span>
-    <span>&#10022; Excellence</span><span>&#10022; Nepal</span>
-    <span>&#10022; Precision</span><span>&#10022; Heritage</span>
-    <span>&#10022; Craftsmanship</span><span>&#10022; Innovation</span>
-    <span>&#10022; Excellence</span><span>&#10022; Nepal</span>
+    <span>Heritage</span><span>Craftsmanship</span>
+    <span>Innovation</span><span>Excellence</span>
+    <span>Nepal</span><span>Precision</span>
+    <span>Heritage</span><span>Craftsmanship</span>
+    <span>Innovation</span><span>Excellence</span>
+    <span>Nepal</span><span>Precision</span>
+    <%-- duplicate set for seamless loop --%>
+    <span>Heritage</span><span>Craftsmanship</span>
+    <span>Innovation</span><span>Excellence</span>
+    <span>Nepal</span><span>Precision</span>
+    <span>Heritage</span><span>Craftsmanship</span>
+    <span>Innovation</span><span>Excellence</span>
+    <span>Nepal</span><span>Precision</span>
   </div>
 </div>
 
@@ -217,17 +224,23 @@
     </div>
     <div class="feat-grid">
       <div class="feat-card reveal reveal-delay-1">
-        <div class="feat-card-icon icon-bg-green">&#9200;</div>
+        <div class="feat-card-icon icon-bg-green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
         <div class="feat-card-title">Precision First</div>
         <p class="feat-card-desc">Every watch we carry is vetted for accuracy, authenticity and craftsmanship. We never compromise on quality.</p>
       </div>
       <div class="feat-card reveal reveal-delay-2">
-        <div class="feat-card-icon icon-bg-gold">&#128081;</div>
+        <div class="feat-card-icon icon-bg-gold">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M12 2v2M12 14v2M6 8H4M20 8h-2M7.05 4.93 5.64 3.51M18.36 3.51l-1.41 1.42M7.05 11.07 5.64 12.49M18.36 12.49l-1.41-1.42"/></svg>
+        </div>
         <div class="feat-card-title">Timeless Heritage</div>
         <p class="feat-card-desc">We celebrate the art of watchmaking by connecting you with heritage brands that have stood the test of time.</p>
       </div>
       <div class="feat-card reveal reveal-delay-3">
-        <div class="feat-card-icon icon-bg-blue">&#127468;&#127479;</div>
+        <div class="feat-card-icon icon-bg-blue">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
         <div class="feat-card-title">Made for Nepal</div>
         <p class="feat-card-desc">Localised experience, local prices, local support. AluGhadi is proudly rooted in Nepal's growing collector community.</p>
       </div>
@@ -244,8 +257,8 @@
       Browse our curated collection of luxury and everyday watches — something for every wrist.
     </p>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-      <a href="${pageContext.request.contextPath}/products" class="btn btn-g btn-lg">&#128717; Shop Collection</a>
-      <a href="${pageContext.request.contextPath}/contact"  class="btn btn-o btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.25);">&#9993; Get in Touch</a>
+      <a href="${pageContext.request.contextPath}/products" class="btn btn-g btn-lg">Shop Collection</a>
+      <a href="${pageContext.request.contextPath}/contact"  class="btn btn-o btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.25);">Get in Touch</a>
     </div>
   </div>
 </section>

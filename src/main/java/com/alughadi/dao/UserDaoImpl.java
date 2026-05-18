@@ -80,6 +80,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public int countCustomers() {
+        Connection conn = null;
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement st = conn.prepareStatement("SELECT COUNT(*) FROM users WHERE role = 'customer'");
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) return rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println("Error counting customers: " + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+        return 0;
+    }
+
+    @Override
     public User findByEmail(String email) {
         Connection conn = null;
         try {

@@ -89,8 +89,8 @@ public class ProductDaoImpl implements ProductDAO {
             conn = DatabaseConnection.getConnection();
 
             String sql = "INSERT INTO products " +
-                    "(category_id, name, brand, description, price, old_price, rating, image_url, in_stock) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "(category_id, name, brand, description, price, old_price, rating, image_url, in_stock, stock_quantity) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, product.getCategoryId());
@@ -102,6 +102,7 @@ public class ProductDaoImpl implements ProductDAO {
             stmt.setDouble(7, product.getRating());
             stmt.setString(8, product.getImageUrl());
             stmt.setBoolean(9, product.isInStock());
+            stmt.setInt(10, product.getStockQuantity());
 
             return stmt.executeUpdate() > 0;
 
@@ -123,7 +124,7 @@ public class ProductDaoImpl implements ProductDAO {
 
             String sql = "UPDATE products SET " +
                     "category_id = ?, name = ?, brand = ?, description = ?, price = ?, " +
-                    "old_price = ?, rating = ?, image_url = ?, in_stock = ? " +
+                    "old_price = ?, rating = ?, image_url = ?, in_stock = ?, stock_quantity = ? " +
                     "WHERE id = ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -136,7 +137,8 @@ public class ProductDaoImpl implements ProductDAO {
             stmt.setDouble(7, product.getRating());
             stmt.setString(8, product.getImageUrl());
             stmt.setBoolean(9, product.isInStock());
-            stmt.setInt(10, product.getId());
+            stmt.setInt(10, product.getStockQuantity());
+            stmt.setInt(11, product.getId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -196,6 +198,7 @@ public class ProductDaoImpl implements ProductDAO {
         product.setRating(rs.getDouble("rating"));
         product.setImageUrl(rs.getString("image_url"));
         product.setInStock(rs.getBoolean("in_stock"));
+        product.setStockQuantity(rs.getInt("stock_quantity"));
         product.setCreatedAt(rs.getTimestamp("created_at"));
         product.setCategoryName(rs.getString("category_name"));
         return product;

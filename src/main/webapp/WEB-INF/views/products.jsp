@@ -270,6 +270,7 @@
   </div>
 
 
+
   <!-- PRODUCT CARDS SECTION (Similar to quota bar structure) -->
   <div class="reveal" style="margin-bottom: 2rem">
     <c:choose>
@@ -277,7 +278,22 @@
         <jsp:include page="/error.jsp" />
       </c:when>
     </c:choose>
-     <div
+    <c:if test="${empty productList}">
+      <div style="text-align:center;padding:5rem 2rem;background:var(--white);border:1.5px dashed var(--border);border-radius:20px;margin-bottom:2rem;">
+        <div style="margin:0 auto 1.25rem;width:64px;height:64px;background:var(--surface);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/></svg>
+        </div>
+        <div style="font-size:1.25rem;font-weight:800;color:var(--text);margin-bottom:.5rem;">Sorry, we are out of products</div>
+        <p style="font-size:.88rem;color:var(--muted);max-width:380px;margin:0 auto 1.5rem;line-height:1.7;">
+          We are currently restocking our collection. Please check back soon — new watches arrive regularly.
+        </p>
+        <a href="${pageContext.request.contextPath}/products" style="display:inline-flex;align-items:center;gap:.4rem;padding:.65rem 1.4rem;background:var(--green);color:#fff;border-radius:10px;font-weight:700;font-size:.84rem;text-decoration:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.76"/></svg>
+          View All Collections
+        </a>
+      </div>
+    </c:if>
+    <div
       style="
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -314,13 +330,23 @@
                 <input type="hidden" name="productId" value="${product.id}">
                 <input type="hidden" name="quantity" value="1">
                 <input type="hidden" name="buyNow" value="true">
-                <button class="btn-fill prod-buy-btn" type="submit" style="flex:1;padding:0.55rem 0.4rem;font-size:0.78rem;font-weight:700;border-radius:10px;text-align:center;">Buy Now</button>
+                <c:choose>
+                  <c:when test="${product.stockQuantity > 0}">
+                    <button class="btn-fill prod-buy-btn" type="submit" style="flex:1;padding:0.55rem 0.4rem;font-size:0.78rem;font-weight:700;border-radius:10px;text-align:center;">Buy Now</button>
+                  </c:when>
+                  <c:otherwise>
+                    <button class="btn-fill prod-buy-btn" type="button" disabled style="flex:1;padding:0.55rem 0.4rem;font-size:0.78rem;font-weight:700;border-radius:10px;text-align:center;background:#999;cursor:not-allowed;">Out of Stock</button>
+                  </c:otherwise>
+                </c:choose>
               </form>
               <form action="${pageContext.request.contextPath}/cart" method="post" style="flex:1;display:flex;">
                 <input type="hidden" name="action" value="add">
                 <input type="hidden" name="productId" value="${product.id}">
                 <input type="hidden" name="quantity" value="1">
                 <c:choose>
+                  <c:when test="${product.stockQuantity <= 0}">
+                    <button type="button" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#ddd;color:#777;border:1.5px solid #ccc;cursor:not-allowed;font-family:inherit;text-align:center;">Out of Stock</button>
+                  </c:when>
                   <c:when test="${cartProductIds.contains(product.id)}">
                     <button type="submit" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#1a6b38;color:#fff;border:1.5px solid #1a6b38;cursor:default;font-family:inherit;text-align:center;">Added &#10003;</button>
                   </c:when>

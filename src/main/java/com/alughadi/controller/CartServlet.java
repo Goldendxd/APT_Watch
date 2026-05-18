@@ -5,7 +5,10 @@ import java.util.List;
 
 import com.alughadi.dao.CartDao;
 import com.alughadi.dao.CartDaoImpl;
+import com.alughadi.dao.ProductDAO;
+import com.alughadi.dao.ProductDaoImpl;
 import com.alughadi.entity.Cart;
+import com.alughadi.entity.Product;
 import com.alughadi.utils.SessionUtil;
 
 import jakarta.servlet.ServletException;
@@ -26,6 +29,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CartServlet extends HttpServlet {
 
     private final CartDao cartDao = new CartDaoImpl();
+    private final ProductDAO productDAO = new ProductDaoImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,6 +70,18 @@ public class CartServlet extends HttpServlet {
         if (action.equals("add")) {
             int productId = Integer.parseInt(request.getParameter("productId"));
             int quantity  = Integer.parseInt(request.getParameter("quantity"));
+
+            Product product = productDAO.getProductById(productId);
+            if (product == null || product.getStockQuantity() <= 0) {
+                String referer = request.getHeader("Referer");
+                if (referer != null && !referer.isBlank()) {
+                    response.sendRedirect(referer);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/products");
+                }
+                return;
+            }
+
             cartDao.addToCart(userId, productId, quantity);
 
         } else if (action.equals("remove")) {
