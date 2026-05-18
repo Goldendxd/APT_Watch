@@ -1,124 +1,109 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    color: #ffffff;
-    background:
-            radial-gradient(circle at top left, rgba(201, 168, 76, 0.22), transparent 34%),
-            radial-gradient(circle at bottom right, rgba(22, 97, 55, 0.22), transparent 32%),
-            linear-gradient(135deg, #050505 0%, #111111 52%, #050505 100%);
-}
-
 .error-shell {
-    min-height: 100vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 28px;
+    padding: 3rem 1.5rem;
 }
 
 .error-card {
     width: 100%;
-    max-width: 620px;
+    max-width: 560px;
     text-align: center;
-    padding: 56px 36px;
-    border: 1px solid rgba(201, 168, 76, 0.35);
-    border-radius: 18px;
-    background: rgba(12, 12, 12, 0.82);
-    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(14px);
+    padding: 3.5rem 2.5rem;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(26, 107, 56, 0.08);
 }
 
-.error-brand {
-    color: #c9a84c;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 22px;
+.error-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--green-light);
+    border: 1.5px solid var(--green-mid);
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
 }
 
 .error-code {
-    font-size: clamp(90px, 18vw, 170px);
+    font-size: clamp(5rem, 16vw, 9rem);
     line-height: 0.9;
     font-weight: 900;
-    color: #c9a84c;
-    text-shadow: 0 10px 35px rgba(201, 168, 76, 0.25);
-    margin-bottom: 22px;
+    letter-spacing: -0.05em;
+    color: var(--green);
+    margin-bottom: 1rem;
 }
 
-.error-card h1 {
-    font-size: clamp(26px, 4vw, 38px);
+.error-title {
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
     font-weight: 800;
-    margin-bottom: 14px;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0.75rem;
 }
 
 .error-message {
-    max-width: 460px;
+    max-width: 420px;
     margin: 0 auto;
-    color: #b8b8b8;
-    font-size: 16px;
-    line-height: 1.7;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.75;
 }
 
 .error-actions {
     display: flex;
     justify-content: center;
-    gap: 14px;
+    gap: 0.75rem;
     flex-wrap: wrap;
-    margin-top: 34px;
+    margin-top: 2rem;
 }
 
 .error-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 150px;
-    padding: 13px 22px;
-    border-radius: 8px;
-    font-size: 15px;
+    min-width: 148px;
+    padding: 0.7rem 1.4rem;
+    border-radius: 12px;
+    font-size: 0.88rem;
     font-weight: 700;
     text-decoration: none;
-    transition: 0.2s ease;
+    transition: all 0.2s var(--ease, ease);
+    font-family: inherit;
 }
 
 .error-btn.primary {
-    background: #c9a84c;
-    color: #050505;
-    border: 1px solid #c9a84c;
+    background: var(--green);
+    color: #fff;
+    border: 1.5px solid var(--green);
 }
 
 .error-btn.secondary {
     background: transparent;
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.28);
-}
-
-.error-btn:hover {
-    transform: translateY(-2px);
+    color: var(--green);
+    border: 1.5px solid var(--green-mid);
 }
 
 .error-btn.primary:hover {
-    background: #e2c97e;
+    background: var(--green-dark, #155c30);
+    border-color: var(--green-dark, #155c30);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 107, 56, 0.28);
 }
 
 .error-btn.secondary:hover {
-    border-color: #c9a84c;
-    color: #c9a84c;
+    background: var(--green-light);
+    transform: translateY(-2px);
 }
 
 @media (max-width: 520px) {
-    .error-shell {
-        padding: 18px;
-    }
-
     .error-card {
-        padding: 44px 22px;
+        padding: 2.5rem 1.5rem;
     }
 
     .error-actions {

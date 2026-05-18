@@ -273,11 +273,6 @@
 
   <!-- PRODUCT CARDS SECTION (Similar to quota bar structure) -->
   <div class="reveal" style="margin-bottom: 2rem">
-    <c:choose>
-      <c:when test="${empty productList}">
-        <jsp:include page="/error.jsp" />
-      </c:when>
-    </c:choose>
     <c:if test="${empty productList}">
       <div style="text-align:center;padding:5rem 2rem;background:var(--white);border:1.5px dashed var(--border);border-radius:20px;margin-bottom:2rem;">
         <div style="margin:0 auto 1.25rem;width:64px;height:64px;background:var(--surface);border-radius:50%;display:flex;align-items:center;justify-content:center;">
