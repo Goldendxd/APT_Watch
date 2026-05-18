@@ -64,53 +64,11 @@
 }
 
 .error-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     min-width: 148px;
-    padding: 0.7rem 1.4rem;
-    border-radius: 12px;
-    font-size: 0.88rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.2s var(--ease, ease);
-    font-family: inherit;
-}
-
-.error-btn.primary {
-    background: var(--green);
-    color: #fff;
-    border: 1.5px solid var(--green);
-}
-
-.error-btn.secondary {
-    background: transparent;
-    color: var(--green);
-    border: 1.5px solid var(--green-mid);
-}
-
-.error-btn.primary:hover {
-    background: var(--green-dark, #155c30);
-    border-color: var(--green-dark, #155c30);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(26, 107, 56, 0.28);
-}
-
-.error-btn.secondary:hover {
-    background: var(--green-light);
-    transform: translateY(-2px);
 }
 
 @media (max-width: 520px) {
-    .error-card {
-        padding: 2.5rem 1.5rem;
-    }
-
-    .error-actions {
-        flex-direction: column;
-    }
-
-    .error-btn {
-        width: 100%;
-    }
+    .error-card { padding: 2.5rem 1.5rem; }
+    .error-actions { flex-direction: column; }
+    .error-btn { width: 100%; }
 }
