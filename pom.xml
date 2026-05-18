@@ -63,6 +63,13 @@
             <version>9.6.0</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Gson — JSON parsing for Khalti API responses -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.13.1</version>
+        </dependency>
     </dependencies>
 
 
