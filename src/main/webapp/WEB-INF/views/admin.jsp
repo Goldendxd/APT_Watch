@@ -121,11 +121,18 @@
     .td-name{font-weight:700;color:var(--text);}
     .td-desc{font-size:.7rem;color:var(--muted);margin-top:.06rem;}
     .td-price{font-weight:900;letter-spacing:-.02em;}
-    .stock-yes{display:inline-flex;align-items:center;gap:.35rem;color:var(--green);font-weight:700;font-size:.7rem;}
-    .stock-no{display:inline-flex;align-items:center;gap:.35rem;color:var(--red);font-weight:700;font-size:.7rem;}
-    .stock-yes::before,.stock-no::before{content:'';width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+    .stock-yes,.stock-no,.stock-low{display:inline-flex;align-items:center;gap:.35rem;font-weight:700;font-size:.7rem;}
+    .stock-yes{color:var(--green);}
+    .stock-no{color:var(--red);}
+    .stock-low{color:var(--amber);}
+    .stock-yes::before,.stock-no::before,.stock-low::before{content:'';width:7px;height:7px;border-radius:50%;flex-shrink:0;}
     .stock-yes::before{background:var(--green);}
     .stock-no::before{background:var(--red);}
+    .stock-low::before{background:var(--amber);}
+    .sqty{font-size:.85rem;font-weight:800;}
+    .sqty-ok{color:var(--text);}
+    .sqty-low{color:var(--amber);}
+    .sqty-out{color:var(--red);}
     .cat-pill{font-size:.68rem;font-weight:700;padding:.18rem .6rem;border-radius:999px;background:var(--surface);border:1.5px solid var(--border);color:var(--muted);}
     .tbl-actions{display:flex;gap:.4rem;align-items:center;}
     .tbl-btn{border:none;border-radius:8px;padding:.35rem .65rem;font-size:.7rem;font-weight:700;font-family:var(--ff);transition:all .18s;}
@@ -460,15 +467,17 @@
                   <td><span class="cat-pill"><c:out value="${p.categoryName}" /></span></td>
                   <td class="td-price">Rs <fmt:formatNumber value="${p.price}" pattern="#,##0" /></td>
                   <td>
-                    <span style="font-size:.85rem;font-weight:800;color:${p.stockQuantity <= 0 ? 'var(--red)' : p.stockQuantity <= 5 ? 'var(--amber)' : 'var(--text)'};">
-                      ${p.stockQuantity}
-                    </span>
+                    <c:choose>
+                      <c:when test="${p.stockQuantity le 0}"><span class="sqty sqty-out">${p.stockQuantity}</span></c:when>
+                      <c:when test="${p.stockQuantity le 5}"><span class="sqty sqty-low">${p.stockQuantity}</span></c:when>
+                      <c:otherwise><span class="sqty sqty-ok">${p.stockQuantity}</span></c:otherwise>
+                    </c:choose>
                     <span style="font-size:.65rem;color:var(--muted);margin-left:2px;">units</span>
                   </td>
                   <td>
                     <c:choose>
-                      <c:when test="${p.stockQuantity <= 0}"><span class="stock-no">Out of Stock</span></c:when>
-                      <c:when test="${p.stockQuantity <= 5}"><span style="display:inline-flex;align-items:center;gap:.35rem;color:var(--amber);font-weight:700;font-size:.7rem;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);"></span>Low Stock</span></c:when>
+                      <c:when test="${p.stockQuantity le 0}"><span class="stock-no">Out of Stock</span></c:when>
+                      <c:when test="${p.stockQuantity le 5}"><span class="stock-low">Low Stock</span></c:when>
                       <c:otherwise><span class="stock-yes">In Stock</span></c:otherwise>
                     </c:choose>
                   </td>
@@ -571,15 +580,17 @@
                   <td class="td-price">Rs <fmt:formatNumber value="${p.price}" pattern="#,##0" /></td>
                   <td><c:choose><c:when test="${not empty p.oldPrice}">Rs <fmt:formatNumber value="${p.oldPrice}" pattern="#,##0" /></c:when><c:otherwise>&mdash;</c:otherwise></c:choose></td>
                   <td>
-                    <span style="font-size:.85rem;font-weight:800;color:${p.stockQuantity <= 0 ? 'var(--red)' : p.stockQuantity <= 5 ? 'var(--amber)' : 'var(--text)'};">
-                      ${p.stockQuantity}
-                    </span>
+                    <c:choose>
+                      <c:when test="${p.stockQuantity le 0}"><span class="sqty sqty-out">${p.stockQuantity}</span></c:when>
+                      <c:when test="${p.stockQuantity le 5}"><span class="sqty sqty-low">${p.stockQuantity}</span></c:when>
+                      <c:otherwise><span class="sqty sqty-ok">${p.stockQuantity}</span></c:otherwise>
+                    </c:choose>
                     <span style="font-size:.65rem;color:var(--muted);margin-left:2px;">units</span>
                   </td>
                   <td>
                     <c:choose>
-                      <c:when test="${p.stockQuantity <= 0}"><span class="stock-no">Out of Stock</span></c:when>
-                      <c:when test="${p.stockQuantity <= 5}"><span style="display:inline-flex;align-items:center;gap:.35rem;color:var(--amber);font-weight:700;font-size:.7rem;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);"></span>Low Stock</span></c:when>
+                      <c:when test="${p.stockQuantity le 0}"><span class="stock-no">Out of Stock</span></c:when>
+                      <c:when test="${p.stockQuantity le 5}"><span class="stock-low">Low Stock</span></c:when>
                       <c:otherwise><span class="stock-yes">In Stock</span></c:otherwise>
                     </c:choose>
                   </td>
@@ -746,25 +757,38 @@
 </form>
 <div class="toast-container" id="toastContainer"></div>
 
-<%-- Pass product and sales data to JS --%>
+<%-- Pass product and sales data to JS via typed JSON blocks (avoids JS validator errors) --%>
+<script type="application/json" id="__productData">[<c:forEach var="p" items="${products}" varStatus="st">{id:${p.id},name:"<c:out value='${p.name}'/>",category:"<c:out value='${p.categoryName}'/>",price:${p.price},stock:${p.stockQuantity},rating:${p.rating}}<c:if test="${!st.last}">,</c:if></c:forEach>]</script>
+<script type="application/json" id="__monthlySales">{"12":${monthlySales12Json},"6":${monthlySales6Json},"3":${monthlySales3Json}}</script>
+<script type="application/json" id="__topProducts">${topProductsJson}</script>
+<div id="__adminMeta"
+     data-total-products="${productCount}"
+     data-in-stock="${inStockCount}"
+     data-out-stock="${outOfStockCount}"
+     data-revenue="${totalRevenue}"
+     data-orders="${totalOrders}"
+     data-customers="${customerCount}"
+     style="display:none;"></div>
 <script>
-var PRODUCT_DATA = [
-  <c:forEach var="p" items="${products}" varStatus="st">
-    {id:${p.id},name:"<c:out value='${p.name}'/>",category:"<c:out value='${p.categoryName}'/>",price:${p.price},stock:${p.stockQuantity},rating:${p.rating}}<c:if test="${!st.last}">,</c:if>
-  </c:forEach>
-];
-var TOTAL_PRODUCTS  = ${productCount};
-var IN_STOCK_COUNT  = ${inStockCount};
-var OUT_STOCK_COUNT = ${outOfStockCount};
-var TOTAL_REVENUE   = ${totalRevenue};
-var TOTAL_ORDERS    = ${totalOrders};
-
-var MONTHLY_SALES = {
-  '12': ${monthlySales12Json},
-  '6':  ${monthlySales6Json},
-  '3':  ${monthlySales3Json}
-};
-var TOP_PRODUCTS = ${topProductsJson};
+(function(){
+  var m = document.getElementById('__adminMeta');
+  var PRODUCT_DATA  = JSON.parse(document.getElementById('__productData').textContent);
+  var MONTHLY_SALES = JSON.parse(document.getElementById('__monthlySales').textContent);
+  var TOP_PRODUCTS  = JSON.parse(document.getElementById('__topProducts').textContent);
+  var TOTAL_PRODUCTS  = parseInt(m.dataset.totalProducts);
+  var IN_STOCK_COUNT  = parseInt(m.dataset.inStock);
+  var OUT_STOCK_COUNT = parseInt(m.dataset.outStock);
+  var TOTAL_REVENUE   = parseFloat(m.dataset.revenue);
+  var TOTAL_ORDERS    = parseInt(m.dataset.orders);
+  window.PRODUCT_DATA   = PRODUCT_DATA;
+  window.MONTHLY_SALES  = MONTHLY_SALES;
+  window.TOP_PRODUCTS   = TOP_PRODUCTS;
+  window.TOTAL_PRODUCTS = TOTAL_PRODUCTS;
+  window.IN_STOCK_COUNT = IN_STOCK_COUNT;
+  window.OUT_STOCK_COUNT= OUT_STOCK_COUNT;
+  window.TOTAL_REVENUE  = TOTAL_REVENUE;
+  window.TOTAL_ORDERS   = TOTAL_ORDERS;
+})();
 </script>
 
 <script>
@@ -1072,7 +1096,7 @@ function buildCharts() {
       type:'line',
       data:{
         labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-        datasets:[{label:'Customers',data:[1,2,3,3,4,5,5,6,6,7,7,${customerCount}],fill:true,backgroundColor:'rgba(26,107,56,0.08)',borderColor:'#1a6b38',tension:0.4,pointRadius:4,pointBackgroundColor:'#1a6b38',pointBorderColor:'#fff',pointBorderWidth:2}]
+        datasets:[{label:'Customers',data:[1,2,3,3,4,5,5,6,6,7,7,parseInt(document.getElementById('__adminMeta').dataset.customers)||0],fill:true,backgroundColor:'rgba(26,107,56,0.08)',borderColor:'#1a6b38',tension:0.4,pointRadius:4,pointBackgroundColor:'#1a6b38',pointBorderColor:'#fff',pointBorderWidth:2}]
       },
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1},grid:{color:'#d4e5da'}},x:{grid:{display:false}}}}
     });
@@ -1093,7 +1117,8 @@ function buildCharts() {
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-  showSection('dashboard');
+  var dashBtn = document.querySelector('.adm-nav-item[onclick*="dashboard"]');
+  showSection('dashboard', dashBtn);
   buildCharts();
 });
 </script>
