@@ -1,274 +1,163 @@
-# AluGhadi Watches - Ecommerce Website Template
+# AluGhadi Watches — E-commerce Platform
 
-A premium ecommerce website template for selling watches, built with JSP and modern CSS. This project is a clean, standalone JSP-based template ready for backend integration.
+A full-stack e-commerce web application for a premium watch store based in Pokhara, Nepal. Built with Jakarta EE (JSP/Servlets), MySQL, and embedded Tomcat.
 
-## 📁 Project Structure
+## Tech Stack
+
+- **Backend**: Java, Jakarta Servlet 6.1, JSP 4.0, JSTL 3.0
+- **Frontend**: Vanilla JS, CSS custom properties, Chart.js
+- **Database**: MySQL (XAMPP) on port 3306
+- **Build**: Maven with Cargo plugin (embedded Tomcat 10.x on port 9090)
+- **Payment**: Khalti payment gateway integration
+
+## Features
+
+### Customer Side
+- Browse full product catalogue with category filters and search
+- Product detail pages
+- Shopping cart (server-side, per session)
+- Wishlist (localStorage)
+- User registration and login with session management
+- Profile management (name, address, phone)
+- Gifting section with For Him / For Her collections
+- Checkout with Khalti online payment or Cash on Delivery
+- Payment success / failure handling
+
+### Admin Side
+- Dashboard with KPI cards (total products, stock, customers, revenue, orders)
+- Monthly sales revenue chart (real DB data)
+- Products by category and stock doughnut charts
+- Top performing products (by units sold)
+- Full product management — add, edit, delete with image upload
+- Customer count and growth chart
+- Analytics section with price range distribution
+- Admin profile management
+
+## Project Structure
 
 ```
 APT_Watch/
-├── pom.xml                          # Maven configuration
-├── src/
-│   ├── main/
-│   │   ├── java/com/alughadi/       # Java classes (ready for backend)
-│   │   ├── webapp/
-│   │   │   ├── WEB-INF/
-│   │   │   │   ├── views/           # JSP pages
-│   │   │   │   │   ├── layout/
-│   │   │   │   │   │   ├── header.jsp
-│   │   │   │   │   │   └── footer.jsp
-│   │   │   │   │   ├── index.jsp    # Homepage
-│   │   │   │   │   └── products.jsp # Products page
-│   │   │   │   └── web.xml          # Web configuration
-│   │   │   ├── static/
-│   │   │   │   ├── app.js           # JavaScript (client-side only)
-│   │   │   │   ├── styles/
-│   │   │   │   │   ├── global.css   # Main stylesheet
-│   │   │   │   │   └── shared/      # CSS components
-│   │   │   │   │       ├── base.css
-│   │   │   │   │       ├── nav.css
-│   │   │   │   │       ├── layout.css
-│   │   │   │   │       ├── components.css
-│   │   │   │   │       └── overlays.css
-│   │   │   │   └── images/          # Static images
-└── README.md
+├── pom.xml
+└── src/main/
+    ├── java/com/alughadi/
+    │   ├── controller/
+    │   │   ├── HomeServlet.java
+    │   │   ├── ProductServlet.java
+    │   │   ├── ProductDetailsServlet.java
+    │   │   ├── CartServlet.java
+    │   │   ├── CheckoutServlet.java (COD: CodOrderServlet)
+    │   │   ├── KhaltiPaymentServlet.java
+    │   │   ├── KhaltiCallbackServlet.java
+    │   │   ├── GiftingServlet.java
+    │   │   ├── ForHimServlet.java
+    │   │   ├── ForHerServlet.java
+    │   │   ├── LoginServlet.java
+    │   │   ├── RegisterServlet.java
+    │   │   ├── LogoutServlet.java
+    │   │   ├── ProfileServlet.java
+    │   │   ├── AdminServlet.java
+    │   │   ├── AdminProfileServlet.java
+    │   │   └── filter/AuthenticationFilter.java
+    │   ├── dao/          # DAO interfaces and implementations
+    │   ├── entity/       # Model classes
+    │   └── utils/        # PasswordUtil, SessionUtil
+    └── webapp/
+        ├── WEB-INF/views/
+        │   ├── layout/
+        │   │   ├── header.jsp    # Shared nav, cart modal
+        │   │   └── footer.jsp    # Shared footer, toast, scripts
+        │   ├── index.jsp
+        │   ├── products.jsp
+        │   ├── product-details.jsp
+        │   ├── gifting.jsp
+        │   ├── for-him.jsp
+        │   ├── for-her.jsp
+        │   ├── cart.jsp
+        │   ├── checkout.jsp
+        │   ├── payment-success.jsp
+        │   ├── payment-fail.jsp
+        │   ├── login.jsp
+        │   ├── register.jsp
+        │   ├── profile.jsp
+        │   ├── admin.jsp
+        │   ├── admin-profile.jsp
+        │   ├── about.jsp
+        │   ├── contact.jsp
+        │   └── error.jsp
+        └── static/
+            ├── css/
+            │   ├── global.css
+            │   └── pages/        # Per-page CSS files
+            ├── js/app.js         # Shared JS (nav, cart, toast, wishlist, auth)
+            └── images/
 ```
 
-## 🎨 Features
+## Pages & Routes
 
-- **Responsive Design**: Mobile-first approach, works on all screen sizes
-- **Modern UI/UX**: Clean, minimalist design inspired by premium ecommerce sites
-- **Navigation**: Sticky nav with mobile hamburger menu
-- **Product Grid**: Filterable product display with cart functionality
-- **Shopping Cart**: Frontend cart system using localStorage
-- **Wishlist**: Save favorite products locally
-- **Modals & Overlays**: Cart modal and other interactive elements
-- **Smooth Animations**: Scroll-triggered reveal animations
+| Route | Description |
+|---|---|
+| `/` | Homepage — hero, featured products, store info |
+| `/products` | Full catalogue with search and category filter |
+| `/products?id=X` | Product detail page |
+| `/gifting` | Gifting hub |
+| `/gifting/for-him` | For Him collection |
+| `/gifting/for-her` | For Her collection |
+| `/cart` | Cart page |
+| `/checkout` | Checkout — Khalti or COD |
+| `/payment/khalti` | Khalti payment initiation |
+| `/payment/khalti/callback` | Khalti callback handler |
+| `/login` | Login |
+| `/register` | Register |
+| `/logout` | Logout |
+| `/profile` | User profile |
+| `/admin` | Admin dashboard |
+| `/admin-profile` | Admin profile |
+| `/contact` | Contact page |
+| `/about` | About page |
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- Java 25+
-- Maven 3.8.0+
-- Apache Tomcat 10.x (included via Maven Cargo plugin)
+- Java 17+
+- Maven 3.8+
+- XAMPP (MySQL running on port 3306)
 
-### Setup & Run
+### Setup
 
-1. **Build the project:**
+1. Start XAMPP and ensure MySQL is running.
 
-   ```bash
-   cd d:\Github work\APT_Watch
-   mvn clean package
-   ```
+2. Import the database schema (create the `alughadi` database and run the SQL setup script).
 
-2. **Run with embedded Tomcat:**
+3. Build and run:
 
-   ```bash
-   mvn cargo:run
-   ```
-
-   The site will be available at: `http://localhost:9090/alughadi-watches-1.0-SNAPSHOT`
-
-3. **Override the port:**
-   ```bash
-   mvn cargo:run -Dcargo.servlet.port=9000
-   ```
-
-### Pages
-
-- **Home** (`/`) - Main landing page with hero section, featured collections, features grid
-- **Products** (`/products`) - Full product catalog with filters and wishlist
-- **Collections** (`/collections`) - Product categories (to be implemented)
-- **About** (`/about`) - Company info (to be implemented)
-- **Contact** (`/contact`) - Contact page (to be implemented)
-
-## 📝 Template Features
-
-### All JSP Pages Already Include:
-
-- ✅ Page title and meta description (customizable)
-- ✅ Active navigation highlighting
-- ✅ Header with nav and mobile menu
-- ✅ Footer with links and info
-- ✅ Loading screen animation
-- ✅ Responsive design
-
-### Client-Side Features (No Backend Needed):
-
-- ✅ LocalStorage cart system
-- ✅ Wishlist management
-- ✅ Product filtering
-- ✅ Modal interactions
-- ✅ Smooth scrolling
-
-## 🎯 Customization Guide
-
-### Change Colors
-
-Edit `/static/styles/shared/base.css` - modify CSS variables:
-
-```css
-:root {
-  --green: #1a6b38; /* Primary color */
-  --green2: #258a4a; /* Secondary color */
-  --green-light: #e7f4ec;
-  --text: #0d1f12; /* Text color */
-  --bg: #f4f7f4; /* Background */
-  /* ... more colors ... */
-}
+```bash
+mvn clean package
+mvn cargo:run
 ```
 
-### Add Navigation Links
+4. Open: `http://localhost:9090/alughadi`
 
-Edit `/WEB-INF/views/layout/header.jsp`:
-
-```jsp
-<a href="${pageContext.request.contextPath}/your-page"
-   ${activeNav == 'your-page' ? 'class="active"' : ''}>Your Page</a>
-```
-
-### Update Product Grid
-
-Edit `/WEB-INF/views/products.jsp` - each product card follows this structure:
-
-```jsp
-<div class="product-card" data-cat="category" data-id="product-id">
-  <!-- Image container -->
-  <!-- Product info -->
-  <!-- Price and button -->
-</div>
-```
-
-### Add New Pages
-
-1. Create a new JSP in `/WEB-INF/views/`
-2. Include the header at top:
-   ```jsp
-   <% request.setAttribute("activeNav", "page-name"); %>
-   <jsp:include page="/WEB-INF/views/layout/header.jsp" />
-   ```
-3. Add footer at bottom:
-   ```jsp
-   <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-   ```
-
-## 🖼️ Using Images
-
-### Placeholder Image
-
-The project uses `snowleopard.png` from the APT project as a placeholder image for products.
-
-To replace with your own:
-
-1. Copy your images to: `/static/images/`
-2. Update image URLs in JSP files:
-   ```jsp
-   <img src="${pageContext.request.contextPath}/static/images/your-image.png" alt="Description" />
-   ```
-
-### External Images
-
-The template also references Unsplash images for hero sections. You can replace these with your own CDN URLs.
-
-## 💻 Backend Integration Notes
-
-This is a **frontend-only template**. To add backend functionality:
-
-1. **Create Servlets** in `src/main/java/com/alughadi/`:
-   - `HomeServlet.java` - Handle home page
-   - `ProductServlet.java` - Handle product listings
-   - `CartServlet.java` - Handle cart operations
-
-2. **Add Dependencies** to `pom.xml`:
-   - Database drivers (MySQL, PostgreSQL, etc.)
-   - Frameworks (Spring, Hibernate)
-   - JSON libraries (Jackson, Gson)
-
-3. **Connect JSP Form Actions** to servlets:
-
-   ```jsp
-   <form action="${pageContext.request.contextPath}/products" method="get">
-     <!-- form fields -->
-   </form>
-   ```
-
-4. **Example Servlet Structure:**
-   ```java
-   @WebServlet("/products")
-   public class ProductServlet extends HttpServlet {
-     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
-       // Fetch products from DB
-       req.setAttribute("products", productList);
-       req.getRequestDispatcher("/WEB-INF/views/products.jsp").forward(req, resp);
-     }
-   }
-   ```
-
-## 🎨 Color Scheme
-
-- **Primary Green**: `#1a6b38` - Used for buttons, links, highlights
-- **Secondary Green**: `#258a4a` - Hover states, darker accents
-- **Light Green**: `#e7f4ec` - Backgrounds, light accents
-- **Text**: `#0d1f12` - Dark text
-- **Background**: `#f4f7f4` - Light silvery-green background
-- **Border**: `#d8e8dc` - Subtle borders
-- **Accent**: `#3dba62` - Additional highlights
-
-## 📱 Responsive Breakpoints
-
-- **Desktop**: 1024px+
-- **Tablet**: 768px - 1023px
-- **Mobile**: < 768px
-
-## 🔧 Development Tips
-
-1. **Live Reload**: Use your IDE's live reload or browser sync for faster development
-2. **Console Logging**: Check browser console for client-side debugging
-3. **LocalStorage**: Check Application > Local Storage in DevTools to debug cart/wishlist
-4. **CSS Variables**: All colors and sizes use CSS custom properties for easy editing
-
-## 📦 Production Deployment
-
-1. Build WAR file:
-
-   ```bash
-   mvn clean package
-   ```
-
-2. Deploy to Tomcat:
-   - Copy `target/alughadi-watches-1.0-SNAPSHOT.war` to `/webapps/`
-   - Or deploy via Tomcat Manager GUI
-
-3. Change context path in `pom.xml` if needed:
-   ```xml
-   <cargo.war.path>/path/to/war</cargo.war.path>
-   ```
-
-## 🛠️ Troubleshooting
-
-### Port Already in Use
+### Run on a different port
 
 ```bash
 mvn cargo:run -Dcargo.servlet.port=9091
 ```
 
-### Build Fails
+## Color Scheme
 
-- Verify Java version: `java -version`
-- Clear Maven cache: `mvn clean`
-- Check internet connection for dependency download
+| Variable | Value | Usage |
+|---|---|---|
+| `--green` | `#1a6b38` | Primary — buttons, links |
+| `--green2` | `#258a4a` | Hover states |
+| `--accent` | `#3dba62` | Highlights |
+| `--gold` | `#c9a452` | Price, ratings |
+| `--text` | `#0b1c10` | Body text |
+| `--bg` | `#f2f6f2` | Page background |
 
-### Styling Issues
+## Contributors
 
-- Make sure all CSS files are in `/static/styles/`
-- Clear browser cache: Ctrl+Shift+Delete
-- Check browser console for CSS errors
-
-## 📄 License
-
-This template is provided as-is for ecommerce website development.
-
----
-
-**Built with precision. Designed for conversions. Ready for your vision.** ⌚
+- [Goldendxd](https://github.com/Goldendxd)
+- [Sabin062](https://github.com/Sabin062)
+- [ashishthapa1414-bit](https://github.com/ashishthapa1414-bit)
+- [dikxu237](https://github.com/dikxu237)
