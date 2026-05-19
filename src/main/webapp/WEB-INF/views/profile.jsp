@@ -143,22 +143,22 @@
             <div class="pf-row single">
               <div class="fg">
                 <label for="pf-address">Street Address</label>
-                <input id="pf-address" name="address" type="text" value="${profileUser.address}" placeholder="Thamel, Ward 26" />
+                <input id="pf-address" name="address" type="text" value="${profileUser.address}" placeholder="Lakeside, Baidam" />
               </div>
             </div>
 
             <div class="pf-row triple">
               <div class="fg">
                 <label for="pf-city">City</label>
-                <input id="pf-city" name="city" type="text" value="${profileUser.city}" placeholder="Kathmandu" />
+                <input id="pf-city" name="city" type="text" value="${profileUser.city}" placeholder="Pokhara" />
               </div>
               <div class="fg">
                 <label for="pf-province">Province</label>
-                <input id="pf-province" name="province" type="text" value="${profileUser.province}" placeholder="Bagmati" />
+                <input id="pf-province" name="province" type="text" value="${profileUser.province}" placeholder="Gandaki" />
               </div>
               <div class="fg">
                 <label for="pf-district">District</label>
-                <input id="pf-district" name="district" type="text" value="${profileUser.district}" placeholder="Kathmandu" />
+                <input id="pf-district" name="district" type="text" value="${profileUser.district}" placeholder="Kaski" />
               </div>
             </div>
 

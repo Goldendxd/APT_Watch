@@ -94,16 +94,16 @@
             </div>
             <div class="fg">
               <label for="ship-address">Street Address *</label>
-              <input type="text" id="ship-address" placeholder="e.g. Thamel, Kathmandu" required />
+              <input type="text" id="ship-address" placeholder="e.g. Lakeside, Baidam" required />
             </div>
             <div class="fg-row">
               <div class="fg">
                 <label for="ship-city">City *</label>
-                <input type="text" id="ship-city" placeholder="e.g. Kathmandu" required />
+                <input type="text" id="ship-city" placeholder="e.g. Pokhara" required />
               </div>
               <div class="fg">
-                <label for="ship-zip">Postal Code</label>
-                <input type="text" id="ship-zip" placeholder="e.g. 44600" />
+                <label for="ship-district">District</label>
+                <input type="text" id="ship-district" placeholder="e.g. Kaski" />
               </div>
             </div>
           </div>

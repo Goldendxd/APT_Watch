@@ -34,7 +34,7 @@
       </div>
       <div>
         <div class="cis-label">Our Location</div>
-        <div class="cis-val">Kathmandu, Nepal</div>
+        <div class="cis-val">Pokhara, Nepal</div>
       </div>
     </div>
     <div class="cis-divider"></div>
@@ -179,7 +179,7 @@
           <div>
             <div class="csc-h">Visit Our Store</div>
             <p class="csc-p">
-              Asan Chowk, Kathmandu<br />
+              Lakeside, Baidam, Pokhara<br />
               Ground Floor, Timepiece Plaza<br />
               Open Sun – Fri, 9 AM – 6 PM
             </p>

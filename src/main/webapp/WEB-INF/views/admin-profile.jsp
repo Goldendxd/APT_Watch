@@ -307,7 +307,7 @@
                 </div>
                 <div class="fg">
                   <label>City</label>
-                  <input name="city" type="text" value="${profileUser.city}" placeholder="Kathmandu" />
+                  <input name="city" type="text" value="${profileUser.city}" placeholder="Pokhara" />
                 </div>
               </div>
               <div class="pf-save-row">
