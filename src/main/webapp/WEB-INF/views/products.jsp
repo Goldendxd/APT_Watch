@@ -234,22 +234,19 @@
                   </c:otherwise>
                 </c:choose>
               </form>
-              <form action="${pageContext.request.contextPath}/cart" method="post" style="flex:1;display:flex;">
-                <input type="hidden" name="action" value="add">
-                <input type="hidden" name="productId" value="${product.id}">
-                <input type="hidden" name="quantity" value="1">
-                <c:choose>
-                  <c:when test="${product.stockQuantity <= 0}">
-                    <button type="button" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#ddd;color:#777;border:1.5px solid #ccc;cursor:not-allowed;font-family:inherit;text-align:center;">Out of Stock</button>
-                  </c:when>
-                  <c:when test="${cartProductIds.contains(product.id)}">
-                    <button type="submit" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#1a6b38;color:#fff;border:1.5px solid #1a6b38;cursor:default;font-family:inherit;text-align:center;">Added &#10003;</button>
-                  </c:when>
-                  <c:otherwise>
-                    <button type="submit" style="flex:1;padding:0.55rem 0.4rem;border:1.5px solid #1a6b38;border-radius:10px;background:transparent;color:#1a6b38;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;">Add to Cart</button>
-                  </c:otherwise>
-                </c:choose>
-              </form>
+              <c:choose>
+                <c:when test="${product.stockQuantity <= 0}">
+                  <button type="button" disabled style="flex:1;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#ddd;color:#777;border:1.5px solid #ccc;cursor:not-allowed;font-family:inherit;text-align:center;">Out of Stock</button>
+                </c:when>
+                <c:otherwise>
+                  <button type="button"
+                          data-product-id="${product.id}"
+                          onclick="addToCart(this, this.dataset.productId, 1)"
+                          style="flex:1;padding:0.55rem 0.4rem;border:1.5px solid #1a6b38;border-radius:10px;background:transparent;color:#1a6b38;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;">
+                    Add to Cart
+                  </button>
+                </c:otherwise>
+              </c:choose>
               </c:otherwise>
               </c:choose>
             </div>

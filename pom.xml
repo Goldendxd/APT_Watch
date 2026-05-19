@@ -64,7 +64,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Gson — JSON parsing for Khalti API responses -->
+        <!-- Gson — JSON parsing for eSewa API responses -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

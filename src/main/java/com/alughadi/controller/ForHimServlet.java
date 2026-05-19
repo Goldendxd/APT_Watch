@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/for-him")
@@ -19,9 +20,23 @@ public class ForHimServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Product> productList = productDAO.getAllProducts();
+        String category = request.getParameter("category");
+        List<Product> productList;
+
+        if (category != null && category.trim().length() > 0 && !category.equals("all")) {
+            productList = productDAO.getProductsByCategory(category);
+        } else {
+            List<Product> all = productDAO.getAllProducts();
+            productList = new ArrayList<Product>();
+            for (Product p : all) {
+                if (!"Womens".equalsIgnoreCase(p.getCategoryName())) {
+                    productList.add(p);
+                }
+            }
+        }
 
         request.setAttribute("productList", productList);
+        request.setAttribute("activeCategory", category != null ? category : "all");
         request.setAttribute("pageTitle", "Gifts For Him | AluGhadi Watches");
         request.setAttribute("pageDesc", "Curated watch gifts for him.");
         request.setAttribute("activeNav", "gifting");

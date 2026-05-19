@@ -8,7 +8,7 @@ A full-stack e-commerce web application for a premium watch store based in Pokha
 - **Frontend**: Vanilla JS, CSS custom properties, Chart.js
 - **Database**: MySQL (XAMPP) on port 3306
 - **Build**: Maven with Cargo plugin (embedded Tomcat 10.x on port 9090)
-- **Payment**: Khalti payment gateway integration
+- **Payment**: eSewa payment gateway integration
 
 ## Features
 
@@ -20,7 +20,7 @@ A full-stack e-commerce web application for a premium watch store based in Pokha
 - User registration and login with session management
 - Profile management (name, address, phone)
 - Gifting section with For Him / For Her collections
-- Checkout with Khalti online payment or Cash on Delivery
+- Checkout with eSewa online payment or Cash on Delivery
 - Payment success / failure handling
 
 ### Admin Side
@@ -46,8 +46,8 @@ APT_Watch/
     │   │   ├── ProductDetailsServlet.java
     │   │   ├── CartServlet.java
     │   │   ├── CheckoutServlet.java (COD: CodOrderServlet)
-    │   │   ├── KhaltiPaymentServlet.java
-    │   │   ├── KhaltiCallbackServlet.java
+    │   │   ├── EsewaPaymentServlet.java
+    │   │   ├── EsewaCallbackServlet.java
     │   │   ├── GiftingServlet.java
     │   │   ├── ForHimServlet.java
     │   │   ├── ForHerServlet.java
@@ -103,9 +103,9 @@ APT_Watch/
 | `/gifting/for-him` | For Him collection |
 | `/gifting/for-her` | For Her collection |
 | `/cart` | Cart page |
-| `/checkout` | Checkout — Khalti or COD |
-| `/payment/khalti` | Khalti payment initiation |
-| `/payment/khalti/callback` | Khalti callback handler |
+| `/checkout` | Checkout — eSewa or COD |
+| `/esewa-pay` | eSewa payment initiation |
+| `/esewa-callback` | eSewa callback handler |
 | `/login` | Login |
 | `/register` | Register |
 | `/logout` | Logout |

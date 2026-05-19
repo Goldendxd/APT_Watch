@@ -99,10 +99,17 @@ public class CartServlet extends HttpServlet {
 
             cartDao.addToCart(userId, productId, quantity);
 
+            String addRedirect = request.getParameter("redirectTo");
+            if (addRedirect == null || addRedirect.isBlank()) addRedirect = request.getHeader("Referer");
+            if (addRedirect == null || addRedirect.isBlank()) addRedirect = request.getContextPath() + "/products";
+            String sep = addRedirect.contains("?") ? "&" : "?";
+            response.sendRedirect(addRedirect + sep + "cart=added");
+            return;
+
         } else if ("remove".equals(action)) {
             Integer cartId = parsePositiveInt(request.getParameter("cartId"));
             if (cartId == null) {
-                response.sendRedirect(request.getContextPath() + "/products?cart=open");
+                response.sendRedirect(request.getContextPath() + "/products");
                 return;
             }
             cartDao.removeFromCart(cartId, userId);
@@ -112,7 +119,7 @@ public class CartServlet extends HttpServlet {
             Integer quantity = parsePositiveInt(request.getParameter("quantity"));
 
             if (cartId == null || quantity == null) {
-                response.sendRedirect(request.getContextPath() + "/products?cart=open");
+                response.sendRedirect(request.getContextPath() + "/products");
                 return;
             }
             cartDao.updateQuantity(cartId, userId, quantity);
@@ -127,18 +134,18 @@ public class CartServlet extends HttpServlet {
         String redirectTo = request.getParameter("redirectTo");
 
         if (redirectTo != null && !redirectTo.isBlank()) {
-            response.sendRedirect(addCartOpen(redirectTo));
+            response.sendRedirect(stripCartOpen(redirectTo));
             return;
         }
 
         String referer = request.getHeader("Referer");
 
         if (referer != null && !referer.isBlank()) {
-            response.sendRedirect(addCartOpen(referer));
+            response.sendRedirect(stripCartOpen(referer));
             return;
         }
 
-        response.sendRedirect(request.getContextPath() + "/products?cart=open");
+        response.sendRedirect(request.getContextPath() + "/products");
     }
 //    private int getLoggedInUserId(HttpServletRequest request, HttpServletResponse response) throws IOException {
 //        Object userIdObj = SessionUtil.getAttribute(request, "authUserId");
@@ -157,12 +164,7 @@ public class CartServlet extends HttpServlet {
             return null;
         }
     }
-    private String addCartOpen(String url) {
-        if (url.contains("cart=open")) {
-            return url;
-        }
-
-        String separator = url.contains("?") ? "&" : "?";
-        return url + separator + "cart=open";
+    private String stripCartOpen(String url) {
+        return url.replaceAll("[?&]cart=open", "").replaceAll("\\?$", "");
     }
 }

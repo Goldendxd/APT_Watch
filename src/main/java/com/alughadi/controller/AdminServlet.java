@@ -78,32 +78,35 @@ public class AdminServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("delete".equals(action)) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            productDAO.deleteProduct(id);
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                productDAO.deleteProduct(id);
+            } catch (NumberFormatException ignored) {}
         }
         if ("save".equals(action)) {
             Product product = new Product();
 
             String id = request.getParameter("id");
             if (id != null && !id.isBlank()) {
-                product.setId(Integer.parseInt(id));
+                try { product.setId(Integer.parseInt(id)); } catch (NumberFormatException ignored) {}
             }
             product.setName(request.getParameter("name"));
             product.setBrand(request.getParameter("brand"));
-            product.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));
+            try { product.setCategoryId(Integer.parseInt(request.getParameter("categoryId"))); } catch (NumberFormatException ignored) {}
             product.setDescription(request.getParameter("description"));
-            product.setPrice(new BigDecimal(request.getParameter("price")));
+            try { product.setPrice(new BigDecimal(request.getParameter("price"))); } catch (NumberFormatException ignored) {}
 
             String oldPrice = request.getParameter("oldPrice");
             if (oldPrice != null && !oldPrice.isBlank()) {
-                product.setOldPrice(new BigDecimal(oldPrice));
+                try { product.setOldPrice(new BigDecimal(oldPrice)); } catch (NumberFormatException ignored) {}
             }
 
             String rating = request.getParameter("rating");
             if (rating != null && !rating.isBlank()) {
-                product.setRating(Double.parseDouble(rating));
+                try { product.setRating(Double.parseDouble(rating)); } catch (NumberFormatException ignored) {}
             }
-            int stockQuantity = Integer.parseInt(request.getParameter("stockQuantity"));
+            int stockQuantity = 0;
+            try { stockQuantity = Integer.parseInt(request.getParameter("stockQuantity")); } catch (NumberFormatException ignored) {}
             product.setStockQuantity(stockQuantity);
             product.setInStock(stockQuantity > 0);
 

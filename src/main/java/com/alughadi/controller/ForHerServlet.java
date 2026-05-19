@@ -19,9 +19,17 @@ public class ForHerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Product> womens  = productDAO.getProductsByCategory("womens");
+        String category = request.getParameter("category");
+        List<Product> productList;
 
-        request.setAttribute("productList", womens);
+        if (category != null && category.trim().length() > 0 && !category.equals("all")) {
+            productList = productDAO.getProductsByCategory(category);
+        } else {
+            productList = productDAO.getProductsByCategory("womens");
+        }
+
+        request.setAttribute("productList", productList);
+        request.setAttribute("activeCategory", category != null ? category : "all");
         request.setAttribute("pageTitle", "Gifts For Her | AluGhadi Watches");
         request.setAttribute("pageDesc", "Curated watch gifts for her.");
         request.setAttribute("activeNav", "gifting");

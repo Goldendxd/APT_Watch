@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrderDao {
-    void saveOrder(int userId, double totalAmount, String paymentMethod, List<Object[]> items);
+    int saveOrder(int userId, double totalAmount, String paymentMethod, List<Object[]> items);
     double getTotalRevenue();
     int getTotalOrderCount();
     List<Map<String, Object>> getMonthlySales(int months);

@@ -8,7 +8,7 @@ import java.util.*;
 public class OrderDaoImpl implements OrderDao {
 
     @Override
-    public void saveOrder(int userId, double totalAmount, String paymentMethod, List<Object[]> items) {
+    public int saveOrder(int userId, double totalAmount, String paymentMethod, List<Object[]> items) {
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
@@ -22,7 +22,7 @@ public class OrderDaoImpl implements OrderDao {
             orderStmt.executeUpdate();
 
             ResultSet keys = orderStmt.getGeneratedKeys();
-            if (!keys.next()) { conn.rollback(); return; }
+            if (!keys.next()) { conn.rollback(); return -1; }
             int orderId = keys.getInt(1);
 
             String itemSql = "INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (?, ?, ?, ?)";
@@ -36,9 +36,11 @@ public class OrderDaoImpl implements OrderDao {
             }
             itemStmt.executeBatch();
             conn.commit();
+            return orderId;
         } catch (SQLException e) {
             try { if (conn != null) conn.rollback(); } catch (SQLException ignored) {}
             System.out.println("Error saving order: " + e.getMessage());
+            return -1;
         } finally {
             try { if (conn != null) conn.setAutoCommit(true); } catch (SQLException ignored) {}
             DatabaseConnection.closeConnection(conn);

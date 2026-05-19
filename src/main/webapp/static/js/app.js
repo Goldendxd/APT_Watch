@@ -80,12 +80,59 @@ document.addEventListener('click', function (e) {
    ================================================================ */
 function openCart() { showModal('cart'); }
 
-/* Auto-open cart if URL contains ?cart=open (set by CartServlet after add/update/remove) */
-(function () {
-  if (new URLSearchParams(window.location.search).get('cart') === 'open') {
-    document.addEventListener('DOMContentLoaded', function () { showModal('cart'); });
-  }
-})();
+/* Add to cart via fetch — no page reload */
+function addToCart(btn, productId, quantity) {
+  btn.disabled = true;
+  var ctx = document.querySelector('meta[name="ctx"]');
+  var base = ctx ? ctx.content : '';
+  var body = new URLSearchParams({ action: 'add', productId: productId, quantity: quantity || 1 });
+  fetch(base + '/cart', { method: 'POST', body: body })
+    .then(function (res) {
+      /* If servlet redirected to login page, navigate there */
+      if (res.url && res.url.indexOf('/login') !== -1) {
+        window.location.href = base + '/login';
+        return;
+      }
+      return refreshCartModal().then(function () {
+        showToast('Added to Cart', 'Item added to your cart.', '🛒');
+      });
+    })
+    .catch(function () {})
+    .finally(function () { btn.disabled = false; });
+}
+
+/* Refresh cart modal HTML via fetch — returns a Promise */
+function refreshCartModal() {
+  var ctx = document.querySelector('meta[name="ctx"]');
+  var base = ctx ? ctx.content : '';
+  return fetch(base + '/cart-fragment')
+    .then(function (r) { return r.text(); })
+    .then(function (html) {
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(html, 'text/html');
+      var newItems = doc.getElementById('cart-items-inner');
+      var newTotal = doc.getElementById('cart-total-val');
+      var newCount = doc.getElementById('cart-count-val');
+      var wrap = document.getElementById('cart-items-inner');
+      var totalEl = document.getElementById('selected-cart-total');
+      if (wrap && newItems) wrap.innerHTML = newItems.innerHTML;
+      if (totalEl && newTotal) totalEl.textContent = newTotal.textContent;
+      var navCount = document.getElementById('nav-cart-count');
+      if (navCount && newCount) navCount.textContent = '(' + newCount.textContent + ')';
+    });
+}
+
+/* Cart quantity/remove forms inside the modal — intercept with fetch */
+document.addEventListener('submit', function (e) {
+  var form = e.target;
+  if (!form.closest('#modal-cart')) return;
+  e.preventDefault();
+  var ctx = document.querySelector('meta[name="ctx"]');
+  var base = ctx ? ctx.content : '';
+  fetch(base + '/cart', { method: 'POST', body: new URLSearchParams(new FormData(form)) })
+    .then(function () { return refreshCartModal(); })
+    .catch(function () {});
+});
 
 /* ================================================================
    SMOOTH SCROLL

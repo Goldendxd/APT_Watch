@@ -84,119 +84,90 @@
         <c:set var="currentPage" value="${currentPage}?${currentQS}" />
       </c:if>
       <div id="cart-items" class="cart-items-wrap">
-        <c:choose>
-          <c:when test="${empty cartItems}">
-            <div class="cart-empty">
-              <div class="cart-empty-ico">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              </div>
-              <p>Your cart is empty.<br/>Start exploring our collection!</p>
-            </div>
-          </c:when>
-
-          <c:otherwise>
-            <c:set var="availableTotal" value="0" />
-            <c:forEach var="cart" items="${cartItems}">
-              <c:if test="${cart.stockQuantity > 0}">
-                <c:set var="availableTotal" value="${availableTotal + cart.totalPrice}" />
-              </c:if>
-              <div class="cart-item" data-line-total="${cart.stockQuantity > 0 ? cart.totalPrice : 0}">
-                <img src="${pageContext.request.contextPath}${cart.imageUrl}" alt="${cart.productName}" class="cart-img" />
-
-                <div class="cart-item-main">
-                  <div class="cartName">${cart.productName}</div>
-                  <div class="cart-brand">${cart.brand}</div>
-                  <c:choose>
-                    <c:when test="${cart.stockQuantity <= 0}">
-                      <div style="color:#c33;font-size:0.78rem;font-weight:700;margin-top:0.25rem;">
-                        Out of Stock
-                      </div>
-                    </c:when>
-                    <c:otherwise>
-                      <div class="cart-prices">
-                        <span class="newPrice">Rs ${cart.price}</span>
-                        <c:if test="${cart.oldPrice > 0}">
-                          <span class="oldPrice">Rs ${cart.oldPrice}</span>
-                        </c:if>
-                      </div>
-                    </c:otherwise>
-                  </c:choose>
+        <div id="cart-items-inner">
+          <c:choose>
+            <c:when test="${empty cartItems}">
+              <div class="cart-empty">
+                <div class="cart-empty-ico">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                 </div>
-
-                <div class="cart-item-controls">
-                  <div class="cart-qty-row">
+                <p>Your cart is empty.<br/>Start exploring our collection!</p>
+              </div>
+            </c:when>
+            <c:otherwise>
+              <c:forEach var="cart" items="${cartItems}">
+                <div class="cart-item">
+                  <img src="${pageContext.request.contextPath}${cart.imageUrl}" alt="${cart.productName}" class="cart-img" />
+                  <div class="cart-item-main">
+                    <div class="cartName">${cart.productName}</div>
+                    <div class="cart-brand">${cart.brand}</div>
                     <c:choose>
-                      <c:when test="${cart.quantity <= 1}">
-                        <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-                          <input type="hidden" name="action" value="remove">
-                          <input type="hidden" name="cartId" value="${cart.id}">
-                          <input type="hidden" name="redirectTo" value="${currentPage}">
-                          <button class="cart-qty-btn" type="submit" title="Remove item">&#8722;</button>
-                        </form>
+                      <c:when test="${cart.stockQuantity <= 0}">
+                        <div style="color:#c33;font-size:0.78rem;font-weight:700;margin-top:0.25rem;">Out of Stock</div>
                       </c:when>
                       <c:otherwise>
-                        <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-                          <input type="hidden" name="action" value="update">
-                          <input type="hidden" name="cartId" value="${cart.id}">
-                          <input type="hidden" name="quantity" value="${cart.quantity - 1}">
-                          <input type="hidden" name="redirectTo" value="${currentPage}">
-                          <button class="cart-qty-btn" type="submit" title="Decrease quantity">&#8722;</button>
-                        </form>
+                        <div class="cart-prices">
+                          <span class="newPrice">Rs <fmt:formatNumber value="${cart.price}" pattern="#,##0"/></span>
+                          <c:if test="${cart.oldPrice > 0}">
+                            <span class="oldPrice">Rs <fmt:formatNumber value="${cart.oldPrice}" pattern="#,##0"/></span>
+                          </c:if>
+                        </div>
                       </c:otherwise>
                     </c:choose>
-
-                    <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-                      <input type="hidden" name="action" value="update">
-                      <input type="hidden" name="cartId" value="${cart.id}">
-                      <input type="hidden" name="redirectTo" value="${currentPage}">
-                      <input class="cart-qty-val"
-                             type="number"
-                             name="quantity"
-                             min="1"
-                             max="${cart.stockQuantity}"
-                             value="${cart.quantity}"
-                        ${cart.stockQuantity <= 0 ? 'disabled' : ''}
-                             onchange="this.form.submit()"
-                             style="width:42px;text-align:center;border:0;background:#fff;font-weight:700;">
-                    </form>
-
-                    <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-                      <input type="hidden" name="action" value="update">
-                      <input type="hidden" name="cartId" value="${cart.id}">
-                      <input type="hidden" name="quantity" value="${cart.quantity + 1}">
-                      <input type="hidden" name="redirectTo" value="${currentPage}">
+                  </div>
+                  <div class="cart-item-controls">
+                    <div class="cart-qty-row">
                       <c:choose>
-                        <c:when test="${cart.stockQuantity <= 0 || cart.quantity >= cart.stockQuantity}">
-                          <button class="cart-qty-btn" type="button" disabled title="Out of stock" style="cursor:not-allowed;opacity:.5;">&#43;</button>
+                        <c:when test="${cart.quantity <= 1}">
+                          <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                            <input type="hidden" name="action" value="remove">
+                            <input type="hidden" name="cartId" value="${cart.id}">
+                            <button class="cart-qty-btn" type="submit" title="Remove item">&#8722;</button>
+                          </form>
                         </c:when>
                         <c:otherwise>
-                          <button class="cart-qty-btn" type="submit" title="Increase quantity">&#43;</button>
+                          <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                            <input type="hidden" name="action" value="update">
+                            <input type="hidden" name="cartId" value="${cart.id}">
+                            <input type="hidden" name="quantity" value="${cart.quantity - 1}">
+                            <button class="cart-qty-btn" type="submit" title="Decrease quantity">&#8722;</button>
+                          </form>
                         </c:otherwise>
                       </c:choose>
+                      <span class="cart-qty-val">${cart.quantity}</span>
+                      <c:choose>
+                        <c:when test="${cart.stockQuantity <= 0 || cart.quantity >= cart.stockQuantity}">
+                          <button class="cart-qty-btn" type="button" disabled title="Max stock" style="cursor:not-allowed;opacity:.5;">&#43;</button>
+                        </c:when>
+                        <c:otherwise>
+                          <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                            <input type="hidden" name="action" value="update">
+                            <input type="hidden" name="cartId" value="${cart.id}">
+                            <input type="hidden" name="quantity" value="${cart.quantity + 1}">
+                            <button class="cart-qty-btn" type="submit" title="Increase quantity">&#43;</button>
+                          </form>
+                        </c:otherwise>
+                      </c:choose>
+                    </div>
+                    <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                      <input type="hidden" name="action" value="remove">
+                      <input type="hidden" name="cartId" value="${cart.id}">
+                      <button class="cart-delete-btn" type="submit" title="Remove from cart">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                      </button>
                     </form>
                   </div>
-
-                  <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-                    <input type="hidden" name="action" value="remove">
-                    <input type="hidden" name="cartId" value="${cart.id}">
-                    <input type="hidden" name="redirectTo" value="${currentPage}">
-                    <button class="cart-delete-btn" type="submit" title="Remove from cart">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
-                    </button>
-                  </form>
                 </div>
-              </div>
-            </c:forEach>
-          </c:otherwise>
-        </c:choose>
+              </c:forEach>
+            </c:otherwise>
+          </c:choose>
+        </div>
       </div>
 
-      <c:if test="${not empty cartItems}">
-        <div class="cart-total-row">
-          <span>Grand Total</span>
-          <strong>Rs <span id="selected-cart-total"><fmt:formatNumber value="${availableTotal}" pattern="#,##0"/></span></strong>
-        </div>
-      </c:if>
+      <div class="cart-total-row">
+        <span>Grand Total</span>
+        <strong>Rs <span id="selected-cart-total"><fmt:formatNumber value="${grandTotal}" pattern="#,##0"/></span></strong>
+      </div>
 
       <c:choose>
         <c:when test="${not empty cartItems}">

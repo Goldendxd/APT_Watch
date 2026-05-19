@@ -14,22 +14,20 @@
     int userId = (Integer) uid;
     CartDaoImpl cartDao = new CartDaoImpl();
     List<Cart> items = cartDao.getCartItems(userId);
-    double total     = cartDao.getGrandTotal(userId);
-    int    count     = cartDao.getCartCount(userId);
-    double shipping  = total >= 5000 ? 0 : 200;
+    double total      = cartDao.getGrandTotal(userId);
+    int    count      = cartDao.getCartCount(userId);
+    double shipping   = total >= 5000 ? 0 : 200;
     double grandTotal = total + shipping;
-    long   amountPaisa = Math.round(grandTotal * 100);
 
-    request.setAttribute("cartItems",   items);
-    request.setAttribute("grandTotal",  total);
-    request.setAttribute("shipping",    shipping);
-    request.setAttribute("finalTotal",  grandTotal);
-    request.setAttribute("amountPaisa", amountPaisa);
-    request.setAttribute("cartCount",   count);
-    request.setAttribute("pageTitle",   "Checkout | AluGhadi Watches");
-    request.setAttribute("pageDesc",    "Complete your order with Khalti or Cash on Delivery.");
-    request.setAttribute("activeNav",   "products");
-    request.setAttribute("pageStyle",   "checkout");
+    request.setAttribute("cartItems",  items);
+    request.setAttribute("grandTotal", total);
+    request.setAttribute("shipping",   shipping);
+    request.setAttribute("finalTotal", grandTotal);
+    request.setAttribute("cartCount",  count);
+    request.setAttribute("pageTitle",  "Checkout | AluGhadi Watches");
+    request.setAttribute("pageDesc",   "Complete your order.");
+    request.setAttribute("activeNav",  "products");
+    request.setAttribute("pageStyle",  "checkout");
 %>
 
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
@@ -51,9 +49,9 @@
 
 <div class="pg-body checkout-page">
 
-  <c:if test="${not empty payError}">
+  <c:if test="${not empty orderError}">
     <div style="background:#fff1f1;border:1.5px solid rgba(200,60,60,0.3);border-radius:12px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;color:#c33;font-weight:600;font-size:0.88rem;">
-      &#9888; ${payError}
+      &#9888; ${orderError}
     </div>
   </c:if>
 
@@ -63,14 +61,16 @@
         <div style="font-size:3rem;margin-bottom:1rem;opacity:0.5;">&#128717;</div>
         <h2 style="margin-bottom:0.5rem;">Your cart is empty</h2>
         <p style="color:var(--muted);margin-bottom:1.5rem;">Add some watches to your cart before checking out.</p>
-        <a href="${pageContext.request.contextPath}/products" class="btn-fill" style="text-decoration:none;padding:0.75rem 1.75rem;border-radius:12px;">Browse Products &#8594;</a>
+        <a href="${pageContext.request.contextPath}/products" class="btn-fill"
+           style="text-decoration:none;padding:0.75rem 1.75rem;border-radius:12px;">Browse Products &#8594;</a>
       </div>
     </c:when>
 
     <c:otherwise>
+      <form action="${pageContext.request.contextPath}/place-order" method="post" id="checkout-form">
       <div class="checkout-layout">
 
-        <%-- LEFT: shipping info + payment choice --%>
+        <%-- LEFT: shipping + payment --%>
         <div class="checkout-forms">
 
           <%-- Shipping --%>
@@ -81,29 +81,29 @@
             <div class="fg-row">
               <div class="fg">
                 <label for="ship-fname">Full Name *</label>
-                <input type="text" id="ship-fname" placeholder="e.g. Ram Bahadur" required />
+                <input type="text" id="ship-fname" name="fullName" placeholder="e.g. Ram Bahadur" required />
               </div>
               <div class="fg">
                 <label for="ship-phone">Phone Number *</label>
-                <input type="tel" id="ship-phone" placeholder="98XXXXXXXX" required />
+                <input type="tel" id="ship-phone" name="phone" placeholder="98XXXXXXXX" required />
               </div>
             </div>
             <div class="fg">
               <label for="ship-email">Email Address</label>
-              <input type="email" id="ship-email" placeholder="you@example.com" />
+              <input type="email" id="ship-email" name="email" placeholder="you@example.com" />
             </div>
             <div class="fg">
               <label for="ship-address">Street Address *</label>
-              <input type="text" id="ship-address" placeholder="e.g. Lakeside, Baidam" required />
+              <input type="text" id="ship-address" name="address" placeholder="e.g. Lakeside, Baidam" required />
             </div>
             <div class="fg-row">
               <div class="fg">
                 <label for="ship-city">City *</label>
-                <input type="text" id="ship-city" placeholder="e.g. Pokhara" required />
+                <input type="text" id="ship-city" name="city" placeholder="e.g. Pokhara" required />
               </div>
               <div class="fg">
                 <label for="ship-district">District</label>
-                <input type="text" id="ship-district" placeholder="e.g. Kaski" />
+                <input type="text" id="ship-district" name="district" placeholder="e.g. Kaski" />
               </div>
             </div>
           </div>
@@ -115,16 +115,16 @@
 
             <div class="payment-options">
 
-              <%-- Khalti --%>
-              <label class="payment-option" for="pay-khalti">
-                <input type="radio" name="paymentMethod" id="pay-khalti" value="khalti" checked />
+              <%-- eSewa --%>
+              <label class="payment-option" for="pay-esewa">
+                <input type="radio" name="paymentMethod" id="pay-esewa" value="esewa" checked />
                 <div class="payment-option-card">
-                  <div class="payment-option-icon" style="background:#5C2D91;">
-                    <span style="font-weight:900;color:#fff;font-size:1.1rem;">K</span>
+                  <div class="payment-option-icon" style="background:#60BB46;">
+                    <span style="font-weight:900;color:#fff;font-size:1.1rem;">e</span>
                   </div>
                   <div class="payment-option-info">
-                    <div class="payment-option-name">Khalti</div>
-                    <div class="payment-option-desc">Pay securely with Khalti digital wallet</div>
+                    <div class="payment-option-name">eSewa</div>
+                    <div class="payment-option-desc">Pay with eSewa digital wallet</div>
                   </div>
                   <div class="payment-option-check">&#10003;</div>
                 </div>
@@ -192,87 +192,19 @@
             </div>
           </div>
 
-          <%-- Hidden Khalti form — submitted by JS --%>
-          <form id="khalti-form" action="${pageContext.request.contextPath}/khalti-pay" method="post" style="display:none;">
-            <input type="hidden" name="fullName"    id="hid-name" />
-            <input type="hidden" name="phone"       id="hid-phone" />
-            <input type="hidden" name="email"       id="hid-email" />
-            <input type="hidden" name="amountPaisa" value="${amountPaisa}" />
-          </form>
-
-          <button class="btn-fill" id="place-order-btn" type="button"
-                  onclick="placeOrder()"
+          <button type="submit" class="btn-fill"
                   style="display:block;width:100%;text-align:center;padding:0.85rem;border-radius:12px;font-weight:700;font-size:1rem;margin-bottom:0.75rem;border:none;cursor:pointer;">
             Place Order &#8594;
           </button>
 
           <div class="checkout-secure-note">
-            <span>&#128274;</span> Payments are processed securely
+            <span>&#128274;</span> Your order will be confirmed immediately
           </div>
         </div>
       </div>
+      </form>
     </c:otherwise>
   </c:choose>
 </div>
-
-<%-- COD success modal --%>
-<div class="modal-ov" id="modal-order-success" role="dialog" aria-modal="true">
-  <div class="modal" style="max-width:440px;text-align:center;">
-    <div style="font-size:3.5rem;margin-bottom:0.75rem;">&#10003;</div>
-    <div class="modal-h" style="color:var(--green);">Order Placed!</div>
-    <div class="modal-sub" style="margin-bottom:0.75rem;">
-      Thank you for shopping with AluGhadi Watches.<br/>
-      Our team will contact you to confirm delivery.
-    </div>
-    <div style="background:var(--green-light);border:1.5px solid var(--green-mid);border-radius:12px;padding:0.85rem;margin-bottom:1.25rem;">
-      <div style="font-size:0.72rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.3rem;">Order ID</div>
-      <div style="font-size:1.1rem;font-weight:900;color:var(--text);" id="order-id-display">AG-000000</div>
-    </div>
-    <a href="${pageContext.request.contextPath}/products" class="btn-fill"
-       style="display:block;text-decoration:none;padding:0.75rem;border-radius:12px;font-weight:700;text-align:center;">
-      Continue Shopping &#8594;
-    </a>
-  </div>
-</div>
-
-<script>
-  function placeOrder() {
-    var fname  = document.getElementById('ship-fname').value.trim();
-    var phone  = document.getElementById('ship-phone').value.trim();
-    var addr   = document.getElementById('ship-address').value.trim();
-    var city   = document.getElementById('ship-city').value.trim();
-    var method = document.querySelector('input[name="paymentMethod"]:checked').value;
-
-    if (!fname || !phone || !addr || !city) {
-      showToast('Missing Information', 'Please fill in all required shipping fields.', '&#9888;');
-      return;
-    }
-
-    if (method === 'khalti') {
-      document.getElementById('hid-name').value  = fname;
-      document.getElementById('hid-phone').value = phone;
-      document.getElementById('hid-email').value = document.getElementById('ship-email').value.trim();
-      document.getElementById('khalti-form').submit();
-    } else {
-      var btn = document.getElementById('place-order-btn');
-      btn.disabled    = true;
-      btn.textContent = 'Placing Order…';
-      fetch('${pageContext.request.contextPath}/cod-order', { method: 'POST', credentials: 'same-origin' })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          document.getElementById('order-id-display').textContent = data.orderId || ('AG-' + Date.now());
-          var modal = document.getElementById('modal-order-success');
-          if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
-          btn.disabled    = false;
-          btn.textContent = 'Place Order →';
-        })
-        .catch(function () {
-          btn.disabled    = false;
-          btn.textContent = 'Place Order →';
-          showToast('Error', 'Could not place order. Please try again.', '&#9888;');
-        });
-    }
-  }
-</script>
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

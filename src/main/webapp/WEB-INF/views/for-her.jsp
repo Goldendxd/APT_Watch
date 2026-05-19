@@ -42,40 +42,47 @@
   <div class="forher-filter-row">
     <div class="forher-filter-label">Filter by style:</div>
     <div class="tabs-wrap" style="margin-bottom:0;">
-      <button class="tab active" onclick="filterCards('all', this)">All Styles</button>
-      <button class="tab" onclick="filterCards('elegant', this)">Elegant</button>
-      <button class="tab" onclick="filterCards('minimal', this)">Minimal</button>
-      <button class="tab" onclick="filterCards('bold', this)">Bold</button>
-      <button class="tab" onclick="filterCards('luxury', this)">Luxury</button>
+      <a class="tab ${empty activeCategory or activeCategory == 'all' ? 'active' : ''}" href="${pageContext.request.contextPath}/for-her" style="text-decoration:none;">All Women's</a>
+      <a class="tab ${activeCategory == 'luxury' ? 'active' : ''}" href="${pageContext.request.contextPath}/for-her?category=luxury" style="text-decoration:none;">Luxury</a>
+      <a class="tab ${activeCategory == 'classic' ? 'active' : ''}" href="${pageContext.request.contextPath}/for-her?category=classic" style="text-decoration:none;">Classic</a>
+      <a class="tab ${activeCategory == 'sports' ? 'active' : ''}" href="${pageContext.request.contextPath}/for-her?category=sports" style="text-decoration:none;">Sports</a>
+      <a class="tab ${activeCategory == 'smart' ? 'active' : ''}" href="${pageContext.request.contextPath}/for-her?category=smart" style="text-decoration:none;">Smart</a>
     </div>
   </div>
 
   <%-- Cards grid --%>
   <div class="forher-grid" id="forher-grid">
-    <c:forEach var="product" items="${productList}">
-      <article class="gift-pick-card reveal" data-category="elegant">
-        <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-forher-elegant">${product.categoryName}</div>
-        <div class="gift-pick-title">${product.name}</div>
-        <p>${product.description}</p>
-        <div class="forher-card-footer">
-          <div class="gift-pick-meta">
-            NPR <fmt:formatNumber value="${product.price}" pattern="#,##0"/>
-          </div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="${product.id}">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forher-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=${product.id}" class="forher-card-btn">View &#8594;</a>
+    <c:choose>
+      <c:when test="${empty productList}">
+        <div style="grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--muted);">
+          <div style="font-size:2rem;margin-bottom:0.75rem;">&#128722;</div>
+          <div style="font-weight:800;margin-bottom:0.4rem;">No watches found</div>
+          <a href="${pageContext.request.contextPath}/for-her" style="color:#b8468a;font-weight:700;text-decoration:none;">View all styles</a>
+        </div>
+      </c:when>
+      <c:otherwise>
+        <c:forEach var="product" items="${productList}">
+          <article class="gift-pick-card reveal">
+            <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" />
+            <div class="gift-pick-body">
+              <div class="gift-pick-style-tag gift-pick-style-forher-elegant">${product.categoryName}</div>
+              <div class="gift-pick-title">${product.name}</div>
+              <p>${product.description}</p>
+              <div class="forher-card-footer">
+                <div class="gift-pick-meta">NPR <fmt:formatNumber value="${product.price}" pattern="#,##0"/></div>
+                <div class="gift-card-actions">
+                  <button class="forher-cart-btn" type="button"
+                          data-product-id="${product.id}"
+                          onclick="addToCart(this, this.dataset.productId, 1)"
+                          title="Add to cart">&#128717;</button>
+                  <a href="${pageContext.request.contextPath}/product-details?id=${product.id}" class="forher-card-btn">View &#8594;</a>
+                </div>
+              </div>
             </div>
-          </div>
-      </div>
-       </article>
-    </c:forEach>
+          </article>
+        </c:forEach>
+      </c:otherwise>
+    </c:choose>
   </div>
 <%--    <article class="gift-pick-card reveal reveal-delay-1" data-category="minimal">--%>
 <%--      <img src="${pageContext.request.contextPath}/static/images/for-her/her-2.webp" alt="Modern Minimal" />--%>
@@ -184,7 +191,6 @@
 
 <%--  </div>--%>
 
-   Back nav
   <div class="forher-back-row">
     <a href="${pageContext.request.contextPath}/gifting" class="forher-back-link">
       &#8592; Back to Gift Guide
@@ -294,18 +300,5 @@
 @media (max-width: 600px)  { .forher-grid { grid-template-columns: 1fr; } }
 </style>
 
-<script>
-function filterCards(cat, btn) {
-  document.querySelectorAll('.tabs-wrap .tab').forEach(function(t){ t.classList.remove('active'); });
-  btn.classList.add('active');
-  document.querySelectorAll('.forher-grid .gift-pick-card').forEach(function(card){
-    if (cat === 'all' || (card.dataset.category && card.dataset.category.indexOf(cat) !== -1)) {
-      card.classList.remove('hidden');
-    } else {
-      card.classList.add('hidden');
-    }
-  });
-}
-</script>
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

@@ -4,7 +4,6 @@ import com.alughadi.dao.CartDaoImpl;
 import com.alughadi.dao.OrderDao;
 import com.alughadi.dao.OrderDaoImpl;
 import com.alughadi.entity.Cart;
-import com.alughadi.utils.SessionUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,20 +11,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/cod-order")
-public class CodOrderServlet extends HttpServlet {
+@WebServlet("/place-order")
+public class PlaceOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Object userIdObj = SessionUtil.getAttribute(request, "authUserId");
+        Object userIdObj = request.getSession(false) != null
+                ? request.getSession(false).getAttribute("authUserId") : null;
         if (userIdObj == null) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
         int userId = (Integer) userIdObj;
@@ -34,13 +33,18 @@ public class CodOrderServlet extends HttpServlet {
         List<Cart> cartItems = cartDao.getCartItems(userId);
 
         if (cartItems.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.sendRedirect(request.getContextPath() + "/cart");
             return;
         }
 
-        double total    = cartDao.getGrandTotal(userId);
-        double shipping = total >= 5000 ? 0 : 200;
-        double grandTotal = total + shipping;
+        String paymentMethod = request.getParameter("paymentMethod");
+        if (paymentMethod == null || paymentMethod.isBlank()) {
+            paymentMethod = "cod";
+        }
+
+        double subtotal   = cartDao.getGrandTotal(userId);
+        double shipping   = subtotal >= 5000 ? 0 : 200;
+        double grandTotal = subtotal + shipping;
 
         List<Object[]> items = new ArrayList<>();
         for (Cart c : cartItems) {
@@ -48,12 +52,14 @@ public class CodOrderServlet extends HttpServlet {
         }
 
         OrderDao orderDao = new OrderDaoImpl();
-        orderDao.saveOrder(userId, grandTotal, "cod", items);
+        int dbOrderId = orderDao.saveOrder(userId, grandTotal, paymentMethod, items);
         cartDao.clearCart(userId);
 
-        // Return a simple JSON with the order confirmation
-        response.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.print("{\"orderId\":\"AG-" + System.currentTimeMillis() + "\"}");
+        String orderId = dbOrderId > 0 ? "AG-" + dbOrderId : "AG-" + System.currentTimeMillis();
+        request.getSession().setAttribute("lastOrderId", orderId);
+        request.getSession().setAttribute("lastPaymentMethod", paymentMethod);
+        request.getSession().setAttribute("lastOrderTotal", grandTotal);
+
+        response.sendRedirect(request.getContextPath() + "/order-success");
     }
 }

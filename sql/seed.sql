@@ -187,41 +187,41 @@ INSERT INTO cart (user_id, product_id, quantity) VALUES
 INSERT INTO orders (id, user_id, total_amount, payment_method, payment_status, order_status, created_at) VALUES
   -- 2024 early
   (1,  4,  18500.00,  'cod',    'paid', 'delivered', '2024-06-15 10:30:00'),  -- shisir
-  (2,  5,  38000.00,  'khalti', 'paid', 'delivered', '2024-07-03 14:22:00'),  -- ashish
-  (3,  6,  145000.00, 'khalti', 'paid', 'delivered', '2024-07-28 09:15:00'),  -- sabin
+  (2,  5,  38000.00,  'esewa', 'paid', 'delivered', '2024-07-03 14:22:00'),  -- ashish
+  (3,  6,  145000.00, 'esewa', 'paid', 'delivered', '2024-07-28 09:15:00'),  -- sabin
   (4,  7,  12500.00,  'cod',    'paid', 'delivered', '2024-08-11 16:40:00'),  -- dikxhita
-  (5,  8,  75000.00,  'khalti', 'paid', 'delivered', '2024-08-22 11:05:00'),  -- rijan
-  (6,  9,  55000.00,  'khalti', 'paid', 'delivered', '2024-09-07 13:50:00'),  -- prasus
+  (5,  8,  75000.00,  'esewa', 'paid', 'delivered', '2024-08-22 11:05:00'),  -- rijan
+  (6,  9,  55000.00,  'esewa', 'paid', 'delivered', '2024-09-07 13:50:00'),  -- prasus
   (7,  10, 9500.00,   'cod',    'paid', 'delivered', '2024-09-19 08:30:00'),  -- sachin
-  (8,  11, 42000.00,  'khalti', 'paid', 'delivered', '2024-09-30 17:10:00'),  -- roshan
+  (8,  11, 42000.00,  'esewa', 'paid', 'delivered', '2024-09-30 17:10:00'),  -- roshan
   (9,  12, 14500.00,  'cod',    'paid', 'delivered', '2024-10-08 11:20:00'),  -- bibek
-  (10, 13, 35000.00,  'khalti', 'paid', 'delivered', '2024-10-21 14:00:00'),  -- rajesh
+  (10, 13, 35000.00,  'esewa', 'paid', 'delivered', '2024-10-21 14:00:00'),  -- rajesh
   -- 2024 late
-  (11, 4,  285000.00, 'khalti', 'paid', 'delivered', '2024-10-04 17:20:00'),
+  (11, 4,  285000.00, 'esewa', 'paid', 'delivered', '2024-10-04 17:20:00'),
   (12, 5,  42000.00,  'cod',    'paid', 'delivered', '2024-10-18 12:10:00'),
-  (13, 6,  35000.00,  'khalti', 'paid', 'delivered', '2024-11-02 15:35:00'),
-  (14, 7,  68000.00,  'khalti', 'paid', 'delivered', '2024-11-14 10:45:00'),
-  (15, 8,  95000.00,  'khalti', 'paid', 'delivered', '2024-11-29 09:20:00'),
-  (16, 9,  165000.00, 'khalti', 'paid', 'delivered', '2024-12-05 14:00:00'),
+  (13, 6,  35000.00,  'esewa', 'paid', 'delivered', '2024-11-02 15:35:00'),
+  (14, 7,  68000.00,  'esewa', 'paid', 'delivered', '2024-11-14 10:45:00'),
+  (15, 8,  95000.00,  'esewa', 'paid', 'delivered', '2024-11-29 09:20:00'),
+  (16, 9,  165000.00, 'esewa', 'paid', 'delivered', '2024-12-05 14:00:00'),
   (17, 10, 18500.00,  'cod',    'paid', 'delivered', '2024-12-20 11:30:00'),
   (18, 11, 8500.00,   'cod',    'paid', 'delivered', '2024-12-27 10:15:00'),
-  (19, 12, 72000.00,  'khalti', 'paid', 'delivered', '2024-12-30 16:00:00'),
-  (20, 13, 55000.00,  'khalti', 'paid', 'delivered', '2025-01-05 09:45:00'),
+  (19, 12, 72000.00,  'esewa', 'paid', 'delivered', '2024-12-30 16:00:00'),
+  (20, 13, 55000.00,  'esewa', 'paid', 'delivered', '2025-01-05 09:45:00'),
   -- 2025
-  (21, 4,  195000.00, 'khalti', 'paid', 'delivered', '2025-01-08 16:15:00'),
+  (21, 4,  195000.00, 'esewa', 'paid', 'delivered', '2025-01-08 16:15:00'),
   (22, 5,  14500.00,  'cod',    'paid', 'delivered', '2025-01-22 10:00:00'),
-  (23, 6,  72000.00,  'khalti', 'paid', 'delivered', '2025-02-10 13:25:00'),
+  (23, 6,  72000.00,  'esewa', 'paid', 'delivered', '2025-02-10 13:25:00'),
   (24, 7,  8500.00,   'cod',    'paid', 'delivered', '2025-02-25 09:40:00'),
-  (25, 8,  125000.00, 'khalti', 'paid', 'delivered', '2025-03-06 15:10:00'),
+  (25, 8,  125000.00, 'esewa', 'paid', 'delivered', '2025-03-06 15:10:00'),
   (26, 9,  38000.00,  'cod',    'paid', 'delivered', '2025-03-18 12:50:00'),
-  (27, 10, 235000.00, 'khalti', 'paid', 'delivered', '2025-04-02 14:30:00'),
-  (28, 11, 95000.00,  'khalti', 'paid', 'delivered', '2025-04-10 11:00:00'),
+  (27, 10, 235000.00, 'esewa', 'paid', 'delivered', '2025-04-02 14:30:00'),
+  (28, 11, 95000.00,  'esewa', 'paid', 'delivered', '2025-04-10 11:00:00'),
   (29, 12, 18500.00,  'cod',    'paid', 'delivered', '2025-04-20 09:30:00'),
-  (30, 13, 68000.00,  'khalti', 'paid', 'delivered', '2025-05-01 14:45:00'),
-  (31, 4,  55000.00,  'khalti', 'paid', 'delivered', '2025-04-15 10:20:00'),
+  (30, 13, 68000.00,  'esewa', 'paid', 'delivered', '2025-05-01 14:45:00'),
+  (31, 4,  55000.00,  'esewa', 'paid', 'delivered', '2025-04-15 10:20:00'),
   (32, 5,  12500.00,  'cod',    'paid', 'delivered', '2025-04-28 09:05:00'),
   (33, 6,  42000.00,  'cod',    'paid', 'delivered', '2025-05-03 16:45:00'),
-  (34, 7,  285000.00, 'khalti', 'paid', 'delivered', '2025-05-12 11:15:00');
+  (34, 7,  285000.00, 'esewa', 'paid', 'delivered', '2025-05-12 11:15:00');
 
 INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES
   (1,  5,  2, 18500.00),
