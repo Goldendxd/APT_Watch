@@ -254,3 +254,24 @@
   color:      var(--gold);
   font-size:  0.85rem;
 }
+
+/* ================================================================
+   MOBILE IMPROVEMENTS
+   ================================================================ */
+@media (max-width: 768px) {
+  .tabs-wrap {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .btn-lg { padding: 0.85rem 1.8rem; }
+  .btn-xl { padding: 0.95rem 2rem; }
+}
+
+@media (max-width: 480px) {
+  .btn    { font-size: 0.82rem; padding: 0.7rem 1.3rem; }
+  .btn-sm { font-size: 0.72rem; padding: 0.48rem 0.9rem; }
+  .btn-full { display: flex; width: 100%; }
+  .info-banner { padding: 0.9rem 1rem; gap: 0.65rem; }
+  .ib-ico { font-size: 1.1rem; }
+}

@@ -101,13 +101,6 @@
                 <c:set var="availableTotal" value="${availableTotal + cart.totalPrice}" />
               </c:if>
               <div class="cart-item" data-line-total="${cart.stockQuantity > 0 ? cart.totalPrice : 0}">
-                <input type="checkbox"
-                       class="cart-select"
-                       name="selectedCartId"
-                       value="${cart.id}"
-                       form="checkoutSelectedForm"
-                  ${cart.stockQuantity <= 0 ? 'disabled' : 'checked'}
-                       style="margin-right:0.5rem;">
                 <img src="${pageContext.request.contextPath}${cart.imageUrl}" alt="${cart.productName}" class="cart-img" />
 
                 <div class="cart-item-main">

@@ -634,15 +634,37 @@
 
 @media (max-width: 768px) {
   .home-hero       { min-height: 55vh; }
-  .hero-content    { padding: 2rem 5%; }
-  .hero-h          { font-size: 2rem; }
-  .hero-p          { font-size: 0.88rem; }
-  .hero-stats      { gap: 1.5rem; }
-  .hero-btns       { flex-direction: column; }
-  .hbtn            { justify-content: center; }
-  .dest-card       { flex: 0 0 260px; }
+  .hero-content    { padding: 2rem 5% 3rem; }
+  .hero-h          { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+  .hero-p          { font-size: 0.88rem; margin-bottom: 1.5rem; }
+  .hero-stats      { gap: 1.25rem; }
+  .hero-stat-number { font-size: 1.25rem; }
+  .hero-btns       { flex-direction: column; gap: 0.65rem; }
+  .hbtn            { justify-content: center; padding: 0.85rem 1.5rem; }
+  .dest-card       { flex: 0 0 240px; }
   .feat-grid       { grid-template-columns: 1fr; }
   .season-inner    { flex-direction: column; gap: 0.8rem; }
   .gift-hero-choice-grid { grid-template-columns: 1fr; }
   .gift-hero-choice { min-height: 200px; }
+  .gift-people-grid { grid-template-columns: 1fr; }
+  .gift-picks-grid  { grid-template-columns: 1fr; }
+  .prod-img-container { height: 200px; }
+}
+
+@media (max-width: 480px) {
+  .home-hero       { min-height: 50vh; }
+  .hero-content    { padding: 1.5rem 4% 2.5rem; }
+  .hero-chip       { font-size: 0.65rem; }
+  .hero-stats      { gap: 1rem; flex-wrap: wrap; }
+  .hero-stat-number { font-size: 1.1rem; }
+  .hero-btns       { gap: 0.5rem; }
+  .hbtn            { padding: 0.8rem 1.2rem; font-size: 0.88rem; }
+  .dest-card       { flex: 0 0 220px; }
+  .collection-card-image { height: 180px; }
+  .feat-card       { padding: 1.35rem; }
+  .prod-img-container { height: 180px; }
+  .product-card    { border-radius: 12px; }
+  .season-strip    { padding: 0.85rem 1rem; }
+  .gift-person-media { height: 200px; }
+  .gift-budget-grid { grid-template-columns: 1fr 1fr; }
 }

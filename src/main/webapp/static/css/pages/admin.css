@@ -185,10 +185,20 @@ tbody td{padding:.88rem 1.25rem;font-size:.81rem;font-weight:500;color:var(--tex
 @media(max-width:600px){
   .kpi-grid{grid-template-columns:1fr;}
   .table-toolbar{flex-direction:column;align-items:stretch;}
+  .adm-topbar{padding:0 1rem;}
+  .adm-topbar-title{font-size:1.05rem;}
+  .adm-body{padding:1.25rem .85rem 3.5rem;}
+  table{display:block;overflow-x:auto;white-space:nowrap;}
 }
 
 /* Product modal two-column collapses on narrow screens */
 @media(max-width:700px){
   #productModal .modal-body{grid-template-columns:1fr !important;}
   #productModal .modal{max-width:98vw !important;}
+}
+
+@media(max-width:480px){
+  .kpi-num{font-size:1.6rem;}
+  .sec-head-title{font-size:1.25rem;}
+  .analytics-grid{grid-template-columns:1fr;}
 }

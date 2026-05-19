@@ -255,9 +255,17 @@
 }
 
 @media (max-width: 768px) {
+  .checkout-page { padding-top: 1.5rem; }
+
   .checkout-section,
   .checkout-summary {
-    padding: 1.25rem;
+    padding: 1.1rem;
+    border-radius: 16px;
+  }
+
+  .checkout-section-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.9rem;
   }
 
   .checkout-item {
@@ -271,5 +279,31 @@
 
   .fg-row {
     grid-template-columns: 1fr;
+  }
+
+  .checkout-layout {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-section,
+  .checkout-summary {
+    padding: 0.9rem;
+    border-radius: 14px;
+  }
+
+  /* Cart item row: image + content stack on very small screens */
+  .checkout-item {
+    flex-wrap: wrap;
+  }
+
+  .checkout-item-img {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .checkout-grand-total strong {
+    font-size: 1.1rem;
   }
 }

@@ -396,16 +396,25 @@
 }
 
 @media (max-width: 900px) {
-  #nav { height: 66px; }
+  #nav { height: 62px; }
   .nav-inner {
     grid-template-columns: 1fr auto;
-    padding: 0 1.1rem;
+    padding: 0 1rem;
     gap: 0;
   }
   .nav-links,
   .nav-end { display: none; }
   .hamburger { display: flex; }
-  .page-hero { margin-top: 66px !important; }
-  .home-hero { margin-top: 66px !important; }
-  .pg-body   { padding: 2rem 1.25rem 5rem; }
+  .page-hero { margin-top: 62px !important; }
+  .home-hero { margin-top: 62px !important; }
+  .pg-body   { padding: 2rem 1rem 5rem; }
+}
+
+@media (max-width: 480px) {
+  #nav { height: 58px; }
+  .nav-inner { padding: 0 0.85rem; }
+  .nav-logo-img { height: 36px; }
+  .page-hero { margin-top: 58px !important; }
+  .home-hero { margin-top: 58px !important; }
+  .sidebar { width: 100%; right: -100%; }
 }

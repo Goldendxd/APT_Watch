@@ -475,6 +475,7 @@
 @media (max-width: 900px) {
   .profile-page {
     grid-template-columns: 1fr;
+    padding: 1.5rem 0 3rem;
   }
 
   .profile-sidebar {
@@ -491,9 +492,20 @@
 @media (max-width: 640px) {
   .pf-row        { grid-template-columns: 1fr; }
   .pf-row.triple { grid-template-columns: 1fr; }
-  .profile-panel-head { flex-direction: column; align-items: flex-start; }
+  .profile-panel-head { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .profile-panel-body { padding: 1.1rem; }
   .order-card-head    { flex-direction: column; align-items: flex-start; }
   .order-card-body    { flex-direction: column; }
-  .order-meta         { flex-direction: row; gap: 1rem; }
+  .order-meta         { flex-direction: row; gap: 1rem; flex-wrap: wrap; }
   .order-meta-item    { text-align: left; }
+  .order-card-head,
+  .order-card-body    { padding: 0.85rem 1rem; }
+}
+
+@media (max-width: 480px) {
+  .profile-sidebar { flex-direction: column; }
+  .profile-card    { min-width: 0; }
+  .profile-avatar  { width: 64px; height: 64px; font-size: 1.6rem; }
+  .pf-save-row     { flex-direction: column; align-items: stretch; }
+  .pf-btn          { width: 100%; text-align: center; justify-content: center; }
 }

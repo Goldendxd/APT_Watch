@@ -384,12 +384,23 @@
 }
 
 @media (max-width: 768px) {
-  .pg-body  { padding: 2.5rem 1.25rem 6rem; }
+  .pg-body  { padding: 2.5rem 1rem 6rem; }
+  .pg-body-sm { padding: 2rem 1rem 5rem; }
   .pg-two,
   .pg-three,
   .fg-row   { grid-template-columns: 1fr; }
-  .sec      { padding: 3.5rem 1.25rem; }
+  .sec      { padding: 3rem 1rem; }
   .split-img { height: 260px; }
   .page-hero  { min-height: 38vh; }
   .ph-body  { padding: 2rem 5% 3rem; }
+  .ph-h     { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+  .ph-sub   { font-size: 0.82rem; }
+  .gc       { padding: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .pg-body  { padding: 2rem 0.85rem 5rem; }
+  .sec      { padding: 2.5rem 0.85rem; }
+  .gc       { padding: 1rem; }
+  .ph-body  { padding: 1.5rem 5% 2.5rem; }
 }

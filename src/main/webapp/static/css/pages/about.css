@@ -280,5 +280,8 @@
 }
 
 @media (max-width: 480px) {
-  .split-stats-grid { grid-template-columns: 1fr 1fr; }
+  .split-stats-grid { grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+  .about-stat-card  { padding: 1.25rem 1rem; }
+  .asc-n            { font-size: 1.75rem; }
+  .team-card        { padding: 1.5rem 1.25rem 1.25rem; }
 }

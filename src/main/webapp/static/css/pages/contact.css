@@ -242,3 +242,10 @@
   .contact-form-foot  { flex-direction: column; align-items: stretch; }
   .contact-form-foot .btn { justify-content: center; }
 }
+
+@media (max-width: 480px) {
+  .contact-form-wrap .gc { padding: 1.1rem; border-radius: 16px; }
+  .contact-side-card      { padding: 1rem; border-radius: 14px; }
+  .contact-socials        { padding: 1rem; border-radius: 14px; }
+  .csc-ico                { width: 38px; height: 38px; font-size: 1.1rem; }
+}

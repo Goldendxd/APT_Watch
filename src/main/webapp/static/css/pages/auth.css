@@ -720,12 +720,22 @@ body.auth-standalone {
 
 @media (max-width: 480px) {
   .auth-right {
-    padding: 1.75rem 1.25rem;
+    padding: 1.5rem 1rem;
+    padding-top: 2rem;
   }
   .auth-form-title {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
   }
   .auth-form-box {
     max-width: 100%;
+    padding: 1.75rem 1.25rem 1.5rem;
+    border-radius: 16px;
+  }
+  .auth-stats {
+    gap: 1.5rem;
+  }
+  .auth-form-sub {
+    font-size: 0.8rem;
+    margin-bottom: 1.4rem;
   }
 }
