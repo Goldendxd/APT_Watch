@@ -24,6 +24,7 @@ CREATE TABLE users (
     city          VARCHAR(100)  NULL,
     province      VARCHAR(100)  NULL,
     district      VARCHAR(100)  NULL,
+    profile_image VARCHAR(255)  NULL,
     is_active     TINYINT(1)    NOT NULL DEFAULT 1,
     is_verified   TINYINT(1)    NOT NULL DEFAULT 0,
     created_at    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,

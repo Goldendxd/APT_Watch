@@ -14,9 +14,37 @@
       <%-- Avatar card --%>
       <div class="profile-card">
         <div class="profile-avatar-block">
-          <div class="profile-avatar">
-            ${fn:toUpperCase(fn:substring(profileUser.username, 0, 1))}
+          <div class="profile-avatar" style="${not empty profileUser.profile_image ? 'padding:0;overflow:hidden;' : ''}">
+            <c:choose>
+              <c:when test="${not empty profileUser.profile_image}">
+                <img src="${pageContext.request.contextPath}${profileUser.profile_image}?v=${profileUser.updated_At.time}" alt="Profile" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              </c:when>
+              <c:otherwise>
+                ${fn:toUpperCase(fn:substring(profileUser.username, 0, 1))}
+              </c:otherwise>
+            </c:choose>
           </div>
+
+          <%-- Avatar upload --%>
+          <form method="post" action="${pageContext.request.contextPath}/profile" enctype="multipart/form-data" style="margin-top:0.6rem;">
+            <input type="hidden" name="action" value="uploadAvatar" />
+            <label for="avatarFile" style="display:inline-block;cursor:pointer;font-size:0.75rem;color:var(--green);font-weight:600;border:1.5px solid var(--green);border-radius:999px;padding:0.25rem 0.85rem;transition:background 0.15s;">
+              Change Photo
+              <input type="file" id="avatarFile" name="avatarFile" accept=".jpg,.jpeg,.png,.webp" style="display:none;" onchange="this.form.submit()" />
+            </label>
+          </form>
+          <c:if test="${param.avatarUpdated == '1'}">
+            <div style="font-size:0.72rem;color:var(--green);margin-top:0.3rem;">Photo updated!</div>
+          </c:if>
+          <c:if test="${not empty param.avatarError}">
+            <div style="font-size:0.72rem;color:var(--red);margin-top:0.3rem;">
+              <c:choose>
+                <c:when test="${param.avatarError == 'type'}">Only JPG, PNG, or WEBP allowed.</c:when>
+                <c:otherwise>Upload failed. Try again.</c:otherwise>
+              </c:choose>
+            </div>
+          </c:if>
+
           <div class="profile-avatar-name">
             <c:choose>
               <c:when test="${not empty profileUser.full_name}">${profileUser.full_name}</c:when>

@@ -129,6 +129,24 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public boolean updateProfileImage(int userId, String imagePath) {
+        Connection conn = null;
+        try {
+            conn = DatabaseConnection.getConnection();
+            PreparedStatement st = conn.prepareStatement(
+                "UPDATE users SET profile_image=? WHERE id=?");
+            st.setString(1, imagePath);
+            st.setInt(2, userId);
+            return st.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error updating profile image: " + e.getMessage());
+            return false;
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+
+    @Override
     public int countCustomers() {
         Connection conn = null;
         try {
@@ -167,6 +185,7 @@ public class UserDaoImpl implements UserDao {
         try { u.setIs_active(rs.getInt("is_active")); } catch (SQLException ignored) {}
         try { u.setIs_verified(rs.getInt("is_verified")); } catch (SQLException ignored) {}
         try { u.setLast_login(rs.getTimestamp("last_login")); } catch (SQLException ignored) {}
+        try { u.setProfile_image(rs.getString("profile_image")); } catch (SQLException ignored) {}
         return u;
     }
 }

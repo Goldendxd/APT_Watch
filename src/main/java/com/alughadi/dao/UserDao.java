@@ -10,4 +10,5 @@ public interface UserDao {
     int countCustomers();
     boolean updateProfile(User user);
     boolean changePassword(int userId, String newHashedPassword);
+    boolean updateProfileImage(int userId, String imagePath);
 }
