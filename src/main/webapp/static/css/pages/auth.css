@@ -215,8 +215,6 @@ body.auth-standalone {
   width:       auto;
   object-fit:  contain;
   display:     block;
-  /* Logo may be dark — invert to white so it's visible on the dark panel */
-  filter:      brightness(0) invert(1);
   transition:  opacity 0.18s;
 }
 .auth-logo:hover .auth-logo-img { opacity: 0.82; }

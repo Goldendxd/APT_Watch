@@ -12,7 +12,7 @@ button{cursor:pointer;font-family:var(--ff);}
 /* ---- SIDEBAR ---- */
 .adm-sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--text);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;z-index:200;overflow-y:auto;overflow-x:hidden;}
 .adm-logo{padding:1.5rem 1.4rem 1.3rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:.7rem;}
-.adm-logo-img{height:36px;width:auto;display:block;filter:brightness(0) invert(1);flex-shrink:0;}
+.adm-logo-img{height:36px;width:auto;display:block;flex-shrink:0;mix-blend-mode:screen;opacity:0.9;}
 .adm-logo-brand{font-weight:900;font-size:1.08rem;color:#fff;letter-spacing:-.02em;line-height:1;}
 .adm-logo-sub{font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.18rem;}
 .adm-nav{flex:1;padding:1rem .7rem;display:flex;flex-direction:column;gap:1px;}

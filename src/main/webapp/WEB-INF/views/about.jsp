@@ -94,33 +94,33 @@
       <div class="sec-tag" style="justify-content:center;">Meet the Team</div>
       <h2 class="sec-h">The <em style="font-style:normal;color:var(--gold);">five</em> behind AluGhadi</h2>
       <p class="sec-sub" style="margin:0.75rem auto 0;text-align:center;">
-        A group of passionate students who turned a class project into a real e-commerce vision.
-        Different skills, one shared ambition.
+        Five students from London Metropolitan University who built AluGhadi from the ground up —
+        each owning a distinct part of the platform, united by one shared ambition.
       </p>
     </div>
 
     <div class="team-grid">
 
-      <%-- Team Card: Shisir Lamsal --%>
+      <%-- Team Card: Ashish Thapa --%>
       <div class="team-card reveal reveal-delay-1">
         <div class="team-avatar-wrap">
-          <div class="team-avatar" style="background: linear-gradient(135deg, #1a6b38 0%, #3dba62 100%);">
-            <span>SL</span>
+          <div class="team-avatar" style="background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);">
+            <span>AT</span>
           </div>
-          <div class="team-avatar-ring"></div>
+          <div class="team-avatar-ring" style="border-color: #dbeafe;"></div>
         </div>
         <div class="team-body">
-          <div class="team-role-chip">Project Lead</div>
-          <h3 class="team-name">Shisir Lamsal</h3>
+          <div class="team-role-chip" style="color:#1e40af;background:#eff6ff;border-color:rgba(59,130,246,0.2);">24040801</div>
+          <h3 class="team-name">Ashish Thapa</h3>
           <p class="team-bio">
-            Visionary project lead who architected the system and kept the team aligned.
-            Passionate about full-stack development and clean code.
+            Built the cart feature, gifting page, For Him and For Her pages,
+            and the image upload utility powering the entire product catalogue.
           </p>
           <div class="team-skills">
-            <span>Java EE</span><span>MVC</span><span>Leadership</span>
+            <span>Cart</span><span>Gifting</span><span>Image Upload</span>
           </div>
         </div>
-        <div class="team-card-glow" style="background: rgba(26,107,56,0.08);"></div>
+        <div class="team-card-glow" style="background: rgba(59,130,246,0.06);"></div>
       </div>
 
       <%-- Team Card: Dikshita GC --%>
@@ -132,39 +132,39 @@
           <div class="team-avatar-ring" style="border-color: var(--gold-light);"></div>
         </div>
         <div class="team-body">
-          <div class="team-role-chip" style="color:var(--gold2);background:var(--gold-light);border-color:rgba(201,164,82,0.25);">UI / UX</div>
+          <div class="team-role-chip" style="color:var(--gold2);background:var(--gold-light);border-color:rgba(201,164,82,0.25);">24041428</div>
           <h3 class="team-name">Dikshita GC</h3>
           <p class="team-bio">
-            The creative force driving AluGhadi's visual identity. Expert at translating
-            ideas into beautiful, accessible interfaces that users love.
+            Designed the entire CSS design system and built the authentication filter,
+            cookie management, and the product details page.
           </p>
           <div class="team-skills">
-            <span>CSS</span><span>Design Systems</span><span>UX</span>
+            <span>CSS Design System</span><span>Auth Filter</span><span>Product Details</span>
           </div>
         </div>
         <div class="team-card-glow" style="background: rgba(201,164,82,0.08);"></div>
       </div>
 
-      <%-- Team Card: Ashish Thapa --%>
+      <%-- Team Card: Rijan Pun --%>
       <div class="team-card reveal reveal-delay-3">
         <div class="team-avatar-wrap">
-          <div class="team-avatar" style="background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);">
-            <span>AT</span>
+          <div class="team-avatar" style="background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);">
+            <span>RP</span>
           </div>
-          <div class="team-avatar-ring" style="border-color: #dbeafe;"></div>
+          <div class="team-avatar-ring" style="border-color: #fde68a;"></div>
         </div>
         <div class="team-body">
-          <div class="team-role-chip" style="color:#1e40af;background:#eff6ff;border-color:rgba(59,130,246,0.2);">Backend Dev</div>
-          <h3 class="team-name">Ashish Thapa</h3>
+          <div class="team-role-chip" style="color:#b45309;background:#fffbeb;border-color:rgba(217,119,6,0.22);">24044068</div>
+          <h3 class="team-name">Rijan Pun</h3>
           <p class="team-bio">
-            Backend architect responsible for database design and servlet infrastructure.
-            Builds robust, scalable systems that power the entire platform.
+            Designed and built the database, developed the home page, about page,
+            contact page, logout functionality, and the site footer.
           </p>
           <div class="team-skills">
-            <span>MySQL</span><span>Servlets</span><span>DAO</span>
+            <span>Database</span><span>Home &amp; About</span><span>Footer</span>
           </div>
         </div>
-        <div class="team-card-glow" style="background: rgba(59,130,246,0.06);"></div>
+        <div class="team-card-glow" style="background: rgba(217,119,6,0.06);"></div>
       </div>
 
       <%-- Team Card: Sabin Thapa --%>
@@ -176,39 +176,39 @@
           <div class="team-avatar-ring" style="border-color: #ede9fe;"></div>
         </div>
         <div class="team-body">
-          <div class="team-role-chip" style="color:#6d28d9;background:#f5f3ff;border-color:rgba(124,58,237,0.2);">Frontend Dev</div>
+          <div class="team-role-chip" style="color:#6d28d9;background:#f5f3ff;border-color:rgba(124,58,237,0.2);">24044087</div>
           <h3 class="team-name">Sabin Thapa</h3>
           <p class="team-bio">
-            Frontend specialist who brings designs to life with smooth interactions and
-            pixel-perfect layouts. JavaScript enthusiast with an eye for detail.
+            Implemented login, registration, input validation, BCrypt password
+            encryption, product listing, and session management across the platform.
           </p>
           <div class="team-skills">
-            <span>JavaScript</span><span>JSP</span><span>Animations</span>
+            <span>Auth</span><span>Sessions</span><span>Products</span>
           </div>
         </div>
         <div class="team-card-glow" style="background: rgba(124,58,237,0.06);"></div>
       </div>
 
-      <%-- Team Card: Rijan Pun --%>
+      <%-- Team Card: Shisir Lamsal --%>
       <div class="team-card reveal reveal-delay-5">
         <div class="team-avatar-wrap">
-          <div class="team-avatar" style="background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);">
-            <span>RP</span>
+          <div class="team-avatar" style="background: linear-gradient(135deg, #1a6b38 0%, #3dba62 100%);">
+            <span>SL</span>
           </div>
-          <div class="team-avatar-ring" style="border-color: #fde68a;"></div>
+          <div class="team-avatar-ring"></div>
         </div>
         <div class="team-body">
-          <div class="team-role-chip" style="color:#b45309;background:#fffbeb;border-color:rgba(217,119,6,0.22);">QA &amp; Testing</div>
-          <h3 class="team-name">Rijan Pun</h3>
+          <div class="team-role-chip">24044379</div>
+          <h3 class="team-name">Shisir Lamsal</h3>
           <p class="team-bio">
-            Quality guardian who ensures every feature is robust, bug-free, and
-            delivers a flawless experience. Driven by precision and user empathy.
+            Owned all JavaScript, the admin dashboard, the site header, navigation,
+            and the overall UI/UX direction of the platform.
           </p>
           <div class="team-skills">
-            <span>Testing</span><span>QA</span><span>Debugging</span>
+            <span>JavaScript</span><span>Admin Dashboard</span><span>UI/UX</span>
           </div>
         </div>
-        <div class="team-card-glow" style="background: rgba(217,119,6,0.06);"></div>
+        <div class="team-card-glow" style="background: rgba(26,107,56,0.08);"></div>
       </div>
 
     </div><%-- /team-grid --%>

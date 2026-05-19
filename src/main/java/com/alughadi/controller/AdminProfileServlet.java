@@ -8,16 +8,21 @@ import com.alughadi.entity.User;
 import com.alughadi.utils.PasswordUtil;
 import com.alughadi.utils.SessionUtil;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @WebServlet("/admin-profile")
+@MultipartConfig
 public class AdminProfileServlet extends HttpServlet {
 
     private final UserDao  userDao  = new UserDaoImpl();
@@ -115,6 +120,43 @@ public class AdminProfileServlet extends HttpServlet {
 
             userDao.changePassword(userId, PasswordUtil.getHashPassword(next.trim()));
             response.sendRedirect(request.getContextPath() + "/admin-profile?pwChanged=1");
+
+        } else if ("uploadAvatar".equals(action)) {
+            Part filePart = request.getPart("avatarFile");
+            if (filePart == null || filePart.getSize() == 0) {
+                response.sendRedirect(request.getContextPath() + "/admin-profile?avatarError=empty");
+                return;
+            }
+            String origName = filePart.getSubmittedFileName();
+            if (origName == null) {
+                response.sendRedirect(request.getContextPath() + "/admin-profile?avatarError=invalid");
+                return;
+            }
+            String ext = origName.substring(origName.lastIndexOf('.')).toLowerCase();
+            if (!ext.equals(".jpg") && !ext.equals(".jpeg") && !ext.equals(".png") && !ext.equals(".webp")) {
+                response.sendRedirect(request.getContextPath() + "/admin-profile?avatarError=type");
+                return;
+            }
+
+            User user = userDao.findById(userId);
+            String username = user != null ? user.getUsername() : String.valueOf(userId);
+            String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
+            String newFileName = username + "_" + date + ext;
+
+            String deployedPath = getServletContext().getRealPath("/static/images/avatars/");
+            File deployedDir = new File(deployedPath);
+            if (!deployedDir.exists()) deployedDir.mkdirs();
+            File destDeployed = new File(deployedDir, newFileName);
+            filePart.write(destDeployed.getAbsolutePath());
+
+            File sourceDir = new File(System.getProperty("user.dir"), "src/main/webapp/static/images/avatars/");
+            if (!sourceDir.exists()) sourceDir.mkdirs();
+            File destSource = new File(sourceDir, newFileName);
+            if (!destSource.exists()) Files.copy(destDeployed.toPath(), destSource.toPath());
+
+            String imagePath = "/static/images/avatars/" + newFileName;
+            userDao.updateProfileImage(userId, imagePath);
+            response.sendRedirect(request.getContextPath() + "/admin-profile?avatarUpdated=1");
         }
     }
 
