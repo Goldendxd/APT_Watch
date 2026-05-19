@@ -72,17 +72,23 @@ public class AuthenticationFilter implements Filter {
         }
 
         boolean isAdminPath = "/admin".equals(path) || "/admin-profile".equals(path);
-        if (isAdminPath){
-            if (!isLoggedIn){
-                res.sendRedirect(contextPath+"/login");
+        if (isAdminPath) {
+            if (!isLoggedIn) {
+                res.sendRedirect(contextPath + "/login");
                 return;
             }
             Object role = SessionUtil.getAttribute(req, "authRole");
-
-            if (!"admin".equals(role)){
-                res.sendRedirect(contextPath+"/home");
+            if (!"admin".equals(role)) {
+                res.sendRedirect(contextPath + "/home");
                 return;
             }
+        }
+
+        // Admins can only access admin routes and logout
+        Object role = SessionUtil.getAttribute(req, "authRole");
+        if ("admin".equals(role) && !isAdminPath && !"/logout".equals(path)) {
+            res.sendRedirect(contextPath + "/admin");
+            return;
         }
 
         chain.doFilter(request, response);
