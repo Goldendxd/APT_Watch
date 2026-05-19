@@ -113,20 +113,27 @@ INSERT INTO categories (id, name, slug) VALUES
   (4, 'Smart',   'smart'),
   (5, 'Womens',  'womens');
 
--- Users
--- Admin passwords: admin<name>@123  (bcrypt cost 10)
--- Customer password: customer@123
-INSERT INTO users (id, username, email, password, role, is_active, is_verified) VALUES
-  (1,  'adminsabin',   'adminsabin@alughadi.com',   '$2a$10$5DkJYjHmv6l52XNTcq0hYeMjpuCT5eKfNh/uKQcDwuzdHaGgRlGWG', 'admin',    1, 1),
-  (2,  'adminshisir',  'adminshisir@alughadi.com',  '$2a$10$tfAhv71P4ZkkVpuEsvg/T.SEebQmJG.Zxhw2bQ.4hYQlxN1Ju.epO', 'admin',    1, 1),
-  (3,  'adminashish',  'adminashish@alughadi.com',  '$2a$10$yrqLN56mJ9EMKtN1.NrXB.j1.ny.SGSeRYT74rQv.eRM.WkXOLpC6', 'admin',    1, 1),
-  (4,  'ram',          'ram@example.com',           '$2a$10$SkjxSjuEwU0LCiA3qhRaUe7rlNvucsB0MJoCmQzHt9t38AQAy/tRq', 'customer', 1, 1),
-  (5,  'hari',         'hari@example.com',          '$2a$10$SkjxSjuEwU0LCiA3qhRaUe7rlNvucsB0MJoCmQzHt9t38AQAy/tRq', 'customer', 1, 0),
-  (6,  'sita',         'sita@example.com',          '$2a$10$SkjxSjuEwU0LCiA3qhRaUe7rlNvucsB0MJoCmQzHt9t38AQAy/tRq', 'customer', 1, 1),
-  (7,  'gita',         'gita@example.com',          '$2a$10$SkjxSjuEwU0LCiA3qhRaUe7rlNvucsB0MJoCmQzHt9t38AQAy/tRq', 'customer', 1, 0),
-  (8,  'mina',         'mina@example.com',          '$2a$10$SkjxSjuEwU0LCiA3qhRaUe7rlNvucsB0MJoCmQzHt9t38AQAy/tRq', 'customer', 1, 1),
-  (9,  'dipesh',       'dipesh@example.com',        '$2a$10$SkjxSjuEwU0LCiA3qhRaUe7rlNvucsB0MJoCmQzHt9t38AQAy/tRq', 'customer', 1, 1),
-  (10, 'sunita',       'sunita@example.com',        '$2a$10$SkjxSjuEwU0LCiA3qhRaUe7rlNvucsB0MJoCmQzHt9t38AQAy/tRq', 'customer', 1, 1);
+-- -------------------------------------------------------
+-- USERS
+-- Admins  : adminSabin@123 | adminShisir@123 | adminAshish@123
+-- Customers: FirstName@123  (e.g. Shisir@123, Ashish@123, ...)
+-- -------------------------------------------------------
+INSERT INTO users (id, username, email, password, role, full_name, is_active, is_verified) VALUES
+  -- Admins
+  (1,  'adminsabin',   'adminsabin@alughadi.com',   '$2a$10$HDeGUfV2fAl5AkFnGaIugem1Kj0eLMQCDVHkyBeHVGtqhP3wjBcqu', 'admin',    'Sabin Thapa',      1, 1),
+  (2,  'adminshisir',  'adminshisir@alughadi.com',  '$2a$10$tdN0DjaazbiChz8P7/ju5OEMSbBmKuxx93pUiXLB4pK17eYkfHWFq', 'admin',    'Shisir Lamsal',    1, 1),
+  (3,  'adminashish',  'adminashish@alughadi.com',  '$2a$10$AIlsRmmUDmf8Qh9TM6hHseVZt73ye7D8BqAGzw1ioVxFDayFKVGiO', 'admin',    'Ashish Thapa',     1, 1),
+  -- Customers
+  (4,  'shisir',       'shisir@example.com',        '$2a$10$4fgfLW8Bl.I.cIYIhesA2.VeBayu/7GUxNDg58.z.FP70lya6dgUS', 'customer', 'Shisir Lamsal',    1, 1),
+  (5,  'ashish',       'ashish@example.com',        '$2a$10$1xMZZN4u/tHpIUB9Qgo7SuFz/yAw33v44bJcLbo/vLd32Z9SGPTPa', 'customer', 'Ashish Thapa',     1, 1),
+  (6,  'sabin',        'sabin@example.com',         '$2a$10$aOq9Y6BGKt/b.Fr3DWUw6OyXYOsjwNv4iODdQmsb34yu7J31.B/lG', 'customer', 'Sabin Thapa',      1, 1),
+  (7,  'dikxhita',     'dikxhita@example.com',      '$2a$10$yF/fMrbSbcVMTNQi2Ten5eElR9l0ZhQzy9MJhA5BrdFd3IFbwBhvS', 'customer', 'Dikxhita GC',      1, 1),
+  (8,  'rijan',        'rijan@example.com',         '$2a$10$xIf6/DaWsthVJLpMZuCWj.1kZv8Cn.Z58xCVZfTQFoGJp8DqddlcG', 'customer', 'Rijan Pun',        1, 1),
+  (9,  'prasus',       'prasus@example.com',        '$2a$10$Yr97E5si2MuJscy0m7Dh4.nBDFj2X1k7/DooQrxIWyr5dqZ/sX2vy', 'customer', 'Prasus Thapa',     1, 1),
+  (10, 'sachin',       'sachin@example.com',        '$2a$10$f5CF4SOoUofwD4zUhDbuvepCQzwimg4qONrwxNKKzZ4nmJ6.3YmvO', 'customer', 'Sachin Dev',       1, 1),
+  (11, 'roshan',       'roshan@example.com',        '$2a$10$JzlXqehj3PlkM5BN2cZcae6cUaYYmfnSOGJfsm6LqBucKPrpnzUty', 'customer', 'Roshan Thapa',     1, 1),
+  (12, 'bibek',        'bibek@example.com',         '$2a$10$n16eLFwmAPiyt21.54MIdeftHmwIfZ62SEu88SMRZkANMERpfDjES',  'customer', 'Bibek Poudel',     1, 1),
+  (13, 'rajesh',       'rajesh@example.com',        '$2a$10$e/SPH7fZ8aZjdxAQ7xQXA.mgasoH48VblJslMQdIDUrgEaBfNuPEu', 'customer', 'Rajesh Adhikari',  1, 1);
 
 -- Products
 -- Stock quantities vary: luxury items are rare (2-5), bestsellers higher (12-20), some critically low
@@ -159,7 +166,7 @@ INSERT INTO products (id, category_id, name, brand, description, price, old_pric
   -- Womens (mix of luxury and accessible)
   (17, 5, 'Rose Diamond Elegance',         'Chopard',        'A breathtaking expression of feminine luxury. The 36mm 18K rose gold case is adorned with 48 brilliant-cut diamonds totaling 0.76 carats, each hand-set by Chopard''s master jewelers. The mother-of-pearl dial shimmers with iridescent hues, featuring diamond hour markers and delicate dauphine hands. Powered by a Swiss quartz movement for precise timekeeping. The bracelet is crafted from 18K rose gold with a butterfly clasp. 30m water resistance. Presented in Chopard''s signature green box with certificate of authenticity.',                   145000.00,  NULL,     4.9, '/static/images/products/watch_womens/watch_womens_1.webp', 1, 3),
   (18, 5, 'Ballon Bleu de Cartier',        'Cartier',        'One of Cartier''s most iconic designs, the Ballon Bleu captivates with its distinctive rounded case and signature blue sapphire cabochon crown. The 33mm stainless steel case houses an automatic movement visible through the sapphire caseback. The silvered guilloché dial features Roman numeral hour markers, blued steel sword-shaped hands, and a date window at 3 o''clock. The fluted crown guard integrates seamlessly into the case design. Stainless steel bracelet with concealed folding clasp. 30m water resistance. A modern classic for the elegant woman.',                              235000.00,  NULL,     4.8, '/static/images/products/watch_womens/watch_womens_2.webp', 1, 4),
-  (19, 5, 'Ladymatic Aqua Terra',          'Omega',          'A feminine masterpiece from Omega''s prestigious Aqua Terra collection. The 34mm stainless steel case features a diamond-set bezel with 30 brilliant-cut diamonds. Powered by the Co-Axial Master Chronometer Caliber 8520, certified for magnetic resistance up to 15,000 gauss. The white mother-of-pearl dial displays a wave pattern inspired by the ocean, with diamond hour markers and luminescent hands. Alligator leather strap with stainless steel buckle. 150m water resistance makes it equally at home at a gala or on the beach.',                           125000.00, 138000.00, 4.7, '/static/images/products/watch_womens/watch_womens_3.webp', 1, 5),
+  (19, 5, 'Ladymatic Aqua Terra',          'Omega',          'A feminine masterpiece from Omega''s prestigious Aqua Terra collection. The 34mm stainless steel case features a diamond-set bezel with 30 brilliant-cut diamonds. Powered by the Co-Axial Master Chronometer Caliber 8520, certified for magnetic resistance up to 15,000 gauss. The white mother-of-pearl dial displays a wave pattern inspired by the ocean, with diamond hour markers and luminescent hands. Alligator leather strap with stainless steel buckle. 150m water resistance makes it equally at home at a gala or on the beach.',           125000.00, 138000.00, 4.7, '/static/images/products/watch_womens/watch_womens_3.webp', 1, 5),
   (20, 5, 'T-Wave Quartz',                 'Tissot',         'An elegant Swiss quartz watch designed for the modern woman who appreciates refined simplicity. The distinctive tonneau-shaped 30mm stainless steel case creates a graceful silhouette on the wrist. Features a scratch-resistant sapphire crystal protecting a silver sunray dial with slim baton indices and Tissot''s signature "T" at the crown. The stainless steel bracelet has a jewelry-style butterfly clasp for secure and comfortable wear. Water resistant to 30m. An ideal gift for birthdays, anniversaries, or as a treat for yourself.',               9500.00,  11500.00, 4.4, '/static/images/products/watch_womens/watch_womens_4.webp', 1, 20);
 
 -- Cart sample entries
@@ -170,35 +177,50 @@ INSERT INTO cart (user_id, product_id, quantity) VALUES
   (7,  10, 1),
   (8,  6,  1),
   (9,  14, 1),
-  (10, 20, 2);
+  (10, 20, 2),
+  (11, 7,  1),
+  (12, 9,  1),
+  (13, 15, 1);
 
--- Sample orders (spread across months for sales chart)
+-- Sample orders — every customer (IDs 4-13) has at least one order
 INSERT INTO orders (id, user_id, total_amount, payment_method, payment_status, order_status, created_at) VALUES
-  (1,  4,  18500.00,  'cod',    'paid', 'delivered', '2024-06-15 10:30:00'),
-  (2,  5,  38000.00,  'khalti', 'paid', 'delivered', '2024-07-03 14:22:00'),
-  (3,  6,  145000.00, 'khalti', 'paid', 'delivered', '2024-07-28 09:15:00'),
-  (4,  7,  12500.00,  'cod',    'paid', 'delivered', '2024-08-11 16:40:00'),
-  (5,  8,  75000.00,  'khalti', 'paid', 'delivered', '2024-08-22 11:05:00'),
-  (6,  9,  55000.00,  'khalti', 'paid', 'delivered', '2024-09-07 13:50:00'),
-  (7,  10, 9500.00,   'cod',    'paid', 'delivered', '2024-09-19 08:30:00'),
-  (8,  4,  285000.00, 'khalti', 'paid', 'delivered', '2024-10-04 17:20:00'),
-  (9,  5,  42000.00,  'cod',    'paid', 'delivered', '2024-10-18 12:10:00'),
-  (10, 6,  35000.00,  'khalti', 'paid', 'delivered', '2024-11-02 15:35:00'),
-  (11, 7,  68000.00,  'khalti', 'paid', 'delivered', '2024-11-14 10:45:00'),
-  (12, 8,  95000.00,  'khalti', 'paid', 'delivered', '2024-11-29 09:20:00'),
-  (13, 9,  165000.00, 'khalti', 'paid', 'delivered', '2024-12-05 14:00:00'),
-  (14, 10, 18500.00,  'cod',    'paid', 'delivered', '2024-12-20 11:30:00'),
-  (15, 4,  195000.00, 'khalti', 'paid', 'delivered', '2025-01-08 16:15:00'),
-  (16, 5,  14500.00,  'cod',    'paid', 'delivered', '2025-01-22 10:00:00'),
-  (17, 6,  72000.00,  'khalti', 'paid', 'delivered', '2025-02-10 13:25:00'),
-  (18, 7,  8500.00,   'cod',    'paid', 'delivered', '2025-02-25 09:40:00'),
-  (19, 8,  125000.00, 'khalti', 'paid', 'delivered', '2025-03-06 15:10:00'),
-  (20, 9,  38000.00,  'cod',    'paid', 'delivered', '2025-03-18 12:50:00'),
-  (21, 10, 235000.00, 'khalti', 'paid', 'delivered', '2025-04-02 14:30:00'),
-  (22, 4,  55000.00,  'khalti', 'paid', 'delivered', '2025-04-15 10:20:00'),
-  (23, 5,  12500.00,  'cod',    'paid', 'delivered', '2025-04-28 09:05:00'),
-  (24, 6,  42000.00,  'cod',    'paid', 'delivered', '2025-05-03 16:45:00'),
-  (25, 7,  285000.00, 'khalti', 'paid', 'delivered', '2025-05-12 11:15:00');
+  -- 2024 early
+  (1,  4,  18500.00,  'cod',    'paid', 'delivered', '2024-06-15 10:30:00'),  -- shisir
+  (2,  5,  38000.00,  'khalti', 'paid', 'delivered', '2024-07-03 14:22:00'),  -- ashish
+  (3,  6,  145000.00, 'khalti', 'paid', 'delivered', '2024-07-28 09:15:00'),  -- sabin
+  (4,  7,  12500.00,  'cod',    'paid', 'delivered', '2024-08-11 16:40:00'),  -- dikxhita
+  (5,  8,  75000.00,  'khalti', 'paid', 'delivered', '2024-08-22 11:05:00'),  -- rijan
+  (6,  9,  55000.00,  'khalti', 'paid', 'delivered', '2024-09-07 13:50:00'),  -- prasus
+  (7,  10, 9500.00,   'cod',    'paid', 'delivered', '2024-09-19 08:30:00'),  -- sachin
+  (8,  11, 42000.00,  'khalti', 'paid', 'delivered', '2024-09-30 17:10:00'),  -- roshan
+  (9,  12, 14500.00,  'cod',    'paid', 'delivered', '2024-10-08 11:20:00'),  -- bibek
+  (10, 13, 35000.00,  'khalti', 'paid', 'delivered', '2024-10-21 14:00:00'),  -- rajesh
+  -- 2024 late
+  (11, 4,  285000.00, 'khalti', 'paid', 'delivered', '2024-10-04 17:20:00'),
+  (12, 5,  42000.00,  'cod',    'paid', 'delivered', '2024-10-18 12:10:00'),
+  (13, 6,  35000.00,  'khalti', 'paid', 'delivered', '2024-11-02 15:35:00'),
+  (14, 7,  68000.00,  'khalti', 'paid', 'delivered', '2024-11-14 10:45:00'),
+  (15, 8,  95000.00,  'khalti', 'paid', 'delivered', '2024-11-29 09:20:00'),
+  (16, 9,  165000.00, 'khalti', 'paid', 'delivered', '2024-12-05 14:00:00'),
+  (17, 10, 18500.00,  'cod',    'paid', 'delivered', '2024-12-20 11:30:00'),
+  (18, 11, 8500.00,   'cod',    'paid', 'delivered', '2024-12-27 10:15:00'),
+  (19, 12, 72000.00,  'khalti', 'paid', 'delivered', '2024-12-30 16:00:00'),
+  (20, 13, 55000.00,  'khalti', 'paid', 'delivered', '2025-01-05 09:45:00'),
+  -- 2025
+  (21, 4,  195000.00, 'khalti', 'paid', 'delivered', '2025-01-08 16:15:00'),
+  (22, 5,  14500.00,  'cod',    'paid', 'delivered', '2025-01-22 10:00:00'),
+  (23, 6,  72000.00,  'khalti', 'paid', 'delivered', '2025-02-10 13:25:00'),
+  (24, 7,  8500.00,   'cod',    'paid', 'delivered', '2025-02-25 09:40:00'),
+  (25, 8,  125000.00, 'khalti', 'paid', 'delivered', '2025-03-06 15:10:00'),
+  (26, 9,  38000.00,  'cod',    'paid', 'delivered', '2025-03-18 12:50:00'),
+  (27, 10, 235000.00, 'khalti', 'paid', 'delivered', '2025-04-02 14:30:00'),
+  (28, 11, 95000.00,  'khalti', 'paid', 'delivered', '2025-04-10 11:00:00'),
+  (29, 12, 18500.00,  'cod',    'paid', 'delivered', '2025-04-20 09:30:00'),
+  (30, 13, 68000.00,  'khalti', 'paid', 'delivered', '2025-05-01 14:45:00'),
+  (31, 4,  55000.00,  'khalti', 'paid', 'delivered', '2025-04-15 10:20:00'),
+  (32, 5,  12500.00,  'cod',    'paid', 'delivered', '2025-04-28 09:05:00'),
+  (33, 6,  42000.00,  'cod',    'paid', 'delivered', '2025-05-03 16:45:00'),
+  (34, 7,  285000.00, 'khalti', 'paid', 'delivered', '2025-05-12 11:15:00');
 
 INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES
   (1,  5,  2, 18500.00),
@@ -208,21 +230,30 @@ INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES
   (5,  6,  1, 75000.00),
   (6,  14, 1, 55000.00),
   (7,  20, 1, 9500.00),
-  (8,  1,  1, 285000.00),
-  (9,  8,  1, 42000.00),
+  (8,  8,  1, 42000.00),
+  (9,  12, 1, 14500.00),
   (10, 10, 1, 35000.00),
-  (11, 11, 1, 68000.00),
-  (12, 7,  1, 95000.00),
-  (13, 4,  1, 165000.00),
-  (14, 5,  1, 18500.00),
-  (15, 2,  1, 195000.00),
-  (16, 12, 1, 14500.00),
-  (17, 15, 1, 72000.00),
+  (11, 1,  1, 285000.00),
+  (12, 8,  1, 42000.00),
+  (13, 10, 1, 35000.00),
+  (14, 11, 1, 68000.00),
+  (15, 7,  1, 95000.00),
+  (16, 4,  1, 165000.00),
+  (17, 5,  1, 18500.00),
   (18, 16, 1, 8500.00),
-  (19, 19, 1, 125000.00),
-  (20, 13, 1, 38000.00),
-  (21, 18, 1, 235000.00),
-  (22, 14, 1, 55000.00),
-  (23, 9,  1, 12500.00),
-  (24, 8,  1, 42000.00),
-  (25, 1,  1, 285000.00);
+  (19, 15, 1, 72000.00),
+  (20, 14, 1, 55000.00),
+  (21, 2,  1, 195000.00),
+  (22, 12, 1, 14500.00),
+  (23, 15, 1, 72000.00),
+  (24, 16, 1, 8500.00),
+  (25, 19, 1, 125000.00),
+  (26, 13, 1, 38000.00),
+  (27, 18, 1, 235000.00),
+  (28, 7,  1, 95000.00),
+  (29, 5,  1, 18500.00),
+  (30, 11, 1, 68000.00),
+  (31, 14, 1, 55000.00),
+  (32, 9,  1, 12500.00),
+  (33, 8,  1, 42000.00),
+  (34, 1,  1, 285000.00);
