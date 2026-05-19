@@ -186,3 +186,9 @@ tbody td{padding:.88rem 1.25rem;font-size:.81rem;font-weight:500;color:var(--tex
   .kpi-grid{grid-template-columns:1fr;}
   .table-toolbar{flex-direction:column;align-items:stretch;}
 }
+
+/* Product modal two-column collapses on narrow screens */
+@media(max-width:700px){
+  #productModal .modal-body{grid-template-columns:1fr !important;}
+  #productModal .modal{max-width:98vw !important;}
+}

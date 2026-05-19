@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageUtil {
+    private static final String REL_PATH = "src/main/webapp/static/images/products/";
+
     public static String uploadImage(Part imagePart, ServletContext servletContext){
         String fileName = imagePart.getSubmittedFileName();
         if (fileName == null || fileName.isEmpty()){
@@ -17,18 +19,28 @@ public class ImageUtil {
             return null;
         }
         String newFileName = System.currentTimeMillis() + "_" + fileName;
-        String uploadPath = servletContext.getRealPath("/static/images/products/"); // configurable
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()){
-            uploadDir.mkdirs();
-        }
-        try{
-            imagePart.write(uploadPath + File.separator + newFileName);
 
-            return  "/static/images/products/" + newFileName;
+        // Save to the deployed runtime path so the image is immediately accessible
+        String deployedPath = servletContext.getRealPath("/static/images/products/");
+        File deployedDir = new File(deployedPath);
+        if (!deployedDir.exists()) deployedDir.mkdirs();
+
+        // Also save to src/main/webapp so the image persists across rebuilds (dev mode)
+        File sourceDir = new File(System.getProperty("user.dir"), REL_PATH);
+        if (!sourceDir.exists()) sourceDir.mkdirs();
+
+        try {
+            File destDeployed = new File(deployedDir, newFileName);
+            imagePart.write(destDeployed.getAbsolutePath());
+
+            File destSource = new File(sourceDir, newFileName);
+            if (!destSource.exists()) {
+                java.nio.file.Files.copy(destDeployed.toPath(), destSource.toPath());
+            }
+
+            return "/static/images/products/" + newFileName;
         } catch (IOException e) {
-            System.out.println("Could not save image '" + fileName +
-                    "'. Please ensure the server's image folder exists and has write permissions.");
+            System.out.println("Could not save image '" + fileName + "': " + e.getMessage());
             return null;
         }
     }

@@ -497,28 +497,28 @@
 
 <!-- ADD/EDIT MODAL -->
 <div class="modal-bg" id="productModal">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal" style="max-width:860px;" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-head">
       <div class="modal-title" id="modalTitle">Add New Product</div>
       <button class="modal-close" onclick="closeProductModal()" aria-label="Close">&#10005;</button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" style="display:grid;grid-template-columns:1fr 240px;gap:1.5rem;align-items:start;">
       <form id="productForm" action="${pageContext.request.contextPath}/admin" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="save" />
         <input type="hidden" name="id" id="pId" value="" />
         <input type="hidden" name="existingImageUrl" id="existingImageUrl" value="" />
         <div class="fg-row">
-          <div class="fg"><label for="pName">Product Name *</label><input type="text" id="pName" name="name" placeholder="e.g. Casio Edifice" /></div>
-          <div class="fg"><label for="pBrand">Brand *</label><input type="text" id="pBrand" name="brand" placeholder="e.g. Casio" /></div>
+          <div class="fg"><label for="pName">Product Name *</label><input type="text" id="pName" name="name" placeholder="e.g. Casio Edifice" oninput="updatePreview()" /></div>
+          <div class="fg"><label for="pBrand">Brand *</label><input type="text" id="pBrand" name="brand" placeholder="e.g. Casio" oninput="updatePreview()" /></div>
         </div>
         <div class="fg-row">
-          <div class="fg"><label for="pPrice">Price (Rs) *</label><input type="number" id="pPrice" name="price" placeholder="12500" min="0" /></div>
-          <div class="fg"><label for="pOldPrice">Old Price (Rs)</label><input type="number" id="pOldPrice" name="oldPrice" placeholder="Optional" min="0" /></div>
+          <div class="fg"><label for="pPrice">Price (Rs) *</label><input type="number" id="pPrice" name="price" placeholder="12500" min="0" oninput="updatePreview()" /></div>
+          <div class="fg"><label for="pOldPrice">Old Price (Rs)</label><input type="number" id="pOldPrice" name="oldPrice" placeholder="Optional" min="0" oninput="updatePreview()" /></div>
         </div>
         <div class="fg-row">
           <div class="fg">
             <label for="pCategory">Category *</label>
-            <select id="pCategory" name="categoryId">
+            <select id="pCategory" name="categoryId" onchange="updatePreview()">
               <option value="">Select...</option>
               <option value="1">Luxury</option>
               <option value="2">Sports</option>
@@ -527,17 +527,45 @@
               <option value="5">Womens</option>
             </select>
           </div>
-          <div class="fg"><label for="pRating">Rating (0-5)</label><input type="number" id="pRating" name="rating" placeholder="4.5" min="0" max="5" step="0.1" /></div>
+          <div class="fg"><label for="pRating">Rating (0-5)</label><input type="number" id="pRating" name="rating" placeholder="4.5" min="0" max="5" step="0.1" oninput="updatePreview()" /></div>
         </div>
         <div class="fg"><label for="pDesc">Description</label><textarea id="pDesc" name="description" placeholder="Product description..."></textarea></div>
-        <div class="fg"><label for="pImageFile">Product Image</label><input type="file" id="pImageFile" name="imageFile" accept="image/*" /></div>
-        <div class="fg"><label for="pImg">Image URL (optional)</label><input type="text" id="pImg" name="imageUrl" placeholder="Or enter an image URL" /></div>
+        <div class="fg">
+          <label for="pImageFile">Product Image (JPG, PNG, WEBP only)</label>
+          <input type="file" id="pImageFile" name="imageFile" onchange="handleImagePick(this)" />
+          <div id="imgTypeError" style="display:none;color:var(--red);font-size:.72rem;font-weight:700;margin-top:.3rem;">Only JPG, PNG, or WEBP images are allowed.</div>
+        </div>
+        <input type="hidden" id="pImg" name="imageUrl" value="" />
         <div class="fg">
           <label for="pStockQuantity">Stock Quantity *</label>
-          <input type="number" id="pStockQuantity" name="stockQuantity" min="0" value="10" />
+          <input type="number" id="pStockQuantity" name="stockQuantity" min="0" value="10" oninput="updatePreview()" />
           <input type="hidden" id="pStock" name="inStock" value="true" />
         </div>
       </form>
+
+      <!-- LIVE PREVIEW CARD -->
+      <div style="position:sticky;top:0;">
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;">Live Preview</div>
+        <div id="previewCard" style="background:var(--white);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);">
+          <div style="width:100%;aspect-ratio:1/1;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;" id="previewImgWrap">
+            <svg id="previewImgPlaceholder" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <img id="previewImg" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none;" />
+          </div>
+          <div style="padding:.85rem .9rem;">
+            <div id="previewCat" style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;">Category</div>
+            <div id="previewName" style="font-size:.88rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:.18rem;">Product Name</div>
+            <div id="previewBrand" style="font-size:.72rem;color:var(--muted);margin-bottom:.5rem;">Brand</div>
+            <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">
+              <span id="previewPrice" style="font-size:1rem;font-weight:900;color:var(--green);">Rs —</span>
+              <span id="previewOldPrice" style="font-size:.75rem;color:var(--muted);text-decoration:line-through;display:none;"></span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:.5rem;">
+              <span id="previewRating" style="font-size:.72rem;color:var(--gold);font-weight:700;">&#9733; —</span>
+              <span id="previewStock" style="font-size:.68rem;font-weight:700;color:var(--green);">In Stock</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-o" type="button" onclick="closeProductModal()">Cancel</button>
@@ -706,6 +734,8 @@ function openEditModal(row) {
   document.getElementById('pImg').value = row.dataset.imageUrl || '';
   document.getElementById('pImageFile').value = '';
   document.getElementById('pStockQuantity').value = row.dataset.stockQuantity || 0;
+  document.getElementById('imgTypeError').style.display = 'none';
+  updatePreview();
   document.getElementById('productModal').classList.add('open');
 }
 function closeProductModal() { document.getElementById('productModal').classList.remove('open'); }
@@ -714,13 +744,92 @@ function resetForm() {
   document.getElementById('pCategory').value = '';
   document.getElementById('pImageFile').value = '';
   document.getElementById('pStockQuantity').value = 10;
+  document.getElementById('imgTypeError').style.display = 'none';
+  updatePreview();
 }
 function saveProduct() {
   var form = document.getElementById('productForm');
   if (!form.name.value.trim() || !form.brand.value.trim() || !parseFloat(form.price.value) || !form.categoryId.value) {
     showToast('Please fill all required fields.', 'error'); return;
   }
+  if (document.getElementById('imgTypeError').style.display !== 'none') {
+    showToast('Please remove the invalid image file.', 'error'); return;
+  }
   form.submit();
+}
+
+/* ---- Image type validation ---- */
+function handleImagePick(input) {
+  var errEl = document.getElementById('imgTypeError');
+  var file = input.files && input.files[0];
+  if (!file) { errEl.style.display = 'none'; updatePreview(); return; }
+  var allowed = ['image/jpeg','image/png','image/webp'];
+  if (allowed.indexOf(file.type) === -1) {
+    errEl.style.display = 'block';
+    input.value = '';
+    updatePreview();
+    return;
+  }
+  errEl.style.display = 'none';
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    showPreviewImage(e.target.result);
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ---- Live preview ---- */
+function updatePreview() {
+  var catMap = {'1':'Luxury','2':'Sports','3':'Classic','4':'Smart','5':'Womens'};
+  var name     = document.getElementById('pName').value.trim()     || 'Product Name';
+  var brand    = document.getElementById('pBrand').value.trim()    || 'Brand';
+  var price    = document.getElementById('pPrice').value;
+  var oldPrice = document.getElementById('pOldPrice').value;
+  var catId    = document.getElementById('pCategory').value;
+  var rating   = document.getElementById('pRating').value;
+  var stock    = parseInt(document.getElementById('pStockQuantity').value) || 0;
+  var imgUrl   = '';
+
+  document.getElementById('previewName').textContent  = name;
+  document.getElementById('previewBrand').textContent = brand;
+  document.getElementById('previewCat').textContent   = catId ? catMap[catId] : 'Category';
+  document.getElementById('previewPrice').textContent = price ? 'Rs ' + parseInt(price).toLocaleString() : 'Rs —';
+  document.getElementById('previewRating').textContent = rating ? '★ ' + parseFloat(rating).toFixed(1) : '★ —';
+
+  var oldEl = document.getElementById('previewOldPrice');
+  if (oldPrice) { oldEl.textContent = 'Rs ' + parseInt(oldPrice).toLocaleString(); oldEl.style.display = ''; }
+  else { oldEl.style.display = 'none'; }
+
+  var stockEl = document.getElementById('previewStock');
+  stockEl.textContent = stock > 0 ? 'In Stock' : 'Out of Stock';
+  stockEl.style.color = stock > 0 ? 'var(--green)' : 'var(--red)';
+
+  /* image: only update from URL field if no file was picked */
+  var fileInput = document.getElementById('pImageFile');
+  if (!fileInput.files || !fileInput.files[0]) {
+    if (imgUrl) showPreviewImage(imgUrl);
+    else {
+      var existing = document.getElementById('existingImageUrl').value;
+      if (existing) showPreviewImage(existing);
+      else clearPreviewImage();
+    }
+  }
+}
+
+function showPreviewImage(src) {
+  var img  = document.getElementById('previewImg');
+  var ph   = document.getElementById('previewImgPlaceholder');
+  img.src  = src;
+  img.style.display = 'block';
+  ph.style.display  = 'none';
+  img.onerror = function() { clearPreviewImage(); };
+}
+function clearPreviewImage() {
+  var img = document.getElementById('previewImg');
+  var ph  = document.getElementById('previewImgPlaceholder');
+  img.src = '';
+  img.style.display = 'none';
+  ph.style.display  = 'block';
 }
 var deletingId = null;
 function openDelModal(row) {
