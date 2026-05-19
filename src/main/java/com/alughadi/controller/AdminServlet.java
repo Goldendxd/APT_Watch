@@ -19,6 +19,8 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,10 +53,23 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("customerCount", customerCount);
         request.setAttribute("totalRevenue",  totalRevenue);
         request.setAttribute("totalOrders",   totalOrders);
-        request.setAttribute("monthlySales12Json", new Gson().toJson(monthlySales12));
-        request.setAttribute("monthlySales6Json",  new Gson().toJson(monthlySales6));
-        request.setAttribute("monthlySales3Json",  new Gson().toJson(monthlySales3));
-        request.setAttribute("topProductsJson",    new Gson().toJson(topProducts));
+        Gson gson = new Gson();
+        List<Map<String,Object>> productData = new ArrayList<>();
+        for (Product p : products) {
+            Map<String,Object> m = new LinkedHashMap<>();
+            m.put("id",       p.getId());
+            m.put("name",     p.getName());
+            m.put("category", p.getCategoryName());
+            m.put("price",    p.getPrice());
+            m.put("stock",    p.getStockQuantity());
+            m.put("rating",   p.getRating());
+            productData.add(m);
+        }
+        request.setAttribute("productDataJson",    gson.toJson(productData));
+        request.setAttribute("monthlySales12Json", gson.toJson(monthlySales12));
+        request.setAttribute("monthlySales6Json",  gson.toJson(monthlySales6));
+        request.setAttribute("monthlySales3Json",  gson.toJson(monthlySales3));
+        request.setAttribute("topProductsJson",    gson.toJson(topProducts));
         request.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(request, response);
     }
 

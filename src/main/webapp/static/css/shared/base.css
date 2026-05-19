@@ -31,6 +31,13 @@
   --gold2:       #b8913a;
   --red:         #d44;
   --amber:       #c88a18;
+  --blue:        #2563eb;
+  --blue-light:  #eff6ff;
+  --purple:      #7c3aed;
+  --purple-light:#f5f3ff;
+
+  /* --- Layout --- */
+  --sidebar-w:   260px;
 
   /* --- Typography --- */
   --ff:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
