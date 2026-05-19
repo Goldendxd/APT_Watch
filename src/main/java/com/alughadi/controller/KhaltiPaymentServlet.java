@@ -66,12 +66,19 @@ public class KhaltiPaymentServlet extends HttpServlet {
 
             HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
 
+            System.out.println("[Khalti Initiate] HTTP " + res.statusCode() + " | " + res.body());
+
             if (res.statusCode() == 200) {
                 JsonObject json = new Gson().fromJson(res.body(), JsonObject.class);
                 String paymentUrl = json.get("payment_url").getAsString();
                 response.sendRedirect(paymentUrl);
             } else {
-                request.setAttribute("payError", "Khalti initiation failed (HTTP " + res.statusCode() + "). Please try Cash on Delivery.");
+                String detail = res.body();
+                try {
+                    JsonObject err = new Gson().fromJson(res.body(), JsonObject.class);
+                    if (err.has("detail")) detail = err.get("detail").getAsString();
+                } catch (Exception ignored) {}
+                request.setAttribute("payError", "Khalti error (HTTP " + res.statusCode() + "): " + detail);
                 request.getRequestDispatcher("/WEB-INF/views/checkout.jsp").forward(request, response);
             }
 

@@ -40,6 +40,7 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("pageTitle", "Shop - Premium Watches | AluGhadi");
         request.setAttribute("pageDesc", "Browse our complete collection of premium watches. Find the perfect timepiece.");
         request.setAttribute("activeNav", "products");
+        request.setAttribute("pageStyle", "products");
         Object userIdObj = SessionUtil.getAttribute(request, "authUserId");
         if (userIdObj != null) {
             int userId = (Integer) userIdObj;

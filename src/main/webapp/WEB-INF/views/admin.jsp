@@ -232,6 +232,11 @@
       </span> Analytics
     </button>
     <div class="adm-nav-label">Account</div>
+    <a class="adm-nav-link" href="${pageContext.request.contextPath}/admin-profile">
+      <span class="nav-ico">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </span> My Profile
+    </a>
     <a class="adm-nav-link" href="${pageContext.request.contextPath}/logout">
       <span class="nav-ico">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -320,6 +325,53 @@
         </div>
       </div>
 
+      <!-- Revenue KPI cards -->
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-bottom:1.2rem;">
+        <div class="kpi-card" style="border-color:var(--gold);">
+          <div class="kpi-glow" style="background:var(--gold)"></div>
+          <div class="kpi-top">
+            <div class="kpi-ico" style="background:var(--gold-light);color:var(--gold2);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <span class="kpi-badge" style="background:var(--gold-light);color:var(--gold2);">Revenue</span>
+          </div>
+          <div class="kpi-num" style="font-size:1.6rem;">Rs <fmt:formatNumber value="${totalRevenue}" pattern="#,##0"/></div>
+          <div class="kpi-label">Total Revenue (Paid Orders)</div>
+        </div>
+        <div class="kpi-card" style="border-color:var(--purple);">
+          <div class="kpi-glow" style="background:var(--purple)"></div>
+          <div class="kpi-top">
+            <div class="kpi-ico" style="background:var(--purple-light);color:var(--purple);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <span class="kpi-badge" style="background:var(--purple-light);color:var(--purple);">Orders</span>
+          </div>
+          <div class="kpi-num">${totalOrders}</div>
+          <div class="kpi-label">Total Orders Placed</div>
+        </div>
+      </div>
+
+      <!-- Stock KPI strip -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:1.85rem;" id="stockKpiStrip"></div>
+
+      <!-- Sales Line Chart -->
+      <div class="card" style="margin-bottom:1.25rem;">
+        <div class="card-head">
+          <div>
+            <div class="card-head-title">Monthly Sales Revenue</div>
+            <div class="card-head-sub">Estimated revenue trend over the last 12 months</div>
+          </div>
+          <select class="chart-range-select" id="salesRangeSelect" onchange="updateSalesChart()">
+            <option value="12">Last 12 months</option>
+            <option value="6">Last 6 months</option>
+            <option value="3">Last 3 months</option>
+          </select>
+        </div>
+        <div class="card-body">
+          <div class="chart-wrap" style="height:260px;"><canvas id="salesChart"></canvas></div>
+        </div>
+      </div>
+
       <!-- Charts -->
       <div class="dash-mid">
         <div class="card">
@@ -346,6 +398,19 @@
         </div>
       </div>
 
+      <!-- Top Performers -->
+      <div class="card" style="margin-bottom:1.85rem;">
+        <div class="card-head">
+          <div>
+            <div class="card-head-title">Top Performing Products</div>
+            <div class="card-head-sub">Ranked by rating and stock health</div>
+          </div>
+        </div>
+        <div class="card-body" style="padding-bottom:0;">
+          <div class="qs-list" id="topPerformersList"></div>
+        </div>
+      </div>
+
       <!-- Product table -->
       <div class="card table-card">
         <div class="table-toolbar">
@@ -367,7 +432,7 @@
         <div style="overflow-x:auto;">
           <table>
             <thead>
-              <tr><th>#</th><th>Product</th><th>Brand</th><th>Category</th><th>Price</th><th>Stock</th><th>Rating</th><th>Actions</th></tr>
+              <tr><th>#</th><th>Product</th><th>Brand</th><th>Category</th><th>Price</th><th>Stock Qty</th><th>Status</th><th>Rating</th><th>Actions</th></tr>
             </thead>
             <tbody id="dashTbody">
               <c:forEach var="p" items="${products}">
@@ -394,7 +459,19 @@
                   <td><c:out value="${p.brand}" /></td>
                   <td><span class="cat-pill"><c:out value="${p.categoryName}" /></span></td>
                   <td class="td-price">Rs <fmt:formatNumber value="${p.price}" pattern="#,##0" /></td>
-                  <td><span class="${p.stockQuantity > 0 ? 'stock-yes' : 'stock-no'}">${p.stockQuantity > 0 ? 'In Stock' : 'Out of Stock'}</span></td>
+                  <td>
+                    <span style="font-size:.85rem;font-weight:800;color:${p.stockQuantity <= 0 ? 'var(--red)' : p.stockQuantity <= 5 ? 'var(--amber)' : 'var(--text)'};">
+                      ${p.stockQuantity}
+                    </span>
+                    <span style="font-size:.65rem;color:var(--muted);margin-left:2px;">units</span>
+                  </td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${p.stockQuantity <= 0}"><span class="stock-no">Out of Stock</span></c:when>
+                      <c:when test="${p.stockQuantity <= 5}"><span style="display:inline-flex;align-items:center;gap:.35rem;color:var(--amber);font-weight:700;font-size:.7rem;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);"></span>Low Stock</span></c:when>
+                      <c:otherwise><span class="stock-yes">In Stock</span></c:otherwise>
+                    </c:choose>
+                  </td>
                   <td><span style="color:var(--gold);font-size:.78rem;">&#9733;</span> <span style="font-size:.76rem;font-weight:700;">${p.rating}</span></td>
                   <td>
                     <div class="tbl-actions">
@@ -465,7 +542,7 @@
         <div style="overflow-x:auto;">
           <table>
             <thead>
-              <tr><th>#</th><th>Product</th><th>Brand</th><th>Category</th><th>Price</th><th>Old Price</th><th>Stock</th><th>Rating</th><th>Actions</th></tr>
+              <tr><th>#</th><th>Product</th><th>Brand</th><th>Category</th><th>Price</th><th>Old Price</th><th>Stock Qty</th><th>Status</th><th>Rating</th><th>Actions</th></tr>
             </thead>
             <tbody id="prodMgmtTbody">
               <c:forEach var="p" items="${products}">
@@ -493,7 +570,19 @@
                   <td><span class="cat-pill"><c:out value="${p.categoryName}" /></span></td>
                   <td class="td-price">Rs <fmt:formatNumber value="${p.price}" pattern="#,##0" /></td>
                   <td><c:choose><c:when test="${not empty p.oldPrice}">Rs <fmt:formatNumber value="${p.oldPrice}" pattern="#,##0" /></c:when><c:otherwise>&mdash;</c:otherwise></c:choose></td>
-                  <td><span class="${p.stockQuantity > 0 ? 'stock-yes' : 'stock-no'}">${p.stockQuantity > 0 ? 'In Stock' : 'Out of Stock'}</span></td>
+                  <td>
+                    <span style="font-size:.85rem;font-weight:800;color:${p.stockQuantity <= 0 ? 'var(--red)' : p.stockQuantity <= 5 ? 'var(--amber)' : 'var(--text)'};">
+                      ${p.stockQuantity}
+                    </span>
+                    <span style="font-size:.65rem;color:var(--muted);margin-left:2px;">units</span>
+                  </td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${p.stockQuantity <= 0}"><span class="stock-no">Out of Stock</span></c:when>
+                      <c:when test="${p.stockQuantity <= 5}"><span style="display:inline-flex;align-items:center;gap:.35rem;color:var(--amber);font-weight:700;font-size:.7rem;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);"></span>Low Stock</span></c:when>
+                      <c:otherwise><span class="stock-yes">In Stock</span></c:otherwise>
+                    </c:choose>
+                  </td>
                   <td><span style="color:var(--gold);font-size:.78rem;">&#9733;</span> <span style="font-size:.76rem;font-weight:700;">${p.rating}</span></td>
                   <td>
                     <div class="tbl-actions">
@@ -657,16 +746,25 @@
 </form>
 <div class="toast-container" id="toastContainer"></div>
 
-<%-- Pass product data to JS for charts --%>
+<%-- Pass product and sales data to JS --%>
 <script>
 var PRODUCT_DATA = [
   <c:forEach var="p" items="${products}" varStatus="st">
-    {id:${p.id},name:"<c:out value='${p.name}'/>",category:"<c:out value='${p.categoryName}'/>",price:${p.price},stock:${p.stockQuantity}}<c:if test="${!st.last}">,</c:if>
+    {id:${p.id},name:"<c:out value='${p.name}'/>",category:"<c:out value='${p.categoryName}'/>",price:${p.price},stock:${p.stockQuantity},rating:${p.rating}}<c:if test="${!st.last}">,</c:if>
   </c:forEach>
 ];
 var TOTAL_PRODUCTS  = ${productCount};
 var IN_STOCK_COUNT  = ${inStockCount};
 var OUT_STOCK_COUNT = ${outOfStockCount};
+var TOTAL_REVENUE   = ${totalRevenue};
+var TOTAL_ORDERS    = ${totalOrders};
+
+var MONTHLY_SALES = {
+  '12': ${monthlySales12Json},
+  '6':  ${monthlySales6Json},
+  '3':  ${monthlySales3Json}
+};
+var TOP_PRODUCTS = ${topProductsJson};
 </script>
 
 <script>
@@ -702,21 +800,45 @@ function updateProductCounts() {
 }
 
 /* ---- Filter ---- */
+function setEmptyRow(tbodyId, colspan, show) {
+  var tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  var existing = tbody.querySelector('.empty-row');
+  if (show) {
+    if (!existing) {
+      var tr = document.createElement('tr');
+      tr.className = 'empty-row';
+      tr.innerHTML = '<td colspan="' + colspan + '" style="text-align:center;padding:2.5rem;color:var(--muted);font-size:.85rem;">No products match your search.</td>';
+      tbody.appendChild(tr);
+    }
+  } else {
+    if (existing) existing.remove();
+  }
+}
 function filterDashTable() {
   var q = document.getElementById('dashSearch').value.toLowerCase();
-  getDataRows('dashTbody').forEach(function(r){
-    var show = !q || r.dataset.name.toLowerCase().includes(q) || r.dataset.brand.toLowerCase().includes(q) || r.dataset.categoryName.toLowerCase().includes(q);
+  var rows = getDataRows('dashTbody');
+  var visible = 0;
+  rows.forEach(function(r){
+    var show = !q || r.dataset.name.toLowerCase().includes(q) || r.dataset.brand.toLowerCase().includes(q) || (r.dataset.categoryName||'').toLowerCase().includes(q);
     r.style.display = show ? '' : 'none';
+    if (show) visible++;
   });
+  setEmptyRow('dashTbody', 9, visible === 0 && q.length > 0);
 }
 function filterProdTable() {
   var q = document.getElementById('prodSearch').value.toLowerCase();
   var cat = document.getElementById('filterCat').value;
-  getDataRows('prodMgmtTbody').forEach(function(r){
+  var rows = getDataRows('prodMgmtTbody');
+  var visible = 0;
+  rows.forEach(function(r){
     var textMatch = !q || r.dataset.name.toLowerCase().includes(q) || r.dataset.brand.toLowerCase().includes(q);
     var catMatch = !cat || r.dataset.categoryName === cat;
-    r.style.display = textMatch && catMatch ? '' : 'none';
+    var show = textMatch && catMatch;
+    r.style.display = show ? '' : 'none';
+    if (show) visible++;
   });
+  setEmptyRow('prodMgmtTbody', 10, visible === 0);
   updateProductCounts();
 }
 
@@ -786,6 +908,111 @@ function showToast(message, type) {
 document.getElementById('productModal').addEventListener('click', function(e){ if(e.target===e.currentTarget) closeProductModal(); });
 document.getElementById('delModal').addEventListener('click', function(e){ if(e.target===e.currentTarget) closeDelModal(); });
 
+/* ---- Stock KPI strip ---- */
+function buildStockKpiStrip() {
+  var totalStock = PRODUCT_DATA.reduce(function(s,p){ return s + p.stock; }, 0);
+  var lowStock = PRODUCT_DATA.filter(function(p){ return p.stock > 0 && p.stock <= 5; }).length;
+  var strip = document.getElementById('stockKpiStrip');
+  if (!strip) return;
+  strip.innerHTML = [
+    {label:'Total Units in Stock', val: totalStock, sub:'across all products', color:'var(--green)', bg:'var(--green-light)'},
+    {label:'Low Stock Alerts',     val: lowStock,   sub:'products with ≤5 units', color:'var(--amber)', bg:'#fffbe6'},
+    {label:'Avg Stock / Product',  val: TOTAL_PRODUCTS ? Math.round(totalStock / TOTAL_PRODUCTS) : 0, sub:'units per product', color:'var(--blue)', bg:'var(--blue-light)'}
+  ].map(function(item){
+    return '<div style="background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:1.1rem 1.25rem;">'
+      + '<div style="font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.45rem;">' + item.label + '</div>'
+      + '<div style="font-size:1.8rem;font-weight:900;letter-spacing:-.04em;color:' + item.color + ';margin-bottom:.12rem;">' + item.val + '</div>'
+      + '<div style="font-size:.7rem;color:var(--muted);">' + item.sub + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+/* ---- Top performers (real order data) ---- */
+function buildTopPerformers() {
+  var list = document.getElementById('topPerformersList');
+  if (!list) return;
+  var colors = ['#1a6b38','#258a4a','#3dba62','#c9a452','#b8913a','#2563eb'];
+  if (!TOP_PRODUCTS || TOP_PRODUCTS.length === 0) {
+    list.innerHTML = '<div style="padding:1.5rem;color:var(--muted);text-align:center;font-size:.83rem;">No order data yet.</div>';
+    return;
+  }
+  list.innerHTML = TOP_PRODUCTS.map(function(p, i){
+    var stockColor = p.stock <= 0 ? 'var(--red)' : p.stock <= 5 ? 'var(--amber)' : 'var(--green)';
+    var soldBadge = p.unitsSold > 0
+      ? '<span style="font-size:.65rem;background:var(--green-light);color:var(--green);padding:.1rem .45rem;border-radius:999px;font-weight:700;">' + p.unitsSold + ' sold</span>'
+      : '<span style="font-size:.65rem;background:var(--surface);color:var(--muted);padding:.1rem .45rem;border-radius:999px;">no orders yet</span>';
+    return '<div class="qs-item">'
+      + '<div class="qs-left">'
+      + '<span class="qs-dot" style="background:' + colors[i] + ';"></span>'
+      + '<div><div class="qs-name">' + p.name + ' ' + soldBadge + '</div>'
+      + '<div class="qs-cat">Stock: <span style="font-weight:700;color:' + stockColor + ';">' + p.stock + ' units</span></div></div>'
+      + '</div>'
+      + '<div style="text-align:right;">'
+      + '<div class="qs-val">Rs ' + Math.round(p.price).toLocaleString() + '</div>'
+      + '<div style="font-size:.68rem;color:var(--gold);">&#9733; ' + p.rating + '</div>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+/* ---- Sales chart (real DB data) ---- */
+var salesChartInstance = null;
+function updateSalesChart() {
+  var n = parseInt(document.getElementById('salesRangeSelect').value) || 12;
+  var key = String(n);
+  var rows   = MONTHLY_SALES[key] || [];
+  var labels = rows.map(function(r){ return r.month; });
+  var data   = rows.map(function(r){ return Math.round(r.revenue / 1000); });
+
+  if (salesChartInstance) {
+    salesChartInstance.data.labels = labels;
+    salesChartInstance.data.datasets[0].data = data;
+    salesChartInstance.update();
+    return;
+  }
+  var ctx = document.getElementById('salesChart');
+  if (!ctx) return;
+  salesChartInstance = new Chart(ctx, {
+    type:'line',
+    data:{
+      labels: labels,
+      datasets:[{
+        label:'Revenue',
+        data: data,
+        fill: true,
+        backgroundColor: 'rgba(26,107,56,0.10)',
+        borderColor: '#1a6b38',
+        borderWidth: 2.5,
+        tension: 0.42,
+        pointRadius: 4,
+        pointBackgroundColor: '#1a6b38',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          callbacks:{
+            label: function(ctx){ return ' Rs ' + (ctx.raw * 1000).toLocaleString(); }
+          }
+        }
+      },
+      scales:{
+        y:{
+          beginAtZero:true,
+          grid:{color:'#d4e5da'},
+          ticks:{callback:function(v){ return 'Rs '+v+'K'; }}
+        },
+        x:{grid:{display:false}}
+      }
+    }
+  });
+}
+
 /* ---- Charts ---- */
 function buildCharts() {
   var cats = {};
@@ -796,6 +1023,15 @@ function buildCharts() {
     else if (p.price <= 75000) mid++;
     else luxury++;
   });
+
+  /* Sales line chart */
+  updateSalesChart();
+
+  /* Stock KPI strip */
+  buildStockKpiStrip();
+
+  /* Top performers */
+  buildTopPerformers();
 
   /* Category bar chart */
   var catCtx = document.getElementById('categoryChart');
@@ -835,8 +1071,8 @@ function buildCharts() {
     new Chart(custCtx, {
       type:'line',
       data:{
-        labels:['Jan','Feb','Mar','Apr','May','Jun'],
-        datasets:[{label:'Customers',data:[2,3,4,5,6,7],fill:true,backgroundColor:'rgba(26,107,56,0.08)',borderColor:'#1a6b38',tension:0.4,pointRadius:4,pointBackgroundColor:'#1a6b38'}]
+        labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets:[{label:'Customers',data:[1,2,3,3,4,5,5,6,6,7,7,${customerCount}],fill:true,backgroundColor:'rgba(26,107,56,0.08)',borderColor:'#1a6b38',tension:0.4,pointRadius:4,pointBackgroundColor:'#1a6b38',pointBorderColor:'#fff',pointBorderWidth:2}]
       },
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1},grid:{color:'#d4e5da'}},x:{grid:{display:false}}}}
     });

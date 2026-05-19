@@ -186,20 +186,6 @@
 
   <%-- ======== SHARED SCRIPTS ======== --%>
   <script src="${pageContext.request.contextPath}/static/js/app.js"></script>
-  <script>
-    /* ---------- Toast Helper ---------- */
-    function showToast(title, msg, icon) {
-      var c = document.getElementById('toast-container');
-      if (!c) return;
-      var t = document.createElement('div');
-      t.className = 'toast';
-      t.innerHTML = '<div class="t-ico">' + (icon || '') + '</div>'
-        + '<div><div class="t-h">' + title + '</div>'
-        + (msg ? '<div class="t-p">' + msg + '</div>' : '') + '</div>';
-      c.appendChild(t);
-      setTimeout(function () { t.remove(); }, 4000);
-    }
-  </script>
 
 </body>
 </html>

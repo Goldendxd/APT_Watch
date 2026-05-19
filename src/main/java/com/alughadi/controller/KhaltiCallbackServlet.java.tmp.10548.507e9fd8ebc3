@@ -19,6 +19,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 @WebServlet("/khalti-callback")
 public class KhaltiCallbackServlet extends HttpServlet {
@@ -71,9 +72,9 @@ public class KhaltiCallbackServlet extends HttpServlet {
 
                     // Snapshot cart items before clearing
                     List<Cart> cartItems = cartDao.getCartItems(userId);
-                    List<Object[]> items = new ArrayList<>();
+                    List<int[]> items = new ArrayList<>();
                     for (Cart c : cartItems) {
-                        items.add(new Object[]{c.getProductId(), c.getQuantity(), c.getPrice()});
+                        items.add(new int[]{c.getProductId(), c.getQuantity(), (int) c.getPrice()});
                     }
 
                     // Save order to database

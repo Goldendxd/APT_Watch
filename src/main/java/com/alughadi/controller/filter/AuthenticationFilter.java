@@ -71,7 +71,7 @@ public class AuthenticationFilter implements Filter {
             }
         }
 
-        boolean isAdminPath = "/admin".equals(path);
+        boolean isAdminPath = "/admin".equals(path) || "/admin-profile".equals(path);
         if (isAdminPath){
             if (!isLoggedIn){
                 res.sendRedirect(contextPath+"/login");

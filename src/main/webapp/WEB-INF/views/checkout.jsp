@@ -237,18 +237,14 @@
 
 <script>
   function placeOrder() {
-    var fname   = document.getElementById('ship-fname').value.trim();
-    var phone   = document.getElementById('ship-phone').value.trim();
-    var addr    = document.getElementById('ship-address').value.trim();
-    var city    = document.getElementById('ship-city').value.trim();
-    var method  = document.querySelector('input[name="paymentMethod"]:checked').value;
+    var fname  = document.getElementById('ship-fname').value.trim();
+    var phone  = document.getElementById('ship-phone').value.trim();
+    var addr   = document.getElementById('ship-address').value.trim();
+    var city   = document.getElementById('ship-city').value.trim();
+    var method = document.querySelector('input[name="paymentMethod"]:checked').value;
 
     if (!fname || !phone || !addr || !city) {
-      if (typeof showToast === 'function') {
-        showToast('Missing Information', 'Please fill in all required shipping fields.', '&#9888;');
-      } else {
-        alert('Please fill in all required shipping fields.');
-      }
+      showToast('Missing Information', 'Please fill in all required shipping fields.', '&#9888;');
       return;
     }
 
@@ -258,26 +254,25 @@
       document.getElementById('hid-email').value = document.getElementById('ship-email').value.trim();
       document.getElementById('khalti-form').submit();
     } else {
-      // Cash on Delivery — show confirmation modal
-      var orderId = 'AG-' + Math.floor(100000 + Math.random() * 900000);
-      document.getElementById('order-id-display').textContent = orderId;
-      var modal = document.getElementById('modal-order-success');
-      if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+      var btn = document.getElementById('place-order-btn');
+      btn.disabled    = true;
+      btn.textContent = 'Placing Order…';
+      fetch('${pageContext.request.contextPath}/cod-order', { method: 'POST', credentials: 'same-origin' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          document.getElementById('order-id-display').textContent = data.orderId || ('AG-' + Date.now());
+          var modal = document.getElementById('modal-order-success');
+          if (modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+          btn.disabled    = false;
+          btn.textContent = 'Place Order →';
+        })
+        .catch(function () {
+          btn.disabled    = false;
+          btn.textContent = 'Place Order →';
+          showToast('Error', 'Could not place order. Please try again.', '&#9888;');
+        });
     }
   }
-
-  // Highlight selected payment card
-  document.querySelectorAll('input[name="paymentMethod"]').forEach(function(radio) {
-    radio.addEventListener('change', function() {
-      document.querySelectorAll('.payment-option-card').forEach(function(card) {
-        card.style.borderColor = '';
-        card.style.background  = '';
-      });
-      var card = this.closest('.payment-option').querySelector('.payment-option-card');
-      card.style.borderColor = 'var(--green)';
-      card.style.background  = 'var(--green-light)';
-    });
-  });
 </script>
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

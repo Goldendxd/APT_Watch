@@ -82,6 +82,13 @@ public class CartServlet extends HttpServlet {
                 return;
             }
 
+            if (request.getParameter("buyNow") != null) {
+                cartDao.clearCart(userId);
+                cartDao.addToCart(userId, productId, quantity);
+                response.sendRedirect(request.getContextPath() + "/checkout");
+                return;
+            }
+
             cartDao.addToCart(userId, productId, quantity);
 
         } else if (action.equals("remove")) {
@@ -95,10 +102,6 @@ public class CartServlet extends HttpServlet {
 
         } else if (action.equals("clear")) {
             cartDao.clearCart(userId);
-        }
-        if (request.getParameter("buyNow") != null) {
-            response.sendRedirect(request.getContextPath() + "/checkout");
-            return;
         }
         String redirectTo = request.getParameter("redirectTo");
         if (redirectTo != null && !redirectTo.isBlank()) {

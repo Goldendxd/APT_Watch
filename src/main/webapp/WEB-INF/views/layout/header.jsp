@@ -75,9 +75,9 @@
         </button>
         <c:choose>
           <c:when test="${not empty sessionScope.authUser}">
-            <span class="nav-user-chip">
+            <a href="${pageContext.request.contextPath}/profile" class="nav-user-chip" style="text-decoration:none;">
               ${sessionScope.authUser}
-            </span>
+            </a>
             <a href="${pageContext.request.contextPath}/logout" class="btn-fill-nav">Logout</a>
           </c:when>
           <c:otherwise>
@@ -127,7 +127,10 @@
               onclick="closeSidebar();openCart()">Cart</button>
       <c:choose>
         <c:when test="${not empty sessionScope.authUser}">
-          <div class="sidebar-user">${sessionScope.authUser}</div>
+          <a href="${pageContext.request.contextPath}/profile"
+             class="sidebar-user"
+             style="text-decoration:none;display:block;text-align:center;"
+             onclick="closeSidebar()">${sessionScope.authUser}</a>
           <a href="${pageContext.request.contextPath}/logout"
              class="btn-fill-nav"
              style="width:100%;justify-content:center;">Logout</a>

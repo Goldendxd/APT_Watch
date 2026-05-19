@@ -1,0 +1,108 @@
+/* ================================================================
+   products.css — Product Listing Page | AluGhadi Watches
+   ================================================================ */
+
+/* ---- Buy + Cart action row ---- */
+.prod-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  align-items: stretch;
+}
+.prod-buy-btn {
+  flex: 1;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+.prod-cart-icon-btn {
+  flex-shrink: 0;
+  width: 42px;
+  border-radius: 11px;
+  border: 1.5px solid var(--green-mid);
+  background: var(--green-light);
+  color: var(--green);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.2s var(--ease);
+}
+.prod-cart-icon-btn:hover {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(26,107,56,0.3);
+}
+
+/* ---- Wishlist heart button ---- */
+.prod-save {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  transition: all 0.22s cubic-bezier(0.16,1,0.3,1);
+  z-index: 5;
+  overflow: visible;
+  padding: 0;
+}
+.prod-save:hover {
+  transform: scale(1.15);
+  box-shadow: 0 5px 18px rgba(0,0,0,0.18);
+  background: #fff;
+}
+
+.wish-heart {
+  font-size: 1.22rem;
+  line-height: 1;
+  color: #ccc;
+  transition: all 0.22s;
+  display: block;
+}
+.prod-save.saved .wish-heart {
+  color: #e53;
+  animation: heartPop 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+.prod-save:hover .wish-heart { color: #e53; }
+
+/* ---- Wishlist tooltip ---- */
+.wish-tip {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 7px);
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.78);
+  color: #fff;
+  font-size: 0.64rem;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 0.28rem 0.65rem;
+  border-radius: 7px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s;
+  letter-spacing: 0.04em;
+}
+.prod-save:hover .wish-tip  { opacity: 1; }
+.prod-save.saved .wish-tip  { content: 'Saved!'; }
+
+/* ---- Wishlist filter tab ---- */
+#fav-tab { position: relative; }

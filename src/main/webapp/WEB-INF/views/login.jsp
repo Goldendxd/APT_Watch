@@ -9,116 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --green:#1a6b38; --green2:#258a4a; --green-light:#e4f4eb; --green-mid:#b2d9c0;
-      --accent:#3dba62; --text:#0b1c10; --muted:#4e6a59; --border:#d4e5da;
-      --bg:#f2f6f2; --white:#ffffff;
-      --ff:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-      --ease:cubic-bezier(0.16,1,0.3,1);
-    }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:var(--ff);background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
-    a{text-decoration:none;color:inherit;}
-
-    .auth-wrap {
-      width:100%;
-      max-width:440px;
-    }
-
-    .auth-logo-row {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:2rem;
-    }
-    .auth-logo-img { height:52px; width:auto; display:block; }
-
-    .auth-card {
-      background:var(--white);
-      border:1.5px solid var(--border);
-      border-radius:20px;
-      padding:2.5rem 2rem;
-      box-shadow:0 4px 32px rgba(10,30,15,.07);
-    }
-
-    .auth-tabs {
-      display:flex;
-      gap:.4rem;
-      background:var(--bg);
-      border:1.5px solid var(--border);
-      border-radius:12px;
-      padding:.3rem;
-      margin-bottom:2rem;
-    }
-    .auth-tab {
-      flex:1;text-align:center;
-      padding:.55rem 1rem;
-      border-radius:9px;
-      font-size:.84rem;font-weight:600;
-      color:var(--muted);
-      transition:all .2s var(--ease);
-    }
-    .auth-tab.active {
-      background:var(--white);
-      color:var(--text);
-      font-weight:700;
-      box-shadow:0 1px 6px rgba(0,0,0,.08);
-    }
-    .auth-tab:hover:not(.active){color:var(--text);}
-
-    .auth-title {font-size:1.4rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.35rem;}
-    .auth-sub {font-size:.84rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.6;}
-
-    .auth-alert {
-      padding:.75rem 1rem;border-radius:10px;font-size:.82rem;font-weight:600;margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem;
-    }
-    .auth-alert-error {background:#fff1f1;color:#b91c1c;border:1.5px solid rgba(185,28,28,.15);}
-    .auth-alert-success{background:var(--green-light);color:var(--green);border:1.5px solid var(--green-mid);}
-
-    .fg {margin-bottom:1.2rem;}
-    .fg label {display:block;font-size:.75rem;font-weight:700;color:var(--text);margin-bottom:.42rem;letter-spacing:.015em;}
-    .input-wrap {position:relative;}
-    .input-wrap input {
-      width:100%;padding:.75rem 2.6rem .75rem .95rem;
-      background:var(--bg);border:1.5px solid var(--border);border-radius:11px;
-      font-family:var(--ff);font-size:.875rem;color:var(--text);outline:none;
-      transition:all .2s var(--ease);
-    }
-    .input-wrap input:focus {border-color:var(--green);background:var(--white);box-shadow:0 0 0 3px rgba(26,107,56,.08);}
-    .input-wrap input::placeholder{color:#88a492;}
-    .input-icon {
-      position:absolute;right:.8rem;top:50%;transform:translateY(-50%);
-      color:#88a492;display:flex;align-items:center;cursor:pointer;
-    }
-
-    .auth-row {display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
-    .auth-check {display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--muted);cursor:pointer;}
-    .auth-check input{accent-color:var(--green);}
-    .auth-forgot {font-size:.8rem;color:var(--green);font-weight:600;}
-    .auth-forgot:hover{text-decoration:underline;}
-
-    .auth-btn {
-      width:100%;padding:.85rem;
-      background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%);
-      color:#fff;border:none;border-radius:12px;
-      font-family:var(--ff);font-size:.9rem;font-weight:700;
-      cursor:pointer;transition:all .22s var(--ease);
-      box-shadow:0 3px 14px rgba(26,107,56,.28);
-    }
-    .auth-btn:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(26,107,56,.38);}
-    .auth-btn:active{transform:none;}
-
-    .auth-switch {text-align:center;margin-top:1.5rem;font-size:.82rem;color:var(--muted);}
-    .auth-switch a {color:var(--green);font-weight:700;}
-    .auth-switch a:hover{text-decoration:underline;}
-
-    .auth-back {text-align:center;margin-top:1rem;}
-    .auth-back a {font-size:.78rem;color:var(--muted);display:inline-flex;align-items:center;gap:.3rem;}
-    .auth-back a:hover{color:var(--green);}
-  </style>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/pages/auth.css" />
 </head>
-<body>
+<body class="auth-standalone">
 
 <div class="auth-wrap">
   <div class="auth-logo-row">
@@ -196,21 +89,6 @@
   </div>
 </div>
 
-<script>
-  function togglePw() {
-    var inp  = document.getElementById('password');
-    var hide = document.getElementById('pw-icon-hide');
-    var show = document.getElementById('pw-icon-show');
-    if (inp.type === 'password') {
-      inp.type = 'text';
-      hide.style.display = 'none';
-      show.style.display = 'block';
-    } else {
-      inp.type = 'password';
-      hide.style.display = 'block';
-      show.style.display = 'none';
-    }
-  }
-</script>
+<script src="<%=request.getContextPath()%>/static/js/app.js"></script>
 </body>
 </html>

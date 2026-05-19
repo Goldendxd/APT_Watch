@@ -1,11 +1,14 @@
 package com.alughadi.controller;
 
+import com.alughadi.dao.OrderDao;
+import com.alughadi.dao.OrderDaoImpl;
 import com.alughadi.dao.ProductDAO;
 import com.alughadi.dao.ProductDaoImpl;
 import com.alughadi.dao.UserDao;
 import com.alughadi.dao.UserDaoImpl;
 import com.alughadi.entity.Product;
 import com.alughadi.utils.ImageUtil;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,25 +20,41 @@ import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/admin")
 @MultipartConfig
 public class AdminServlet extends HttpServlet {
     private final ProductDAO productDAO = new ProductDaoImpl();
-    private final UserDao userDAO = new UserDaoImpl();
+    private final UserDao    userDAO    = new UserDaoImpl();
+    private final OrderDao   orderDAO   = new OrderDaoImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products = productDAO.getAllProducts();
         int customerCount = userDAO.countCustomers();
-        long inStock = products.stream().filter(p -> p.getStockQuantity() > 0).count();
+        long inStock  = products.stream().filter(p -> p.getStockQuantity() > 0).count();
         long outOfStock = products.size() - inStock;
 
-        request.setAttribute("products", products);
-        request.setAttribute("productCount", products.size());
-        request.setAttribute("inStockCount", inStock);
+        double totalRevenue  = orderDAO.getTotalRevenue();
+        int    totalOrders   = orderDAO.getTotalOrderCount();
+
+        List<Map<String, Object>> monthlySales12 = orderDAO.getMonthlySales(12);
+        List<Map<String, Object>> monthlySales6  = orderDAO.getMonthlySales(6);
+        List<Map<String, Object>> monthlySales3  = orderDAO.getMonthlySales(3);
+        List<Map<String, Object>> topProducts    = orderDAO.getTopProducts(6);
+
+        request.setAttribute("products",      products);
+        request.setAttribute("productCount",  products.size());
+        request.setAttribute("inStockCount",  inStock);
         request.setAttribute("outOfStockCount", outOfStock);
         request.setAttribute("customerCount", customerCount);
+        request.setAttribute("totalRevenue",  totalRevenue);
+        request.setAttribute("totalOrders",   totalOrders);
+        request.setAttribute("monthlySales12Json", new Gson().toJson(monthlySales12));
+        request.setAttribute("monthlySales6Json",  new Gson().toJson(monthlySales6));
+        request.setAttribute("monthlySales3Json",  new Gson().toJson(monthlySales3));
+        request.setAttribute("topProductsJson",    new Gson().toJson(topProducts));
         request.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(request, response);
     }
 
