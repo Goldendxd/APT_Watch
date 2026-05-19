@@ -45,7 +45,7 @@
     </div>
 
     <div class="checkout-secure-note" style="justify-content:center;margin-top:1.5rem;">
-      <span>&#128274;</span> Your order details are saved to your account
+      Your order details are saved to your account
     </div>
   </div>
 </div>

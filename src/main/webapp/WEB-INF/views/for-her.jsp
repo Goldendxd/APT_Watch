@@ -55,7 +55,6 @@
     <c:choose>
       <c:when test="${empty productList}">
         <div style="grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--muted);">
-          <div style="font-size:2rem;margin-bottom:0.75rem;">&#128722;</div>
           <div style="font-weight:800;margin-bottom:0.4rem;">No watches found</div>
           <a href="${pageContext.request.contextPath}/for-her" style="color:#b8468a;font-weight:700;text-decoration:none;">View all styles</a>
         </div>
@@ -74,7 +73,7 @@
                   <button class="forher-cart-btn" type="button"
                           data-product-id="${product.id}"
                           onclick="addToCart(this, this.dataset.productId, 1)"
-                          title="Add to cart">&#128717;</button>
+                          title="Add to cart">+</button>
                   <a href="${pageContext.request.contextPath}/product-details?id=${product.id}" class="forher-card-btn">View &#8594;</a>
                 </div>
               </div>

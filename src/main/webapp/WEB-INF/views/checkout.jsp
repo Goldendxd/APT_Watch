@@ -51,14 +51,13 @@
 
   <c:if test="${not empty orderError}">
     <div style="background:#fff1f1;border:1.5px solid rgba(200,60,60,0.3);border-radius:12px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;color:#c33;font-weight:600;font-size:0.88rem;">
-      &#9888; ${orderError}
+      ${orderError}
     </div>
   </c:if>
 
   <c:choose>
     <c:when test="${empty cartItems}">
       <div class="checkout-empty gc" style="text-align:center;padding:5rem 2rem;">
-        <div style="font-size:3rem;margin-bottom:1rem;opacity:0.5;">&#128717;</div>
         <h2 style="margin-bottom:0.5rem;">Your cart is empty</h2>
         <p style="color:var(--muted);margin-bottom:1.5rem;">Add some watches to your cart before checking out.</p>
         <a href="${pageContext.request.contextPath}/products" class="btn-fill"
@@ -135,7 +134,7 @@
                 <input type="radio" name="paymentMethod" id="pay-cod" value="cod" />
                 <div class="payment-option-card">
                   <div class="payment-option-icon" style="background:var(--green);">
-                    <span style="font-size:1.2rem;">&#128181;</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><circle cx="12" cy="12" r="1" fill="#fff"/></svg>
                   </div>
                   <div class="payment-option-info">
                     <div class="payment-option-name">Cash on Delivery</div>
@@ -198,7 +197,7 @@
           </button>
 
           <div class="checkout-secure-note">
-            <span>&#128274;</span> Your order will be confirmed immediately
+            Your order will be confirmed immediately
           </div>
         </div>
       </div>

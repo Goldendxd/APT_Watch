@@ -31,7 +31,6 @@
     <%-- ===== EMPTY CART ===== --%>
     <c:when test="${empty cartItems}">
       <div class="checkout-empty gc" style="text-align:center;padding:5rem 2rem;">
-        <div style="font-size:3.5rem;margin-bottom:1rem;opacity:0.4;">&#128717;</div>
         <h2 style="margin-bottom:0.5rem;">Your cart is empty</h2>
         <p style="color:var(--muted);margin-bottom:1.75rem;">
           Looks like you haven't added any watches yet. Browse our collection to find your perfect timepiece.
@@ -195,7 +194,7 @@
           </a>
 
           <div class="checkout-secure-note" style="margin-top:1rem;">
-            <span>&#128274;</span> Secure checkout — your data is protected
+            Secure checkout — your data is protected
           </div>
         </div>
       </div>

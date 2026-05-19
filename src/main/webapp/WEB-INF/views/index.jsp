@@ -212,7 +212,7 @@ request.setAttribute("activeNav", "home"); %>
         <div class="feat-card-link">Learn more &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="feat-card-icon icon-bg-red">&#128230;</div>
+        ><div class="feat-card-icon icon-bg-red"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
         <div class="feat-card-title">Free Shipping</div>
         <p class="feat-card-desc">
           Free shipping on orders above Rs 5,000. Safe, insured delivery to your
@@ -221,7 +221,7 @@ request.setAttribute("activeNav", "home"); %>
         <div class="feat-card-link">View policy &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="feat-card-icon icon-bg-blue">&#128260;</div>
+        ><div class="feat-card-icon icon-bg-blue"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.76"/></svg></div>
         <div class="feat-card-title">Easy Returns</div>
         <p class="feat-card-desc">
           30-day return policy. Change your mind? Full refund, no questions
@@ -230,7 +230,7 @@ request.setAttribute("activeNav", "home"); %>
         <div class="feat-card-link">Details &rarr;</div></a
       >
       <a class="feat-card" href="${pageContext.request.contextPath}/"
-        ><div class="feat-card-icon icon-bg-green">&#128142;</div>
+        ><div class="feat-card-icon icon-bg-green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <div class="feat-card-title">Expert Support</div>
         <p class="feat-card-desc">
           Our watch experts are here 24/7. Expert advice on sizing, features,
@@ -242,7 +242,7 @@ request.setAttribute("activeNav", "home"); %>
         class="feat-card"
         href="${pageContext.request.contextPath}/"
         onclick="showModal('warranty'); return false;"
-        ><div class="feat-card-icon icon-bg-red">&#128737;</div>
+        ><div class="feat-card-icon icon-bg-red"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <div class="feat-card-title">Warranty Coverage</div>
         <p class="feat-card-desc">
           All watches backed by manufacturer warranty. Extended warranty options

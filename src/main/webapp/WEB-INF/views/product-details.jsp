@@ -66,7 +66,7 @@
           <input type="hidden" name="quantity" value="1">
           <c:choose>
             <c:when test="${product.stockQuantity > 0}">
-              <button class="btn-fill product-details-primary-btn" type="submit">Add to Cart &#128717;</button>
+              <button class="btn-fill product-details-primary-btn" type="submit">Add to Cart</button>
             </c:when>
             <c:otherwise>
               <button class="btn-fill product-details-primary-btn" type="button" disabled style="background:#999;cursor:not-allowed;">Out of Stock</button>
