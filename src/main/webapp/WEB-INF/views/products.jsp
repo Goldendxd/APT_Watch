@@ -211,6 +211,15 @@
               <div class="prod-rating"><span class="prod-stars">&#9733;</span> ${product.rating}</div>
             </div>
             <div style="display:flex;gap:0.45rem;margin-top:0.65rem;">
+              <c:choose>
+              <c:when test="${product.stockQuantity <= 0}">
+                <button type="button" disabled
+                        style="width:100%;padding:0.55rem 0.4rem;border-radius:10px;font-size:0.78rem;font-weight:700;background:#999;color:#fff;border:1.5px solid #999;cursor:not-allowed;font-family:inherit;text-align:center;">
+                  Out of Stock
+                </button>
+              </c:when>
+
+              <c:otherwise>
               <form action="${pageContext.request.contextPath}/cart" method="post" style="flex:1;display:flex;">
                 <input type="hidden" name="action" value="add">
                 <input type="hidden" name="productId" value="${product.id}">
@@ -241,19 +250,11 @@
                   </c:otherwise>
                 </c:choose>
               </form>
+              </c:otherwise>
+              </c:choose>
             </div>
           </div>
         </div>
-<%--            <div class="prod-chip">${product.name}</div>--%>
-<%--          </div>--%>
-<%--          <div class="prod-body">--%>
-<%--            <div class="prod-brand">${product.brand}</div>--%>
-<%--          </div>--%>
-
-<%--        <li class="product-card">--%>
-<%--          <a href="${pageContext.request.contentPath}/cart?productid= ${product.id}" class="prod-img-container"> <c:out value = "${product.image.url}" /></a>--%>
-<%--          <a href="${pageContext.request.contentPath}/cart?productid= ${product.id}" class="prod-h"> <c:out value = "${product.name}" /></a>--%>
-<%--        </li>--%>
 
 
       </c:forEach>

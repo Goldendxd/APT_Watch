@@ -8,6 +8,7 @@ public class Cart {
     private int userId;
     private int productId;
     private int quantity;
+    private int stockQuantity;
     private Timestamp createdAt;
 
     // ── Joined product fields (for display) ───────────────────
@@ -72,6 +73,14 @@ public class Cart {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public Timestamp getCreatedAt() {

@@ -55,7 +55,7 @@ public class CartDaoImpl implements CartDao {
         try {
             conn = DatabaseConnection.getConnection();
             String sql = "SELECT c.id, c.user_id, c.product_id, c.quantity, c.created_at, " +
-                    "p.name, p.brand, p.image_url, p.price, p.old_price, " +
+                    "p.name, p.brand, p.image_url, p.price, p.old_price, p.stock_quantity, " +
                     "(p.price * c.quantity) AS total_price " +
                     "FROM cart c join products p ON c.product_id = p.id " +
                     "WHERE c.user_id = ?";
@@ -74,6 +74,7 @@ public class CartDaoImpl implements CartDao {
                 cart.setImageUrl(rs.getString("image_url"));
                 cart.setPrice(rs.getDouble("price"));
                 cart.setOldPrice(rs.getDouble("old_price"));
+                cart.setStockQuantity(rs.getInt("stock_quantity"));
                 cart.setTotalPrice(rs.getDouble("total_price"));
                 items.add(cart);
             }

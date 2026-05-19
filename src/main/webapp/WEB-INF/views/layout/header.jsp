@@ -133,7 +133,8 @@
              onclick="closeSidebar()">${sessionScope.authUser}</a>
           <a href="${pageContext.request.contextPath}/logout"
              class="btn-fill-nav"
-             style="width:100%;justify-content:center;">Logout</a>
+             style="width:100%;justify-content:center;"
+             onclick="return confirm('Are you sure you want to logout?');">Logout</a>
         </c:when>
         <c:otherwise>
           <a href="${pageContext.request.contextPath}/register"

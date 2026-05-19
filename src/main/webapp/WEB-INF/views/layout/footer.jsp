@@ -73,7 +73,7 @@
 
   <%-- ======== CART MODAL ======== --%>
   <div class="modal-ov" id="modal-cart" role="dialog" aria-modal="true" aria-label="Shopping cart">
-    <div class="modal cart-modal" style="max-width:520px;">
+    <div class="modal cart-modal" style="max-width:680px;">
       <button class="modal-close" onclick="closeModal('cart')" aria-label="Close cart">&#10005;</button>
       <div class="modal-h">Shopping Cart</div>
       <div class="modal-sub">Your selected items</div>
@@ -95,19 +95,39 @@
           </c:when>
 
           <c:otherwise>
+            <c:set var="availableTotal" value="0" />
             <c:forEach var="cart" items="${cartItems}">
-              <div class="cart-item">
+              <c:if test="${cart.stockQuantity > 0}">
+                <c:set var="availableTotal" value="${availableTotal + cart.totalPrice}" />
+              </c:if>
+              <div class="cart-item" data-line-total="${cart.stockQuantity > 0 ? cart.totalPrice : 0}">
+                <input type="checkbox"
+                       class="cart-select"
+                       name="selectedCartId"
+                       value="${cart.id}"
+                       form="checkoutSelectedForm"
+                  ${cart.stockQuantity <= 0 ? 'disabled' : 'checked'}
+                       style="margin-right:0.5rem;">
                 <img src="${pageContext.request.contextPath}${cart.imageUrl}" alt="${cart.productName}" class="cart-img" />
 
                 <div class="cart-item-main">
                   <div class="cartName">${cart.productName}</div>
                   <div class="cart-brand">${cart.brand}</div>
-                  <div class="cart-prices">
-                    <span class="newPrice">Rs ${cart.price}</span>
-                    <c:if test="${cart.oldPrice > 0}">
-                      <span class="oldPrice">Rs ${cart.oldPrice}</span>
-                    </c:if>
-                  </div>
+                  <c:choose>
+                    <c:when test="${cart.stockQuantity <= 0}">
+                      <div style="color:#c33;font-size:0.78rem;font-weight:700;margin-top:0.25rem;">
+                        Out of Stock
+                      </div>
+                    </c:when>
+                    <c:otherwise>
+                      <div class="cart-prices">
+                        <span class="newPrice">Rs ${cart.price}</span>
+                        <c:if test="${cart.oldPrice > 0}">
+                          <span class="oldPrice">Rs ${cart.oldPrice}</span>
+                        </c:if>
+                      </div>
+                    </c:otherwise>
+                  </c:choose>
                 </div>
 
                 <div class="cart-item-controls">
@@ -132,14 +152,34 @@
                       </c:otherwise>
                     </c:choose>
 
-                    <span class="cart-qty-val">${cart.quantity}</span>
+                    <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                      <input type="hidden" name="action" value="update">
+                      <input type="hidden" name="cartId" value="${cart.id}">
+                      <input type="hidden" name="redirectTo" value="${currentPage}">
+                      <input class="cart-qty-val"
+                             type="number"
+                             name="quantity"
+                             min="1"
+                             max="${cart.stockQuantity}"
+                             value="${cart.quantity}"
+                        ${cart.stockQuantity <= 0 ? 'disabled' : ''}
+                             onchange="this.form.submit()"
+                             style="width:42px;text-align:center;border:0;background:#fff;font-weight:700;">
+                    </form>
 
                     <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
                       <input type="hidden" name="action" value="update">
                       <input type="hidden" name="cartId" value="${cart.id}">
                       <input type="hidden" name="quantity" value="${cart.quantity + 1}">
                       <input type="hidden" name="redirectTo" value="${currentPage}">
-                      <button class="cart-qty-btn" type="submit" title="Increase quantity">&#43;</button>
+                      <c:choose>
+                        <c:when test="${cart.stockQuantity <= 0 || cart.quantity >= cart.stockQuantity}">
+                          <button class="cart-qty-btn" type="button" disabled title="Out of stock" style="cursor:not-allowed;opacity:.5;">&#43;</button>
+                        </c:when>
+                        <c:otherwise>
+                          <button class="cart-qty-btn" type="submit" title="Increase quantity">&#43;</button>
+                        </c:otherwise>
+                      </c:choose>
                     </form>
                   </div>
 
@@ -161,7 +201,7 @@
       <c:if test="${not empty cartItems}">
         <div class="cart-total-row">
           <span>Grand Total</span>
-          <strong>Rs <fmt:formatNumber value="${grandTotal}" pattern="#,##0"/></strong>
+          <strong>Rs <span id="selected-cart-total"><fmt:formatNumber value="${availableTotal}" pattern="#,##0"/></span></strong>
         </div>
       </c:if>
 
@@ -186,6 +226,20 @@
 
   <%-- ======== SHARED SCRIPTS ======== --%>
   <script src="${pageContext.request.contextPath}/static/js/app.js"></script>
+  <script>
+    /* ---------- Toast Helper ---------- */
+    function showToast(title, msg, icon) {
+      var c = document.getElementById('toast-container');
+      if (!c) return;
+      var t = document.createElement('div');
+      t.className = 'toast';
+      t.innerHTML = '<div class="t-ico">' + (icon || '') + '</div>'
+        + '<div><div class="t-h">' + title + '</div>'
+        + (msg ? '<div class="t-p">' + msg + '</div>' : '') + '</div>';
+      c.appendChild(t);
+      setTimeout(function () { t.remove(); }, 4000);
+    }
+  </script>
 
 </body>
 </html>

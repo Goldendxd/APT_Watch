@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%
   request.setAttribute("pageTitle", "Gifts For Him | AluGhadi Watches");
   request.setAttribute("pageDesc", "Curated watch gifts for him — bold, precise, and built to impress. Browse our men's gift collection.");
@@ -49,135 +51,39 @@
   </div>
 
   <%-- Cards grid --%>
-  <div class="forhim-grid" id="forhim-grid">
+    <div class="forhim-grid" id="forhim-grid">
+      <c:forEach var="product" items="${productList}">
+        <c:if test="${product.categoryName != 'Womens'}">
+        <article class="gift-pick-card reveal" data-category="classic">
+          <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" />
 
-    <article class="gift-pick-card reveal" data-category="classic">
-      <img src="${pageContext.request.contextPath}/static/images/for-him/him-1.webp" alt="Executive Classic" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag">Classic</div>
-        <div class="gift-pick-title">Executive Classic</div>
-        <p>Clean dial and leather strap. Made for boardrooms, formal dinners, and daily elegance.</p>
-        <div class="forhim-card-footer">
-          <div class="gift-pick-meta">NPR 8,000 – 15,000</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="9">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=9" class="forhim-card-btn">View &#8594;</a>
+          <div class="gift-pick-body">
+            <div class="gift-pick-style-tag">${product.categoryName}</div>
+            <div class="gift-pick-title">${product.name}</div>
+            <p>${product.description}</p>
+
+            <div class="forhim-card-footer">
+              <div class="gift-pick-meta">
+                NPR <fmt:formatNumber value="${product.price}" pattern="#,##0"/>
+              </div>
+
+              <div class="gift-card-actions">
+                <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
+                  <input type="hidden" name="action" value="add">
+                  <input type="hidden" name="productId" value="${product.id}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
+                </form>
+
+                <a href="${pageContext.request.contextPath}/product-details?id=${product.id}" class="forhim-card-btn">View &#8594;</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </article>
+        </article>
+        </c:if>
+      </c:forEach>
+</div>
 
-    <article class="gift-pick-card reveal reveal-delay-1" data-category="sport">
-      <img src="${pageContext.request.contextPath}/static/images/for-him/him-2.webp" alt="Active Sport" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-sport">Sport</div>
-        <div class="gift-pick-title">Active Sport</div>
-        <p>Built tough for every adventure. Water-resistant with a bold, energetic design.</p>
-        <div class="forhim-card-footer">
-          <div class="gift-pick-meta">NPR 5,000 – 12,000</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="5">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=5" class="forhim-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gift-pick-card reveal reveal-delay-2" data-category="minimal">
-      <img src="${pageContext.request.contextPath}/static/images/for-him/him-3.webp" alt="Slim Minimal" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-minimal">Minimal</div>
-        <div class="gift-pick-title">Slim Minimal</div>
-        <p>Understated elegance. Thin profile and a clean face that lets the craft speak for itself.</p>
-        <div class="forhim-card-footer">
-          <div class="gift-pick-meta">NPR 6,500 – 14,000</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="12">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=12" class="forhim-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gift-pick-card reveal reveal-delay-3" data-category="luxury">
-      <img src="${pageContext.request.contextPath}/static/images/for-him/him-4.webp" alt="Premium Signature" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
-        <div class="gift-pick-title">Premium Signature</div>
-        <p>A statement piece for milestone moments. Elevated materials and precision engineering.</p>
-        <div class="forhim-card-footer">
-          <div class="gift-pick-meta">NPR 40,000+</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="1">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=1" class="forhim-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gift-pick-card reveal" data-category="classic sport">
-      <img src="${pageContext.request.contextPath}/static/images/for-him/him-5.webp" alt="Chronograph Pro" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag">Classic</div>
-        <div class="gift-pick-title">Chronograph Pro</div>
-        <p>Multi-function dial with stopwatch. The perfect balance of sport function and classic design.</p>
-        <div class="forhim-card-footer">
-          <div class="gift-pick-meta">NPR 12,000 – 25,000</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="11">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=11" class="forhim-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="gift-pick-card reveal reveal-delay-1" data-category="luxury minimal">
-      <img src="${pageContext.request.contextPath}/static/images/for-him/him-6.webp" alt="Dress Watch" />
-      <div class="gift-pick-body">
-        <div class="gift-pick-style-tag gift-pick-style-luxury">Luxury</div>
-        <div class="gift-pick-title">Dress Watch</div>
-        <p>Ultra-thin with sapphire crystal. The ultimate dress watch for every formal occasion.</p>
-        <div class="forhim-card-footer">
-          <div class="gift-pick-meta">NPR 35,000 – 60,000</div>
-          <div class="gift-card-actions">
-            <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="productId" value="4">
-              <input type="hidden" name="quantity" value="1">
-              <button class="forhim-cart-btn" type="submit" title="Add to cart">&#128717;</button>
-            </form>
-            <a href="${pageContext.request.contextPath}/product-details?id=4" class="forhim-card-btn">View &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-  </div>
 
   <%-- Back nav --%>
   <div class="forhim-back-row">

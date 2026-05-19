@@ -232,11 +232,6 @@
       </span> Analytics
     </button>
     <div class="adm-nav-label">Account</div>
-    <a class="adm-nav-link" href="${pageContext.request.contextPath}/admin-profile">
-      <span class="nav-ico">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </span> My Profile
-    </a>
     <a class="adm-nav-link" href="${pageContext.request.contextPath}/logout">
       <span class="nav-ico">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -686,7 +681,7 @@
         </div>
         <div class="fg-row">
           <div class="fg"><label for="pPrice">Price (Rs) *</label><input type="number" id="pPrice" name="price" placeholder="12500" min="0" /></div>
-          <div class="fg"><label for="pOldPrice">Original Price (Rs)</label><input type="number" id="pOldPrice" name="oldPrice" placeholder="Optional" min="0" /></div>
+          <div class="fg"><label for="pOldPrice">Old Price (Rs)</label><input type="number" id="pOldPrice" name="oldPrice" placeholder="Optional" min="0" /></div>
         </div>
         <div class="fg-row">
           <div class="fg">
