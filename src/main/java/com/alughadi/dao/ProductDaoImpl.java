@@ -41,7 +41,7 @@ public class ProductDaoImpl implements ProductDAO {
                 products.add(mapProductFromResultSet(rs));
             }
         } catch (SQLException e) {
-            System.out.println("Error fetching all products; " + e.getMessage());
+            throw new RuntimeException("Error fetching all products", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -66,7 +66,7 @@ public class ProductDaoImpl implements ProductDAO {
                 products.add(mapProductFromResultSet(rs));
             }
         } catch (SQLException e) {
-            System.out.println("Error fetching products by category: " + e.getMessage());
+            throw new RuntimeException("Error fetching products by category", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -88,7 +88,7 @@ public class ProductDaoImpl implements ProductDAO {
                 return mapProductFromResultSet(rs);
             }
         } catch (SQLException e) {
-            System.out.println("Error fetching product by id: " + e.getMessage());
+            throw new RuntimeException("Error fetching product by id", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -120,8 +120,7 @@ public class ProductDaoImpl implements ProductDAO {
             return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            System.out.println("Error adding product: " + e.getMessage());
-            return false;
+            throw new RuntimeException("Error adding product", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -155,7 +154,9 @@ public class ProductDaoImpl implements ProductDAO {
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error updating product", e);
+        } finally {
+            DatabaseConnection.closeConnection(conn);
         }
     }
 
@@ -173,8 +174,7 @@ public class ProductDaoImpl implements ProductDAO {
             return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            System.out.println("Error deleting product: " + e.getMessage());
-            return false;
+            throw new RuntimeException("Error deleting product", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }

@@ -35,7 +35,4 @@ public class GiftingServlet extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/gifting.jsp");
         rd.forward(req, res);
     }
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException,IOException{
-
-    }
 }

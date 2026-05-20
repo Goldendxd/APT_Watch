@@ -54,7 +54,6 @@ public class ImageUtil {
 
             return "/static/images/products/" + newFileName;
         } catch (IOException e) {
-            System.out.println("Could not save image '" + fileName + "': " + e.getMessage());
             return null;
         }
     }

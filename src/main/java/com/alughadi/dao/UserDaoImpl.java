@@ -43,8 +43,7 @@ public class UserDaoImpl implements UserDao {
             st.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println("Error inserting user: " + e.getMessage());
-            return false;
+            throw new RuntimeException("Error inserting user", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -65,7 +64,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet rs = st.executeQuery();
             if (rs.next()) return mapRow(rs);
         } catch (SQLException e) {
-            System.out.println("Error finding user by username: " + e.getMessage());
+            throw new RuntimeException("Error finding user by username", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -87,7 +86,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet rs = st.executeQuery();
             if (rs.next()) return mapRow(rs);
         } catch (SQLException e) {
-            System.out.println("Error finding user by email: " + e.getMessage());
+            throw new RuntimeException("Error finding user by email", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -109,7 +108,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet rs = st.executeQuery();
             if (rs.next()) return mapRow(rs);
         } catch (SQLException e) {
-            System.out.println("Error finding user by id: " + e.getMessage());
+            throw new RuntimeException("Error finding user by id", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -140,8 +139,7 @@ public class UserDaoImpl implements UserDao {
             st.setInt(8, user.getId());
             return st.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println("Error updating profile: " + e.getMessage());
-            return false;
+            throw new RuntimeException("Error updating profile", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -162,8 +160,7 @@ public class UserDaoImpl implements UserDao {
             st.setInt(2, userId);
             return st.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println("Error changing password: " + e.getMessage());
-            return false;
+            throw new RuntimeException("Error changing password", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -184,8 +181,7 @@ public class UserDaoImpl implements UserDao {
             st.setInt(2, userId);
             return st.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println("Error updating profile image: " + e.getMessage());
-            return false;
+            throw new RuntimeException("Error updating profile image", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -205,7 +201,7 @@ public class UserDaoImpl implements UserDao {
             ResultSet rs = st.executeQuery();
             if (rs.next()) return rs.getInt(1);
         } catch (SQLException e) {
-            System.out.println("Error counting customers: " + e.getMessage());
+            throw new RuntimeException("Error counting customers", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -214,8 +210,7 @@ public class UserDaoImpl implements UserDao {
 
     /**
      * Maps a single ResultSet row into a User object.
-     * Reads only the columns that actually exist in the DB schema.
-     * Uses try/catch per field so a missing nullable column doesn't crash the whole read.
+     * Called only after a SELECT * FROM users, so all columns are guaranteed present.
      */
     private User mapRow(ResultSet rs) throws SQLException {
         // Build the core user first (always present columns)
@@ -231,18 +226,18 @@ public class UserDaoImpl implements UserDao {
         // Role — decides admin vs customer access
         u.setRole(rs.getString("role"));
 
-        // Optional profile fields — null is fine for new accounts
-        try { u.setFull_name(rs.getString("full_name"));       } catch (SQLException ignored) {}
-        try { u.setPhone(rs.getString("phone"));               } catch (SQLException ignored) {}
-        try { u.setGender(rs.getString("gender"));             } catch (SQLException ignored) {}
-        try { u.setAddress(rs.getString("address"));           } catch (SQLException ignored) {}
-        try { u.setCity(rs.getString("city"));                 } catch (SQLException ignored) {}
-        try { u.setProvince(rs.getString("province"));         } catch (SQLException ignored) {}
-        try { u.setProfile_image(rs.getString("profile_image")); } catch (SQLException ignored) {}
+        // Optional profile fields — rs.getString returns null for SQL NULL, no exception thrown
+        u.setFull_name(rs.getString("full_name"));
+        u.setPhone(rs.getString("phone"));
+        u.setGender(rs.getString("gender"));
+        u.setAddress(rs.getString("address"));
+        u.setCity(rs.getString("city"));
+        u.setProvince(rs.getString("province"));
+        u.setProfile_image(rs.getString("profile_image"));
 
         // Account state fields
-        try { u.setIs_active(rs.getInt("is_active"));          } catch (SQLException ignored) {}
-        try { u.setLast_login(rs.getTimestamp("last_login"));  } catch (SQLException ignored) {}
+        u.setIs_active(rs.getInt("is_active"));
+        u.setLast_login(rs.getTimestamp("last_login"));
 
         return u;
     }

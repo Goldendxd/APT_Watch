@@ -26,7 +26,7 @@ public class DatabaseConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("MySQL Driver not found: " + e.getMessage());
+            throw new RuntimeException("MySQL JDBC driver not found", e);
         }
     }
 
@@ -39,8 +39,7 @@ public class DatabaseConnection {
             if (connection != null) {
                 connection.close();
             }
-        } catch (SQLException e) {
-            System.out.println("Error closing connection: " + e.getMessage());
+        } catch (SQLException ignored) {
         }
     }
 }

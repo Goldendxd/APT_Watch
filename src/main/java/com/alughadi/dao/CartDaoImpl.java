@@ -61,7 +61,7 @@ public class CartDaoImpl implements CartDao {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println("Error adding to cart: " + e.getMessage());
+            throw new RuntimeException("Error adding to cart", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -97,7 +97,7 @@ public class CartDaoImpl implements CartDao {
                 items.add(cart);
             }
         } catch (SQLException e) {
-            System.out.println("Error getting cart items: " + e.getMessage());
+            throw new RuntimeException("Error getting cart items", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -114,7 +114,7 @@ public class CartDaoImpl implements CartDao {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) return rs.getInt("cart_count");
         } catch (SQLException e) {
-            System.out.println("Error getting cart count: " + e.getMessage());
+            throw new RuntimeException("Error getting cart count", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -134,7 +134,7 @@ public class CartDaoImpl implements CartDao {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) return rs.getDouble("grand_total");
         } catch (SQLException e) {
-            System.out.println("Error getting grand total: " + e.getMessage());
+            throw new RuntimeException("Error getting grand total", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -151,7 +151,7 @@ public class CartDaoImpl implements CartDao {
             statement.setInt(2, userId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error removing from cart: " + e.getMessage());
+            throw new RuntimeException("Error removing from cart", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -168,7 +168,7 @@ public class CartDaoImpl implements CartDao {
             statement.setInt(3, userId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error updating quantity: " + e.getMessage());
+            throw new RuntimeException("Error updating quantity", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -183,7 +183,7 @@ public class CartDaoImpl implements CartDao {
             statement.setInt(1, userId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error clearing cart: " + e.getMessage());
+            throw new RuntimeException("Error clearing cart", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -203,7 +203,7 @@ public class CartDaoImpl implements CartDao {
                 productIds.add(rs.getInt("product_id"));
             }
         } catch (SQLException e) {
-            System.out.println("Error getting cart product ids: " + e.getMessage());
+            throw new RuntimeException("Error getting cart product ids", e);
         }
         finally {
             DatabaseConnection.closeConnection(conn);

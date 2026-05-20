@@ -55,7 +55,6 @@ public class OrderDaoImpl implements OrderDao {
             return orderId;
         } catch (SQLException e) {
             try { if (conn != null) conn.rollback(); } catch (SQLException ignored) {}
-            System.out.println("Error saving order: " + e.getMessage());
             return -1;
         } finally {
             try { if (conn != null) conn.setAutoCommit(true); } catch (SQLException ignored) {}
@@ -72,7 +71,7 @@ public class OrderDaoImpl implements OrderDao {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) return rs.getDouble(1);
         } catch (SQLException e) {
-            System.out.println("Error getting revenue: " + e.getMessage());
+            throw new RuntimeException("Error getting revenue", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -88,7 +87,7 @@ public class OrderDaoImpl implements OrderDao {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) return rs.getInt(1);
         } catch (SQLException e) {
-            System.out.println("Error getting order count: " + e.getMessage());
+            throw new RuntimeException("Error getting order count", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -119,7 +118,7 @@ public class OrderDaoImpl implements OrderDao {
                 result.add(row);
             }
         } catch (SQLException e) {
-            System.out.println("Error getting monthly sales: " + e.getMessage());
+            throw new RuntimeException("Error getting monthly sales", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -159,7 +158,7 @@ public class OrderDaoImpl implements OrderDao {
                 result.add(row);
             }
         } catch (SQLException e) {
-            System.out.println("Error getting user orders: " + e.getMessage());
+            throw new RuntimeException("Error getting user orders", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
@@ -196,7 +195,7 @@ public class OrderDaoImpl implements OrderDao {
                 result.add(row);
             }
         } catch (SQLException e) {
-            System.out.println("Error getting top products: " + e.getMessage());
+            throw new RuntimeException("Error getting top products", e);
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
