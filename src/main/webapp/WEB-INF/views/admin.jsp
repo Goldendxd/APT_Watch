@@ -92,6 +92,10 @@
 <!-- MAIN -->
 <div class="adm-main">
   <header class="adm-topbar">
+    <%-- Mobile: hamburger button to open the sidebar --%>
+    <button class="adm-menu-btn" id="admMenuBtn" onclick="toggleAdmSidebar()" aria-label="Open menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <div class="adm-topbar-title" id="topbarTitle">Dashboard</div>
     <div class="adm-topbar-right">
       <div class="adm-topbar-chip">
@@ -99,10 +103,12 @@
       </div>
       <button class="btn btn-g" onclick="openAddModal()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Add Product
+        <span class="adm-btn-label">Add Product</span>
       </button>
     </div>
   </header>
+  <%-- Overlay to close sidebar on mobile when tapping outside --%>
+  <div class="adm-overlay" id="admOverlay" onclick="toggleAdmSidebar()"></div>
 
   <div class="adm-body">
 
@@ -649,6 +655,14 @@
 </script>
 
 <script>
+/* ---- Mobile sidebar toggle ---- */
+function toggleAdmSidebar() {
+  var sidebar = document.getElementById('admSidebar');
+  var overlay = document.getElementById('admOverlay');
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('open');
+}
+
 /* ---- Section switching ---- */
 function showSection(id, el) {
   ['dashboard','products','customers','analytics'].forEach(function(s){
@@ -659,6 +673,13 @@ function showSection(id, el) {
   if (el) el.classList.add('active');
   var titles = {dashboard:'Dashboard',products:'Product Management',customers:'Customers',analytics:'Analytics'};
   document.getElementById('topbarTitle').textContent = titles[id] || id;
+  /* Close sidebar on mobile after selecting a section */
+  var sidebar = document.getElementById('admSidebar');
+  var overlay = document.getElementById('admOverlay');
+  if (sidebar && sidebar.classList.contains('open')) {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+  }
   if (id === 'dashboard') updateDashboardCounts();
   if (id === 'products')  updateProductCounts();
 }

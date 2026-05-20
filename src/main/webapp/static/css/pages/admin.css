@@ -166,6 +166,14 @@ tbody td{padding:.88rem 1.25rem;font-size:.81rem;font-weight:500;color:var(--tex
 .toast.success{background:var(--green);}
 .toast.error{background:var(--red);}
 
+/* ---- Mobile sidebar toggle button (hidden on desktop) ---- */
+.adm-menu-btn{display:none;align-items:center;justify-content:center;width:38px;height:38px;border:none;background:var(--surface);border-radius:10px;color:var(--text);cursor:pointer;flex-shrink:0;transition:background .18s;}
+.adm-menu-btn:hover{background:var(--green-light);color:var(--green);}
+
+/* ---- Overlay behind mobile sidebar ---- */
+.adm-overlay{display:none;position:fixed;inset:0;background:rgba(8,20,12,.48);backdrop-filter:blur(4px);z-index:199;}
+.adm-overlay.open{display:block;}
+
 /* ---- Responsive ---- */
 @media(max-width:1200px){
   .kpi-grid{grid-template-columns:repeat(2,1fr);}
@@ -178,6 +186,8 @@ tbody td{padding:.88rem 1.25rem;font-size:.81rem;font-weight:500;color:var(--tex
   .adm-sidebar{transform:translateX(-100%);transition:transform .3s var(--ease);}
   .adm-sidebar.open{transform:none;width:260px;}
   .adm-main{margin-left:0;}
+  .adm-topbar{padding:0 1rem;gap:.6rem;}
+  .adm-menu-btn{display:flex;}
   .adm-body{padding:1.5rem 1.2rem 4rem;}
   .analytics-grid{grid-template-columns:1fr;}
   .fg-row{grid-template-columns:1fr;}
@@ -185,8 +195,10 @@ tbody td{padding:.88rem 1.25rem;font-size:.81rem;font-weight:500;color:var(--tex
 @media(max-width:600px){
   .kpi-grid{grid-template-columns:1fr;}
   .table-toolbar{flex-direction:column;align-items:stretch;}
-  .adm-topbar{padding:0 1rem;}
-  .adm-topbar-title{font-size:1.05rem;}
+  .adm-topbar{padding:0 .75rem;}
+  .adm-topbar-title{font-size:1rem;}
+  .adm-topbar-chip{display:none;}   /* hide "Live" chip on very small screens */
+  .adm-btn-label{display:none;}     /* show only the + icon on the Add Product button */
   .adm-body{padding:1.25rem .85rem 3.5rem;}
   table{display:block;overflow-x:auto;white-space:nowrap;}
 }
