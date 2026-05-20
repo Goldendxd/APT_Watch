@@ -30,7 +30,8 @@ public class OrderDaoImpl implements OrderDao {
             conn = DatabaseConnection.getConnection();
             conn.setAutoCommit(false);
 
-            String orderSql = "INSERT INTO orders (user_id, total_amount, payment_method, payment_status, order_status) VALUES (?, ?, ?, 'paid', 'processing')";
+            String orderSql = "INSERT INTO orders (user_id, total_amount, payment_method," +
+                    " payment_status, order_status) VALUES (?, ?, ?, 'paid', 'processing')";
             PreparedStatement orderStmt = conn.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS);
             orderStmt.setInt(1, userId);
             orderStmt.setDouble(2, totalAmount);
@@ -41,7 +42,8 @@ public class OrderDaoImpl implements OrderDao {
             if (!keys.next()) { conn.rollback(); return -1; }
             int orderId = keys.getInt(1);
 
-            String itemSql = "INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (?, ?, ?, ?)";
+            String itemSql = "INSERT INTO order_items (order_id, product_id, quantity," +
+                    " unit_price) VALUES (?, ?, ?, ?)";
             PreparedStatement itemStmt = conn.prepareStatement(itemSql);
             for (Object[] item : items) {
                 itemStmt.setInt(1, orderId);
@@ -54,10 +56,22 @@ public class OrderDaoImpl implements OrderDao {
             conn.commit();
             return orderId;
         } catch (SQLException e) {
-            try { if (conn != null) conn.rollback(); } catch (SQLException ignored) {}
+            try {
+                if (conn != null){
+                    conn.rollback();
+                }
+            } catch (SQLException ignored) {
+
+            }
             return -1;
         } finally {
-            try { if (conn != null) conn.setAutoCommit(true); } catch (SQLException ignored) {}
+            try {
+                if (conn != null){
+                    conn.setAutoCommit(true);
+                }
+            } catch (SQLException ignored) {
+
+            }
             DatabaseConnection.closeConnection(conn);
         }
     }
