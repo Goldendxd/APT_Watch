@@ -1,3 +1,9 @@
+<%--
+  contact.jsp — Contact Us page.
+  Static form page — email and phone validated client-side before submit.
+  The form uses mailto: or a simple action; no servlet backs this form.
+  Sets its own pageTitle / activeNav inline. Includes header.jsp and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><%
   request.setAttribute("pageTitle", "Contact Us | AluGhadi");
   request.setAttribute("pageDesc", "Get in touch with AluGhadi — Nepal's premium watch destination. Ask about products, orders, partnerships or anything else.");
@@ -236,12 +242,32 @@
     var txt  = document.getElementById('cf-btn-text');
     var form = document.getElementById('contact-form');
 
-    var name    = document.getElementById('cf-name').value.trim();
-    var email   = document.getElementById('cf-email').value.trim();
-    var subject = document.getElementById('cf-subject').value;
-    var message = document.getElementById('cf-message').value.trim();
+    var nameEl    = document.getElementById('cf-name');
+    var emailEl   = document.getElementById('cf-email');
+    var phoneEl   = document.getElementById('cf-phone');
+    var subjectEl = document.getElementById('cf-subject');
+    var msgEl     = document.getElementById('cf-message');
 
-    if (!name || !email || !subject || !message) {
+    // Check required fields are filled
+    var hasError = false;
+    if (!nameEl.value.trim())    { showFieldError(nameEl, 'Name is required');           hasError = true; }
+    if (!subjectEl.value)        { showFieldError(subjectEl, 'Please pick a subject');   hasError = true; }
+    if (!msgEl.value.trim())     { showFieldError(msgEl, 'Message cannot be empty');     hasError = true; }
+
+    // Email — required and must be valid format
+    if (!emailEl.value.trim()) {
+      showFieldError(emailEl, 'Email is required');
+      hasError = true;
+    } else if (!validateEmailField(emailEl)) {
+      hasError = true;
+    }
+
+    // Phone — optional but must be 10 digits if provided
+    if (phoneEl.value.trim() && !validatePhoneField(phoneEl)) {
+      hasError = true;
+    }
+
+    if (hasError) {
       var errEl = document.getElementById('cf-error');
       errEl.style.display = 'flex';
       setTimeout(function(){ errEl.style.display = 'none'; }, 4000);

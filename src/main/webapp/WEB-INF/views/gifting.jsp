@@ -1,3 +1,11 @@
+<%--
+  gifting.jsp — Gift Guide landing page.
+  Expects from GiftingServlet:
+    productList  (List<Product>) — all products; JSP shows the first 6 as "Top Picks"
+                                   with For Him / For Her badges.
+  Hero section uses a looping video (water1.mp4) instead of an image.
+  Includes header.jsp and footer.jsp.
+--%>
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%--%>
 <%--request.setAttribute("pageTitle", "Gift Guide | AluGhadi Watches");--%>
 <%--request.setAttribute("pageDesc", "Find the perfect watch gift for him or her.--%>

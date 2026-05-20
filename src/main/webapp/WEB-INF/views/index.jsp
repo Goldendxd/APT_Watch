@@ -1,3 +1,9 @@
+<%--
+  index.jsp — Home page.
+  Shows the hero section, featured products, brand highlights, and newsletter signup.
+  Included by HomeServlet after it sets pageTitle / activeNav.
+  Includes header.jsp (nav + cart modal) and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
 prefix="c" uri="jakarta.tags.core" %> <% request.setAttribute("pageTitle",
 "AluGhadi Watches - Premium Watch Collection"); request.setAttribute("pageDesc",

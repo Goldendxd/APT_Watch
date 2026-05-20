@@ -14,6 +14,23 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * CartFragmentServlet — returns the cart modal HTML as a partial page (AJAX-style).
+ *
+ * URL: /cart-fragment
+ *
+ * GET /cart-fragment -> check if user is logged in.
+ *   - Not logged in: return empty cart placeholders.
+ *   - Logged in: fetch cart items from DB, build HTML rows with qty controls
+ *     (minus/plus buttons, number input, delete button), and append the
+ *     total price and item count spans at the bottom.
+ *
+ * The response is raw HTML, not a full page — JS on the front-end
+ * inserts it directly into the cart modal container.
+ *
+ * Quantities are capped at stock_quantity; the + button is disabled at max stock.
+ * If stock is 0 the item shows "Out of Stock" instead of a price.
+ */
 @WebServlet("/cart-fragment")
 public class CartFragmentServlet extends HttpServlet {
 

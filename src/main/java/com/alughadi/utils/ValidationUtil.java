@@ -3,14 +3,16 @@ package com.alughadi.utils;
 import java.util.regex.Pattern;
 
 /**
- * ValidationUtil — server-side validation helper methods.
+ * ValidationUtil — server-side input validation helpers used by RegisterServlet.
  *
- * Provided complete for Week 5. These methods are used by
- * RegisterServlet to validate user input before processing.
+ * isNullOrEmpty           — check that a field is actually filled in.
+ * isAlphanumericStartingWithLetter — enforce username format rules.
+ * isValidEmail            — check basic email format (something@domain.tld).
+ * isValidPassword         — enforce strong password (8+ chars, uppercase, number, symbol).
+ * doPasswordsMatch        — confirm the two password fields are the same.
  *
- * Why validate on the server? Client-side validation (HTML required,
- * JavaScript checks) can be bypassed. Server-side validation is your
- * last line of defense.
+ * Client-side JS can be bypassed, so these server-side checks run even if the
+ * browser already validated the form.
  */
 public class ValidationUtil {
 

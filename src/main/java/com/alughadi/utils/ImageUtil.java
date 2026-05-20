@@ -6,6 +6,20 @@ import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * ImageUtil — handles product image uploads.
+ *
+ * uploadImage(imagePart, servletContext):
+ *   1. Get the original filename from the uploaded Part.
+ *   2. Check the extension — only .jpg, .jpeg, .png, .webp are allowed.
+ *      Returns null if the file type is invalid (caller shows an error).
+ *   3. Generate a unique filename using the current timestamp + original name
+ *      to avoid collisions.
+ *   4. Save the file to TWO places:
+ *      a) The deployed Tomcat path  (so the image works immediately in the browser)
+ *      b) src/main/webapp/static/images/products/ (so it survives a project rebuild)
+ *   5. Return the web-relative path (/static/images/products/filename) to store in the DB.
+ */
 public class ImageUtil {
     private static final String REL_PATH = "src/main/webapp/static/images/products/";
 

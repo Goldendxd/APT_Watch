@@ -3,10 +3,15 @@ package com.alughadi.utils;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * PasswordUtil — BCrypt password hashing utility.
- * New for Week 5: bridges the lecture theory on hashing to actual code.
+ * PasswordUtil — handles password hashing and checking using BCrypt.
  *
- * Uses the jBCrypt library to hash and verify passwords.
+ * getHashPassword(plainText) — generate a salted BCrypt hash. Call this once
+ *   when the user registers or changes their password. Store the hash in the DB.
+ * checkPassword(typed, stored) — compare a plain-text password against the stored
+ *   hash. Returns true if they match. Call this during login.
+ *
+ * BCrypt is slow by design — the cost factor (10) means each hash takes ~100ms,
+ * which makes brute-force attacks much harder.
  */
 public class PasswordUtil {
 

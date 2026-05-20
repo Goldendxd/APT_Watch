@@ -5,10 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Database Connection Utility — manages MySQL connections.
- * Complete from Week 2. No changes needed.
+ * DatabaseConnection — opens and closes MySQL connections for the rest of the app.
  *
- * XAMPP Default: root user, no password, port 3306
+ * getConnection()  — returns a new connection each time it's called.
+ *                    Every DAO method is responsible for closing its own connection.
+ * closeConnection()— wraps connection.close() in a try/catch so DAOs don't have
+ *                    to repeat the boilerplate.
+ *
+ * Connects to the local XAMPP MySQL instance (localhost:3306, database: alughadi,
+ * user: root, no password). The MySQL JDBC driver is registered in a static block
+ * so it only runs once when the class is first loaded.
  */
 public class DatabaseConnection {
 

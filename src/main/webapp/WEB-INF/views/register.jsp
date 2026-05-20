@@ -1,3 +1,11 @@
+<%--
+  register.jsp — Sign-up page.
+  Standalone page (does NOT use header.jsp — has its own full <html> structure).
+  Shows registerError attribute if server-side validation failed (set by RegisterServlet).
+  POSTs to /register with username, email, password, confirmPassword.
+  Client-side JS: live password strength meter, show/hide password toggle,
+    and email format check on submit.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
@@ -6,6 +14,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register | AluGhadi</title>
+  <%-- Favicon so the browser tab shows the AluGhadi logo --%>
+  <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/static/images/alughadiweblogo.png" />
+  <link rel="shortcut icon" type="image/png" href="<%=request.getContextPath()%>/static/images/alughadiweblogo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -87,7 +98,7 @@
         By creating an account you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
       </p>
 
-      <button type="submit" class="auth-btn">Create Account</button>
+      <button type="submit" class="auth-btn" id="reg-submit-btn">Create Account</button>
     </form>
 
     <div class="auth-switch">
@@ -104,5 +115,40 @@
 </div>
 
 <script src="<%=request.getContextPath()%>/static/js/app.js"></script>
+<script>
+  /* Password strength bar — lights up segments as the password gets stronger */
+  function checkStrength(pw) {
+    var bar = document.getElementById('pass-bar');
+    if (!bar) return;
+    var score = 0;
+    if (pw.length >= 8)           score++;  // long enough
+    if (/[A-Z]/.test(pw))         score++;  // has uppercase
+    if (/\d/.test(pw))            score++;  // has a number
+    if (/[@$!%*?&]/.test(pw))     score++;  // has a symbol
+    var colors = ['#c33', '#e67e22', '#f1c40f', '#27ae60'];
+    bar.style.width  = (score * 25) + '%';
+    bar.style.background = colors[score - 1] || '#e0e0e0';
+  }
+
+  /* Show/hide password toggle */
+  function togglePw() {
+    var input = document.getElementById('reg-password');
+    var isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    document.getElementById('pw-icon-hide').style.display = isHidden ? 'none' : '';
+    document.getElementById('pw-icon-show').style.display = isHidden ? '' : 'none';
+  }
+
+  /* Validate the register form before submitting */
+  document.querySelector('form[action*="register"]').addEventListener('submit', function(e) {
+    var emailInput = document.getElementById('reg-email');
+    var valid = true;
+
+    // Email must look like a real email
+    if (emailInput && !validateEmailField(emailInput)) valid = false;
+
+    if (!valid) e.preventDefault();
+  });
+</script>
 </body>
 </html>

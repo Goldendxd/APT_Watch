@@ -3,6 +3,7 @@ package com.alughadi.dao;
 import java.util.List;
 import java.util.Map;
 
+/** Defines all order DB operations. OrderDaoImpl provides the actual SQL. */
 public interface OrderDao {
     int saveOrder(int userId, double totalAmount, String paymentMethod, List<Object[]> items);
     double getTotalRevenue();

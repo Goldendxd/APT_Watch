@@ -12,6 +12,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * ForHerServlet — loads the "For Her" gift guide page.
+ *
+ * URL: /for-her  or  /for-her?category=X
+ *
+ * GET /for-her              -> show all Women's category products (default)
+ * GET /for-her?category=X   -> filter to a specific sub-style if provided
+ *
+ * Unlike ForHimServlet which excludes Women's, this page defaults to Women's only.
+ */
 @WebServlet("/for-her")
 public class ForHerServlet extends HttpServlet {
     private final ProductDAO productDAO = new ProductDaoImpl();

@@ -56,6 +56,7 @@ logs/
 *.swo
 *~
 .tmp/
+*.tmp*
 node_modules/
 
 .smarttomcat

@@ -24,6 +24,27 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * AdminServlet — the main admin dashboard. Only admins can reach this page
+ * (AuthenticationFilter enforces that — non-admins are blocked at the filter level).
+ *
+ * URL: /admin
+ *
+ * GET /admin -> load all products, customer count, revenue stats, and chart data,
+ *              then forward to admin.jsp.
+ *   - Products are serialized to JSON (productDataJson) for the data table.
+ *   - Sales history for 3 / 6 / 12 months is serialized to JSON for the revenue chart.
+ *   - Top 6 selling products are serialized for the top-products chart.
+ *
+ * POST /admin?action=delete -> delete a product by id, then redirect back to /admin.
+ * POST /admin?action=save   -> add a new product OR update an existing one:
+ *   - If the form includes a file upload (imageFile), save the image via ImageUtil
+ *     and validate it's a JPG/PNG. If invalid, reload the page with an error.
+ *   - If no file was uploaded, use the imageUrl text field or keep the existing image.
+ *   - If a product id is present in the form → update; otherwise → insert new.
+ *
+ * @MultipartConfig is required because the save form includes a file upload field.
+ */
 @WebServlet("/admin")
 @MultipartConfig
 public class AdminServlet extends HttpServlet {

@@ -16,6 +16,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * ProductServlet — shows the products listing page.
+ *
+ * URL: /products  or  /products?category=luxury
+ *
+ * GET /products             -> load ALL products, forward to products.jsp
+ * GET /products?category=X  -> load products in that category only (luxury/sports/classic/smart/womens)
+ *
+ * Also loads cart product IDs for the logged-in user so the JSP can highlight
+ * which products are already in the cart.
+ */
 @WebServlet("/products")
 public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,14 +64,6 @@ public class ProductServlet extends HttpServlet {
             request.setAttribute("grandTotal", cartDao.getGrandTotal(userId));
         }
 
-//        HttpSession session = request.getSession(false);
-//        if (session != null){
-//            Integer justAddedId = (Integer) session.getAttribute("JustAddedProductId");
-//            if (justAddedId != null){
-//                request.setAttribute("justAddedId", justAddedId);
-//                session.removeAttribute("justAddedProductId");
-//            }
-//        }
         request.getRequestDispatcher("/WEB-INF/views/products.jsp").forward(request, response);
     }
 }

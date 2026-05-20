@@ -1,3 +1,8 @@
+<%--
+  about.jsp — About Us page.
+  Static content page — no servlet data needed. Sets its own pageTitle / activeNav inline.
+  Includes header.jsp and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><%
   request.setAttribute("pageTitle", "About Us | AluGhadi");
   request.setAttribute("pageDesc", "Meet the team behind AluGhadi — Nepal's premium watch destination. Crafted with precision and passion by five passionate developers.");

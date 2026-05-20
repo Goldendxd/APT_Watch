@@ -1,3 +1,16 @@
+<%--
+  admin.jsp — Admin dashboard. Only accessible to users with role="admin".
+  Expects from AdminServlet:
+    products          (List<Product>)       — all products for the product table
+    productCount / inStockCount / outOfStockCount (int)
+    customerCount / totalOrders / totalRevenue    — summary stats
+    productDataJson   (JSON String) — for the product data table (client-side)
+    monthlySales12Json / monthlySales6Json / monthlySales3Json — for the revenue chart
+    topProductsJson   — for the top-products chart
+  Standalone page with its own <html> — does not use header.jsp.
+  Add/edit product modal POSTs to /admin?action=save.
+  Delete POSTs to /admin?action=delete.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>

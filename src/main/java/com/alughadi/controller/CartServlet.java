@@ -18,12 +18,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * CartServlet — handles cart operations.
+ * CartServlet — handles the cart page and all cart actions.
  *
  * URL: /cart
  *
- * GET  /cart -> show cart page with items and total
- * POST /cart -> add, remove, update, clear cart
+ * GET  /cart -> load the user's cart items + total, forward to cart.jsp.
+ *              Redirects to /login if not logged in.
+ *
+ * POST /cart?action=add    -> add a product to the cart (or clear + add for "Buy Now")
+ * POST /cart?action=remove -> remove one item by cartId
+ * POST /cart?action=update -> change the quantity of a cart item
+ * POST /cart?action=clear  -> empty the entire cart
+ *
+ * After any POST action, the user is sent back to wherever they came from
+ * (redirectTo param → Referer header → /products as fallback).
+ * The ?cart=open query param is stripped from the redirect URL to avoid
+ * re-opening the cart modal automatically on every reload.
+ *
+ * parsePositiveInt() is used everywhere to safely parse IDs and quantities —
+ * returns null instead of throwing on bad input.
  */
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
@@ -41,7 +54,6 @@ public class CartServlet extends HttpServlet {
             return;
         }
         int userId = (Integer) userIdObj;
-//        int userId = (userIdObj != null) ? (Integer) userIdObj : 0;
 
         List<Cart> cartItems  = cartDao.getCartItems(userId);
         int        cartCount  = cartDao.getCartCount(userId);
@@ -147,15 +159,6 @@ public class CartServlet extends HttpServlet {
 
         response.sendRedirect(request.getContextPath() + "/products");
     }
-//    private int getLoggedInUserId(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        Object userIdObj = SessionUtil.getAttribute(request, "authUserId");
-//        if (userIdObj == null){
-//            response.sendRedirect(request.getContextPath());
-//            return -1;
-//        }
-//
-//        return (Integer) userIdObj;
-//    }
     private Integer parsePositiveInt(String value) {
         try {
             int parsed = Integer.parseInt(value);

@@ -11,15 +11,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * LoginServlet — handles user login.
+ * LogoutServlet — logs the current user out.
  *
- * URL: /login
+ * URL: /logout
  *
- * GET  /login -> forward to login.jsp (displays the form)
- * POST /login -> find user, verify password, store session, redirect on success
+ * GET /logout -> destroy the session (wipes authUser, authUserId, authRole, cart data)
+ *               then redirect to the home page so the user lands somewhere clean.
  *
- * Week 7: doPost now stores the User object in the session after successful
- * authentication (previously just redirected with no session state).
+ * This is the only route admins are allowed to visit outside of /admin and /admin-profile
+ * (enforced in AuthenticationFilter).
  */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
@@ -27,8 +27,8 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Kill the session — everything stored in it disappears
         SessionUtil.invalidateSession(request);
-
-        response.sendRedirect(request.getContextPath()+"/");
+        response.sendRedirect(request.getContextPath() + "/");
     }
 }

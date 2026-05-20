@@ -34,6 +34,9 @@
   <meta name="ctx" content="${pageContext.request.contextPath}" />
   <title>${not empty pageTitle ? pageTitle : 'AluGhadi Watches'}</title>
   <meta name="description" content="${not empty pageDesc ? pageDesc : 'Premium watch collection and online shopping in Nepal.'}" />
+  <%-- Favicon — uses the site logo PNG so the browser tab shows our logo --%>
+  <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/static/images/alughadiweblogo.png" />
+  <link rel="shortcut icon" type="image/png" href="${pageContext.request.contextPath}/static/images/alughadiweblogo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />

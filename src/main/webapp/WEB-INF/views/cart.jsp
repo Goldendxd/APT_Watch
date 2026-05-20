@@ -1,3 +1,12 @@
+<%--
+  cart.jsp — Full cart page.
+  Expects from CartServlet:
+    cartItems   (List<Cart>) — all items in the user's cart with product details
+    cartCount   (int)        — total quantity across all items
+    grandTotal  (double)     — sum of price * quantity for all items
+  Includes header.jsp, head.jsp, and footer.jsp.
+  Qty controls post back to /cart?action=update; delete posts to /cart?action=remove.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"   uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>

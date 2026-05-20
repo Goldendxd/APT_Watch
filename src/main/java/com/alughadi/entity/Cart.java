@@ -2,6 +2,15 @@ package com.alughadi.entity;
 
 import java.sql.Timestamp;
 
+/**
+ * Cart — represents one row in the cart table, plus extra fields joined in
+ * from the products table so the cart page can show product name, image, and price
+ * without a second query.
+ *
+ * DB columns (cart table): id, user_id, product_id, quantity, created_at
+ * Extra joined fields:     productName, brand, imageUrl, price, oldPrice,
+ *                          stockQuantity, totalPrice (price * quantity)
+ */
 public class Cart {
     // ── Cart table fields ──────────────────────────────────────
     private int id;

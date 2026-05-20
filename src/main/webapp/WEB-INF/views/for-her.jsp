@@ -1,3 +1,10 @@
+<%--
+  for-her.jsp — "Gifts For Her" page.
+  Expects from ForHerServlet:
+    productList     (List<Product>) — Women's category products only by default
+    activeCategory  (String)        — "all" or the selected sub-category
+  Includes header.jsp, head.jsp, and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>

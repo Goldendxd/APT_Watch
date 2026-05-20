@@ -10,6 +10,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CartDaoImpl — all database operations for the shopping cart.
+ *
+ * addToCart    — check if the product is already in the user's cart.
+ *                If yes, add the quantity to the existing row.
+ *                If no, insert a new row.
+ * getCartItems — join cart + products to get full item details (name, price,
+ *                image, stock_quantity) for every row in the user's cart.
+ * getCartCount — SUM(quantity) across all cart rows for this user — used for
+ *                the cart badge in the nav.
+ * getGrandTotal— SUM(price * quantity) for all items — used in checkout + cart modal.
+ * removeFromCart — DELETE one cart row by cartId AND userId (userId prevents
+ *                  users deleting each other's items).
+ * updateQuantity — UPDATE the quantity on a specific cart row (same userId guard).
+ * clearCart    — DELETE all cart rows for this user (called after order is placed).
+ * getCartProductIds — return just the list of product IDs in the cart; used to
+ *                     highlight "already in cart" products on the product listing page.
+ */
 public class CartDaoImpl implements CartDao {
 
     @Override

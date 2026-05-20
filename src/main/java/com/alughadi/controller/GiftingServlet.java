@@ -13,6 +13,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * GiftingServlet — loads the gifting page.
+ *
+ * URL: /gifting
+ *
+ * GET /gifting -> fetch all products, put them on the request, forward to gifting.jsp.
+ *                 The JSP shows the first 6 as "Top Picks" cards with For Him / For Her badges.
+ *                 The hero section uses a looping video (water1.mp4) instead of an image.
+ */
 @WebServlet("/gifting")
 public class GiftingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

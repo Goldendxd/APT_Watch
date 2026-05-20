@@ -18,11 +18,20 @@ import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * ProfileServlet — lets a logged-in customer view and edit their profile.
+ *
+ * URL: /profile
+ *
+ * GET  /profile         -> load user + order history, forward to profile.jsp
+ * POST /profile action=updateProfile  -> save name/phone/city/etc changes
+ * POST /profile action=changePassword -> verify old password, save new hash
+ * POST /profile action=uploadAvatar   -> save uploaded photo, store path in DB
+ */
 @WebServlet("/profile")
 @MultipartConfig
 public class ProfileServlet extends HttpServlet {
@@ -72,20 +81,13 @@ public class ProfileServlet extends HttpServlet {
                 return;
             }
 
+            // Update the profile fields that exist in the DB schema
             user.setFull_name(trim(request.getParameter("fullName")));
             user.setPhone(trim(request.getParameter("phone")));
             user.setGender(trim(request.getParameter("gender")));
             user.setAddress(trim(request.getParameter("address")));
             user.setCity(trim(request.getParameter("city")));
             user.setProvince(trim(request.getParameter("province")));
-            user.setDistrict(trim(request.getParameter("district")));
-
-            String dob = trim(request.getParameter("dateOfBirth"));
-            if (dob != null && !dob.isEmpty()) {
-                try {
-                    user.setDate_of_birth(new SimpleDateFormat("yyyy-MM-dd").parse(dob));
-                } catch (ParseException ignored) {}
-            }
 
             // Email uniqueness check
             String newEmail = trim(request.getParameter("email"));

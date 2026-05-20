@@ -1,3 +1,14 @@
+<%--
+  admin-profile.jsp — Admin's own profile page. Only reachable by admins (/admin-profile).
+  Expects from AdminProfileServlet:
+    profileUser       (User)   — the admin user's data
+    successMessage / errorMessage — feedback after form submission
+  Has three form sections:
+    1. Edit profile (name, phone, email, gender, address, city, province)
+    2. Change password
+    3. Upload avatar photo
+  Standalone page with its own <html> — does not use header.jsp (uses a custom admin nav).
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>

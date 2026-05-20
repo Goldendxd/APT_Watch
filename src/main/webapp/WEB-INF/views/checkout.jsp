@@ -1,3 +1,11 @@
+<%--
+  checkout.jsp — Checkout / order review page.
+  Loads cart items directly via CartDaoImpl so this page always shows fresh data.
+  The form POSTs to /place-order with paymentMethod (cod or esewa).
+  Phone is required and must be exactly 10 digits (validated client-side on submit).
+  Email is optional but must be valid format if provided.
+  Includes header.jsp, head.jsp, and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -205,5 +213,31 @@
     </c:otherwise>
   </c:choose>
 </div>
+
+<script>
+  /* Checkout form validation — runs before the order is placed */
+  document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    var emailInput = document.getElementById('ship-email');
+    var phoneInput = document.getElementById('ship-phone');
+    var valid = true;
+
+    // Email — optional field, but must be valid format if provided
+    if (emailInput && emailInput.value.trim()) {
+      if (!validateEmailField(emailInput)) valid = false;
+    }
+
+    // Phone — required and must be exactly 10 digits
+    if (phoneInput) {
+      if (!phoneInput.value.trim()) {
+        showFieldError(phoneInput, 'Phone number is required');
+        valid = false;
+      } else if (!validatePhoneField(phoneInput)) {
+        valid = false;
+      }
+    }
+
+    if (!valid) e.preventDefault(); // Stop form submission if anything is wrong
+  });
+</script>
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

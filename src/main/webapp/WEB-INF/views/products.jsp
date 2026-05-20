@@ -1,3 +1,13 @@
+<%--
+  products.jsp — All-products listing page.
+  Expects from ProductServlet:
+    productList      (List<Product>) — all products or filtered by category
+    activeCategory   (String)        — "all" or the selected category slug
+    cartProductIds   (List<Integer>) — product IDs already in the user's cart
+                                        (used to show an "in cart" indicator)
+    cartItems / cartCount / grandTotal — for the cart modal in the nav
+  Includes header.jsp, head.jsp, and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>

@@ -1,6 +1,112 @@
 // AluGhadi Watches — Main Application Script
 
 /* ================================================================
+   SHARED FORM VALIDATION HELPERS
+   These functions are used on all forms that have email or phone fields.
+   ================================================================ */
+
+/**
+ * Check if an email looks valid — must have a local part, @, and a domain.
+ * Example: "you@gmail.com" → true, "notanemail" → false
+ */
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
+}
+
+/**
+ * Check if a phone number is exactly 10 digits (digits only, no spaces/dashes).
+ * Nepali numbers like 9841234567 pass; +977... or short numbers fail.
+ */
+function isValidPhone(phone) {
+  return /^\d{10}$/.test(phone.trim());
+}
+
+/**
+ * Show a red error message below an input field.
+ * Creates a small <span> element tagged with data-err so we can clear it later.
+ */
+function showFieldError(input, message) {
+  clearFieldError(input);
+  var err = document.createElement('span');
+  err.setAttribute('data-err', '1');
+  err.style.cssText = 'display:block;font-size:0.72rem;color:#c33;margin-top:0.25rem;font-weight:600;';
+  err.textContent = message;
+  input.parentNode.appendChild(err);
+  input.style.borderColor = '#c33';
+}
+
+/**
+ * Remove any error message shown below an input field.
+ */
+function clearFieldError(input) {
+  var old = input.parentNode.querySelector('[data-err]');
+  if (old) old.remove();
+  input.style.borderColor = '';
+}
+
+/**
+ * Validate a single email input in-place.
+ * Returns true if valid, false + shows error if not.
+ */
+function validateEmailField(input) {
+  if (!input) return true;
+  var val = input.value.trim();
+  if (!val) return true; // Empty is OK if the field isn't required; required attr handles that
+  if (!isValidEmail(val)) {
+    showFieldError(input, 'Please enter a valid email address (e.g. you@example.com)');
+    return false;
+  }
+  clearFieldError(input);
+  return true;
+}
+
+/**
+ * Validate a single phone input in-place.
+ * Returns true if valid, false + shows error if not.
+ * Only validates when the field has a value (phone is often optional).
+ */
+function validatePhoneField(input) {
+  if (!input) return true;
+  var val = input.value.trim();
+  if (!val) return true; // Empty is fine for optional phone fields
+  if (!isValidPhone(val)) {
+    showFieldError(input, 'Phone must be exactly 10 digits (e.g. 9841234567)');
+    return false;
+  }
+  clearFieldError(input);
+  return true;
+}
+
+/**
+ * Wire up live validation on all email/phone inputs on the page.
+ * Runs on blur (when the user tabs out of the field) so it's not annoying while typing.
+ */
+function initFormValidation() {
+  // Find every email input on the page and validate on blur
+  document.querySelectorAll('input[type="email"]').forEach(function(input) {
+    input.addEventListener('blur', function() { validateEmailField(this); });
+    input.addEventListener('input', function() { clearFieldError(this); });
+  });
+
+  // Find every phone/tel input and validate on blur
+  document.querySelectorAll('input[type="tel"]').forEach(function(input) {
+    input.addEventListener('blur', function() { validatePhoneField(this); });
+    input.addEventListener('input', function() {
+      // Only allow digit characters while typing
+      this.value = this.value.replace(/[^\d]/g, '');
+      clearFieldError(this);
+    });
+  });
+}
+
+// Run as soon as the DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFormValidation);
+} else {
+  initFormValidation();
+}
+
+/* ================================================================
    PAGE LOADER
    ================================================================ */
 window.addEventListener('load', function () {
@@ -258,20 +364,6 @@ function toggleWishlist(btn) {
   updateWishlistCount();
 }
 
-function filterProducts(cat, tabBtn) {
-  document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
-  tabBtn.classList.add('active');
-  var wish  = getWishlist();
-  var shown = 0;
-  var empty = document.getElementById('fav-empty');
-  document.querySelectorAll('.product-card').forEach(function (card) {
-    var id = card.getAttribute('data-id');
-    if (wish.indexOf(id) !== -1) { card.style.display = ''; shown++; }
-    else { card.style.display = 'none'; }
-  });
-  if (empty) empty.style.display = shown === 0 ? 'block' : 'none';
-}
-
 /* Init wishlist UI if on products page */
 document.addEventListener('DOMContentLoaded', function () {
   if (document.querySelector('.product-card')) {
@@ -280,4 +372,3 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-console.log('AluGhadi Watches — Ready ⌚');

@@ -3,6 +3,18 @@ package com.alughadi.entity;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+/**
+ * Product — maps to the products table in the DB.
+ *
+ * DB columns: id, category_id, name, brand, description, price, old_price,
+ *             rating, image_url, in_stock, stock_quantity, created_at
+ *
+ * categoryName is not a DB column — it is joined in from the categories table
+ * when products are fetched, so JSPs don't need a separate lookup.
+ *
+ * price and oldPrice are BigDecimal (not double) to avoid floating-point
+ * rounding issues when displaying currency.
+ */
 public class Product {
     private int id;
     private int categoryId;

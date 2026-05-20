@@ -13,6 +13,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ForHimServlet — loads the "For Him" gift guide page.
+ *
+ * URL: /for-him  or  /for-him?category=sports
+ *
+ * GET /for-him              -> show all non-women's products
+ * GET /for-him?category=X   -> filter to a specific style (luxury/sports/classic/smart)
+ *
+ * Women's category products are excluded from the default "all" view
+ * because this page is men's watches only.
+ */
 @WebServlet("/for-him")
 public class ForHimServlet extends HttpServlet {
     private final ProductDAO productDAO = new ProductDaoImpl();

@@ -14,6 +14,20 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * ProductDetailsServlet — shows a single product's full detail page.
+ *
+ * URL: /product-details?id=X
+ *
+ * GET /product-details?id=X -> look up product by ID, forward to product-details.jsp.
+ *
+ * Safety checks:
+ *   - No id param or non-numeric id → redirect to /products
+ *   - Product not found in DB       → redirect to /products
+ *
+ * Also loads cart data for the logged-in user so the cart modal in the nav
+ * shows the correct item count and grand total.
+ */
 @WebServlet("/product-details")
 public class ProductDetailsServlet extends HttpServlet {
     @Override

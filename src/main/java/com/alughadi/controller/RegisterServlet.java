@@ -13,6 +13,25 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * RegisterServlet — handles new user sign-up.
+ *
+ * URL: /register
+ *
+ * GET  /register -> forward to register.jsp (show the form)
+ * POST /register -> validate inputs, hash password, insert user, redirect to /login
+ *
+ * Validation steps (server-side):
+ *   1. All four fields (username, email, password, confirmPassword) must be filled.
+ *   2. Username must be alphanumeric, start with a letter, and be at least 6 chars.
+ *   3. Email must match a valid email format.
+ *   4. Password must be 8+ chars with uppercase, number, and symbol.
+ *   5. Password and confirmPassword must match.
+ *
+ * If any check fails, the error message is set on the request and the form is shown again.
+ * On success, the password is hashed with BCrypt and the user is saved; then the browser
+ * is redirected to /login?registered=1 so the login page can show a success notice.
+ */
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 

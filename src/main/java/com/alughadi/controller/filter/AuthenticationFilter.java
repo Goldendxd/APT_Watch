@@ -16,17 +16,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * AuthenticationFilter — protects all routes behind login.
+ * AuthenticationFilter — intercepts every request (@WebFilter("/*")) and enforces access rules.
  *
- * Acts as middleware (gatekeeper) that intercepts every request and checks
- * if the user is logged in before allowing access.
- *
- * Rules:
- *   - Static resources (.css, .png, .js, .jpg) -> always allowed
- *   - /login and /register -> allowed only if NOT logged in
- *   - Everything else -> allowed only if logged in
- *
- * Complete from Week 7 tutorial.
+ * How it works for each request:
+ *   1. Static files (/static/*) — let through always, no login needed.
+ *   2. /cart — redirect to /login if not logged in.
+ *   3. If logged in — preload cart data (items, count, total) as request attributes
+ *      so any page that includes the cart modal already has the data ready.
+ *   4. Admin-only paths (/admin, /admin-profile):
+ *        - Not logged in → /login
+ *        - Logged in but not admin role → /home
+ *   5. Admin users trying to access non-admin paths (except /logout):
+ *        → redirect to /admin so admins can't browse the shop.
+ *   6. Everything else — pass through.
  */
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
@@ -43,8 +45,6 @@ public class AuthenticationFilter implements Filter {
         String uri = req.getRequestURI();
         String contextPath = req.getContextPath();
         String path = uri.substring(contextPath.length());
-//        String method = req.getMethod();
-
         // Allow static resources (CSS, images, JS) through without login
         if (path.startsWith("/static/")) {
             chain.doFilter(request, response);
@@ -53,7 +53,6 @@ public class AuthenticationFilter implements Filter {
 
         boolean isLoggedIn = SessionUtil.getAttribute(req, "authUser") != null;
         boolean isCartPath = "/cart".equals(path);
-//        boolean isCartToBUyAction = "POST".equalsIgnoreCase(method) && path.equals("/cart");
         if (!isLoggedIn && isCartPath){
             res.sendRedirect(contextPath + "/login");
             return;
@@ -92,21 +91,5 @@ public class AuthenticationFilter implements Filter {
         }
 
         chain.doFilter(request, response);
-//        boolean isAuthPage = "/login".equals(path) || "/register".equals(path);
-//
-//        if (!isLoggedIn && !isAuthPage) {
-//            // Not logged in + trying to access protected page -> go to login
-//            res.sendRedirect(contextPath + "/login");
-//            return;
-//        }
-//
-//        if (isLoggedIn && isAuthPage) {
-//            // Already logged in + trying to access login/register -> go to topics
-//            res.sendRedirect(contextPath + "/home");
-//            return;
-//        }
-
-        // All other cases: allow through
-
     }
 }

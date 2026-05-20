@@ -5,6 +5,22 @@ import com.alughadi.utils.DatabaseConnection;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * OrderDaoImpl — all database operations for orders.
+ *
+ * saveOrder      — insert a new order row and all its line items in one transaction.
+ *                  Uses a DB transaction (autoCommit=false / commit / rollback) so if
+ *                  any item insert fails the whole order is rolled back. Returns the
+ *                  new order's generated ID, or -1 on failure.
+ * getTotalRevenue — SUM(total_amount) for all paid orders — shown on the admin dashboard.
+ * getTotalOrderCount — COUNT(*) of all orders — shown on the admin dashboard.
+ * getMonthlySales — revenue + order count grouped by month for the last N months.
+ *                   Used to draw the revenue chart on the admin dashboard (3 / 6 / 12 month views).
+ * getUserOrders  — all orders for a specific user, joined with product names from order_items.
+ *                  Used on the profile page order history section.
+ * getTopProducts — top N products ranked by units sold (via LEFT JOIN with order_items).
+ *                  Used for the top products chart on the admin dashboard.
+ */
 public class OrderDaoImpl implements OrderDao {
 
     @Override

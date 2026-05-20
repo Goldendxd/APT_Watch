@@ -21,10 +21,15 @@ import java.io.IOException;
  * URL: /login
  *
  * GET  /login -> forward to login.jsp (displays the form)
- * POST /login -> find user, verify password, store session, redirect on success
+ * POST /login -> find user by username, verify BCrypt password, store session, redirect
  *
- * Week 7: doPost now stores the User object in the session after successful
- * authentication (previously just redirected with no session state).
+ * On success, three session attributes are set:
+ *   - authUser   (username string)
+ *   - authUserId (int)
+ *   - authRole   (e.g. "user" or "admin")
+ *
+ * Admin accounts are sent to /admin; regular users go to /home.
+ * Wrong username or password → show "Invalid username or password." and stay on form.
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {

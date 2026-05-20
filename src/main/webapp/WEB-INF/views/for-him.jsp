@@ -1,3 +1,11 @@
+<%--
+  for-him.jsp — "Gifts For Him" page.
+  Expects from ForHimServlet:
+    productList     (List<Product>) — men's watches (Women's category excluded unless
+                                       a specific category filter is passed)
+    activeCategory  (String)        — "all" or the selected sub-category
+  Includes header.jsp, head.jsp, and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>

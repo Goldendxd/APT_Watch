@@ -5,12 +5,33 @@ import com.alughadi.utils.DatabaseConnection;
 
 import java.sql.*;
 
+/**
+ * UserDaoImpl — talks to the "users" table in MySQL.
+ *
+ * Columns used: id, username, email, password, role,
+ *               full_name, phone, gender, profile_image,
+ *               address, city, province,
+ *               is_active, last_login, created_at, updated_at
+ *
+ * How it works:
+ *   1. Get a DB connection from DatabaseConnection.
+ *   2. Run a PreparedStatement (safe — prevents SQL injection).
+ *   3. Read the ResultSet / return a count.
+ *   4. Always close the connection in the finally block.
+ */
 public class UserDaoImpl implements UserDao {
 
+    /**
+     * Register a new user.
+     * First checks username and email aren't already taken,
+     * then inserts a new row with just username, email, password (hashed).
+     */
     @Override
     public boolean insertUser(User user) {
+        // Stop if username or email already exists
         if (findByUsername(user.getUsername()) != null) return false;
-        if (findByEmail(user.getEmail()) != null) return false;
+        if (findByEmail(user.getEmail())       != null) return false;
+
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
@@ -29,6 +50,10 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Look up a user by their username (case-insensitive).
+     * Used during login to verify credentials.
+     */
     @Override
     public User findByUsername(String username) {
         Connection conn = null;
@@ -38,7 +63,7 @@ public class UserDaoImpl implements UserDao {
                 "SELECT * FROM users WHERE LOWER(username) = LOWER(?)");
             st.setString(1, username);
             ResultSet rs = st.executeQuery();
-            if (rs.next()) return mapFull(rs);
+            if (rs.next()) return mapRow(rs);
         } catch (SQLException e) {
             System.out.println("Error finding user by username: " + e.getMessage());
         } finally {
@@ -47,6 +72,10 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+    /**
+     * Look up a user by their email address (case-insensitive).
+     * Used during registration to detect duplicate emails.
+     */
     @Override
     public User findByEmail(String email) {
         Connection conn = null;
@@ -56,7 +85,7 @@ public class UserDaoImpl implements UserDao {
                 "SELECT * FROM users WHERE LOWER(email) = LOWER(?)");
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
-            if (rs.next()) return mapFull(rs);
+            if (rs.next()) return mapRow(rs);
         } catch (SQLException e) {
             System.out.println("Error finding user by email: " + e.getMessage());
         } finally {
@@ -65,15 +94,20 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+    /**
+     * Look up a user by their numeric database ID.
+     * Used in profile, admin dashboard, and cart loading.
+     */
     @Override
     public User findById(int id) {
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
-            PreparedStatement st = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+            PreparedStatement st = conn.prepareStatement(
+                "SELECT * FROM users WHERE id = ?");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            if (rs.next()) return mapFull(rs);
+            if (rs.next()) return mapRow(rs);
         } catch (SQLException e) {
             System.out.println("Error finding user by id: " + e.getMessage());
         } finally {
@@ -82,25 +116,28 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+    /**
+     * Save changes the user made on the profile page.
+     * Only updates the editable profile fields — username and password
+     * are changed through separate flows.
+     */
     @Override
     public boolean updateProfile(User user) {
         Connection conn = null;
         try {
             conn = DatabaseConnection.getConnection();
+            // Only update columns that actually exist in the DB schema
             PreparedStatement st = conn.prepareStatement(
                 "UPDATE users SET full_name=?, phone=?, email=?, gender=?, " +
-                "date_of_birth=?, address=?, city=?, province=?, district=? WHERE id=?");
+                "address=?, city=?, province=? WHERE id=?");
             st.setString(1, user.getFull_name());
             st.setString(2, user.getPhone());
             st.setString(3, user.getEmail());
             st.setString(4, user.getGender());
-            st.setDate(5, user.getDate_of_birth() != null
-                ? new java.sql.Date(user.getDate_of_birth().getTime()) : null);
-            st.setString(6, user.getAddress());
-            st.setString(7, user.getCity());
-            st.setString(8, user.getProvince());
-            st.setString(9, user.getDistrict());
-            st.setInt(10, user.getId());
+            st.setString(5, user.getAddress());
+            st.setString(6, user.getCity());
+            st.setString(7, user.getProvince());
+            st.setInt(8, user.getId());
             return st.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Error updating profile: " + e.getMessage());
@@ -110,6 +147,10 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Replace the user's password hash in the DB.
+     * Called after verifying the old password in ProfileServlet / AdminProfileServlet.
+     */
     @Override
     public boolean changePassword(int userId, String newHashedPassword) {
         Connection conn = null;
@@ -128,6 +169,10 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Save a new profile image path (relative URL like /static/images/avatars/xxx.jpg).
+     * Called after successfully uploading the file.
+     */
     @Override
     public boolean updateProfileImage(int userId, String imagePath) {
         Connection conn = null;
@@ -146,6 +191,10 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Count how many regular customer accounts exist.
+     * Used in the admin dashboard KPI strip.
+     */
     @Override
     public int countCustomers() {
         Connection conn = null;
@@ -163,7 +212,13 @@ public class UserDaoImpl implements UserDao {
         return 0;
     }
 
-    private User mapFull(ResultSet rs) throws SQLException {
+    /**
+     * Maps a single ResultSet row into a User object.
+     * Reads only the columns that actually exist in the DB schema.
+     * Uses try/catch per field so a missing nullable column doesn't crash the whole read.
+     */
+    private User mapRow(ResultSet rs) throws SQLException {
+        // Build the core user first (always present columns)
         User u = new User(
             rs.getInt("id"),
             rs.getString("username"),
@@ -172,20 +227,23 @@ public class UserDaoImpl implements UserDao {
             rs.getTimestamp("created_at"),
             rs.getTimestamp("updated_at")
         );
+
+        // Role — decides admin vs customer access
         u.setRole(rs.getString("role"));
-        // Profile fields — may be null for older rows
-        try { u.setFull_name(rs.getString("full_name")); } catch (SQLException ignored) {}
-        try { u.setPhone(rs.getString("phone")); } catch (SQLException ignored) {}
-        try { u.setGender(rs.getString("gender")); } catch (SQLException ignored) {}
-        try { u.setDate_of_birth(rs.getDate("date_of_birth")); } catch (SQLException ignored) {}
-        try { u.setAddress(rs.getString("address")); } catch (SQLException ignored) {}
-        try { u.setCity(rs.getString("city")); } catch (SQLException ignored) {}
-        try { u.setProvince(rs.getString("province")); } catch (SQLException ignored) {}
-        try { u.setDistrict(rs.getString("district")); } catch (SQLException ignored) {}
-        try { u.setIs_active(rs.getInt("is_active")); } catch (SQLException ignored) {}
-        try { u.setIs_verified(rs.getInt("is_verified")); } catch (SQLException ignored) {}
-        try { u.setLast_login(rs.getTimestamp("last_login")); } catch (SQLException ignored) {}
+
+        // Optional profile fields — null is fine for new accounts
+        try { u.setFull_name(rs.getString("full_name"));       } catch (SQLException ignored) {}
+        try { u.setPhone(rs.getString("phone"));               } catch (SQLException ignored) {}
+        try { u.setGender(rs.getString("gender"));             } catch (SQLException ignored) {}
+        try { u.setAddress(rs.getString("address"));           } catch (SQLException ignored) {}
+        try { u.setCity(rs.getString("city"));                 } catch (SQLException ignored) {}
+        try { u.setProvince(rs.getString("province"));         } catch (SQLException ignored) {}
         try { u.setProfile_image(rs.getString("profile_image")); } catch (SQLException ignored) {}
+
+        // Account state fields
+        try { u.setIs_active(rs.getInt("is_active"));          } catch (SQLException ignored) {}
+        try { u.setLast_login(rs.getTimestamp("last_login"));  } catch (SQLException ignored) {}
+
         return u;
     }
 }

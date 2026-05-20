@@ -1,3 +1,17 @@
+<%--
+  profile.jsp — Logged-in customer profile page.
+  Expects from ProfileServlet:
+    profileUser   (User)              — the logged-in user's data
+    orderHistory  (List<Map>)         — the user's past orders (from OrderDao.getUserOrders)
+    successMessage / errorMessage     — feedback after form submission
+  Has three form sections:
+    1. Edit profile (name, phone, email, gender, address, city, province)
+       POSTs to /profile?action=updateProfile
+    2. Change password — POSTs to /profile?action=changePassword
+    3. Upload avatar photo — POSTs to /profile?action=uploadAvatar
+  Email and phone are validated client-side before submit.
+  Includes header.jsp, head.jsp, and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -162,20 +176,12 @@
                 </select>
               </div>
               <div class="fg">
-                <label for="pf-dob">Date of Birth</label>
-                <input id="pf-dob" name="dateOfBirth" type="date"
-                  value="<c:if test='${not empty profileUser.date_of_birth}'><fmt:formatDate value='${profileUser.date_of_birth}' pattern='yyyy-MM-dd'/></c:if>" />
-              </div>
-            </div>
-
-            <div class="pf-row single">
-              <div class="fg">
                 <label for="pf-address">Street Address</label>
                 <input id="pf-address" name="address" type="text" value="${profileUser.address}" placeholder="Lakeside, Baidam" />
               </div>
             </div>
 
-            <div class="pf-row triple">
+            <div class="pf-row">
               <div class="fg">
                 <label for="pf-city">City</label>
                 <input id="pf-city" name="city" type="text" value="${profileUser.city}" placeholder="Pokhara" />
@@ -183,10 +189,6 @@
               <div class="fg">
                 <label for="pf-province">Province</label>
                 <input id="pf-province" name="province" type="text" value="${profileUser.province}" placeholder="Gandaki" />
-              </div>
-              <div class="fg">
-                <label for="pf-district">District</label>
-                <input id="pf-district" name="district" type="text" value="${profileUser.district}" placeholder="Kaski" />
               </div>
             </div>
 
@@ -321,6 +323,7 @@
 </div>
 
 <script>
+  /* Switch between Personal Info / Order History / Password tabs */
   function switchPanel(btn) {
     document.querySelectorAll('.profile-nav-item').forEach(function(b) { b.classList.remove('active'); });
     document.querySelectorAll('.profile-panel[data-panel]').forEach(function(p) { p.classList.remove('active'); });
@@ -329,7 +332,7 @@
     if (target) target.classList.add('active');
   }
 
-  // Auto-open correct panel from URL hash or query param
+  // Auto-open the right panel when the page loads based on URL params
   (function () {
     var hash = window.location.hash.replace('#', '');
     var params = new URLSearchParams(window.location.search);
@@ -339,6 +342,24 @@
       if (btn) switchPanel(btn);
     }
   })();
+
+  /* Validate the profile update form before it submits */
+  var pfForm = document.querySelector('form[action*="profile"] input[name="action"][value="updateProfile"]');
+  if (pfForm) {
+    pfForm.closest('form').addEventListener('submit', function(e) {
+      var emailInput = document.getElementById('pf-email');
+      var phoneInput = document.getElementById('pf-phone');
+      var valid = true;
+
+      // Email must be valid if the user typed something
+      if (emailInput && emailInput.value.trim() && !validateEmailField(emailInput)) valid = false;
+
+      // Phone must be 10 digits if the user typed something
+      if (phoneInput && phoneInput.value.trim() && !validatePhoneField(phoneInput)) valid = false;
+
+      if (!valid) e.preventDefault();
+    });
+  }
 </script>
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp" />

@@ -18,9 +18,20 @@ import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * AdminProfileServlet — lets the admin view and edit their own account.
+ *
+ * URL: /admin-profile
+ *
+ * GET  /admin-profile        -> load admin user + store stats, forward to admin-profile.jsp
+ * POST action=updateProfile  -> save name/phone/city/etc
+ * POST action=changePassword -> verify old password, save new hash
+ * POST action=uploadAvatar   -> upload and store a new profile photo
+ *
+ * Access: admin role only (enforced by AuthenticationFilter before this even runs).
+ */
 @WebServlet("/admin-profile")
 @MultipartConfig
 public class AdminProfileServlet extends HttpServlet {
@@ -67,20 +78,13 @@ public class AdminProfileServlet extends HttpServlet {
                 return;
             }
 
+            // Update only the profile fields that exist in the DB schema
             user.setFull_name(trim(request.getParameter("fullName")));
             user.setPhone(trim(request.getParameter("phone")));
             user.setGender(trim(request.getParameter("gender")));
             user.setAddress(trim(request.getParameter("address")));
             user.setCity(trim(request.getParameter("city")));
             user.setProvince(trim(request.getParameter("province")));
-            user.setDistrict(trim(request.getParameter("district")));
-
-            String dob = trim(request.getParameter("dateOfBirth"));
-            if (dob != null && !dob.isEmpty()) {
-                try {
-                    user.setDate_of_birth(new SimpleDateFormat("yyyy-MM-dd").parse(dob));
-                } catch (ParseException ignored) {}
-            }
 
             String newEmail = trim(request.getParameter("email"));
             if (newEmail != null && !newEmail.isEmpty() && !newEmail.equalsIgnoreCase(user.getEmail())) {

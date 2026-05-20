@@ -4,6 +4,7 @@ import com.alughadi.entity.Product;
 
 import java.util.List;
 
+/** Defines all product DB operations. ProductDaoImpl provides the actual SQL. */
 public interface ProductDAO {
     List<Product> getAllProducts();
     List<Product> getProductsByCategory(String categoryName);

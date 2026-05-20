@@ -1,3 +1,12 @@
+<%--
+  order-success.jsp — Order confirmation page shown after checkout.
+  Expects from OrderSuccessServlet (set as request attributes, already cleared from session):
+    orderId        (String) — e.g. "AG-42"
+    paymentMethod  (String) — "cod" or "esewa"
+    orderTotal     (double) — grand total that was charged
+  If the user navigates here directly (no orderId), OrderSuccessServlet redirects to /products.
+  Includes header.jsp, head.jsp, and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>

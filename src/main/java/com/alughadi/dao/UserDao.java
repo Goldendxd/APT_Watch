@@ -2,6 +2,7 @@ package com.alughadi.dao;
 
 import com.alughadi.entity.User;
 
+/** Defines all user DB operations. UserDaoImpl provides the actual SQL. */
 public interface UserDao {
     boolean insertUser(User user);
     User findByUsername(String username);

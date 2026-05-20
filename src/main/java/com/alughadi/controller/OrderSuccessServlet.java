@@ -9,6 +9,21 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+/**
+ * OrderSuccessServlet — shows the order confirmation page.
+ *
+ * URL: /order-success
+ *
+ * GET /order-success -> read the order details that PlaceOrderServlet stored in the session,
+ *                       put them on the request, forward to order-success.jsp, then clear
+ *                       them from the session so refreshing the page redirects away.
+ *
+ * Flow: PlaceOrderServlet → saves order → stores lastOrderId/lastPaymentMethod/lastOrderTotal
+ *       in session → redirects here → we display it → clear session data.
+ *
+ * If there is no order in the session (e.g. user typed the URL directly),
+ * redirect to /products instead.
+ */
 @WebServlet("/order-success")
 public class OrderSuccessServlet extends HttpServlet {
 

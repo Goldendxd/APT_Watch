@@ -10,6 +10,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ProductDaoImpl — all database operations for products.
+ *
+ * getAllProducts      — fetch every product joined with its category name,
+ *                       ordered by newest first.
+ * getProductsByCategory — same join but filtered by category name (case-insensitive).
+ * getProductById     — fetch one product by its primary key; returns null if not found.
+ * addProduct         — INSERT a new product row with all fields.
+ * updateProduct      — UPDATE all product fields by id.
+ * deleteProduct      — DELETE a product by id.
+ * mapProductFromResultSet — shared helper that maps a ResultSet row to a Product object.
+ *                           Called by all the SELECT methods to avoid repeating field reads.
+ */
 public class ProductDaoImpl implements ProductDAO {
 
     public List<Product> getAllProducts() {
@@ -166,25 +179,6 @@ public class ProductDaoImpl implements ProductDAO {
             DatabaseConnection.closeConnection(conn);
         }
     }
-
-//    public int getTotalInStockCount(){
-//        Connection conn = null;
-//
-//        try{
-//            conn = DatabaseConnection.getConnection();
-//            String sql = "SELECT COUNT(*) FROM products WHERE in_stock = TRUE";
-//            PreparedStatement statement = conn.prepareStatement(sql);
-//            ResultSet rs = statement.executeQuery();
-//            if (rs.next()){
-//                return rs.getInt("id");
-//            }
-//        }  catch (SQLException e){
-//            System.out.println("Error counting in-stock products: " + e.getMessage());
-//        }
-//        return 0;
-//    }
-
-
 
     private Product mapProductFromResultSet(ResultSet rs) throws SQLException {
         Product product = new Product();

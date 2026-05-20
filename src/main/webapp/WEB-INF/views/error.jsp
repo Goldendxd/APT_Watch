@@ -1,3 +1,9 @@
+<%--
+  error.jsp — Generic error page (isErrorPage="true").
+  Reads jakarta.servlet.error.status_code from the request to show 400 / 401 / 403 / 404 / 500.
+  Configured in web.xml so Tomcat forwards here on HTTP errors.
+  Standalone page with its own <html> structure — does not use header.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isErrorPage="true" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%

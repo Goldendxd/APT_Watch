@@ -1,3 +1,10 @@
+<%--
+  product-details.jsp — Single product detail page.
+  Expects from ProductDetailsServlet:
+    product          (Product) — the product to display
+    cartItems / cartCount / grandTotal — for the cart modal in the nav
+  Includes header.jsp, head.jsp, and footer.jsp.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -6,6 +13,8 @@
 <jsp:include page="/WEB-INF/views/layout/header.jsp" />
 
 <section class="product-details-main pg-body">
+
+  <%-- BREADCRUMB: Home > Products > [product name] --%>
   <div class="product-details-crumb gc reveal" aria-label="Breadcrumb">
     <a href="${pageContext.request.contextPath}/">Home</a>
     <span class="crumb-sep" aria-hidden="true">/</span>
@@ -14,7 +23,10 @@
     <span class="crumb-current" aria-current="page">${product.name}</span>
   </div>
 
+  <%-- MAIN LAYOUT: product image on the left, info/actions on the right --%>
   <div class="product-details-layout">
+
+    <%-- LEFT: product image with category badge overlay --%>
     <div class="product-details-gallery gc reveal">
       <div class="product-details-gallery-main single-image">
         <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" />
@@ -22,7 +34,9 @@
       </div>
     </div>
 
+    <%-- RIGHT: brand, title, rating, price, description, add-to-cart / buy-now --%>
     <aside class="product-details-summary gc reveal reveal-delay-1">
+      <%-- Brand name + in-stock / out-of-stock badge --%>
       <div class="product-details-brand-row">
         <span class="product-details-brand">${product.brand}</span>
         <c:choose>
@@ -41,6 +55,7 @@
         <span>Verified ratings</span>
       </div>
 
+      <%-- Price: current price + crossed-out old price + savings if there's a discount --%>
       <div class="product-details-price-box">
         <div class="product-details-price">Rs <fmt:formatNumber value="${product.price}" pattern="#,##0"/></div>
         <c:if test="${not empty product.oldPrice and product.oldPrice gt 0}">
@@ -59,6 +74,7 @@
         </c:if>
       </div>
 
+      <%-- Action buttons: "Add to Cart" keeps the cart open; "Buy Now" clears cart and goes straight to checkout --%>
       <div class="product-details-action-row">
         <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
           <input type="hidden" name="action" value="add">
@@ -73,6 +89,7 @@
             </c:otherwise>
           </c:choose>
         </form>
+        <%-- buyNow=true tells CartServlet to clear cart first, then redirect to /checkout --%>
         <form action="${pageContext.request.contextPath}/cart" method="post" style="display:contents;">
           <input type="hidden" name="action" value="add">
           <input type="hidden" name="productId" value="${product.id}">
@@ -91,7 +108,9 @@
     </aside>
   </div>
 
+  <%-- BOTTOM GRID: full description + quick specs side by side --%>
   <div class="product-details-grid">
+    <%-- LEFT: long description + feature list (brand, category, rating, availability) --%>
     <div class="product-details-copy gc reveal">
       <div class="sec-tag">Product Details</div>
       <h2 class="sec-h">Crafted for excellence.</h2>
@@ -117,6 +136,7 @@
       </div>
     </div>
 
+    <%-- RIGHT: compact spec grid + shipping/delivery notes --%>
     <div class="product-details-specs gc reveal reveal-delay-1">
       <div class="sec-tag">Quick Specs</div>
       <h2 class="sec-h">At a glance</h2>
@@ -150,6 +170,7 @@
     </div>
   </div>
 
+  <%-- REVIEWS: static placeholder reviews — not from the DB, just for display --%>
   <section class="product-details-reviews gc reveal">
     <div class="sec-tag">Customer Reviews</div>
     <h2 class="sec-h">What our customers say</h2>

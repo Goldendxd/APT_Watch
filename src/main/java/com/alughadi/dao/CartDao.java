@@ -3,6 +3,7 @@ package com.alughadi.dao;
 import com.alughadi.entity.Cart;
 import java.util.List;
 
+/** Defines all cart DB operations. CartDaoImpl provides the actual SQL. */
 public interface CartDao {
 
     void       addToCart(int userId, int productId, int quantity);

@@ -1,3 +1,10 @@
+<%--
+  login.jsp — Login page.
+  Standalone page (does NOT use header.jsp — has its own full <html> structure).
+  Shows loginError attribute if credentials were wrong (set by LoginServlet on failed POST).
+  Shows a success notice when ?registered=1 is in the URL (after sign-up redirect).
+  POSTs to /login with username and password.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
@@ -6,6 +13,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign In | AluGhadi</title>
+  <%-- Favicon so the browser tab shows the AluGhadi logo --%>
+  <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/static/images/alughadiweblogo.png" />
+  <link rel="shortcut icon" type="image/png" href="<%=request.getContextPath()%>/static/images/alughadiweblogo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />

@@ -14,6 +14,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * PlaceOrderServlet — finalizes checkout and creates the order in the DB.
+ *
+ * URL: /place-order  (POST only — form submits from checkout.jsp)
+ *
+ * Flow:
+ *   1. Check user is logged in; if not, redirect to /login.
+ *   2. Load the user's cart items. If empty, send back to /cart.
+ *   3. Read paymentMethod param (defaults to "cod" if missing).
+ *   4. Calculate grand total: subtotal + shipping (Rs 200; free if subtotal >= Rs 5000).
+ *   5. Save the order and its line items to the DB via OrderDao.
+ *   6. Clear the user's cart.
+ *   7. Store orderId, paymentMethod, orderTotal in the session so
+ *      OrderSuccessServlet can display them on the confirmation page.
+ *   8. Redirect to /order-success.
+ *
+ * The order ID shown to the user is prefixed "AG-" (e.g. AG-42).
+ */
 @WebServlet("/place-order")
 public class PlaceOrderServlet extends HttpServlet {
 

@@ -4,13 +4,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * SessionUtil — utility class for session management.
+ * SessionUtil — wraps HttpSession operations so servlets don't repeat the same boilerplate.
  *
- * Wraps HttpSession operations into clean, reusable static methods.
- * Used by LoginServlet (create session), LogoutServlet (destroy session),
- * TopicServlet (read session), and AuthenticationFilter (check session).
+ * setAttribute(request, key, value) — create/get the session and set an attribute.
+ *   Also resets the session timeout to 30 minutes each time it's called.
+ *   Used by LoginServlet to store authUser, authUserId, authRole after login.
  *
- * New for Week 7.
+ * getAttribute(request, key) — read a session attribute without creating a new session
+ *   if none exists (getSession(false)). Returns null if there is no session or the
+ *   key is not set.
+ *
+ * invalidateSession(request) — destroy the session completely.
+ *   Used by LogoutServlet to log the user out.
  */
 
 public class SessionUtil {
