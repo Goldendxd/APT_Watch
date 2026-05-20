@@ -109,8 +109,8 @@
       <%-- Team Card: Ashish Thapa --%>
       <div class="team-card reveal reveal-delay-1">
         <div class="team-avatar-wrap">
-          <div class="team-avatar" style="background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);">
-            <span>AT</span>
+          <div class="team-avatar" style="padding:0;overflow:hidden;">
+            <img src="${pageContext.request.contextPath}/static/images/about_images/Ashish.webp" alt="Ashish Thapa" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <div class="team-avatar-ring" style="border-color: #dbeafe;"></div>
         </div>
@@ -131,8 +131,8 @@
       <%-- Team Card: Dikshita GC --%>
       <div class="team-card reveal reveal-delay-2">
         <div class="team-avatar-wrap">
-          <div class="team-avatar" style="background: linear-gradient(135deg, #c9a452 0%, #b8913a 100%);">
-            <span>DG</span>
+          <div class="team-avatar" style="padding:0;overflow:hidden;">
+            <img src="${pageContext.request.contextPath}/static/images/about_images/Dikshita.webp" alt="Dikshita GC" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <div class="team-avatar-ring" style="border-color: var(--gold-light);"></div>
         </div>
@@ -153,8 +153,8 @@
       <%-- Team Card: Rijan Pun --%>
       <div class="team-card reveal reveal-delay-3">
         <div class="team-avatar-wrap">
-          <div class="team-avatar" style="background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);">
-            <span>RP</span>
+          <div class="team-avatar" style="padding:0;overflow:hidden;">
+            <img src="${pageContext.request.contextPath}/static/images/about_images/Rijan.webp" alt="Rijan Pun" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <div class="team-avatar-ring" style="border-color: #fde68a;"></div>
         </div>
@@ -175,8 +175,8 @@
       <%-- Team Card: Sabin Thapa --%>
       <div class="team-card reveal reveal-delay-4">
         <div class="team-avatar-wrap">
-          <div class="team-avatar" style="background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);">
-            <span>ST</span>
+          <div class="team-avatar" style="padding:0;overflow:hidden;">
+            <img src="${pageContext.request.contextPath}/static/images/about_images/Sabin.webp" alt="Sabin Thapa" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <div class="team-avatar-ring" style="border-color: #ede9fe;"></div>
         </div>
@@ -197,8 +197,8 @@
       <%-- Team Card: Shisir Lamsal --%>
       <div class="team-card reveal reveal-delay-5">
         <div class="team-avatar-wrap">
-          <div class="team-avatar" style="background: linear-gradient(135deg, #1a6b38 0%, #3dba62 100%);">
-            <span>SL</span>
+          <div class="team-avatar" style="padding:0;overflow:hidden;">
+            <img src="${pageContext.request.contextPath}/static/images/about_images/Shisir.webp" alt="Shisir Lamsal" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <div class="team-avatar-ring"></div>
         </div>
